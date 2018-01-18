@@ -1,4 +1,5 @@
 module ietf-dhcpv6-options {
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options";
   prefix "dhcpv6-options";
 
@@ -16,11 +17,17 @@ module ietf-dhcpv6-options {
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de";
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com";
 
   description "This model defines a YANG data model that can be
     used to configure and manage a DHCPv6 server.";
-
+  
+  revision 2017-12-22 {
+	  description "Resolve most issues on Ian's github.";
+	  reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+  
   revision 2017-11-24 {
     description "First version of the separated DHCPv6 options
       YANG model.";
@@ -31,11 +38,17 @@ module ietf-dhcpv6-options {
   /*
    * Features
    */
+  
+  
+  //  features for server options
 	feature server-unicast-op {
 		description "Support for Server Unicast option";
 	}
-	feature sip-server-op {
-		description "Support for SIP Server option";
+	feature sip-server-domain-name-list-op {
+		description "Support for SIP Server Domain Name List option";
+	}
+	feature sip-server-address-list-op {
+		description "Support for SIP Server Address List option";
 	}
 	feature dns-config-op {
 		description "Support for DNS Recursive Name Server option";
@@ -51,113 +64,128 @@ module ietf-dhcpv6-options {
 		description "Support for Network Information Service V2 (NIS+) 
 			Servers option";
 	}
-  	feature nis-domain-name-op {
-  		description "Support for Network Information Service (NIS)
-  			Domain Name option";
-  	}
-  	feature nis-plus-domain-name-op {
-  		description "Support for Network Information Service V2 (NIS+)
-  			Server option";
-  	}
-  	feature sntp-server-op {
-  		description "Support for Simple Network Protocol Configuration 
-  			(SNTP) Servers option";
-  	}
-  	feature info-refresh-time-op {
-  		description "Support for Information Refresh Time option";
-  	}
-  	feature cli-fqdn-op {
-  		description "Support for Client FQDN option";
-  	}
-  	feature posix-timezone-op {
-  		description "Support for New POIX Timezone option";
-  	}
-  	feature tzdb-timezone-op {
-  		description "Support for New TZDB Timezone option";
-  	}
-  	feature ntp-server-op {
-  		description "Support for Network Time Protocol (NTP) 
-  			Server option";
-  	}
-  	feature network-boot-op {
-  		description "Support for Network Boot option";
-  	}
-  	feature aftr-name-op {
-  		description "Support for Address Family Transition
-  			Router (AFTR) option";
-  	}
-  	feature kerberos-op {
-  		description "Support for Kerberos options";
-  	}
-  	feature sol-max-rt-op {
-  		description "Support for SOL_MAX_RT option";
-  	}
-  	feature inf-max-rt-op {
-  		description "Support for INF_MAX_RT option";
-  	}
-  	feature addr-selection-op {
-  		description "Support for Address Selection opiton";
-  	}
-  	feature pcp-server-op {
-  		description "Support for Port Control Protocol (PCP)
-  			option";
-  	}
-  	feature s46-rule-op {
-  		description "Support for S46 Rule option";
-  	}
-  	feature s46-br-op {
-  		description "Support for S46 Border Relay (BR) option";
-  	}
-  	feature s46-dmr-op {
-  		description "Support for S46 Default Mapping Rule 
-  			(DMR) option";
-  	}
-  	feature s46-v4-v6-binding-op {
-  		description "Support for S46 IPv4/IPv6 Address
-  			Bind option";
-  	}
-  	feature erp-local-domain-name-op {
-  		description "Support for ERP Local Domain
-  			Name option";
-  	}
-  	feature option-request-op {
-  		description "Support for Option Request
-  			option";
-  	}
-  	feature rapid-commit-op {
-  		description "Support for Rapid Commit option";
-  	}
-  	feature user-class-op {
-  		description "Support for User Class option";
-  	}
-  	feature vendor-class-op {
-  		description "Support for Vendor Class option";
-  	}
-  	feature client-arch-type-op {
-  		description "Support for Client System Architecture
-  			Type option";
-  	}
-  	feature client-network-interface-identifier-op {
-  		description "Support for Client Network Interface
-  			Identifier option";
-  	}
-  	feature krb-principal-name-op {
-  		description "Support for Kerberos Principal
-  			Name option";
-  	}
-  	feature client-link-layer-addr-op {
-  		description "Support for Client Link-Layer Address
-  			Option";
-  	}
-  	feature operator-op-ipv6-address {
-  		description "Support for Option with IPv6 Addresses";
-  	}
-  	feature operator-op-single-flag {
-  		description "Support for Option with Single Flag";
-  	}
-  	feature operator-op-ipv6-prefix {
-  		description "Support for Option with IPv6 Prefix";
-  	}
+	feature nis-domain-name-op {
+		description "Support for Network Information Service (NIS)
+			Domain Name option";
+	}
+	feature nis-plus-domain-name-op {
+		description "Support for Network Information Service V2 (NIS+)
+			Server option";
+	}
+	feature sntp-server-op {
+		description "Support for Simple Network Protocol Configuration 
+			(SNTP) Servers option";
+	}
+	feature info-refresh-time-op {
+		description "Support for Information Refresh Time option";
+	}
+	feature client-fqdn-op {
+		description "Support for Client FQDN option";
+	}
+	feature posix-timezone-op {
+		description "Support for New POIX Timezone option";
+	}
+	feature tzdb-timezone-op {
+		description "Support for New TZDB Timezone option";
+	}
+	feature ntp-server-op {
+		description "Support for Network Time Protocol (NTP) 
+			Server option";
+	}
+	feature boot-file-url-op {
+		description "Support for Boot File URL option";
+	}
+	feature boot-file-param-op {
+		description "Support for Boot File Parameters option";
+	}
+	feature aftr-name-op {
+		description "Support for Address Family Transition
+			Router (AFTR) option";
+	}
+	feature kbr-default-name-op {
+		description "Support for Kerberos Default Name 
+			Option";
+	}
+	feature kbr-kdc-op {
+		description "Support for Kerberos KDC option";
+	}
+	feature sol-max-rt-op {
+		description "Support for SOL_MAX_RT option";
+	}
+	feature inf-max-rt-op {
+		description "Support for INF_MAX_RT option";
+	}
+	feature addr-selection-op {
+		description "Support for Address Selection opiton";
+	}
+	feature pcp-server-op {
+		description "Support for Port Control Protocol (PCP)
+			option";
+	}
+	feature s46-rule-op {
+		description "Support for S46 Rule option";
+	}
+	feature s46-br-op {
+		description "Support for S46 Border Relay (BR) option";
+	}
+	feature s46-dmr-op {
+		description "Support for S46 Default Mapping Rule 
+			(DMR) option";
+	}
+	feature s46-v4-v6-binding-op {
+		description "Support for S46 IPv4/IPv6 Address
+			Bind option";
+	}
+	
+	// features for relay-supplied options
+	feature erp-local-domain-name-op {
+		description "Support for ERP Local Domain
+			Name option";
+	}
+	
+	// features for client options
+	feature option-request-op {
+		description "Support for Option Request option";
+	}
+	feature rapid-commit-op {
+		description "Support for Rapid Commit option";
+	}
+	feature user-class-op {
+		description "Support for User Class option";
+	}
+	feature vendor-class-op {
+		description "Support for Vendor Class option";
+	}
+	feature client-arch-type-op {
+		description "Support for Client System Architecture
+			Type option";
+	}
+	feature client-network-interface-identifier-op {
+		description "Support for Client Network Interface
+			Identifier option";
+	}
+	feature kbr-principal-name-op {
+		description "Support for Kerberos Principal
+			Name option";
+	}
+	feature kbr-realm-name-op {
+		description "Support Kerberos Realm Name option";
+	}
+	feature client-link-layer-addr-op {
+		description "Support for Client Link-Layer Address
+			Option";
+	}
+	
+	// features for custom options
+	feature operator-op-ipv6-address {
+		description "Support for Option with IPv6 Addresses";
+	}
+	feature operator-op-single-flag {
+		description "Support for Option with Single Flag";
+	}
+	feature operator-op-ipv6-prefix {
+		description "Support for Option with IPv6 Prefix";
+	}
 	feature operator-op-int32 {
 		description "Support for Opion with 32-bit
 			Integer Value";
@@ -212,52 +240,131 @@ module ietf-dhcpv6-options {
    }
   }
 
+  grouping duid {
+	    description "DHCP Unique Identifier";
+	    reference "RFC3315: Section 9";
+	    leaf type-code {
+        	type uint16;
+        	default 65535;
+        	description "Type code of this DUID";
+        }
+	    choice duid-type {
+		  default duid-invalid;
+	      description "Selects the format for the DUID.";
+	      case duid-llt {
+	        description "DUID Based on Link-layer Address Plus Time (Type 1 - DUID-LLT)";
+	        reference "RFC3315 Section 9.2";
+
+	        leaf duid-llt-hardware-type {
+	          type uint16;
+	          description "Hardware type as assigned by IANA (RFC826).";
+	        }
+	        leaf duid-llt-time {
+	          type yang:timeticks;
+	          description "The time value is the time that the DUID is generated
+	            represented in seconds since midnight (UTC), January 1, 2000,
+	                        modulo 2^32.";
+	        }
+	        leaf duid-llt-link-layer-addr {
+	          type yang:mac-address;
+	          description "Link-layer address as described in RFC2464";
+	        }
+	      }
+	      case duid-en {
+	        description "DUID Assigned by Vendor Based on Enterprise Number (Type 2 - DUID-EN)";
+	        reference "RFC3315 Section 9.3";
+	        leaf duid-en-enterprise-number {
+	          type uint32;
+	          description "Vendor's registered Private Enterprise Number as
+	            maintained by IANA";
+	        }
+	        leaf duid-en-identifier {
+	          type string;
+	          description "Indentifier, unique to the device that is using it";
+	        }
+	      }
+	      case duid-ll {
+	        description "DUID Based on Link-layer Address (Type 3 - DUID-LL)";
+	        reference "RFC3315 Section 9.4";
+	        leaf duid-ll-hardware-type {
+	          type uint16;
+	          description "Hardware type as assigned by IANA (RFC826).";
+	        }
+	        leaf duid-ll-link-layer-addr {
+		          type yang:mac-address;
+		          description "Link-layer address as described in RFC2464";
+		    }
+	      }
+	      case duid-uuid {
+	    	  description "DUID Based on Universally Unique Identifier (Type 4 - DUID-UUID)";
+	    	  reference "RFC6335 Defination of the UUID-Based Unique Identifier";
+	    	  leaf uuid {
+	    		  type yang:uuid;
+	    		  description "A Universally Unique IDentifier in the string representation
+	    		      defined in RFC 4122.  The canonical representation uses
+	    		      lowercase characters";
+	    	  }    	  
+	      }
+	      case duid-invalid {
+	    	  description "DUID based on free raw bytes";
+	    	  leaf data {
+	    		  type binary;
+	    		  description "The bits to be used as the identifier";
+	    	  }
+	      }	      
+	    }
+	  }
+  
   grouping server-option-definitions {
     description "Contains definitions for options configured on the
       DHCPv6 server which will be supplied to clients.";
     container server-unicast-option {
       if-feature server-unicast-op;
+      presence "Enable this option";
       description "OPTION_UNICAST (12) Server Unicast Option";
       reference "RFC3315: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6)";
       leaf server-address {
         type inet:ipv6-address;
+        description "server ipv6 address";
       }
     }
-    container sip-server-option {
-      if-feature sip-server-op;
-      presence "Enable this option";
-      description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List
-      and OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List";
-      /* if - Note - this container is currently modelling two options
-       (21 & 22). It would allow the config of a mixed list of domain
-       names and addresses in a way that doesn't follow the
-       RFC. Needs to be broken into SIP Domain list and SIP Address
-       list containers */
-      reference "RFC3319: Dynamic Host Configuration Protocol
-        (DHCPv6) Options for Session Initiation Protocol (SIP)
-        Servers";
-      list sip-server {
-        key sip-serv-id;
-        description "sip server info";
-        leaf sip-serv-id {
-          type uint8;
-          mandatory true;
-          description "sip server id";
-        }
-        leaf sip-serv-domain-name {
-          type string;
-          mandatory true;
-          description "sip server domain
-            name";
-        }
-        leaf sip-serv-addr {
-          type inet:ipv6-address;
-          mandatory true;
-          description "sip server addr";
-        }
-      }
+    container sip-server-domain-name-list-option {
+        if-feature sip-server-domain-name-list-op;
+        presence "Enable this option";
+        description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
+        reference "RFC3319: Dynamic Host Configuration Protocol
+          (DHCPv6) Options for Session Initiation Protocol (SIP)
+          Servers";
+          leaf sip-serv-domain-name {
+            type string;
+            mandatory true;
+            description "sip server domain
+              name";
+          }
     }
+    container sip-server-address-list-option {
+        if-feature sip-server-address-list-op;
+        presence "Enable this option";
+        description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List";
+        reference "RFC3319: Dynamic Host Configuration Protocol
+          (DHCPv6) Options for Session Initiation Protocol (SIP)
+          Servers";
+        list sip-server {
+          key sip-serv-id;
+          description "sip server info";
+          leaf sip-serv-id {
+            type uint8;
+            mandatory true;
+            description "sip server id";
+          }
+          leaf sip-serv-addr {
+            type inet:ipv6-address;
+            mandatory true;
+            description "sip server addr";
+          }
+        }
+    }   
     container dns-config-option {
       if-feature dns-config-op;
       presence "Enable this option";
@@ -410,8 +517,8 @@ module ietf-dhcpv6-options {
         description "The refresh time.";
       }
     }
-    container cli-fqdn-option {
-      if-feature cli-fqdn-op;
+    container client-fqdn-option {
+      if-feature client-fqdn-op;
       presence "Enable this option";
       description "OPTION_CLIENT_FQDN (39) DHCPv6 Client FQDN Option";
       reference "RFC4704: The Dynamic Host Configuration Protocol for IPv6
@@ -457,6 +564,10 @@ module ietf-dhcpv6-options {
     container ntp-server-option {
       //This option looks like it needs work to correctly model the
       //option as defined in the RFC.
+    	
+      // Zihao - Re-modelled so it only contains one 
+    	// time source suboption
+      
       if-feature ntp-server-op;
       presence "Enable this option";
       description "OPTION_NTP_SERVER (56) NTP Server Option for DHCPv6";
@@ -470,67 +581,79 @@ module ietf-dhcpv6-options {
           mandatory true;
           description "ntp server id";
         }
-        leaf ntp-serv-addr-suboption {
-          type inet:ipv6-address;
-          mandatory true;
-          description "ntp server addr";
-        }
-        leaf ntp-serv-mul-addr-suboption {
-          type inet:ipv6-address;
-          mandatory true;
-          description "ntp server multicast addr";
-        }
-        leaf ntp-serv-fqdn-suboption {
-          type string;
-          mandatory true;
-          description "ntp server fqdn";
-        }
-      }
-    }
-    container network-boot-option {
-      description "OPT_BOOTFILE_URL (59) and OPT_BOOTFILE_PARAM (60)";
-      reference "RFC5970: DHCPv6 Options for Network Boot";
-      // if - Looks like 2 options combined that need to be split out
-      if-feature network-boot-op;
-      presence "Enable this option";
-      list boot-file {
-        key boot-file-id;
-        description "boot file info";
-        leaf boot-file-id {
-          type uint8;
-          mandatory true;
-          description "boot file id";
-        }
-        leaf-list suitable-arch-type {
-          type uint16;
-          description "architecture type";
-        }
-        leaf-list suitable-net-if {
-          type uint32;
-          description "network interface";
-        }
-        leaf boot-file-url {
-          type string;
-          mandatory true;
-          description "url for boot file";
-        }
-        list boot-file-paras {
-          key para-id;
-          description "boot file parameters";
-          leaf para-id {
-            type uint8;
-            mandatory true;
-            description "parameter id";
-          }
-          leaf parameter {
-            type string;
-            mandatory true;
-            description "parameter
-              value";
-          }
+        choice ntp-time-source-suboption {
+        	description "Select a NTP time source suboption.";
+        	case server-address {
+	    	leaf-list ntp-serv-addr-suboption {
+	    	          type inet:ipv6-address;
+	    	          description "ntp server addr";
+	    	        }
+        	}
+        	case server-multicast-address {
+        		leaf-list ntp-serv-mul-addr-suboption {
+        	          type inet:ipv6-address;
+        	          description "ntp server multicast addr";
+        	        }
+        	}
+        	case server-fqdn {
+        		leaf-list ntp-serv-fqdn-suboption {
+                    type string;
+                    description "ntp server fqdn";
+                  }
+        	}       	
         }
       }
-    }
+    }    
+  	container boot-file-url-option {
+  		if-feature boot-file-url-op;
+  		presence "Enable this option";
+  		description "OPT_BOOTFILE_URL (59) Boot File URL option";
+  		reference "RFC5970: DHCPv6 Options for Network Boot";		
+  		list boot-file {
+  			key boot-file-id;
+  			description "boot file info";
+  			leaf boot-file-id {
+  				type uint8;
+  				mandatory true;
+  				description "boot file id";
+  			}
+  	        leaf-list suitable-arch-type {
+  	            type uint16;
+  	            description "architecture type";
+  	          }
+            	leaf-list suitable-net-if {
+              	type uint32;
+              	description "network interface";
+            	}
+  			leaf boot-file-url {
+  				type string;
+  				mandatory true;
+  				description "url for boot file";
+  			}
+  		}
+  	}	
+  	container boot-file-param-option {
+  		if-feature boot-file-param-op;
+  		presence "Enable this option";
+  		description "OPT_BOOTFiLE_PARAM (60) Boot File Parameters Option";
+  		reference "RFC5970: DHCPv6 Options for Network Boot";
+          list boot-file-paras {
+              key para-id;
+              description "boot file parameters";
+              leaf para-id {
+                type uint8;
+                mandatory true;
+                description "parameter id";
+              }
+              leaf parameter {
+                type string;
+                mandatory true;
+                description "parameter
+                  value";
+              }
+              
+            }
+  	}   
     container aftr-name-option {
       if-feature aftr-name-op;
       presence "Enable this option";
@@ -542,61 +665,63 @@ module ietf-dhcpv6-options {
         mandatory true;
         description "aftr name";
       }
+    }    
+    container kbr-default-name-option {
+    	if-feature kbr-default-name-op;
+    	presence "Enable this option";
+    	description "OPTION_KRB_DEFAULT_REALM_NAME (77) Kerberos Default Realm Name Option";
+    	reference "RFC6784: Kerberos Options for DHCPv6";
+        leaf default-realm-name {
+            type string;
+            mandatory true;
+            description "default realm name";
+          }
     }
-    container kerberos-option {
-      //This needs re-working and possibly splitting into several option
-      //containers to follow the RFC.
-      if-feature kerberos-op;
-      presence "Enable this option";
-      description "OPTION_KRB_KDC (78) Kerberos KDB Option, OPTION_KRB_REALM_NAME (76)
-        Kerberos Realm Name Option and OPTION_KRB_DEFAULT_REALM_NAME (77)
-        Kerberos Default Realm Name Option";
-      reference "RFC6784: Kerberos Options for DHCPv6";
-      leaf default-realm-name {
-        type string;
-        mandatory true;
-        description "default realm name";
-      }
-      list kdc-info {
-        key kdc-id;
-        description "kdc info";
-        leaf kdc-id {
-          type uint8;
-          mandatory true;
-          description "kdc id";
-        }
-        leaf priority {
-          type uint16;
-          mandatory true;
-          description "priority";
-        }
-        leaf weight {
-          type uint16;
-          mandatory true;
-          description "weight";
-        }
-        leaf transport-type {
-          type uint8;
-          mandatory true;
-          description "transport type";
-        }
-        leaf port-number {
-          type uint16;
-          mandatory true;
-          description "port number";
-        }
-        leaf kdc-ipv6-addr {
-          type inet:ipv6-address;
-          mandatory true;
-          description "kdc ipv6 addr";
-        }
-        leaf realm-name {
-          type string;
-          mandatory true;
-          description "realm name";
-        }
-      }
-    }
+    container kbr-kdc-option {
+    	if-feature kbr-kdc-op;
+    	presence "Enable this option";
+    	description "OPTION_KRB_KDC (78) Kerberos KDB Option";
+    	reference "RFC6784: Kerberos Options for DHCPv6";
+        list kdc-info {
+            key kdc-id;
+            description "kdc info";
+            leaf kdc-id {
+              type uint8;
+              mandatory true;
+              description "kdc id";
+            }
+            leaf priority {
+              type uint16;
+              mandatory true;
+              description "priority";
+            }
+            leaf weight {
+              type uint16;
+              mandatory true;
+              description "weight";
+            }
+            leaf transport-type {
+              type uint8;
+              mandatory true;
+              description "transport type";
+            }
+            leaf port-number {
+              type uint16;
+              mandatory true;
+              description "port number";
+            }
+            leaf kdc-ipv6-addr {
+              type inet:ipv6-address;
+              mandatory true;
+              description "kdc ipv6 addr";
+            }
+            leaf realm-name {
+              type string;
+              mandatory true;
+              description "realm name";
+            }
+          }
+    }    
     container sol-max-rt-option {
       if-feature sol-max-rt-op;
       presence "Enable this option";
@@ -620,7 +745,7 @@ module ietf-dhcpv6-options {
         mandatory true;
         description "inf max rt value";
       }
-    }
+    }       
     container addr-selection-option {
       if-feature addr-selection-op;
       presence "Enable this option";
@@ -629,12 +754,7 @@ module ietf-dhcpv6-options {
       DHCPv6";
       // if - Needs checking to see if this matches the RFC - there
       // are two options here.
-      leaf enable {
-        type boolean;
-        mandatory true;
-        description "indicate whether this option will be included in the
-                  option set";
-        }
+      // Zihao - I think this matches RFC7078
       leaf a-bit-set {
         type boolean;
         mandatory true;
@@ -832,7 +952,7 @@ module ietf-dhcpv6-options {
 
   grouping relay-supplied-option-definitions {
     // if - The structure here needs to be checked and probably reworked.
-    description "Relay supplied DHCP Options";
+    description "OPTION_RSOO (66) Relay-Supplied Options option";
     reference "RFC6422: Relay-Supplied DHCP Options";
     container erp-local-domain-name-option {
       if-feature erp-local-domain-name-op;
@@ -853,6 +973,7 @@ module ietf-dhcpv6-options {
           description "Sets the DUID";
           // uses duid;
           // if - Maybe DUID definition needs to be moved to this module.
+          uses duid;
         }
         leaf erp-name {
           type string;
@@ -917,18 +1038,7 @@ module ietf-dhcpv6-options {
         }
       }
     }
-    container rapid-commit-option {
-      if-feature rapid-commit-op;
-      description "OPTION_RAPID_COMMIT (14)";
-      reference "RFC3315: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6)";
-      leaf enable-rapid-commit {
-        type boolean;
-      }
-      // if - This fuction is also being covered by
-      // /client/client-if/rapid-commit switch. Is it better
-      // defined there or as an option?
-    }
+
     container user-class-option {
       if-feature user-class-op;
       presence "Enable this option";
@@ -963,21 +1073,29 @@ module ietf-dhcpv6-options {
         type uint32;
         mandatory true;
         description "enterprise number";
+      }     
+      list vendor-class {
+    	  key vendor-class-id;
+    	  description "vendor class";
+          leaf vendor-class-id {
+              type uint8;
+              mandatory true;
+              description "vendor class id";
+            }
+          leaf vendor-class-data {
+        	  type string;
+        	  mandatory true;
+        	  description "The vendor-class-data is composed of a series
+                  of separate items, each of which describes some
+                  characteristic of the client's hardware configuration.
+                  Examples of vendor-class-data instances might include the
+                  version of the operating system the client is running or
+                  the amount of memory installed on the client.";
+          }
       }
-      leaf-list vendor-class-data {
-        type string;
-        description "The vendor-class-data is composed of a series
-          of separate items, each of which describes some
-          characteristic of the client's hardware configuration.
-          Examples of vendor-class-data instances might include the
-          version of the operating system the client is running or
-          the amount of memory installed on the client.";
-          // if - It may be better to model this as a leaf-list
-          // so the list contents can be indexed.
-      }
-    }
+    }   
     container client-fqdn-option {
-      if-feature cli-fqdn-op;
+      if-feature client-fqdn-op;
       presence "Enable this option";
       description "OPTION_CLIENT_FQDN (39) The Dynamic Host
         Configuration Protocol for IPv6 (DHCPv6) Client Fully
@@ -1025,9 +1143,8 @@ module ietf-dhcpv6-options {
     container client-network-interface-identifier-option {
       if-feature client-network-interface-identifier-op;
       presence "Enable this option";
-      description
-        "OPTION_NII (62) Client Network Interface Identifier
-        Option";
+      description "OPTION_NII (62) Client Network Interface 
+    	  Identifier Option";
       reference "RFC5970: DHCPv6 Options for Network Boot";
       leaf type {
         type uint8;
@@ -1045,18 +1162,43 @@ module ietf-dhcpv6-options {
         description "minor";
       }
     }
-    container krb-principal-name-option {
-      if-feature krb-principal-name-op;
+    container kbr-principal-name-option {
+      if-feature kbr-principal-name-op;
       presence "Enable this option";
       description "OPTION_KRB_PRINCIPAL_NAME (75) Kerberos
         Principal Name Option";
       reference "RFC6784: Kerberos Options for DHCPv6";
-      leaf principal-name {
-        type string;
-        mandatory true;
-        description "principal name";
-        // if - this can probably be typed according to RFC4120 5.2.2
+      list principle-name {
+    	  key principle-name-id;
+    	  description "principle name";
+    	  leaf principle-name-id {
+    		  type uint8;
+    		  mandatory true;
+    		  description "principle name id";
+    	  }
+    	  leaf name-type {
+    		  type int32;
+    		  mandatory true;
+    		  description "This field specifies the type of name that follows.";
+    	  }
+    	  leaf name-string {
+    		  type string;
+    		  mandatory true;
+    		  description "This field encodes a sequence of components that form
+    			  a name, each component encoded as a KerberoString";
+    	  }
       }
+      }   
+    container kbr-realm-name-option {
+    	if-feature kbr-realm-name-op;
+    	presence "Enable this option";
+    	description "OPTION_KRB_REALM_NAME (76) Kerberos Realm Name Option";
+    	reference "RFC6784: Kerberos Options for DHCPv6";
+    	leaf realm-name {
+    		type string;
+    		mandatory true;
+    		description "realm name";
+    	}
     }
     container client-link-layer-addr-option {
       if-feature client-link-layer-addr-op;
@@ -1078,9 +1220,12 @@ module ietf-dhcpv6-options {
         description "Client link-layer address";
       }
     }
-  }
+    }
+
+  
 
   grouping custom-option-definitions {
+	description "operator customized options";
     container operator-option-ipv6-address {
       if-feature operator-op-ipv6-address;
       presence "Enable this option";
