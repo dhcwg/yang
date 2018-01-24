@@ -1,4 +1,5 @@
 module ietf-dhcpv6-relay {
+	yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay";
   prefix "dhcpv6-client";
 
@@ -9,23 +10,22 @@ module ietf-dhcpv6-relay {
 
   import ietf-dhcpv6-options {
     prefix dhcpv6-options;
-    revision-date "2017-11-24";
+    revision-date "2017-12-22";
   }
 
   organization "DHC WG";
   contact "yong@csnet1.cs.tsinghua.edu.cn
-    wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de";
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com";
 
   description "This model defines a YANG data model that can be
     used to configure and manage a DHCPv6 relay.";
 
-  revision 2017-11-29{
-	  description "separation of relay configuration and 
-		  state trees";
-	  reference "I-d: draft-ietf-dhc-dhcpv6-yang";
+  revision 2017-12-22 {
+	  description "Resolve most issues on Ian's github.";
+	  reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
   
   revision 2017-11-24 {
@@ -60,11 +60,10 @@ module ietf-dhcpv6-relay {
    */
 
 container relay {
+	presence "Enables the relay";
     description "dhcpv6 relay portion";
-    
     container relay-config{
     	description "configuration tree of relay";
-    	
         container relay-attributes {
             description "A container describes
               some basic attributes of the relay
@@ -122,10 +121,25 @@ container relay {
           }
 
           container rsoo-option-sets {
+        	description "DHCPv6 relay agent could provide
+                some information that would be useful to DHCPv6 client. 
+        		Since relay agent cannot provide options directly to 
+        		the client, RSOO-enabled options are defined to 
+        		propose options for the server to send to the client. 
+        		This container models such RSOO-enabled options.";
+        	reference "RFC6422";
             list option-set {
               key id;
+              description "This list under the 'rsoo-option-sets' container 
+              is similar to the that defined in server module. It allows 
+              the relay to implement several sets of RSOO-enabled options 
+              for different interfaces. The list only include the EAP 
+              Re-authentication Protocol (ERP) Local Domain Name DHCPv6 Option 
+              defined in RFC6440, since it is the only one 
+              RSOO-enabled options accepted by IANA so far.";
                 leaf id {
                   type uint32;
+                  description "option sed id";
                 }
               uses dhcpv6-options:relay-supplied-option-definitions;
             }
@@ -167,38 +181,6 @@ container relay {
               }
               description "Configured Relay Supplied Option set";
             }
-            list pd-route {
-              // if - need to look at if/how we model these. If they are
-              // going to be modelled, then they should be ro state
-              // entries (we're not trying to configure routes here)
-              key pd-route-id;
-              description "pd route";
-              leaf pd-route-id {
-                type uint8;
-                mandatory true;
-                description "pd route id";
-              }
-              leaf requesting-router-id {
-                type uint32;
-                mandatory true;
-                description "requesting router id";
-              }
-              leaf delegating-router-id {
-                type uint32;
-                mandatory true;
-                description "delegating router id";
-              }
-              leaf next-router {
-                type inet:ipv6-address;
-                mandatory true;
-                description "next router";
-              }
-              leaf last-router {
-                type inet:ipv6-address;
-                mandatory true;
-                description "previous router";
-              }
-            }
             list next-entity {
               key dest-addr;
               description "This node defines
@@ -237,9 +219,8 @@ container relay {
     
     
 	container relay-state{
-		description "state tree of relay";
-		
 		config "false";
+		description "state tree of relay";
 		list relay-if{
 			key if-name;
 			description "...";			
@@ -248,8 +229,44 @@ container relay {
 				mandatory true;
 				description "interface name";
 			}
+            list pd-route {
+                // if - need to look at if/how we model these. If they are
+                // going to be modelled, then they should be ro state
+                // entries (we're not trying to configure routes here)
+                key pd-route-id;
+                description "pd route";
+                leaf pd-route-id {
+                  type uint8;
+                  mandatory true;
+                  description "pd route id";
+                }
+                leaf requesting-router-id {
+                  type uint32;
+                  mandatory true;
+                  description "requesting router id";
+                }
+                leaf delegating-router-id {
+                  type uint32;
+                  mandatory true;
+                  description "delegating router id";
+                }
+                leaf next-router {
+                  type inet:ipv6-address;
+                  mandatory true;
+                  description "next router";
+                }
+                leaf last-router {
+                  type inet:ipv6-address;
+                  mandatory true;
+                  description "previous router";
+                }
+              }
 			list next-entity{
 				key dest-addr;
+				description "This node defines a list that is used to 
+					describe the next hop entity of this relay agent. 
+					Different entities are distinguished by their 
+					addresses.";
 				leaf dest-addr{
 					type inet:ipv6-address;
 					mandatory true;
@@ -409,6 +426,7 @@ container relay {
    */
 
   notification notifications {
+    description "dhcpv6 relay notification module";
     container dhcpv6-relay-event {
       description "dhcpv6 relay event";
       container topo-changed {
