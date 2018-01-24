@@ -425,7 +425,6 @@ module: ietf-dhcpv6-server
   notifications:
     +---n notifications
        +--ro dhcpv6-server-event
-ietf-dhcpv6-server.yang:175 (at ietf-dhcpv6-server.yang:87): error: the default case "duid-invalid" is not found"
           +--ro pool-running-out
           |  +--ro max-address-utilization-ratio    uint16
           |  +--ro address-utilization-ratio        uint16
