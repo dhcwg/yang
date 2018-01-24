@@ -18,7 +18,7 @@ module: ietf-dhcpv6-server
        |  |  |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
        |  |  |     +--:(duid-uuid)
        |  |  |     |  +--rw uuid?                        yang:uuid
-       |  |  |     +--:(duid-invalid)
+       |  |  |     +--:(duid-unknown)
        |  |  |        +--rw data?                        binary
        |  |  +--rw ipv6-address*        inet:ipv6-address
        |  |  +--rw description?         string
@@ -221,7 +221,7 @@ module: ietf-dhcpv6-server
        |  |     |  |  |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
        |  |     |  |  |     +--:(duid-uuid)
        |  |     |  |  |     |  +--rw uuid?                        yang:uuid
-       |  |     |  |  |     +--:(duid-invalid)
+       |  |     |  |  |     +--:(duid-unknown)
        |  |     |  |  |        +--rw data?                        binary
        |  |     |  |  +--rw reserv-addr*   inet:ipv6-address
        |  |     |  +--rw other-reserv-addr*   inet:ipv6-address
@@ -243,7 +243,7 @@ module: ietf-dhcpv6-server
        |  |     |  |  |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
        |  |     |  |  |     +--:(duid-uuid)
        |  |     |  |  |     |  +--rw uuid?                        yang:uuid
-       |  |     |  |  |     +--:(duid-invalid)
+       |  |     |  |  |     +--:(duid-unknown)
        |  |     |  |  |        +--rw data?                        binary
        |  |     |  |  +--rw reserv-prefix-len    uint8
        |  |     |  |  +--rw reserv-prefix        inet:ipv6-prefix
@@ -296,7 +296,7 @@ module: ietf-dhcpv6-server
        |  |           |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
        |  |           |     +--:(duid-uuid)
        |  |           |     |  +--rw uuid?                        yang:uuid
-       |  |           |     +--:(duid-invalid)
+       |  |           |     +--:(duid-unknown)
        |  |           |        +--rw data?                        binary
        |  |           +--rw inherit-option-set      boolean
        |  |           +--rw option-set-id?          -> /server/server-config/option-sets/option-set/id
@@ -345,7 +345,7 @@ module: ietf-dhcpv6-server
           |     |     |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
           |     |     |     +--:(duid-uuid)
           |     |     |     |  +--ro uuid?                        yang:uuid
-          |     |     |     +--:(duid-invalid)
+          |     |     |     +--:(duid-unknown)
           |     |     |        +--ro data?                        binary
           |     |     +--ro cli-ia* [iaid]
           |     |        +--ro ia-type     string
@@ -373,7 +373,7 @@ module: ietf-dhcpv6-server
           |     |     |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
           |     |     |     +--:(duid-uuid)
           |     |     |     |  +--ro uuid?                        yang:uuid
-          |     |     |     +--:(duid-invalid)
+          |     |     |     +--:(duid-unknown)
           |     |     |        +--ro data?                        binary
           |     |     +--ro cli-iapd* [iaid]
           |     |        +--ro iaid              uint32
@@ -398,7 +398,7 @@ module: ietf-dhcpv6-server
           |        |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
           |        |     +--:(duid-uuid)
           |        |     |  +--ro uuid?                        yang:uuid
-          |        |     +--:(duid-invalid)
+          |        |     +--:(duid-unknown)
           |        |        +--ro data?                        binary
           |        +--ro iaid*                       uint32
           |        +--ro preferred-addr*             inet:ipv6-address
@@ -425,6 +425,7 @@ module: ietf-dhcpv6-server
   notifications:
     +---n notifications
        +--ro dhcpv6-server-event
+ietf-dhcpv6-server.yang:175 (at ietf-dhcpv6-server.yang:87): error: the default case "duid-invalid" is not found"
           +--ro pool-running-out
           |  +--ro max-address-utilization-ratio    uint16
           |  +--ro address-utilization-ratio        uint16
@@ -445,7 +446,7 @@ module: ietf-dhcpv6-server
           |  |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
           |  |     +--:(duid-uuid)
           |  |     |  +--ro uuid?                        yang:uuid
-          |  |     +--:(duid-invalid)
+          |  |     +--:(duid-unknown)
           |  |        +--ro data?                        binary
           |  +--ro serv-name?                       string
           |  +--ro pool-name                        string
@@ -465,6 +466,6 @@ module: ietf-dhcpv6-server
              |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
              |     +--:(duid-uuid)
              |     |  +--ro uuid?                        yang:uuid
-             |     +--:(duid-invalid)
+             |     +--:(duid-unknown)
              |        +--ro data?                        binary
              +--ro description?   string
