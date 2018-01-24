@@ -249,7 +249,7 @@ module ietf-dhcpv6-options {
         	description "Type code of this DUID";
         }
 	    choice duid-type {
-		  default duid-invalid;
+	      default duid-unknown;
 	      description "Selects the format for the DUID.";
 	      case duid-llt {
 	        description "DUID Based on Link-layer Address Plus Time (Type 1 - DUID-LLT)";
