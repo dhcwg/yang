@@ -305,7 +305,7 @@ module ietf-dhcpv6-options {
 	    		      lowercase characters";
 	    	  }    	  
 	      }
-	      case duid-invalid {
+	      case duid-unknown {
 	    	  description "DUID based on free raw bytes";
 	    	  leaf data {
 	    		  type binary;
