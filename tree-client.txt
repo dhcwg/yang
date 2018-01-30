@@ -79,10 +79,6 @@ module: ietf-dhcpv6-client
              |  +--ro sip-server* [sip-serv-id]
              |     +--ro sip-serv-id      uint8
              |     +--ro sip-serv-addr    inet:ipv6-address
-             +--ro dns-config-option! {dns-config-op}?
-             |  +--ro dns-server* [dns-serv-id]
-             |     +--ro dns-serv-id      uint8
-             |     +--ro dns-serv-addr    inet:ipv6-address
              +--ro domain-searchlist-option! {domain-searchlist-op}?
              |  +--ro domain-searchlist* [domain-searchlist-id]
              |     +--ro domain-searchlist-id        uint8
