@@ -1,0 +1,57 @@
+
+Main changes
+------------
+
+Split of the monolithic model in to:
+
+ietf-dhcpv6-server
+ietf-dhcpv6-client
+ietf-dhcpv6-relay
+ietf-dhcpv6-options
+
+The options model has containers for server, client, and relay sourced
+options. While the options model is still huge (and incomplete), it
+has made working with the functional element models
+
+I've reworked the 'option-sets' definition and use mechanism throughout.
+
+Removed duplication of options between the server (rw) and client (ro)
+option definitions. Client now imports the server options with 'config false'
+
+The option definitions now have a consistent style throughout giving
+the IANA allocated name/code in the description and the source RFC
+in the reference. This makes it a lot easier to check for completeness
+and validate their structures.
+
+
+Main Tasks ToDo
+---------------
+
+Many inline comments in the models that need to be addressed.
+
+Separate Configuration and State trees - currently state (such as
+pool utilisation) is contained alongside the config. This is messy
+and is out of line with the general modelling conventions.
+
+Further modelling of the DHCP option space and validation against their
+source RFCs.
+
+Implement the use of 'features' to indicate support for different options.
+
+Review the use of an 'enable' node under each of the options. Would it
+be better to do this using presence statements?
+
+Currently, DUID is modelled in client/server/relay. As this is common,
+should it be moved to 'options' (although not strictly an option, it's
+a commonly used field)?
+
+Currently, there is no way of defining server rules for parsing input
+values in the client's request/relay message to the correct address
+pool. As there are a number of ways that this can be done, we need a
+way of defining this logic.
+
+The relay model has nodes relating to routes learnt from PD. should
+these be modelled, and if so, how (ietf-routing ref)?
+
+All of the models should have some interaction with ietf-interfaces. This
+needs to be added.

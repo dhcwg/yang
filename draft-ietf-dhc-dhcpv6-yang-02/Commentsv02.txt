@@ -1,0 +1,45 @@
+Section 3.2
+
+One thing that this model needs to take into account is how PD is dealt with in the case that
+the relay is not the delegating router (i.e. there is a separate relay and DHCP server).
+In this case, the relay needs to snoop the passing PD requests/allocations and allocate a remote
+route on the port that the requests is for. An operator needs to be able to read these routes
+(and also clear them in event of a problem)
+
+RFC6422 (relay supplied options option) needs to be modelled (I'm afraid I haven't really looked
+into how this works, so I can't provide any suggestions at this stage).
+
+
+Section 3.3
+
+The duid should be a rw parameter. Although a device creates it (normally from its Ethernet
+address), it is normally a settable parameter. 
+
+I'm not clear what the function of the 'rw dual-stack' leaf is. It would imply that this is to do with
+turning v4 on / off? If so, I don't think that it belongs in here.
+
+The 'mo-tab' is a useful idea, but I'm not sure if this is the best way to achieve it. It also
+means that a conflict in the model is possbile (what if the client is enabled, but both M and O are disabled?).
+'M' and 'O' are specifically the names of bits in the PIO option in an RA, and although the functionality is
+equivalent, those names don't have any significance outside of a PIO.
+What if there were leaf nodes under an enable list (replacing the 'rw enable' leaf) which allowed either
+'full configuration including addresses' (i.e. 'm' functionality) or 'additional configuration only' (i.e. 'o')?
+
+The if-other-paras needs to have a comprehensive list of all of the possible options in there (as you did
+with the server). I think that for some options, there is the possibility for a client to receive more than one
+instance of an option in an offer, so they would need to be constructed as lists.
+
+There needs to be a way of configuring the list of options that the client will request in its ORO.
+
+Should there be an RO list of 'supported options' so that it is possible to interrogate a client's capabilities?
+
+
+Section 3.4
+
+It would be useful to have a reporting threshold in the notification (e.g. notify at 80% utilisation) and again
+when the pool is at 100% - so that an admin can do something about it rather than just know that it's too late!
+The util threshold would need to be a settable parameter.
+
+Logging of DHCP events over Netconf may also be a desirable function. Operators generally need to retain logs
+of which IP address a user has at any given time, so a Notify mechanism for tracking allocation/renew/release
+would be a useful thing to have.

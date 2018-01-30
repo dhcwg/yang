@@ -1,0 +1,1078 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+   
+  <meta http-equiv="Content-Style-Type" content="text/css"> 
+  <title>Diff: raft-ietf-dhc-dhcpv6-yang-04-00.txt - draft-ietf-dhc-dhcpv6-yang-03.txt</title> 
+  <style type="text/css"> 
+    body    { margin: 0.4ex; margin-right: auto; } 
+    tr      { } 
+    td      { white-space: pre; font-family: monospace; vertical-align: top; font-size: 0.86em;} 
+    th      { font-size: 0.86em; } 
+    .small  { font-size: 0.6em; font-style: italic; font-family: Verdana, Helvetica, sans-serif; } 
+    .left   { background-color: #EEE; } 
+    .right  { background-color: #FFF; } 
+    .diff   { background-color: #CCF; } 
+    .lblock { background-color: #BFB; } 
+    .rblock { background-color: #FF8; } 
+    .insert { background-color: #8FF; } 
+    .delete { background-color: #ACF; } 
+    .void   { background-color: #FFB; } 
+    .cont   { background-color: #EEE; } 
+    .linebr { background-color: #AAA; } 
+    .lineno { color: red; background-color: #FFF; font-size: 0.7em; text-align: right; padding: 0 2px; } 
+    .elipsis{ background-color: #AAA; } 
+    .left .cont { background-color: #DDD; } 
+    .right .cont { background-color: #EEE; } 
+    .lblock .cont { background-color: #9D9; } 
+    .rblock .cont { background-color: #DD6; } 
+    .insert .cont { background-color: #0DD; } 
+    .delete .cont { background-color: #8AD; } 
+    .stats, .stats td, .stats th { background-color: #EEE; padding: 2px 0; } 
+    span.hide { display: none; color: #aaa;}    a:hover span { display: inline; }    tr.change { background-color: gray; } 
+    tr.change a { text-decoration: none; color: black } 
+  </style> 
+     <script>
+var chunk_index = 0;
+var old_chunk = null;
+
+function format_chunk(index) {
+    var prefix = "diff";
+    var str = index.toString();
+    for (x=0; x<(4-str.length); ++x) {
+        prefix+='0';
+    }
+    return prefix + str;
+}
+
+function find_chunk(n){
+    return document.querySelector('tr[id$="' + n + '"]');
+}
+
+function change_chunk(offset) {
+    var index = chunk_index + offset;
+    var new_str;
+    var new_chunk;
+
+    new_str = format_chunk(index);
+    new_chunk = find_chunk(new_str);
+    if (!new_chunk) {
+        return;
+    }
+    if (old_chunk) {
+        old_chunk.style.outline = "";
+    }
+    old_chunk = new_chunk;
+    old_chunk.style.outline = "1px solid red";
+    window.location.replace("#" + new_str)
+    window.scrollBy(0,-100);
+    chunk_index = index;
+}
+
+document.onkeydown = function(e) {
+    switch (e.keyCode) {
+    case 78:
+        change_chunk(1);
+        break;
+    case 80:
+        change_chunk(-1);
+        break;
+    }
+};
+   </script> 
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head> 
+<body> 
+  <table border="0" cellpadding="0" cellspacing="0"> 
+  <tbody><tr id="part-1" bgcolor="orange"><th></th><th>&nbsp;raft-ietf-dhc-dhcpv6-yang-04-00.txt&nbsp;</th><th> </th><th>&nbsp;<a href="https://tools.ietf.org/html/draft-ietf-dhc-dhcpv6-yang-03.txt" style="color:#008">draft-ietf-dhc-dhcpv6-yang-03.txt</a>&nbsp;<a href="https://tools.ietf.org/rfcdiff?url1=draft-ietf-dhc-dhcpv6-yang-03.txt" style="color:#008; text-decoration:none;">&gt;</a></th><th></th></tr> 
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">DHC Working Group                                                 Y. Cui</td><td> </td><td class="right">DHC Working Group                                                 Y. Cui</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Internet-Draft                                                   H. Wang</td><td> </td><td class="right">Internet-Draft                                                   H. Wang</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Intended status: Standards Track                                  L. Sun</td><td> </td><td class="right">Intended status: Standards Track                                  L. Sun</td><td class="lineno"></td></tr>
+      <tr id="diff0001"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">Expires: <span class="delete">April 28, 2018</span>                              Tsinghua University</td><td> </td><td class="rblock">Expires: <span class="insert">December 20, 2016</span>                           Tsinghua University</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">                                                                <span class="insert">T. Lemon</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                 Nominum</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                                               I. Farrer</td><td> </td><td class="right">                                                               I. Farrer</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                                                S. Zoric</td><td> </td><td class="right">                                                                S. Zoric</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                                     Deutsche Telekom AG</td><td> </td><td class="right">                                                     Deutsche Telekom AG</td><td class="lineno"></td></tr>
+      <tr id="diff0002"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">                                                        <span class="delete">October 25, 2017</span></td><td> </td><td class="rblock">                                                        <span class="insert">   June 18, 2016</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                YANG Data Model for DHCPv6 Configuration</td><td> </td><td class="right">                YANG Data Model for DHCPv6 Configuration</td><td class="lineno"></td></tr>
+      <tr id="diff0003"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">                    <span class="delete">draft-ietf-dhc-dhcpv6-yang-04-00</span></td><td> </td><td class="rblock">                    <span class="insert"> draft-ietf-dhc-dhcpv6-yang-03</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Abstract</td><td> </td><td class="right">Abstract</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   This document describes a YANG data model [RFC6020] for the</td><td> </td><td class="right">   This document describes a YANG data model [RFC6020] for the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   configuration and management of DHCPv6 servers, relays and clients.</td><td> </td><td class="right">   configuration and management of DHCPv6 servers, relays and clients.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Requirements Language</td><td> </td><td class="right">Requirements Language</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",</td><td> </td><td class="right">   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this</td><td> </td><td class="right">   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   document are to be interpreted as described in [RFC2119].</td><td> </td><td class="right">   document are to be interpreted as described in [RFC2119].</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Status of This Memo</td><td> </td><td class="right">Status of This Memo</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   This Internet-Draft is submitted in full conformance with the</td><td> </td><td class="right">   This Internet-Draft is submitted in full conformance with the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   provisions of BCP 78 and BCP 79.</td><td> </td><td class="right">   provisions of BCP 78 and BCP 79.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Internet-Drafts are working documents of the Internet Engineering</td><td> </td><td class="right">   Internet-Drafts are working documents of the Internet Engineering</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Task Force (IETF).  Note that other groups may also distribute</td><td> </td><td class="right">   Task Force (IETF).  Note that other groups may also distribute</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   working documents as Internet-Drafts.  The list of current Internet-</td><td> </td><td class="right">   working documents as Internet-Drafts.  The list of current Internet-</td><td class="lineno"></td></tr>
+      <tr id="diff0004"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   Drafts is at http<span class="delete">s</span>://datatracker.ietf.org/drafts/current/.</td><td> </td><td class="rblock">   Drafts is at http://datatracker.ietf.org/drafts/current/.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Internet-Drafts are draft documents valid for a maximum of six months</td><td> </td><td class="right">   Internet-Drafts are draft documents valid for a maximum of six months</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   and may be updated, replaced, or obsoleted by other documents at any</td><td> </td><td class="right">   and may be updated, replaced, or obsoleted by other documents at any</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   time.  It is inappropriate to use Internet-Drafts as reference</td><td> </td><td class="right">   time.  It is inappropriate to use Internet-Drafts as reference</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   material or to cite them other than as "work in progress."</td><td> </td><td class="right">   material or to cite them other than as "work in progress."</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0005"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   This Internet-Draft will expire on <span class="delete">April 28, 2018</span>.</td><td> </td><td class="rblock">   This Internet-Draft will expire on <span class="insert">December 20, 2016</span>.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Copyright Notice</td><td> </td><td class="right">Copyright Notice</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0006"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   Copyright (c) 201<span class="delete">7</span> IETF Trust and the persons identified as the</td><td> </td><td class="rblock">   Copyright (c) 201<span class="insert">6</span> IETF Trust and the persons identified as the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   document authors.  All rights reserved.</td><td> </td><td class="right">   document authors.  All rights reserved.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   This document is subject to BCP 78 and the IETF Trust's Legal</td><td> </td><td class="right">   This document is subject to BCP 78 and the IETF Trust's Legal</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Provisions Relating to IETF Documents</td><td> </td><td class="right">   Provisions Relating to IETF Documents</td><td class="lineno"></td></tr>
+      <tr id="diff0007"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   (http<span class="delete">s</span>://trustee.ietf.org/license-info) in effect on the date of</td><td> </td><td class="rblock">   (http://trustee.ietf.org/license-info) in effect on the date of</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   publication of this document.  Please review these documents</td><td> </td><td class="right">   publication of this document.  Please review these documents</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   carefully, as they describe your rights and restrictions with respect</td><td> </td><td class="right">   carefully, as they describe your rights and restrictions with respect</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   to this document.  Code Components extracted from this document must</td><td> </td><td class="right">   to this document.  Code Components extracted from this document must</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   include Simplified BSD License text as described in Section 4.e of</td><td> </td><td class="right">   include Simplified BSD License text as described in Section 4.e of</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   the Trust Legal Provisions and are provided without warranty as</td><td> </td><td class="right">   the Trust Legal Provisions and are provided without warranty as</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   described in the Simplified BSD License.</td><td> </td><td class="right">   described in the Simplified BSD License.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Table of Contents</td><td> </td><td class="right">Table of Contents</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2</td><td> </td><td class="right">   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">     1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3</td><td> </td><td class="right">     1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   2.  DHCPv6 Tree Diagrams  . . . . . . . . . . . . . . . . . . . .   3</td><td> </td><td class="right">   2.  DHCPv6 Tree Diagrams  . . . . . . . . . . . . . . . . . . . .   3</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">     2.1.  DHCPv6 Server Tree Diagrams . . . . . . . . . . . . . . .   3</td><td> </td><td class="right">     2.1.  DHCPv6 Server Tree Diagrams . . . . . . . . . . . . . . .   3</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">     2.2.  DHCPv6 Relay Tree Diagrams  . . . . . . . . . . . . . . .  12</td><td> </td><td class="right">     2.2.  DHCPv6 Relay Tree Diagrams  . . . . . . . . . . . . . . .  12</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">     2.3.  DHCPv6 Client Tree Diagrams . . . . . . . . . . . . . . .  15</td><td> </td><td class="right">     2.3.  DHCPv6 Client Tree Diagrams . . . . . . . . . . . . . . .  15</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">     2.4.  Notifications Mechanism for DHCPv6  . . . . . . . . . . .  20</td><td> </td><td class="right">     2.4.  Notifications Mechanism for DHCPv6  . . . . . . . . . . .  20</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   3.  DHCPv6 YANG Model . . . . . . . . . . . . . . . . . . . . . .  22</td><td> </td><td class="right">   3.  DHCPv6 YANG Model . . . . . . . . . . . . . . . . . . . . . .  22</td><td class="lineno"></td></tr>
+      <tr id="diff0008"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   4.  Security Considerations (TBD) . . . . . . . . . . . . . . . .  <span class="delete">86</span></td><td> </td><td class="rblock">   4.  Security Considerations (TBD) . . . . . . . . . . . . . . . .  <span class="insert">87</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   5.  IANA Considerations (TBD) . . . . . . . . . . . . . . . . . .  <span class="delete">86</span></td><td> </td><td class="rblock">   5.  IANA Considerations (TBD) . . . . . . . . . . . . . . . . . .  <span class="insert">87</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  87</td><td> </td><td class="right">   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  87</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  87</td><td> </td><td class="right">   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  87</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  87</td><td> </td><td class="right">     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  87</td><td class="lineno"></td></tr>
+      <tr id="diff0009"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     7.2.  Informative References  . . . . . . . . . . . . . . . . .  <span class="delete">87</span></td><td> </td><td class="rblock">     7.2.  Informative References  . . . . . . . . . . . . . . . . .  <span class="insert">88</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <span class="delete">89</span></td><td> </td><td class="rblock">   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  <span class="insert">90</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">1.  Introduction</td><td> </td><td class="right">1.  Introduction</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   DHCPv6 [RFC3315] is widely used for supplying configuration and other</td><td> </td><td class="right">   DHCPv6 [RFC3315] is widely used for supplying configuration and other</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   relevant parameters to clients in IPv6 networks.  This document</td><td> </td><td class="right">   relevant parameters to clients in IPv6 networks.  This document</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   defines a DHCPv6 YANG data model, containing sub-modules for the</td><td> </td><td class="right">   defines a DHCPv6 YANG data model, containing sub-modules for the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   configuration and management of DHCPv6 servers, relays and clients.</td><td> </td><td class="right">   configuration and management of DHCPv6 servers, relays and clients.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   A single YANG model covering all of these elements provides an</td><td> </td><td class="right">   A single YANG model covering all of these elements provides an</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   operator with a common interface for the management of the entire</td><td> </td><td class="right">   operator with a common interface for the management of the entire</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   DHCPv6 deployment in their network.</td><td> </td><td class="right">   DHCPv6 deployment in their network.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-2" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-2"><em> page 3, line 40<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-2"><em> page 3, line 43<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">   o  Abbreviations before data node names: "rw" means configuration</td><td> </td><td class="right">   o  Abbreviations before data node names: "rw" means configuration</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      data (read-write), and "ro" means state data (read-only).</td><td> </td><td class="right">      data (read-write), and "ro" means state data (read-only).</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.  DHCPv6 Tree Diagrams</td><td> </td><td class="right">2.  DHCPv6 Tree Diagrams</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.1.  DHCPv6 Server Tree Diagrams</td><td> </td><td class="right">2.1.  DHCPv6 Server Tree Diagrams</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">+--rw dhcpv6</td><td> </td><td class="right">+--rw dhcpv6</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   +--rw server</td><td> </td><td class="right">   +--rw server</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +--rw serv-attributes</td><td> </td><td class="right">      +--rw serv-attributes</td><td class="lineno"></td></tr>
+      <tr id="diff0010"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      |  +--rw <span class="delete">name?</span>                           string</td><td> </td><td class="rblock">      |  +--rw <span class="insert">name</span>                            string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      |  +--rw <span class="delete">duid?</span>                           duidtype</td><td> </td><td class="rblock">      |  +--rw <span class="insert">duid</span>                            duidtype</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">      <span class="insert">|  +--rw enable                          boolean</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw interfaces-config*              string</td><td> </td><td class="right">      |  +--rw interfaces-config*              string</td><td class="lineno"></td></tr>
+      <tr id="diff0011"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      |  +--rw ipv6-address<span class="delete">*</span>                   inet:ipv6-address</td><td> </td><td class="rblock">      |  +--rw ipv6-address<span class="insert">?</span>                   inet:ipv6-address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw description?                    string</td><td> </td><td class="right">      |  +--rw description?                    string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw pd-function                     boolean</td><td> </td><td class="right">      |  +--rw pd-function                     boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw stateless-service               boolean</td><td> </td><td class="right">      |  +--rw stateless-service               boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw rapid-commit                    boolean</td><td> </td><td class="right">      |  +--rw rapid-commit                    boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw vendor-info</td><td> </td><td class="right">      |  +--rw vendor-info</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw ent-num                      uint32</td><td> </td><td class="right">      |     +--rw ent-num                      uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw data*                        string</td><td> </td><td class="right">      |     +--rw data*                        string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +--rw option-sets</td><td> </td><td class="right">      +--rw option-sets</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw option-set* [option-set-id]</td><td> </td><td class="right">      |  +--rw option-set* [option-set-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw option-set-id                uint8</td><td> </td><td class="right">      |     +--rw option-set-id                uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-3" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-3"><em> page 8, line 12<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-3"><em> page 8, line 16<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |              +--rw psid-len            uint8</td><td> </td><td class="right">      |              +--rw psid-len            uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |              +--rw psid                uint16</td><td> </td><td class="right">      |              +--rw psid                uint16</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +--rw network-ranges</td><td> </td><td class="right">      +--rw network-ranges</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw option-set-id                   uint8</td><td> </td><td class="right">      |  +--rw option-set-id                   uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw network-range* [network-range-id]</td><td> </td><td class="right">      |  +--rw network-range* [network-range-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw network-range-id             uint8</td><td> </td><td class="right">      |     +--rw network-range-id             uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw network-description          string</td><td> </td><td class="right">      |     +--rw network-description          string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw network-prefix               inet:ipv6-prefix</td><td> </td><td class="right">      |     +--rw network-prefix               inet:ipv6-prefix</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw inherit-option-set           boolean</td><td> </td><td class="right">      |     +--rw inherit-option-set           boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw option-set-id                uint8</td><td> </td><td class="right">      |     +--rw option-set-id                uint8</td><td class="lineno"></td></tr>
+      <tr id="diff0012"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      <span class="delete">|     +--rw reserved-addresses</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  +--rw static-binding* [cli-id]</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw cli-id                 uint32</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw duid?                  duidtype</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw reserv-addr*           inet:ipv6-address</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  +--rw other-reserv-addr*        inet:ipv6-address</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     +--rw reserved-prefixes</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  +--rw static-binding* [cli-id]</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw cli-id                 uint32</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw duid?                  duidtype</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw reserv-prefix-len      uint8</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  |  +--rw reserv-prefix          inet:ipv6-prefix</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  +--rw exclude-prefix-len        uint8</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  +--rw exclude-prefix            inet:ipv6-prefix</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |  +--rw other-reserv-prefix*  [reserv-id]</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |     +--rw reserv-id              uint8</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |     +--rw prefix-len             uint8</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">      |     |     +--rw prefix                 inet:ipv6-prefix</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw address-pools</td><td> </td><td class="right">      |     +--rw address-pools</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  +--rw address-pool* [pool-id]</td><td> </td><td class="right">      |     |  +--rw address-pool* [pool-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw pool-id                uint8</td><td> </td><td class="right">      |     |  |  +--rw pool-id                uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw pool-prefix            inet:ipv6-prefix</td><td> </td><td class="right">      |     |  |  +--rw pool-prefix            inet:ipv6-prefix</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw start-address          inet:ipv6-address</td><td> </td><td class="right">      |     |  |  +--rw start-address          inet:ipv6-address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw end-address            inet:ipv6-address</td><td> </td><td class="right">      |     |  |  +--rw end-address            inet:ipv6-address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw renew-time             yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw renew-time             yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw rebind-time            yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw rebind-time            yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw preferred-lifetime     yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw preferred-lifetime     yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw valid-lifetime         yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw valid-lifetime         yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--ro total-ipv6-count       uint64</td><td> </td><td class="right">      |     |  |  +--ro total-ipv6-count       uint64</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--ro used-ipv6-count        uint64</td><td> </td><td class="right">      |     |  |  +--ro used-ipv6-count        uint64</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw utilization-ratio      threshold</td><td> </td><td class="right">      |     |  |  +--rw utilization-ratio      threshold</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw inherit-option-set     boolean</td><td> </td><td class="right">      |     |  |  +--rw inherit-option-set     boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw option-set-id          uint8</td><td> </td><td class="right">      |     |  |  +--rw option-set-id          uint8</td><td class="lineno"></td></tr>
+      <tr id="diff0013"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">      <span class="insert">|     |  |  +--rw reserved-addresses</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     +--rw static-binding* [cli-id]</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw cli-id           uint32</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw duid             duidtype</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw reserv-addr*     inet:ipv6-address</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     +--rw other-reserv-addr*  inet:ipv6-address</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  +--ro binding-info* [cli-id]</td><td> </td><td class="right">      |     |  +--ro binding-info* [cli-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |     +--ro cli-id                 uint32</td><td> </td><td class="right">      |     |     +--ro cli-id                 uint32</td><td class="lineno"></td></tr>
+      <tr id="diff0014"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      |     |     +--ro duid<span class="delete">?</span>                  duidtype</td><td> </td><td class="rblock">      |     |     +--ro duid<span class="insert"> </span>                  duidtype</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |     +--ro cli-ia* [iaid]</td><td> </td><td class="right">      |     |     +--ro cli-ia* [iaid]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro ia-type             string</td><td> </td><td class="right">      |     |        +--ro ia-type             string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro iaid                uint32</td><td> </td><td class="right">      |     |        +--ro iaid                uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro cli-addr*           inet:ipv6-address</td><td> </td><td class="right">      |     |        +--ro cli-addr*           inet:ipv6-address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro pool-id?            uint8</td><td> </td><td class="right">      |     |        +--ro pool-id?            uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw prefix-pools</td><td> </td><td class="right">      |     +--rw prefix-pools</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  +--rw prefix-pool* [pool-id]</td><td> </td><td class="right">      |     |  +--rw prefix-pool* [pool-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw pool-id                uint8</td><td> </td><td class="right">      |     |  |  +--rw pool-id                uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw prefix                 inet:ipv6-prefix</td><td> </td><td class="right">      |     |  |  +--rw prefix                 inet:ipv6-prefix</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw prefix-length          uint8</td><td> </td><td class="right">      |     |  |  +--rw prefix-length          uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw renew-time             yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw renew-time             yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw rebind-time            yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw rebind-time            yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw preferred-lifetime     yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw preferred-lifetime     yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw valid-lifetime         yang:timeticks</td><td> </td><td class="right">      |     |  |  +--rw valid-lifetime         yang:timeticks</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw utilization-ratio      threshold</td><td> </td><td class="right">      |     |  |  +--rw utilization-ratio      threshold</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw inherit-option-set     boolean</td><td> </td><td class="right">      |     |  |  +--rw inherit-option-set     boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  |  +--rw option-set-id          uint8</td><td> </td><td class="right">      |     |  |  +--rw option-set-id          uint8</td><td class="lineno"></td></tr>
+      <tr id="diff0015"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">      <span class="insert">|     |  |  +--rw reserved-prefixes</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     +--rw static-binding* [cli-id]</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw cli-id           uint32</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw duid             duidtype</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw reserv-prefix-len  uint8</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     |  +--rw reserv-prefix    inet:ipv6-prefix</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     +--rw exclude-prefix-len  uint8</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     +--rw exclude-prefix      inet:ipv6-prefix</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |     +--rw other-reserv-prefix*  [reserv-id]</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |        +--rw reserv-id        uint8</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |        +--rw prefix-len       uint8</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      |     |  |        +--rw prefix           inet:ipv6-prefix</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  +--ro binding-info* [cli-id]</td><td> </td><td class="right">      |     |  +--ro binding-info* [cli-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |     +--ro cli-id                 uint32</td><td> </td><td class="right">      |     |     +--ro cli-id                 uint32</td><td class="lineno"></td></tr>
+      <tr id="diff0016"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      |     |     +--ro duid<span class="delete">?</span>                  duidtype</td><td> </td><td class="rblock">      |     |     +--ro duid<span class="insert"> </span>                  duidtype</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |     +--ro cli-iapd* [iaid]</td><td> </td><td class="right">      |     |     +--ro cli-iapd* [iaid]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro iaid                uint32</td><td> </td><td class="right">      |     |        +--ro iaid                uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro cli-prefix*         uint32</td><td> </td><td class="right">      |     |        +--ro cli-prefix*         uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro cli-prefix-len*     uint8</td><td> </td><td class="right">      |     |        +--ro cli-prefix-len*     uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |        +--ro pool-id?            uint8</td><td> </td><td class="right">      |     |        +--ro pool-id?            uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw hosts</td><td> </td><td class="right">      |     +--rw hosts</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |        +--rw host* [cli-id]</td><td> </td><td class="right">      |        +--rw host* [cli-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |           +--rw cli-id                 uint32</td><td> </td><td class="right">      |           +--rw cli-id                 uint32</td><td class="lineno"></td></tr>
+      <tr id="diff0017"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">      |           +--rw duid<span class="delete">?</span>                  duidtype</td><td> </td><td class="rblock">      |           +--rw duid<span class="insert"> </span>                  duidtype</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |           +--rw inherit-option-set     boolean</td><td> </td><td class="right">      |           +--rw inherit-option-set     boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |           +--rw option-set-id          uint8</td><td> </td><td class="right">      |           +--rw option-set-id          uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |           +--rw nis-domain-name?       string</td><td> </td><td class="right">      |           +--rw nis-domain-name?       string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |           +--rw nis-plus-domain-name?  string</td><td> </td><td class="right">      |           +--rw nis-plus-domain-name?  string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +--rw relay-opaque-paras</td><td> </td><td class="right">      +--rw relay-opaque-paras</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |  +--rw relays* [relay-name]</td><td> </td><td class="right">      |  +--rw relays* [relay-name]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw relay-name                   string</td><td> </td><td class="right">      |     +--rw relay-name                   string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     +--rw interface-info* [if-name]</td><td> </td><td class="right">      |     +--rw interface-info* [if-name]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  +--rw if-name                   string</td><td> </td><td class="right">      |     |  +--rw if-name                   string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |     |  +--rw interface-id              string</td><td> </td><td class="right">      |     |  +--rw interface-id              string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-4" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-4"><em> page 12, line 46<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-4"><em> page 12, line 50<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">   o  packet-stats: A container presents the packet statistics related</td><td> </td><td class="right">   o  packet-stats: A container presents the packet statistics related</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      to the DHCPv6 server.</td><td> </td><td class="right">      to the DHCPv6 server.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.2.  DHCPv6 Relay Tree Diagrams</td><td> </td><td class="right">2.2.  DHCPv6 Relay Tree Diagrams</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   +--rw dhcpv6</td><td> </td><td class="right">   +--rw dhcpv6</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +-- ...</td><td> </td><td class="right">      +-- ...</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |</td><td> </td><td class="right">      |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +--rw relay</td><td> </td><td class="right">      +--rw relay</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         +--rw relay-attributes</td><td> </td><td class="right">         +--rw relay-attributes</td><td class="lineno"></td></tr>
+      <tr id="diff0018"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">         |  +--rw <span class="delete">name?</span>                           string</td><td> </td><td class="rblock">         |  +--rw <span class="insert">name</span>                            string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">         <span class="insert">|  +--rw enable                          boolean</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw description?                    string</td><td> </td><td class="right">         |  +--rw description?                    string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw dest-addrs*                     inet:ipv6-address</td><td> </td><td class="right">         |  +--rw dest-addrs*                     inet:ipv6-address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw subscribers* [subscriber]</td><td> </td><td class="right">         |  +--rw subscribers* [subscriber]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  |  +--rw subscriber                   uint8</td><td> </td><td class="right">         |  |  +--rw subscriber                   uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  |  +--rw subscriber-id                string</td><td> </td><td class="right">         |  |  +--rw subscriber-id                string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw remote-host* [entNum]</td><td> </td><td class="right">         |  +--rw remote-host* [entNum]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  |  +--rw ent-num                      uint32</td><td> </td><td class="right">         |  |  +--rw ent-num                      uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  |  +--rw remote-id                    string</td><td> </td><td class="right">         |  |  +--rw remote-id                    string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw vendor-info</td><td> </td><td class="right">         |  +--rw vendor-info</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |     +--rw ent-num                      uint32</td><td> </td><td class="right">         |     +--rw ent-num                      uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |     +--rw data*                        string</td><td> </td><td class="right">         |     +--rw data*                        string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         +--rw relay-supplied-options-option</td><td> </td><td class="right">         +--rw relay-supplied-options-option</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw rsoo-set* [rsoo-set-id]</td><td> </td><td class="right">         |  +--rw rsoo-set* [rsoo-set-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |     +--rw rsoo-set-id               uint8</td><td> </td><td class="right">         |     +--rw rsoo-set-id               uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |     +--rw erp-local-domain-name-option</td><td> </td><td class="right">         |     +--rw erp-local-domain-name-option</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |        +--rw enable                 boolean</td><td> </td><td class="right">         |        +--rw enable                 boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |        +--rw erp-for-client* [cli-id]</td><td> </td><td class="right">         |        +--rw erp-for-client* [cli-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |           +--rw cli-id              uint32</td><td> </td><td class="right">         |           +--rw cli-id              uint32</td><td class="lineno"></td></tr>
+      <tr id="diff0019"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">         |           +--rw duid<span class="delete">?</span>               duidtype</td><td> </td><td class="rblock">         |           +--rw duid<span class="insert"> </span>               duidtype</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |           +--rw erp-name            string</td><td> </td><td class="right">         |           +--rw erp-name            string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         +--rw relay-if* [if-name]</td><td> </td><td class="right">         +--rw relay-if* [if-name]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw if-name                   string</td><td> </td><td class="right">         |  +--rw if-name                   string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw enable                    boolean</td><td> </td><td class="right">         |  +--rw enable                    boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw ipv6-address?             ietf:ipv6-address</td><td> </td><td class="right">         |  +--rw ipv6-address?             ietf:ipv6-address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw interface-id?             string</td><td> </td><td class="right">         |  +--rw interface-id?             string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw rsoo-set [rsoo-set-id]</td><td> </td><td class="right">         |  +--rw rsoo-set [rsoo-set-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  +--rw pd-route* [pd-route-id]</td><td> </td><td class="right">         |  +--rw pd-route* [pd-route-id]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  |  +--rw pd-route-id            uint8</td><td> </td><td class="right">         |  |  +--rw pd-route-id            uint8</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         |  |  +--rw requesting-router-id   uint32</td><td> </td><td class="right">         |  |  +--rw requesting-router-id   uint32</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-5" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-5"><em> page 15, line 21<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-5"><em> page 15, line 24<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   o  relay-stats: The "relay-stats" container records and presents the</td><td> </td><td class="right">   o  relay-stats: The "relay-stats" container records and presents the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      overall packet statistics of the relay agent.</td><td> </td><td class="right">      overall packet statistics of the relay agent.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.3.  DHCPv6 Client Tree Diagrams</td><td> </td><td class="right">2.3.  DHCPv6 Client Tree Diagrams</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   +--rw dhcpv6</td><td> </td><td class="right">   +--rw dhcpv6</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +-- ...</td><td> </td><td class="right">      +-- ...</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      |</td><td> </td><td class="right">      |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">      +--rw client</td><td> </td><td class="right">      +--rw client</td><td class="lineno"></td></tr>
+      <tr id="diff0020"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">         +--rw duid?                           duidtype</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">         +--rw client-if* [if-name]</td><td> </td><td class="right">         +--rw client-if* [if-name]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw if-name                      string</td><td> </td><td class="right">            +--rw if-name                      string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw cli-id                       uint32</td><td> </td><td class="right">            +--rw cli-id                       uint32</td><td class="lineno"></td></tr>
+      <tr id="diff0021"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">            <span class="insert">+--rw duid                         duidtype</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">            +--rw enable                       boolean</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw description?                 string</td><td> </td><td class="right">            +--rw description?                 string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw pd-function                  boolean</td><td> </td><td class="right">            +--rw pd-function                  boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw rapid-commit                 boolean</td><td> </td><td class="right">            +--rw rapid-commit                 boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw mo-tab</td><td> </td><td class="right">            +--rw mo-tab</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            |  +--rw m-tab                     boolean</td><td> </td><td class="right">            |  +--rw m-tab                     boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            |  +--rw o-tab                     boolean</td><td> </td><td class="right">            |  +--rw o-tab                     boolean</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            +--rw oro-options</td><td> </td><td class="right">            +--rw oro-options</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            |  +--rw oro-option* [option-code]</td><td> </td><td class="right">            |  +--rw oro-option* [option-code]</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            |     +--rw option-code            uint16</td><td> </td><td class="right">            |     +--rw option-code            uint16</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            |     +--rw description            string</td><td> </td><td class="right">            |     +--rw description            string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-6" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-6"><em> page 25, line 45<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-6"><em> page 25, line 45<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">    container server {</td><td> </td><td class="right">    container server {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">        presence "Enables server";</td><td> </td><td class="right">        presence "Enables server";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">        description "dhcpv6 server portion";</td><td> </td><td class="right">        description "dhcpv6 server portion";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">        container serv-attributes {</td><td> </td><td class="right">        container serv-attributes {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            description "This container contains basic attributes</td><td> </td><td class="right">            description "This container contains basic attributes</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            of a DHCPv6 server such as DUID, server name and so</td><td> </td><td class="right">            of a DHCPv6 server such as DUID, server name and so</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            on. Some optional functions that can be provided by</td><td> </td><td class="right">            on. Some optional functions that can be provided by</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            the server is also included.";</td><td> </td><td class="right">            the server is also included.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf name {</td><td> </td><td class="right">            leaf name {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type string;</td><td> </td><td class="right">                type string;</td><td class="lineno"></td></tr>
+      <tr id="diff0022"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "server's name";</td><td> </td><td class="right">                description "server's name";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf duid {</td><td> </td><td class="right">            leaf duid {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type duidtype;</td><td> </td><td class="right">                type duidtype;</td><td class="lineno"></td></tr>
+      <tr id="diff0023"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "DHCP Unique Identifer";</td><td> </td><td class="right">                description "DHCP Unique Identifer";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr id="diff0024"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">            <span class="delete">leaf-list</span> ipv6-address {</td><td> </td><td class="rblock">            <span class="insert">leaf enable {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                type boolean;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                description "whether to enable the server";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">            }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">            leaf</span> ipv6-address {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type inet:ipv6-address;</td><td> </td><td class="right">                type inet:ipv6-address;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "server's IPv6 address";</td><td> </td><td class="right">                description "server's IPv6 address";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf description {</td><td> </td><td class="right">            leaf description {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type string;</td><td> </td><td class="right">                type string;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "description of the server";</td><td> </td><td class="right">                description "description of the server";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf pd-function {</td><td> </td><td class="right">            leaf pd-function {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type boolean;</td><td> </td><td class="right">                type boolean;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                mandatory true;</td><td> </td><td class="right">                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-7" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-7"><em> page 46, line 47<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-7"><em> page 47, line 6<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        type boolean;</td><td> </td><td class="right">                        type boolean;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        mandatory true;</td><td> </td><td class="right">                        mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        description "indicate whether to inherit</td><td> </td><td class="right">                        description "indicate whether to inherit</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        the configuration from higher level";</td><td> </td><td class="right">                        the configuration from higher level";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    }</td><td> </td><td class="right">                    }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    leaf option-set-id {</td><td> </td><td class="right">                    leaf option-set-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        type uint8;</td><td> </td><td class="right">                        type uint8;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        mandatory true;</td><td> </td><td class="right">                        mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        description "the selected option-set";</td><td> </td><td class="right">                        description "the selected option-set";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    }</td><td> </td><td class="right">                    }</td><td class="lineno"></td></tr>
+      <tr id="diff0025"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">                    <span class="delete">container reserved-addresses {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        description "reserved addresses";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        list static-binding {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            key cli-id;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            description "static binding of</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            reserved addresses";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf cli-id {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type uint32;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "client id";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf duid {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type duidtype;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "DHCP Unique</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                Identifier";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf-list reserv-addr {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type inet:ipv6-address;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "reserved addr";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        leaf-list other-reserv-addr {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            type inet:ipv6-address;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            description "other reserved</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            addr";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                    }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                    container reserved-prefixes {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        description "reserved prefixes";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        list static-binding {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            key cli-id;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            description "static binding";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf cli-id {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type uint32;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "client id";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf duid {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type duidtype;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "DHCP Unique</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                Identifier";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf reserv-prefix-len {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type uint8;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "reserved</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                prefix length";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf reserv-prefix {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type inet:ipv6-prefix;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                "reserved prefix";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete"></span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        leaf exclude-prefix-len {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            type uint8;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            description "exclude prefix</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            length";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        leaf exclude-prefix {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            type inet:ipv6-prefix;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            description "exclude prefix";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        list other-reserv-prefix {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            key reserv-id;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            description</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            "other reserved prefix";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf reserv-id {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type uint8;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                "reserved prefix id";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf prefix-len {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type uint8;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description "prefix length";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            leaf prefix {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                type inet:ipv6-prefix;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                mandatory true;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                description</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                "reserved prefix";</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                        }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                    }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    container address-pools {</td><td> </td><td class="right">                    container address-pools {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        description "A container describes</td><td> </td><td class="right">                        description "A container describes</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        the DHCPv6 server's address pools.";</td><td> </td><td class="right">                        the DHCPv6 server's address pools.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        list address-pool {</td><td> </td><td class="right">                        list address-pool {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            key pool-id;</td><td> </td><td class="right">                            key pool-id;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            description "A DHCPv6 server can</td><td> </td><td class="right">                            description "A DHCPv6 server can</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            be configured with several address</td><td> </td><td class="right">                            be configured with several address</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            pools. This list defines such</td><td> </td><td class="right">                            pools. This list defines such</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            address pools which are distinguish</td><td> </td><td class="right">                            address pools which are distinguish</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            by the key called 'pool-name'.";</td><td> </td><td class="right">                            by the key called 'pool-name'.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-8" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-8"><em> page 50, line 26<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-8"><em> page 48, line 40<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "indicate whether to</td><td> </td><td class="right">                                description "indicate whether to</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                inherit the configuration from</td><td> </td><td class="right">                                inherit the configuration from</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                higher level";</td><td> </td><td class="right">                                higher level";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf option-set-id {</td><td> </td><td class="right">                            leaf option-set-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type uint8;</td><td> </td><td class="right">                                type uint8;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "the selected option-set";</td><td> </td><td class="right">                                description "the selected option-set";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr id="diff0026"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">                            <span class="insert">container reserved-addresses {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                description "reserved addresses";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                list static-binding {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    key cli-id;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    description "static binding of</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    reserved addresses";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf cli-id {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type uint32;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "client id";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf duid {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type duidtype;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "DHCP Unique</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        Identifer";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf-list reserv-addr {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type inet:ipv6-address;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "reserved addr";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                leaf-list other-reserv-addr {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    type inet:ipv6-address;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    description "other reserved</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    addr";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                            }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        }</td><td> </td><td class="right">                        }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        list binding-info {</td><td> </td><td class="right">                        list binding-info {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            key cli-id;</td><td> </td><td class="right">                            key cli-id;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            config "false";</td><td> </td><td class="right">                            config "false";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            description "A list records a binding</td><td> </td><td class="right">                            description "A list records a binding</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            information for each DHCPv6 client</td><td> </td><td class="right">                            information for each DHCPv6 client</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            that has already been allocated IPv6</td><td> </td><td class="right">                            that has already been allocated IPv6</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            addresses.";</td><td> </td><td class="right">                            addresses.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf cli-id {</td><td> </td><td class="right">                            leaf cli-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type uint32;</td><td> </td><td class="right">                                type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "client id";</td><td> </td><td class="right">                                description "client id";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf duid {</td><td> </td><td class="right">                            leaf duid {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type duidtype;</td><td> </td><td class="right">                                type duidtype;</td><td class="lineno"></td></tr>
+      <tr id="diff0027"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "DHCP Unique Identifer";</td><td> </td><td class="right">                                description "DHCP Unique Identifer";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            list cli-ia {</td><td> </td><td class="right">                            list cli-ia {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                key iaid;</td><td> </td><td class="right">                                key iaid;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "client IA";</td><td> </td><td class="right">                                description "client IA";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                leaf ia-type {</td><td> </td><td class="right">                                leaf ia-type {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                    type string;</td><td> </td><td class="right">                                    type string;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                    mandatory true;</td><td> </td><td class="right">                                    mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                    description "IA type";</td><td> </td><td class="right">                                    description "IA type";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                }</td><td> </td><td class="right">                                }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-9" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-9"><em> page 52, line 36<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-9"><em> page 51, line 31<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type boolean;</td><td> </td><td class="right">                                type boolean;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "whether to inherit</td><td> </td><td class="right">                                description "whether to inherit</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                configuration from higher level";</td><td> </td><td class="right">                                configuration from higher level";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf option-set-id {</td><td> </td><td class="right">                            leaf option-set-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type uint8;</td><td> </td><td class="right">                                type uint8;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "the selected option-set";</td><td> </td><td class="right">                                description "the selected option-set";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr id="diff0028"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">                            <span class="insert">container reserved-prefixes {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                description "reserved prefixes";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                list static-binding {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    key cli-id;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    description "static binding";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf cli-id {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type uint32;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "client id";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf duid {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type duidtype;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "DHCP Unique</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        Identifer";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf reserv-prefix-len {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type uint8;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "reserved</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        prefix length";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf reserv-prefix {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type inet:ipv6-prefix;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        "reserved prefix";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                leaf exclude-prefix-len {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    type uint8;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    description "exclude prefix</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    length";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                leaf exclude-prefix {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    type inet:ipv6-prefix;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    description "exclude prefix";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                list other-reserv-prefix {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    key reserv-id;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    description</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    "other reserved prefix";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf reserv-id {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type uint8;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        "reserved prefix id";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf prefix-len {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type uint8;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description "prefix length";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    leaf prefix {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        type inet:ipv6-prefix;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        description</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                        "reserved prefix";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                    }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                            }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        }</td><td> </td><td class="right">                        }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        list binding-info {</td><td> </td><td class="right">                        list binding-info {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            key cli-id;</td><td> </td><td class="right">                            key cli-id;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            config "false";</td><td> </td><td class="right">                            config "false";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            description "A list records a</td><td> </td><td class="right">                            description "A list records a</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            binding information for each</td><td> </td><td class="right">                            binding information for each</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            DHCPv6 client that has already</td><td> </td><td class="right">                            DHCPv6 client that has already</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            been allocated IPv6 addresses.";</td><td> </td><td class="right">                            been allocated IPv6 addresses.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf cli-id {</td><td> </td><td class="right">                            leaf cli-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type uint32;</td><td> </td><td class="right">                                type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "client id";</td><td> </td><td class="right">                                description "client id";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf duid {</td><td> </td><td class="right">                            leaf duid {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type duidtype;</td><td> </td><td class="right">                                type duidtype;</td><td class="lineno"></td></tr>
+      <tr id="diff0029"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "DHCP Unique</td><td> </td><td class="right">                                description "DHCP Unique</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                Identifier";</td><td> </td><td class="right">                                Identifier";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            list cli-iapd {</td><td> </td><td class="right">                            list cli-iapd {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                key iaid;</td><td> </td><td class="right">                                key iaid;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "client IAPD";</td><td> </td><td class="right">                                description "client IAPD";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                leaf iaid {</td><td> </td><td class="right">                                leaf iaid {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                    type uint32;</td><td> </td><td class="right">                                    type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                    mandatory true;</td><td> </td><td class="right">                                    mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                    description "IAID";</td><td> </td><td class="right">                                    description "IAID";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-10" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-10"><em> page 53, line 41<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-10"><em> page 54, line 4<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    }</td><td> </td><td class="right">                    }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    container hosts {</td><td> </td><td class="right">                    container hosts {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        description "hosts level";</td><td> </td><td class="right">                        description "hosts level";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        list host {</td><td> </td><td class="right">                        list host {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            key cli-id;</td><td> </td><td class="right">                            key cli-id;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            description "specific host";</td><td> </td><td class="right">                            description "specific host";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf cli-id {</td><td> </td><td class="right">                            leaf cli-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type uint32;</td><td> </td><td class="right">                                type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "client id";</td><td> </td><td class="right">                                description "client id";</td><td class="lineno"></td></tr>
+      <tr id="diff0030"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf duid {</td><td> </td><td class="right">                            leaf duid {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type duidtype;</td><td> </td><td class="right">                                type duidtype;</td><td class="lineno"></td></tr>
+      <tr id="diff0031"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "DHCP Unique</td><td> </td><td class="right">                                description "DHCP Unique</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                Identifer";</td><td> </td><td class="right">                                Identifer";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf inherit-option-set {</td><td> </td><td class="right">                            leaf inherit-option-set {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type boolean;</td><td> </td><td class="right">                                type boolean;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "whether to inherit</td><td> </td><td class="right">                                description "whether to inherit</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                configuration</td><td> </td><td class="right">                                configuration</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                from higher level";</td><td> </td><td class="right">                                from higher level";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-11" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-11"><em> page 57, line 42<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-11"><em> page 58, line 6<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">        container relay-attributes {</td><td> </td><td class="right">        container relay-attributes {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            description "A container describes</td><td> </td><td class="right">            description "A container describes</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            some basic attributes of the relay</td><td> </td><td class="right">            some basic attributes of the relay</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            agent including some relay agent</td><td> </td><td class="right">            agent including some relay agent</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            specific options data that need to</td><td> </td><td class="right">            specific options data that need to</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            be configured previously. Such options</td><td> </td><td class="right">            be configured previously. Such options</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            include Remote-Id option and</td><td> </td><td class="right">            include Remote-Id option and</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            Subscriber-Id option.";</td><td> </td><td class="right">            Subscriber-Id option.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf name {</td><td> </td><td class="right">            leaf name {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type string;</td><td> </td><td class="right">                type string;</td><td class="lineno"></td></tr>
+      <tr id="diff0032"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "relay agent name";</td><td> </td><td class="right">                description "relay agent name";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr id="diff0033"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">            <span class="insert">leaf enable {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                type boolean;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                description "whether the relay is enabled";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">            }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf description {</td><td> </td><td class="right">            leaf description {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type string;</td><td> </td><td class="right">                type string;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "description of the relay agent";</td><td> </td><td class="right">                description "description of the relay agent";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            leaf-list dest-addrs {</td><td> </td><td class="right">            leaf-list dest-addrs {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                type inet:ipv6-address;</td><td> </td><td class="right">                type inet:ipv6-address;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "Each DHCPv6 relay agent may</td><td> </td><td class="right">                description "Each DHCPv6 relay agent may</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                be configured with a list of destination</td><td> </td><td class="right">                be configured with a list of destination</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                addresses. This node defines such a list</td><td> </td><td class="right">                addresses. This node defines such a list</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                of IPv6 addresses that may include</td><td> </td><td class="right">                of IPv6 addresses that may include</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-12" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-12"><em> page 59, line 20<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-12"><em> page 59, line 38<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        list erp-for-client {</td><td> </td><td class="right">                        list erp-for-client {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            key cli-id;</td><td> </td><td class="right">                            key cli-id;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            description "erp for client";</td><td> </td><td class="right">                            description "erp for client";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf cli-id {</td><td> </td><td class="right">                            leaf cli-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type uint32;</td><td> </td><td class="right">                                type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "client id";</td><td> </td><td class="right">                                description "client id";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf duid {</td><td> </td><td class="right">                            leaf duid {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type duidtype;</td><td> </td><td class="right">                                type duidtype;</td><td class="lineno"></td></tr>
+      <tr id="diff0034"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "DHCP Unique</td><td> </td><td class="right">                                description "DHCP Unique</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                Identifer";</td><td> </td><td class="right">                                Identifer";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            leaf erp-name {</td><td> </td><td class="right">                            leaf erp-name {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                type string;</td><td> </td><td class="right">                                type string;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                mandatory true;</td><td> </td><td class="right">                                mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                                description "erp name";</td><td> </td><td class="right">                                description "erp name";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                            }</td><td> </td><td class="right">                            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                        }</td><td> </td><td class="right">                        }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    }</td><td> </td><td class="right">                    }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-13" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-13"><em> page 64, line 36<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-13"><em> page 65, line 6<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                leaf discarded-packet-count {</td><td> </td><td class="right">                leaf discarded-packet-count {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    type uint32;</td><td> </td><td class="right">                    type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    mandatory true;</td><td> </td><td class="right">                    mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    description "discarded packet counter";</td><td> </td><td class="right">                    description "discarded packet counter";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                }</td><td> </td><td class="right">                }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            }</td><td> </td><td class="right">            }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">    }</td><td> </td><td class="right">    }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">    container client {</td><td> </td><td class="right">    container client {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            presence "Enables client";</td><td> </td><td class="right">            presence "Enables client";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            description "dhcpv6 client portion";</td><td> </td><td class="right">            description "dhcpv6 client portion";</td><td class="lineno"></td></tr>
+      <tr id="diff0035"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">            <span class="delete">leaf duid {</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                type duidtype;</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                description "DHCP Unique Identifier"</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">            }</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">            list client-if {</td><td> </td><td class="right">            list client-if {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                key if-name;</td><td> </td><td class="right">                key if-name;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                description "A client may have several</td><td> </td><td class="right">                description "A client may have several</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                interfaces, it is more reasonable to</td><td> </td><td class="right">                interfaces, it is more reasonable to</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                configure and manage parameters on</td><td> </td><td class="right">                configure and manage parameters on</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                the interface-level. The list defines</td><td> </td><td class="right">                the interface-level. The list defines</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                specific client interfaces and their</td><td> </td><td class="right">                specific client interfaces and their</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                data. Different interfaces are distinguished</td><td> </td><td class="right">                data. Different interfaces are distinguished</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                by the key which is a configurable string</td><td> </td><td class="right">                by the key which is a configurable string</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                value.";</td><td> </td><td class="right">                value.";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                leaf if-name {</td><td> </td><td class="right">                leaf if-name {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    type string;</td><td> </td><td class="right">                    type string;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    mandatory true;</td><td> </td><td class="right">                    mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    description "interface name";</td><td> </td><td class="right">                    description "interface name";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                }</td><td> </td><td class="right">                }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                leaf cli-id {</td><td> </td><td class="right">                leaf cli-id {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    type uint32;</td><td> </td><td class="right">                    type uint32;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    mandatory true;</td><td> </td><td class="right">                    mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    description "client id";</td><td> </td><td class="right">                    description "client id";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                }</td><td> </td><td class="right">                }</td><td class="lineno"></td></tr>
+      <tr id="diff0036"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">                <span class="insert">leaf duid {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    type duidtype;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    description "DHCP Unique</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    Identifer";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                leaf enable {</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    type boolean;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    mandatory true;</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                    description "whether the interface is enabled";</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                }</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                leaf description {</td><td> </td><td class="right">                leaf description {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    type string;</td><td> </td><td class="right">                    type string;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    description</td><td> </td><td class="right">                    description</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    "description of the client interface";</td><td> </td><td class="right">                    "description of the client interface";</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                }</td><td> </td><td class="right">                }</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                leaf pd-function {</td><td> </td><td class="right">                leaf pd-function {</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    type boolean;</td><td> </td><td class="right">                    type boolean;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    mandatory true;</td><td> </td><td class="right">                    mandatory true;</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    description "Whether the client</td><td> </td><td class="right">                    description "Whether the client</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">                    can act as a requesting router</td><td> </td><td class="right">                    can act as a requesting router</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-14" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-14"><em> page 87, line 18<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-14"><em> page 87, line 40<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Tomek Mrugalski, Marcin Siodelski, Bernie Volz and Bing Liu for their</td><td> </td><td class="right">   Tomek Mrugalski, Marcin Siodelski, Bernie Volz and Bing Liu for their</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   valuable comments and contributions to this work.</td><td> </td><td class="right">   valuable comments and contributions to this work.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">7.  References</td><td> </td><td class="right">7.  References</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">7.1.  Normative References</td><td> </td><td class="right">7.1.  Normative References</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate</td><td> </td><td class="right">   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Requirement Levels", BCP 14, RFC 2119,</td><td> </td><td class="right">              Requirement Levels", BCP 14, RFC 2119,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC2119, March 1997,</td><td> </td><td class="right">              DOI 10.17487/RFC2119, March 1997,</td><td class="lineno"></td></tr>
+      <tr id="diff0037"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc2119&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc2119&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC3315]  Droms, R., Ed., Bound, J., Volz, B., Lemon, T., Perkins,</td><td> </td><td class="right">   [RFC3315]  Droms, R., Ed., Bound, J., Volz, B., Lemon, T., Perkins,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              C., and M. Carney, "Dynamic Host Configuration Protocol</td><td> </td><td class="right">              C., and M. Carney, "Dynamic Host Configuration Protocol</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              for IPv6 (DHCPv6)", RFC 3315, DOI 10.17487/RFC3315, July</td><td> </td><td class="right">              for IPv6 (DHCPv6)", RFC 3315, DOI 10.17487/RFC3315, July</td><td class="lineno"></td></tr>
+      <tr id="diff0038"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              2003, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc3315&gt;.</td><td> </td><td class="rblock">              2003, &lt;http://www.rfc-editor.org/info/rfc3315&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC3633]  Troan, O. and R. Droms, "IPv6 Prefix Options for Dynamic</td><td> </td><td class="right">   [RFC3633]  Troan, O. and R. Droms, "IPv6 Prefix Options for Dynamic</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Host Configuration Protocol (DHCP) version 6", RFC 3633,</td><td> </td><td class="right">              Host Configuration Protocol (DHCP) version 6", RFC 3633,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC3633, December 2003,</td><td> </td><td class="right">              DOI 10.17487/RFC3633, December 2003,</td><td class="lineno"></td></tr>
+      <tr id="diff0039"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc3633&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc3633&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6020]  Bjorklund, M., Ed., "YANG - A Data Modeling Language for</td><td> </td><td class="right">   [RFC6020]  Bjorklund, M., Ed., "YANG - A Data Modeling Language for</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              the Network Configuration Protocol (NETCONF)", RFC 6020,</td><td> </td><td class="right">              the Network Configuration Protocol (NETCONF)", RFC 6020,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC6020, October 2010,</td><td> </td><td class="right">              DOI 10.17487/RFC6020, October 2010,</td><td class="lineno"></td></tr>
+      <tr id="diff0040"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6020&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc6020&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6087]  Bierman, A., "Guidelines for Authors and Reviewers of YANG</td><td> </td><td class="right">   [RFC6087]  Bierman, A., "Guidelines for Authors and Reviewers of YANG</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Data Model Documents", RFC 6087, DOI 10.17487/RFC6087,</td><td> </td><td class="right">              Data Model Documents", RFC 6087, DOI 10.17487/RFC6087,</td><td class="lineno"></td></tr>
+      <tr id="diff0041"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              January 2011, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6087&gt;.</td><td> </td><td class="rblock">              January 2011, &lt;http://www.rfc-editor.org/info/rfc6087&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",</td><td> </td><td class="right">   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              RFC 6991, DOI 10.17487/RFC6991, July 2013,</td><td> </td><td class="right">              RFC 6991, DOI 10.17487/RFC6991, July 2013,</td><td class="lineno"></td></tr>
+      <tr id="diff0042"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6991&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc6991&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">7.2.  Informative References</td><td> </td><td class="right">7.2.  Informative References</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC3319]  Schulzrinne, H. and B. Volz, "Dynamic Host Configuration</td><td> </td><td class="right">   [RFC3319]  Schulzrinne, H. and B. Volz, "Dynamic Host Configuration</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Protocol (DHCPv6) Options for Session Initiation Protocol</td><td> </td><td class="right">              Protocol (DHCPv6) Options for Session Initiation Protocol</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              (SIP) Servers", RFC 3319, DOI 10.17487/RFC3319, July 2003,</td><td> </td><td class="right">              (SIP) Servers", RFC 3319, DOI 10.17487/RFC3319, July 2003,</td><td class="lineno"></td></tr>
+      <tr id="diff0043"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc3319&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc3319&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC3646]  Droms, R., Ed., "DNS Configuration options for Dynamic</td><td> </td><td class="right">   [RFC3646]  Droms, R., Ed., "DNS Configuration options for Dynamic</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Host Configuration Protocol for IPv6 (DHCPv6)", RFC 3646,</td><td> </td><td class="right">              Host Configuration Protocol for IPv6 (DHCPv6)", RFC 3646,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC3646, December 2003,</td><td> </td><td class="right">              DOI 10.17487/RFC3646, December 2003,</td><td class="lineno"></td></tr>
+      <tr id="diff0044"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc3646&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc3646&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC3898]  Kalusivalingam, V., "Network Information Service (NIS)</td><td> </td><td class="right">   [RFC3898]  Kalusivalingam, V., "Network Information Service (NIS)</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Configuration Options for Dynamic Host Configuration</td><td> </td><td class="right">              Configuration Options for Dynamic Host Configuration</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Protocol for IPv6 (DHCPv6)", RFC 3898,</td><td> </td><td class="right">              Protocol for IPv6 (DHCPv6)", RFC 3898,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC3898, October 2004,</td><td> </td><td class="right">              DOI 10.17487/RFC3898, October 2004,</td><td class="lineno"></td></tr>
+      <tr id="diff0045"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc3898&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc3898&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC4075]  Kalusivalingam, V., "Simple Network Time Protocol (SNTP)</td><td> </td><td class="right">   [RFC4075]  Kalusivalingam, V., "Simple Network Time Protocol (SNTP)</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Configuration Option for DHCPv6", RFC 4075,</td><td> </td><td class="right">              Configuration Option for DHCPv6", RFC 4075,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC4075, May 2005,</td><td> </td><td class="right">              DOI 10.17487/RFC4075, May 2005,</td><td class="lineno"></td></tr>
+      <tr id="diff0046"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc4075&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc4075&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC4242]  Venaas, S., Chown, T., and B. Volz, "Information Refresh</td><td> </td><td class="right">   [RFC4242]  Venaas, S., Chown, T., and B. Volz, "Information Refresh</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Time Option for Dynamic Host Configuration Protocol for</td><td> </td><td class="right">              Time Option for Dynamic Host Configuration Protocol for</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              IPv6 (DHCPv6)", RFC 4242, DOI 10.17487/RFC4242, November</td><td> </td><td class="right">              IPv6 (DHCPv6)", RFC 4242, DOI 10.17487/RFC4242, November</td><td class="lineno"></td></tr>
+      <tr id="diff0047"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              2005, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc4242&gt;.</td><td> </td><td class="rblock">              2005, &lt;http://www.rfc-editor.org/info/rfc4242&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC4704]  Volz, B., "The Dynamic Host Configuration Protocol for</td><td> </td><td class="right">   [RFC4704]  Volz, B., "The Dynamic Host Configuration Protocol for</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              IPv6 (DHCPv6) Client Fully Qualified Domain Name (FQDN)</td><td> </td><td class="right">              IPv6 (DHCPv6) Client Fully Qualified Domain Name (FQDN)</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Option", RFC 4704, DOI 10.17487/RFC4704, October 2006,</td><td> </td><td class="right">              Option", RFC 4704, DOI 10.17487/RFC4704, October 2006,</td><td class="lineno"></td></tr>
+      <tr id="diff0048"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc4704&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc4704&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC4833]  Lear, E. and P. Eggert, "Timezone Options for DHCP",</td><td> </td><td class="right">   [RFC4833]  Lear, E. and P. Eggert, "Timezone Options for DHCP",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              RFC 4833, DOI 10.17487/RFC4833, April 2007,</td><td> </td><td class="right">              RFC 4833, DOI 10.17487/RFC4833, April 2007,</td><td class="lineno"></td></tr>
+      <tr id="diff0049"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc4833&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc4833&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC5908]  Gayraud, R. and B. Lourdelet, "Network Time Protocol (NTP)</td><td> </td><td class="right">   [RFC5908]  Gayraud, R. and B. Lourdelet, "Network Time Protocol (NTP)</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Server Option for DHCPv6", RFC 5908, DOI 10.17487/RFC5908,</td><td> </td><td class="right">              Server Option for DHCPv6", RFC 5908, DOI 10.17487/RFC5908,</td><td class="lineno"></td></tr>
+      <tr id="diff0050"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              June 2010, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc5908&gt;.</td><td> </td><td class="rblock">              June 2010, &lt;http://www.rfc-editor.org/info/rfc5908&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC5970]  Huth, T., Freimann, J., Zimmer, V., and D. Thaler, "DHCPv6</td><td> </td><td class="right">   [RFC5970]  Huth, T., Freimann, J., Zimmer, V., and D. Thaler, "DHCPv6</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Options for Network Boot", RFC 5970, DOI 10.17487/RFC5970,</td><td> </td><td class="right">              Options for Network Boot", RFC 5970, DOI 10.17487/RFC5970,</td><td class="lineno"></td></tr>
+      <tr id="diff0051"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              September 2010, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc5970&gt;.</td><td> </td><td class="rblock">              September 2010, &lt;http://www.rfc-editor.org/info/rfc5970&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6334]  Hankins, D. and T. Mrugalski, "Dynamic Host Configuration</td><td> </td><td class="right">   [RFC6334]  Hankins, D. and T. Mrugalski, "Dynamic Host Configuration</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Protocol for IPv6 (DHCPv6) Option for Dual-Stack Lite",</td><td> </td><td class="right">              Protocol for IPv6 (DHCPv6) Option for Dual-Stack Lite",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              RFC 6334, DOI 10.17487/RFC6334, August 2011,</td><td> </td><td class="right">              RFC 6334, DOI 10.17487/RFC6334, August 2011,</td><td class="lineno"></td></tr>
+      <tr id="diff0052"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6334&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc6334&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6422]  Lemon, T. and Q. Wu, "Relay-Supplied DHCP Options",</td><td> </td><td class="right">   [RFC6422]  Lemon, T. and Q. Wu, "Relay-Supplied DHCP Options",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              RFC 6422, DOI 10.17487/RFC6422, December 2011,</td><td> </td><td class="right">              RFC 6422, DOI 10.17487/RFC6422, December 2011,</td><td class="lineno"></td></tr>
+      <tr id="diff0053"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6422&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc6422&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6440]  Zorn, G., Wu, Q., and Y. Wang, "The EAP Re-authentication</td><td> </td><td class="right">   [RFC6440]  Zorn, G., Wu, Q., and Y. Wang, "The EAP Re-authentication</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Protocol (ERP) Local Domain Name DHCPv6 Option", RFC 6440,</td><td> </td><td class="right">              Protocol (ERP) Local Domain Name DHCPv6 Option", RFC 6440,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC6440, December 2011,</td><td> </td><td class="right">              DOI 10.17487/RFC6440, December 2011,</td><td class="lineno"></td></tr>
+      <tr id="diff0054"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6440&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc6440&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6784]  Sakane, S. and M. Ishiyama, "Kerberos Options for DHCPv6",</td><td> </td><td class="right">   [RFC6784]  Sakane, S. and M. Ishiyama, "Kerberos Options for DHCPv6",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              RFC 6784, DOI 10.17487/RFC6784, November 2012,</td><td> </td><td class="right">              RFC 6784, DOI 10.17487/RFC6784, November 2012,</td><td class="lineno"></td></tr>
+      <tr id="diff0055"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6784&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc6784&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC6939]  Halwasia, G., Bhandari, S., and W. Dec, "Client Link-Layer</td><td> </td><td class="right">   [RFC6939]  Halwasia, G., Bhandari, S., and W. Dec, "Client Link-Layer</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Address Option in DHCPv6", RFC 6939, DOI 10.17487/RFC6939,</td><td> </td><td class="right">              Address Option in DHCPv6", RFC 6939, DOI 10.17487/RFC6939,</td><td class="lineno"></td></tr>
+      <tr id="diff0056"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              May 2013, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc6939&gt;.</td><td> </td><td class="rblock">              May 2013, &lt;http://www.rfc-editor.org/info/rfc6939&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC7078]  Matsumoto, A., Fujisaki, T., and T. Chown, "Distributing</td><td> </td><td class="right">   [RFC7078]  Matsumoto, A., Fujisaki, T., and T. Chown, "Distributing</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Address Selection Policy Using DHCPv6", RFC 7078,</td><td> </td><td class="right">              Address Selection Policy Using DHCPv6", RFC 7078,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC7078, January 2014,</td><td> </td><td class="right">              DOI 10.17487/RFC7078, January 2014,</td><td class="lineno"></td></tr>
+      <tr id="diff0057"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc7078&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc7078&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC7083]  Droms, R., "Modification to Default Values of SOL_MAX_RT</td><td> </td><td class="right">   [RFC7083]  Droms, R., "Modification to Default Values of SOL_MAX_RT</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              and INF_MAX_RT", RFC 7083, DOI 10.17487/RFC7083, November</td><td> </td><td class="right">              and INF_MAX_RT", RFC 7083, DOI 10.17487/RFC7083, November</td><td class="lineno"></td></tr>
+      <tr id="diff0058"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              2013, &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc7083&gt;.</td><td> </td><td class="rblock">              2013, &lt;http://www.rfc-editor.org/info/rfc7083&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC7227]  Hankins, D., Mrugalski, T., Siodelski, M., Jiang, S., and</td><td> </td><td class="right">   [RFC7227]  Hankins, D., Mrugalski, T., Siodelski, M., Jiang, S., and</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              S. Krishnan, "Guidelines for Creating New DHCPv6 Options",</td><td> </td><td class="right">              S. Krishnan, "Guidelines for Creating New DHCPv6 Options",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              BCP 187, RFC 7227, DOI 10.17487/RFC7227, May 2014,</td><td> </td><td class="right">              BCP 187, RFC 7227, DOI 10.17487/RFC7227, May 2014,</td><td class="lineno"></td></tr>
+      <tr id="diff0059"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc7227&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc7227&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC7291]  Boucadair, M., Penno, R., and D. Wing, "DHCP Options for</td><td> </td><td class="right">   [RFC7291]  Boucadair, M., Penno, R., and D. Wing, "DHCP Options for</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              the Port Control Protocol (PCP)", RFC 7291,</td><td> </td><td class="right">              the Port Control Protocol (PCP)", RFC 7291,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC7291, July 2014,</td><td> </td><td class="right">              DOI 10.17487/RFC7291, July 2014,</td><td class="lineno"></td></tr>
+      <tr id="diff0060"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc7291&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc7291&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC7598]  Mrugalski, T., Troan, O., Farrer, I., Perreault, S., Dec,</td><td> </td><td class="right">   [RFC7598]  Mrugalski, T., Troan, O., Farrer, I., Perreault, S., Dec,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              W., Bao, C., Yeh, L., and X. Deng, "DHCPv6 Options for</td><td> </td><td class="right">              W., Bao, C., Yeh, L., and X. Deng, "DHCPv6 Options for</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Configuration of Softwire Address and Port-Mapped</td><td> </td><td class="right">              Configuration of Softwire Address and Port-Mapped</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Clients", RFC 7598, DOI 10.17487/RFC7598, July 2015,</td><td> </td><td class="right">              Clients", RFC 7598, DOI 10.17487/RFC7598, July 2015,</td><td class="lineno"></td></tr>
+      <tr id="diff0061"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;http<span class="delete">s</span>://www.rfc-editor.org/info/rfc7598&gt;.</td><td> </td><td class="rblock">              &lt;http://www.rfc-editor.org/info/rfc7598&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Authors' Addresses</td><td> </td><td class="right">Authors' Addresses</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Yong Cui</td><td> </td><td class="right">   Yong Cui</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Tsinghua University</td><td> </td><td class="right">   Tsinghua University</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Beijing  100084</td><td> </td><td class="right">   Beijing  100084</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   P.R.China</td><td> </td><td class="right">   P.R.China</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Phone: +86-10-6260-3059</td><td> </td><td class="right">   Phone: +86-10-6260-3059</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Email: yong@csnet1.cs.tsinghua.edu.cn</td><td> </td><td class="right">   Email: yong@csnet1.cs.tsinghua.edu.cn</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-15" class="change"><td></td><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-15"><em> page 90, line 20<span class="hide"> ¶</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="https://tools.ietf.org/tools/rfcdiff/rfcdiff.pyht#part-15"><em> page 90, line 42<span class="hide"> ¶</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Email: wangh13@mails.tsinghua.edu.cn</td><td> </td><td class="right">   Email: wangh13@mails.tsinghua.edu.cn</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Linhui Sun</td><td> </td><td class="right">   Linhui Sun</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Tsinghua University</td><td> </td><td class="right">   Tsinghua University</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Beijing  100084</td><td> </td><td class="right">   Beijing  100084</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   P.R.China</td><td> </td><td class="right">   P.R.China</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Phone: +86-10-6278-5822</td><td> </td><td class="right">   Phone: +86-10-6278-5822</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Email: lh.sunlinh@gmail.com</td><td> </td><td class="right">   Email: lh.sunlinh@gmail.com</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0062"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">Ted Lemon</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   Nominum, Inc.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   950 Charter St.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   Redwood City, CA  94043</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   USA</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   Email: Ted.Lemon@nominum.com</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Ian Farrer</td><td> </td><td class="right">   Ian Farrer</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Deutsche Telekom AG</td><td> </td><td class="right">   Deutsche Telekom AG</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   CTO-ATI, Landgrabenweg 151</td><td> </td><td class="right">   CTO-ATI, Landgrabenweg 151</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Bonn, NRW  53227</td><td> </td><td class="right">   Bonn, NRW  53227</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Germany</td><td> </td><td class="right">   Germany</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Email: ian.farrer@telekom.de</td><td> </td><td class="right">   Email: ian.farrer@telekom.de</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Sladjana Zoric</td><td> </td><td class="right">   Sladjana Zoric</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Deutsche Telekom AG</td><td> </td><td class="right">   Deutsche Telekom AG</td><td class="lineno"></td></tr>
+
+     <tr><td></td><td class="left"></td><td> </td><td class="right"></td><td></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 62 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><td></td><th><i>158 lines changed or deleted</i></th><th><i> </i></th><th><i>197 lines changed or added</i></th><td></td></tr>
+     <tr><td colspan="5" align="center" class="small"><br>This html diff was produced by rfcdiff 1.46. The latest version is available from <a href="http://www.tools.ietf.org/tools/rfcdiff/">http://tools.ietf.org/tools/rfcdiff/</a> </td></tr>
+   </tbody></table>
+   
+   
+</body></html>

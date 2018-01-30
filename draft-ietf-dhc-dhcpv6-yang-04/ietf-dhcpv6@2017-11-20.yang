@@ -1,0 +1,263 @@
+module ietf-dhcpv6 {
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6";
+  prefix "dhcpv6";
+
+  import ietf-inet-types {
+    prefix inet;
+    revision-date "2013-07-15";
+  }
+  import ietf-yang-types {
+    prefix yang;
+    revision-date "2013-07-15";
+  }
+
+  organization "dhc wg";
+  contact "yong@csnet1.cs.tsinghua.edu.cn
+    wangh13@mails.tsinghua.edu.cn
+    lh.sunlinh@gmail.com
+    Ted.Lemon@nominum.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de";
+
+  description "This model defines a YANG data model that can be
+    used to configure and manage DHCPv6 server, DHCPv6 relay and
+    DHCPv6 client.";
+
+  revision 2016-06-18 {
+    description "version08: resolve yang compiling error:
+      top-level node must not be mandatory, wait for YANG
+      doctor's review";
+
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-03";
+  }
+  revision 2016-06-15 {
+    description "version07: resolve yang compiling errors, wait
+      for YANG doctor's review";
+
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-02";
+  }
+  revision 2016-03-21 {
+    description "version06: resolve feedbacks from IETF94";
+
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-01";
+  }
+  revision 2015-10-16 {
+    description "version05: Omit the feature statement. Modify
+      model according to comments from Huawei. Also correct some
+      grammar errors.";
+
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-00";
+  }
+  revision 2015-09-25 {
+    description "version04: Correct duid and grammar errors.";
+
+    reference "I-D: draft-cui-dhc-dhcpv6-yang-04";
+  }
+  revision 2015-07-01 {
+    description "version03: Correct grammar errors.";
+
+    reference "I-D: draft-cui-dhc-dhcpv6-yang-03";
+  }
+  revision 2015-04-13 {
+    description "version02: Correct grammar errors.";
+
+    reference "I-D: draft-cui-dhc-dhcpv6-yang-02";
+  }
+  revision 2015-04-02 {
+    description "version01: Correct grammar errors, Reuse
+      groupings, Update 'dhcpv6-relay' feature, Add
+      notifications.";
+
+    reference "I-D: draft-cui-dhc-dhcpv6-yang-01";
+  }
+  revision 2015-03-04 {
+    description "version00: Initial revision.";
+
+    reference "I-D: draft-cui-dhc-dhcpv6-yang-00";
+  }
+
+  /*
+   * Typedef
+   */
+
+  typedef threshold {
+    type union {
+      type uint16 {
+        range 0..100;
+      }
+      type enumeration {
+        enum "disabled" {
+          description "No threshold";
+        }
+      }
+    }
+    description "Threshold value in percent";
+  }
+
+  /*
+   * Grouping
+   */
+
+  grouping vendor-infor {
+    description "Vendor information.";
+    container vendor-info {
+      description "";
+      leaf ent-num {
+        type uint32;
+        mandatory true;
+        description "enterprise number";
+      }
+      leaf-list data {
+        type string;
+        description "specific vendor info";
+      }
+    }
+  }
+
+  grouping duid {
+    description "DHCP Unique Identifier";
+    reference "RFC3315: Section 9";
+    choice duid-type {
+      description "Selects the format for the DUID.";
+      case duid-llt {
+        description "DUID Based on Link-layer Address Plus Time";
+        reference "RFC3315 Section 9.2";
+        leaf duid-llt-hardware-type {
+          type uint16;
+          description "Hardware type as assigned by IANA (RFC826).";
+        }
+        leaf duid-llt-time {
+          type yang:timeticks;
+          description "The time value is the time that the DUID is generated
+            represented in seconds since midnight (UTC), January 1, 2000,
+                        modulo 2^32.";
+        }
+        leaf duid-llt-link-layer-addr {
+          type yang:mac-address;
+          description "Link-layer address as described in RFC2464";
+        }
+      }
+      case duid-en {
+        description "DUID Assigned by Vendor Based on Enterprise Number";
+        reference "RFC3315 Section 9.3";
+        leaf duid-en-enterprise-number {
+          type uint32;
+          description "Vendor's registered Private Enterprise Number as
+            maintained by IANA";
+        }
+        leaf duid-en-identifier {
+          type string;
+          description "Indentifier, unique to the device that is using it";
+        }
+      }
+      case duid-ll {
+        description "DUID Based on Link-layer Address";
+        reference "RFC3315 Section 9.4";
+        leaf duid-ll-hardware-type {
+          type uint16;
+          description "Hardware type as assigned by IANA (RFC826).";
+        }
+        leaf duid-ll-time {
+          type yang:timeticks;
+          description "The time value is the time that the DUID is generated
+            represented in seconds since midnight (UTC), January 1, 2000,
+                        modulo 2^32.";
+        }
+      }
+    }
+  }
+
+  grouping portset-para {
+    description "portset parameters";
+    container port-parameter {
+      description "port parameter";
+      leaf offset {
+        type uint8;
+        mandatory true;
+        description "offset in a port set";
+      }
+      leaf psid-len {
+        type uint8;
+        mandatory true;
+        description "length of a psid";
+      }
+      leaf psid {
+        type uint16;
+        mandatory true;
+        description "psid value";
+      }
+    }
+  }
+
+  /*
+   * Data Nodes
+   */
+
+      container packet-stats {
+        config "false";
+        description "A container records all the packet status
+          information of a specific interface.";
+        leaf solicit-count {
+          type uint32;
+          mandatory true;
+          description "solicit counter";
+        }
+        leaf request-count {
+          type uint32;
+          mandatory true;
+          description "request counter";
+        }
+        leaf renew-count {
+          type uint32;
+          mandatory true;
+          description "renew counter";
+        }
+        leaf rebind-count {
+          type uint32;
+          mandatory true;
+          description "rebind counter";
+        }
+        leaf decline-count {
+          type uint32;
+          mandatory true;
+          description "decline counter";
+        }
+        leaf release-count {
+          type uint32;
+          mandatory true;
+          description "release counter";
+        }
+        leaf info-req-count {
+          type uint32;
+          mandatory true;
+          description "information request counter";
+        }
+        leaf advertise-count {
+          type uint32;
+          mandatory true;
+          description "advertise counter";
+        }
+        leaf confirm-count {
+          type uint32;
+          mandatory true;
+          description "confirm counter";
+        }
+        leaf reply-count {
+          type uint32;
+          mandatory true;
+          description "reply counter";
+        }
+        leaf reconfigure-count {
+          type uint32;
+          mandatory true;
+          description "recofigure counter";
+        }
+      }
+    }
+  }
+
+  /*
+   * Notifications
+   */
+
+}
