@@ -2,7 +2,6 @@ module: ietf-dhcpv6-server
     +--rw server!
        +--rw server-config
        |  +--rw serv-attributes
-       |  |  +--rw name?                string
        |  |  +--rw duid
        |  |  |  +--rw type-code?                   uint16
        |  |  |  +--rw (duid-type)?
@@ -20,10 +19,9 @@ module: ietf-dhcpv6-server
        |  |  |     |  +--rw uuid?                        yang:uuid
        |  |  |     +--:(duid-unknown)
        |  |  |        +--rw data?                        binary
-       |  |  +--rw ipv6-address*        inet:ipv6-address
+       |  |  +--rw name?                string
        |  |  +--rw description?         string
-       |  |  +--rw pd-function          boolean
-       |  |  +--rw stateless-service    boolean
+       |  |  +--rw ipv6-address*        inet:ipv6-address
        |  |  +--rw rapid-commit         boolean
        |  |  +--rw interfaces-config*   string
        |  |  +--rw vendor-info
@@ -40,10 +38,6 @@ module: ietf-dhcpv6-server
        |  |     |  +--rw sip-server* [sip-serv-id]
        |  |     |     +--rw sip-serv-id      uint8
        |  |     |     +--rw sip-serv-addr    inet:ipv6-address
-       |  |     +--rw dns-config-option! {dns-config-op}?
-       |  |     |  +--rw dns-server* [dns-serv-id]
-       |  |     |     +--rw dns-serv-id      uint8
-       |  |     |     +--rw dns-serv-addr    inet:ipv6-address
        |  |     +--rw domain-searchlist-option! {domain-searchlist-op}?
        |  |     |  +--rw domain-searchlist* [domain-searchlist-id]
        |  |     |     +--rw domain-searchlist-id        uint8
@@ -197,6 +191,9 @@ module: ietf-dhcpv6-server
        |  |           +--rw operator-option-dns-wire-id    uint8
        |  |           +--rw operator-option-dns-wire       binary
        |  +--rw network-ranges
+       |  |  +--rw dns-server* [dns-serv-id]
+       |  |  |  +--rw dns-serv-id      uint8
+       |  |  |  +--rw dns-serv-addr    inet:ipv6-address
        |  |  +--rw network-range* [network-range-id]
        |  |     +--rw network-range-id       uint32
        |  |     +--rw network-description    string
@@ -263,11 +260,11 @@ module: ietf-dhcpv6-server
        |  |     |     +--rw rebind-time                      yang:timeticks
        |  |     |     +--rw preferred-lifetime               yang:timeticks
        |  |     |     +--rw valid-lifetime                   yang:timeticks
-       |  |     |     +--rw max-address-utilization-ratio    threshold
+       |  |     |     +--rw max-address-utilization-ratio    dhcpv6-types:threshold
        |  |     |     +--rw inherit-option-set               boolean
        |  |     |     +--rw option-set-id                    -> /server/server-config/option-sets/option-set/id
-       |  |     +--rw prefix-pools
-       |  |     |  +--rw prefix-pool* [pool-id]
+       |  |     +--rw pd-pools
+       |  |     |  +--rw pd-pool* [pool-id]
        |  |     |     +--rw pool-id                         uint32
        |  |     |     +--rw prefix                          inet:ipv6-prefix
        |  |     |     +--rw prefix-length                   uint8
@@ -275,12 +272,12 @@ module: ietf-dhcpv6-server
        |  |     |     +--rw rebind-time                     yang:timeticks
        |  |     |     +--rw preferred-lifetime              yang:timeticks
        |  |     |     +--rw valid-lifetime                  yang:timeticks
-       |  |     |     +--rw max-prefix-utilization-ratio    threshold
+       |  |     |     +--rw max-prefix-utilization-ratio    dhcpv6-types:threshold
        |  |     |     +--rw inherit-option-set              boolean
        |  |     |     +--rw option-set-id?                  -> /server/server-config/option-sets/option-set/id
        |  |     +--rw hosts
        |  |        +--rw host* [cli-id]
-       |  |           +--rw cli-id                  uint32
+       |  |           +--rw cli-id                uint32
        |  |           +--rw duid
        |  |           |  +--rw type-code?                   uint16
        |  |           |  +--rw (duid-type)?
@@ -298,10 +295,8 @@ module: ietf-dhcpv6-server
        |  |           |     |  +--rw uuid?                        yang:uuid
        |  |           |     +--:(duid-unknown)
        |  |           |        +--rw data?                        binary
-       |  |           +--rw inherit-option-set      boolean
-       |  |           +--rw option-set-id?          -> /server/server-config/option-sets/option-set/id
-       |  |           +--rw nis-domain-name?        string
-       |  |           +--rw nis-plus-domain-name?   string
+       |  |           +--rw inherit-option-set    boolean
+       |  |           +--rw option-set-id?        -> /server/server-config/option-sets/option-set/id
        |  +--rw relay-opaque-paras
        |  |  +--rw relays* [relay-name]
        |  |     +--rw relay-name        string
@@ -352,9 +347,11 @@ module: ietf-dhcpv6-server
           |     |        +--ro iaid        uint32
           |     |        +--ro cli-addr*   inet:ipv6-address
           |     |        +--ro pool-id     uint32
-          |     +--ro prefix-pools
+          |     +--ro pd-pools
           |     |  +--ro prefix-pool* [pool-id]
           |     |  |  +--ro pool-id                     uint32
+          |     |  |  +--ro totol-prefix-count          uint64
+          |     |  |  +--ro used-prefix-count           uint64
           |     |  |  +--ro prefix-utilization-ratio    uint16
           |     |  +--ro binding-info* [cli-id]
           |     |     +--ro cli-id      uint32
@@ -425,11 +422,9 @@ module: ietf-dhcpv6-server
   notifications:
     +---n notifications
        +--ro dhcpv6-server-event
-          +--ro pool-running-out
+          +--ro address-pool-running-out
           |  +--ro max-address-utilization-ratio    uint16
           |  +--ro address-utilization-ratio        uint16
-          |  +--ro max-prefix-utilization-ratio     uint16
-          |  +--ro prefix-utilization-ratio         uint16
           |  +--ro duid
           |  |  +--ro type-code?                   uint16
           |  |  +--ro (duid-type)?
@@ -449,6 +444,28 @@ module: ietf-dhcpv6-server
           |  |        +--ro data?                        binary
           |  +--ro serv-name?                       string
           |  +--ro pool-name                        string
+          +--ro pd-pool-running-out
+          |  +--ro max-prefix-utilization-ratio    uint16
+          |  +--ro prefix-utilization-ratio        uint16
+          |  +--ro duid
+          |  |  +--ro type-code?                   uint16
+          |  |  +--ro (duid-type)?
+          |  |     +--:(duid-llt)
+          |  |     |  +--ro duid-llt-hardware-type?      uint16
+          |  |     |  +--ro duid-llt-time?               yang:timeticks
+          |  |     |  +--ro duid-llt-link-layer-addr?    yang:mac-address
+          |  |     +--:(duid-en)
+          |  |     |  +--ro duid-en-enterprise-number?   uint32
+          |  |     |  +--ro duid-en-identifier?          string
+          |  |     +--:(duid-ll)
+          |  |     |  +--ro duid-ll-hardware-type?       uint16
+          |  |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
+          |  |     +--:(duid-uuid)
+          |  |     |  +--ro uuid?                        yang:uuid
+          |  |     +--:(duid-unknown)
+          |  |        +--ro data?                        binary
+          |  +--ro serv-name?                      string
+          |  +--ro pool-name                       string
           +--ro invalid-client-detected
              +--ro duid
              |  +--ro type-code?                   uint16
