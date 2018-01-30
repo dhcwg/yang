@@ -35,7 +35,7 @@ module: ietf-dhcpv6-relay
        |  |           |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
        |  |           |     +--:(duid-uuid)
        |  |           |     |  +--rw uuid?                        yang:uuid
-       |  |           |     +--:(duid-invalid)
+       |  |           |     +--:(duid-unknown)
        |  |           |        +--rw data?                        binary
        |  |           +--rw erp-name    string
        |  +--rw relay-if* [if-name]
