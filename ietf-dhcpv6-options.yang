@@ -52,6 +52,9 @@ module ietf-dhcpv6-options {
 	feature sip-server-address-list-op {
 		description "Support for SIP Server Address List option";
 	}
+  feature dns-servers-op {
+    description "Support for DNS Servers Option";
+  }
 	feature domain-searchlist-op {
 		description "Support for Domain Search List Option";
 	}
@@ -261,7 +264,29 @@ module ietf-dhcpv6-options {
           description "sip server addr";
         }
       }
-    }   
+    }  
+
+    container dns-servers-option {
+      if-feature dns-servers-op;
+      presence "Enable this option";
+      description "OPTION_DNS_SERVERS (23) DNS recursive Name Server option";
+      reference "RFC3646: DNS Configuration options for Dynamic Host Configuration 
+        Protocol for IPv6 (DHCPv6)";
+      list dns-server {
+        key dns-serv-id;
+        description "dns server info";
+        leaf dns-serv-id {
+          type uint8;
+          mandatory true;
+          description "DNS server list entry ID.";
+        }
+        leaf dns-serv-addr {
+          type inet:ipv6-address;
+          mandatory true;
+          description "DNS server address.";
+        }
+      }
+    } 
 
     container domain-searchlist-option {
       if-feature domain-searchlist-op;
