@@ -42,6 +42,23 @@ module ietf-dhcpv6-server {
 	}
 
 	/*
+ 	* Typedef
+ 	*/
+	typedef threshold {
+  	type union {
+  		type uint16 {
+    		range 0..100;
+  		}
+  		type enumeration {
+    		enum "disabled" {
+      			description "No threshold";
+    		}
+    	}
+  	}
+  	description "Threshold value in percent";
+	}	
+
+	/*
  	* Data Nodes
  	*/
 	container server {
@@ -132,20 +149,14 @@ module ietf-dhcpv6-server {
         	levels are defined as sub-containers under it. The 'network-ranges' 
         	contains the parameters (e.g. option-sets) that would be allocated to
         	all the clients served by this server.";
-	      list dns-server {
-	        key dns-serv-id;
-	        description "dns server info";
-	        leaf dns-serv-id {
-	          type uint8;
-	          mandatory true;
-	          description "DNS server list entry ID.";
-	        }
-	        leaf dns-serv-addr {
-	          type inet:ipv6-address;
-	          mandatory true;
-	          description "DNS server address.";
-	        }
-	      }
+
+        leaf option-set-id {
+          type leafref {
+            path "/server/server-config/option-sets/option-set/id";
+          }
+          description "The ID field of relevant global option-set to be provisioned to 
+          clients.";
+        }
         list network-range {
         	key network-range-id;
         	description "Under the 'network-ranges' container, a 'network-range' list 
@@ -168,12 +179,6 @@ module ietf-dhcpv6-server {
 	        	mandatory true;
 	            description "subnet prefix";
 	        }
-	        leaf inherit-option-set {
-            type boolean;
-            mandatory true;
-            description "indicate whether to inherit the configuration from higher 
-            level";
-	        }
 	        leaf option-set-id {
             type leafref {
               path "/server/server-config/option-sets/option-set/id";
@@ -181,7 +186,6 @@ module ietf-dhcpv6-server {
             description "The ID field of relevant option-set to be provisioned to 
             clients of this network-range.";
 	        }
-
 	      	container reserved-addresses {
             description "reserved addresses";
             list static-binding {
@@ -195,6 +199,18 @@ module ietf-dhcpv6-server {
 	            container duid {
                 description "Sets the DUID";
                 uses dhcpv6-types:duid;
+	            }
+	            leaf cli-link-addr {
+	            	type yang:mac-address;
+	            	description "MAC address of client";
+	            }
+	            leaf cli-remote-id {
+	            	type string;
+	            	description "Remote ID of client";
+	            }
+	            leaf cli-subscriber-id {
+	            	type string;
+	            	description "Subscriber ID of client";
 	            }
 	            leaf-list reserv-addr {
 	                type inet:ipv6-address;
@@ -221,6 +237,18 @@ module ietf-dhcpv6-server {
 	          		description "Sets the DUID";
 	          		uses dhcpv6-types:duid;
 	          	}
+	            leaf cli-link-addr {
+	            	type yang:mac-address;
+	            	description "MAC address of client";
+	            }
+	            leaf cli-remote-id {
+	            	type string;
+	            	description "Remote ID of client";
+	            }
+	            leaf cli-subscriber-id {
+	            	type string;
+	            	description "Subscriber ID of client";
+	            }
 	          	leaf reserv-prefix-len {
 	          		type uint8;
 	          		mandatory true;
@@ -311,16 +339,12 @@ module ietf-dhcpv6-server {
               	mandatory true;
               	description "valid liftime for IA";
             	}
-            	leaf max-address-utilization-ratio {
-              	type dhcpv6-types:threshold;
+            	leaf max-address-count {
+              	type threshold;
               	mandatory true;
-              	description "address pool utilization ratio threshold";
-            	}
-            	leaf inherit-option-set {
-              	type boolean;
-              	mandatory true;
-              	description "indicate whether to inherit the configuration 
-              	from higher level";
+              	description "maximum count of addresses that can 
+              		be allocated in this pool. This value may be 
+              		less than count of total addresses.";
             	}
             	leaf option-set-id {
               	type leafref {
@@ -377,21 +401,16 @@ module ietf-dhcpv6-server {
                 mandatory true;
                 description "valid lifetime for IA";
 	            }
-	            leaf max-prefix-utilization-ratio {
-                type dhcpv6-types:threshold;
+	            leaf max-pd-space-utlization {
+                type threshold;
                 mandatory true;
-                description "prefix pool utilization ratio threshold";
-	            }
-	            leaf inherit-option-set {
-	            	type boolean;
-                mandatory true;
-                description "whether to inherit configuration from higher 
-                level";
+                description "maximum utilization of pd space in this pool";
 	            }
 	            leaf option-set-id {
 	            	type leafref {
 	                	path "/server/server-config/option-sets/option-set/id";
 	                }
+	                mandatory true;
 	                description "The ID field of relevant option-set to be
 	                  provisioned to clients of this prefix-pool.";
 	            }
@@ -412,16 +431,11 @@ module ietf-dhcpv6-server {
                	description "Sets the DUID";
                	uses dhcpv6-types:duid;
             	}
-            	leaf inherit-option-set {
-            		type boolean;
-            		mandatory true;
-            		description "whether to inherit configuration from higher 
-            		level";
-            	}
         			leaf option-set-id {
                 type leafref {
                		path "/server/server-config/option-sets/option-set/id";
                	}
+               	mandatory true;
              	  description "The ID field of relevant option-set to be provisioned 
                 	to clients of this prefix-pool.";
               }
@@ -539,21 +553,16 @@ module ietf-dhcpv6-server {
 	                mandatory true;
 	                description "pool id";
   	            }
-          			leaf total-ipv6-count {
-          				type uint64;
-          				mandatory true;
-          				description "how many ipv6 addresses are in the pool";
-          			}
-          			leaf used-ipv6-count {
-          				type uint64;
-          				mandatory true;
-          				description "how many are allocated";
-          			}
-          			leaf address-utilization-ratio {
-          				type uint16;
-          				mandatory true;
-          				description "current address pool utilization ratio";
-          			}
+				        leaf total-address-count {
+				        	type uint64;
+				        	mandatory true;
+				        	description "count of total addresses in the pool";
+				        }
+				        leaf allocated-address-conut {
+				        	type uint64;
+				        	mandatory true;
+				        	description "count of allocated addresses in the pool";
+				        }
           		}
           		list binding-info {
           			key cli-id;
@@ -607,20 +616,10 @@ module ietf-dhcpv6-server {
               		mandatory true;
                 	description "pool id";
                 }
-                leaf totol-prefix-count {
-                	type uint64;
+                leaf pd-space-utilization {
+                	type threshold;
                 	mandatory true;
-                	description "how many prefixes are in the pool";
-                }
-                leaf used-prefix-count {
-                	type uint64;
-                	mandatory true;
-                	description "how many prefixes are allocated";
-                }
-	          		leaf prefix-utilization-ratio {
-	                type uint16;
-	               	mandatory true;
-	        				description "current prefix pool utilization ratio";
+                	description "current PD space utilization";
                 }
 	        		}
 	        		list binding-info {
@@ -802,16 +801,23 @@ module ietf-dhcpv6-server {
         	been defined in the server feature so that it will notify the
         	administrator when the utilization ratio reaches the
         	threshold, and such threshold is a settable parameter";
-      	leaf max-address-utilization-ratio {
-        	type uint16;
+        leaf total-address-count {
+        	type uint64;
         	mandatory true;
-        	description "address pool utilization ratio threshold";
-      	}	
-				leaf address-utilization-ratio {
-					type uint16;
-					mandatory true;
-					description "current address pool utilization ratio";
-				}
+        	description "count of total addresses in the pool";
+        }
+        leaf max-address-count {
+        	type uint64;
+        	mandatory true;
+        	description "maximum count of addresses that can be allocated 
+        		in the pool. This value may be less than count of total 
+        		addresses";
+        }
+        leaf allocated-address-conut {
+        	type uint64;
+        	mandatory true;
+        	description "count of allocated addresses in the pool";
+        }
 		    container duid {
 		    	description "server duid";
 		    	uses dhcpv6-types:duid;
@@ -832,15 +838,15 @@ module ietf-dhcpv6-server {
          	been defined in the server feature so that it will notify the
          	administrator when the utilization ratio reaches the
          	threshold, and such threshold is a settable parameter";
-	  		leaf max-prefix-utilization-ratio {
-  	    	type uint16;
+	  		leaf max-pd-space-utilization {
+  	    	type threshold;
   	    	mandatory true;
-  	    	description "prefix pool utilization ratio threshold";
+  	    	description "maximum pd space utilization";
   	   	}
-	  		leaf prefix-utilization-ratio {
-	  			type uint16;
+	  		leaf pd-space-utilization {
+	  			type threshold;
 	  			mandatory true;
-	  			description "current prefix pool utilization ratio";
+	  			description "current pd space utilization";
 	  		}
       	container duid {
         	description "Sets the DUID";
