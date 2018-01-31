@@ -147,10 +147,9 @@ module ietf-dhcpv6-types {
   }
 
   grouping iaid {
-	  description "IA is a construct through which a server and a
-	      client can identify, group, and manage a set of related IPv6
-	      addresses. The key of the list is a 4-byte number IAID defined
-	      in [RFC3315].";
+	  description "IA is a construct through which a server and a client 
+      can identify, group, and manage a set of related IPv6 addresses. 
+      The key of the list is a 4-byte number IAID defined in [RFC3315].";
     list identity-association {
       config "false";
       description "IA";
@@ -198,23 +197,5 @@ module ietf-dhcpv6-types {
       }
     }
   }
-
-
-	/*
- 	* Typedef
- 	*/
-	typedef threshold {
-  	type union {
-  		type uint16 {
-    		range 0..100;
-  		}
-  		type enumeration {
-    		enum "disabled" {
-      			description "No threshold";
-    		}
-    	}
-  	}
-  	description "Threshold value in percent";
-	}	
 
 }
