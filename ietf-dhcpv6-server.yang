@@ -19,6 +19,9 @@ module ietf-dhcpv6-server {
   	prefix dhcpv6-types;
   	revision-date "2018-01-30";
   }
+  import ietf-interfaces {
+  	prefix if;
+  }
 
   organization "DHC WG";
   contact "yong@csnet1.cs.tsinghua.edu.cn
@@ -101,7 +104,7 @@ module ietf-dhcpv6-server {
 		    leaf-list interfaces-config {
 	        // Note - this should probably be references to
 	        // entries in the ietf-interfaces model
-	        type string;
+	        type if:interface-ref;
 	        description "A leaf list to denote which one or more interfaces 
 	        	the server should listen on. The default value is to listen 
 	        	on all the interfaces. This node is also used to set a unicast 
@@ -110,7 +113,7 @@ module ietf-dhcpv6-server {
 	          address with a specific interface, he can use the format like 
 	          'eth1/2001:db8::1'.";
 		    }
-  		  uses dhcpv6-types:vendor-infor;
+		    uses dhcpv6-types:vendor-infor;
     	}
 
 	    container option-sets {
