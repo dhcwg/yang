@@ -11,6 +11,9 @@ module ietf-dhcpv6-client {
     prefix dhcpv6-types;
     revision-date "2018-01-30";
   }
+  import ietf-interfaces {
+    prefix if;
+  }
 
   organization "DHC WG";
   contact "yong@csnet1.cs.tsinghua.edu.cn
@@ -55,19 +58,24 @@ module ietf-dhcpv6-client {
           specific client interfaces and their data. Different interfaces are 
           distinguished by the key which is a configurable string value.";
         leaf if-name {
-          type string;
+          type if:interface-ref;
           mandatory true;
           description "interface name";
         }
+
         leaf cli-id {
           type uint32;
           mandatory true;
           description "client id";
         }
+
+        /*
         leaf description {
           type string;
           description "description of the client interface";
         }
+        */
+
         leaf pd-function {
           type boolean;
           mandatory true;
@@ -82,6 +90,8 @@ module ietf-dhcpv6-client {
             the client is not allowed to add a Rapid Commit option to request 
             addresses in a two-message exchange pattern.";
         }
+
+        /*
         container mo-tab {
           description "The management tab label indicates the operation mode of the 
             DHCPv6 client. 
@@ -97,7 +107,6 @@ module ietf-dhcpv6-client {
             // to be redfining what will be received in the PIO. Is
             // the intention to be whether they PIO options will be
             // obeyed as received or overridden?
-
           leaf m-tab {
             type boolean;
             mandatory true;
@@ -109,6 +118,8 @@ module ietf-dhcpv6-client {
             description "o tab";
           }
         }
+        */
+
         container client-configured-options {
           description "client configured options";
           uses dhcpv6-options:client-option-definitions;
