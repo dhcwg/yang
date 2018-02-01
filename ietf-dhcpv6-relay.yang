@@ -131,30 +131,36 @@ module ietf-dhcpv6-relay {
           parameters is employed to fulfil the configfuration. Here we use a string
           called 'if-name; as the key of list.";
         leaf if-name {
-          type string;
+          type if:interface-ref;
           mandatory true;
           description "interface name";
-        }
-        leaf enable {
-          type boolean;
-          mandatory true;
-          description "whether this interface is enabled";
-        }
-        leaf ipv6-address {
-          type inet:ipv6-address;
-          description
-            "ipv6 address for this interface";
         }
         leaf interface-id {
           type string;
           description "interface id";
         }
+
+        /*
+        leaf enable {
+          type boolean;
+          mandatory true;
+          description "whether this interface is enabled";
+        }
+        */
+
+        leaf ipv6-address {
+          type inet:ipv6-address;
+          description
+            "ipv6 address for this interface";
+        }
+
         leaf rsoo-option-set-id {
           type leafref {
             path "/relay/relay-config/rsoo-option-sets/option-set/id";
           }
           description "Configured Relay Supplied Option set";
         }
+        
         list next-entity {
           key dest-addr;
           description "This node defines a list that is used to describe
