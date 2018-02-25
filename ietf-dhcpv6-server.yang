@@ -321,7 +321,11 @@ module ietf-dhcpv6-server {
               	type inet:ipv6-address-no-zone;
               	mandatory true;
               	description "end address";
-              	}
+              }
+              leaf client-class {
+                type string;
+                description "client class";
+              }
             	leaf renew-time {
               	type yang:timeticks;
               	mandatory true;
@@ -384,6 +388,10 @@ module ietf-dhcpv6-server {
 	                mandatory true;
 	                description "prefix length";
 	            }
+              leaf client-class {
+                type string;
+                description "client class";
+              }
 	            leaf renew-time {
 	                type yang:timeticks;
 	                mandatory true;
@@ -662,6 +670,8 @@ module ietf-dhcpv6-server {
 		    				}
 	        		}
 	        	}
+
+            /*
 	        	list address-prefix-assign-param {
 	        		// Zihao - This probably needs further updated.
 	        		// But is it a way to represent the address/prefix assignment
@@ -715,6 +725,8 @@ module ietf-dhcpv6-server {
 		   					 	the client";
 	    				}   					            			
 	        	}
+            */
+
 					}	        		        		
    			}
    		    	
