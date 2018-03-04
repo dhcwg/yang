@@ -21,7 +21,7 @@ module ietf-dhcpv6-server {
 
   organization "DHC WG";
   contact 
-   	"yong@tsinghua.edu.cn
+   	"cuiyong@tsinghua.edu.cn
   	 lh.sunlinh@gmail.com
   	 ian.farrer@telekom.de
   	 sladjana.zechlin@telekom.de
@@ -33,6 +33,7 @@ module ietf-dhcpv6-server {
   revision 2018-03-04 {
   	description "Resolved most issues on the DHC official
   	github";
+  	reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
 	revision 2017-12-22 {
@@ -74,7 +75,8 @@ module ietf-dhcpv6-server {
      * Configuration data
      */
     container server-config {
-    	description "configuration tree of server";
+    	description "This container contains the configuration data
+            of a server.";
     	container serv-attributes {
 		    description 
 		     "This container contains basic attributes of a DHCPv6 server 
@@ -216,12 +218,6 @@ module ietf-dhcpv6-server {
               	mandatory true;
               	description "end address";
               }
-              leaf client-class {
-                type string;
-                description 
-                "If this leaf is specified, this pool will only serve
-                the clients belonging to this class.";
-              }
             	leaf valid-lifetime {
               	type yang:timeticks;
               	mandatory true;
@@ -248,6 +244,12 @@ module ietf-dhcpv6-server {
 	        			description "A boolean value specifies whether the pool 
 	        			supports client-server exchanges involving two messages.";
 		    			}
+              leaf client-class {
+                type string;
+                description 
+                "If this leaf is specified, this pool will only serve
+                the clients belonging to this class.";
+              }
             	leaf max-address-count {
               	type threshold;
               	mandatory true;
@@ -290,10 +292,6 @@ module ietf-dhcpv6-server {
 	                mandatory true;
 	                description "prefix length";
 	            }
-              leaf client-class {
-                type string;
-                description "client class";
-              }
 	            leaf valid-lifetime {
 	            	type yang:timeticks;
                 mandatory true;
@@ -320,10 +318,14 @@ module ietf-dhcpv6-server {
 	        			description "A boolean value specifies whether the server 
 	        			support client-server exchanges involving two messages defined.";
 		    			}
+		    			leaf client-class {
+                type string;
+                description "client class";
+              }
 	            leaf max-pd-space-utlization {
                 type threshold;
                 mandatory true;
-                description "maximum utilization of pd space in this pool";
+                description "Maximum utilization of pd space in this pool";
 	            }
 	            leaf option-set-id {
 	            	type leafref {
@@ -337,10 +339,12 @@ module ietf-dhcpv6-server {
 	        }
 
           container host-reservations {
-            description "This container provides host reservations in the host level.";
+            description 
+            	"This container allows the server to make reservations at host level.";
             list host-reservation {
               key cli-id;
-              description "specific host";
+              description "This list allows the server to reserve addresses, 
+              prefixes, hostname and options for different clients.";
               leaf cli-id {
                 type uint32;
                 mandatory true;
@@ -348,8 +352,9 @@ module ietf-dhcpv6-server {
               }
 
               choice client-identifier {
-                description "Client identifier used in making reservations. Currently
-                	'DUID' and 'hardware address' are supported.";
+                description "When making reservations, the server needs to choose a
+                identifier to identify the server. Currently 'DUID' and 'hardware 
+                address' are supported.";
                 case duid {
                   description "DUID";
                   uses dhcpv6-types:duid;
@@ -373,8 +378,8 @@ module ietf-dhcpv6-server {
               	description "reserved prefix reservation";
               	leaf reserv-prefix-id {
               		type uint32;
-              		description "reserved prefix id";
               		mandatory true;
+              		description "reserved prefix id";
               	}
               	leaf reserv-prefix {
 	                type inet:ipv6-prefix;
@@ -510,6 +515,10 @@ module ietf-dhcpv6-server {
       			description "A container that describes the DHCPv6 server's address pools";   			
           		list address-pool {
           			key pool-id;
+          			description "A DHCPv6 server can be configured with 
+            			several address pools. This list defines such address pools 
+            			which are distinguished by the key called 'pool-id'.";
+          			description "";
               	leaf pool-id {
 	                type uint32;
 	                mandatory true;
