@@ -206,12 +206,12 @@ module: ietf-dhcpv6-server
        |  |     |     +--rw pool-prefix           inet:ipv6-prefix
        |  |     |     +--rw start-address         inet:ipv6-address-no-zone
        |  |     |     +--rw end-address           inet:ipv6-address-no-zone
-       |  |     |     +--rw client-class?         string
        |  |     |     +--rw valid-lifetime        yang:timeticks
        |  |     |     +--rw renew-time            yang:timeticks
        |  |     |     +--rw rebind-time           yang:timeticks
        |  |     |     +--rw preferred-lifetime    yang:timeticks
        |  |     |     +--rw rapid-commit          boolean
+       |  |     |     +--rw client-class?         string
        |  |     |     +--rw max-address-count     threshold
        |  |     |     +--rw option-set-id         -> /server/server-config/option-sets/option-set/option-set-id
        |  |     +--rw pd-pools
@@ -219,12 +219,12 @@ module: ietf-dhcpv6-server
        |  |     |     +--rw pool-id                    uint32
        |  |     |     +--rw prefix                     inet:ipv6-prefix
        |  |     |     +--rw prefix-length              uint8
-       |  |     |     +--rw client-class?              string
        |  |     |     +--rw valid-lifetime             yang:timeticks
        |  |     |     +--rw renew-time                 yang:timeticks
        |  |     |     +--rw rebind-time                yang:timeticks
        |  |     |     +--rw preferred-lifetime         yang:timeticks
        |  |     |     +--rw rapid-commit               boolean
+       |  |     |     +--rw client-class?              string
        |  |     |     +--rw max-pd-space-utlization    threshold
        |  |     |     +--rw option-set-id              -> /server/server-config/option-sets/option-set/option-set-id
        |  |     +--rw host-reservations
