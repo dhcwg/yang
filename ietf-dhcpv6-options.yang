@@ -5,19 +5,17 @@ module ietf-dhcpv6-options {
 
   import ietf-inet-types {
     prefix inet;
-    revision-date "2013-07-15";
   }
   import ietf-yang-types {
     prefix yang;
-    revision-date "2013-07-15";
   }
   import ietf-dhcpv6-types {
     prefix dhcpv6-types;
-    revision-date "2018-01-30";
   }
 
   organization "DHC WG";
-  contact "yong@csnet1.cs.tsinghua.edu.cn
+  contact 
+   "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -27,6 +25,12 @@ module ietf-dhcpv6-options {
   description "This model defines a YANG data model that can be
     used to configure DHCPv6 options.";
   
+  revision 2018-03-04 {
+    description "Resolved most issues on the DHC official
+    github";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
   revision 2017-12-22 {
 	  description "Resolve most issues on Ian's github.";
 	  reference "I-D: draft-ietf-dhc-dhcpv6-yang";
