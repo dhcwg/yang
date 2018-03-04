@@ -5,19 +5,15 @@ module ietf-dhcpv6-server {
 
 	import ietf-inet-types {
 		prefix inet;
-		revision-date "2013-07-15";
   }
 	import ietf-yang-types {
   	prefix yang;
-  	revision-date "2013-07-15";
 	}
 	import ietf-dhcpv6-options {
   	prefix dhcpv6-options;
-  	revision-date "2017-12-22";
   }
   import ietf-dhcpv6-types {
   	prefix dhcpv6-types;
-  	revision-date "2018-01-30";
   }
   import ietf-interfaces {
   	prefix if;
@@ -25,7 +21,7 @@ module ietf-dhcpv6-server {
 
   organization "DHC WG";
   contact 
-   	"yong@csnet1.cs.tsinghua.edu.cn
+   	"yong@tsinghua.edu.cn
   	 lh.sunlinh@gmail.com
   	 ian.farrer@telekom.de
   	 sladjana.zechlin@telekom.de
@@ -33,6 +29,11 @@ module ietf-dhcpv6-server {
 
 	description "This model defines a YANG data model that can be
     	used to configure and manage a DHCPv6 server.";
+
+  revision 2018-03-04 {
+  	description "Resolved most issues on the DHC official
+  	github";
+  }
 
 	revision 2017-12-22 {
 		description "Resolve most issues on Ian's github.";
@@ -116,7 +117,7 @@ module ietf-dhcpv6-server {
           all the possible options that need to be configured at the server
           side. ";
         list option-set {
-	        	key id;
+	        	key option-set-id;
         		description "A server may allow different option sets to be
             	configured for different conditions (i.e. different networks,
             	clients and etc). This 'option-set' list enables various sets of
@@ -180,7 +181,7 @@ module ietf-dhcpv6-server {
 	        }
 	        leaf option-set-id {
             type leafref {
-              path "/server/server-config/option-sets/option-set/id";
+              path "/server/server-config/option-sets/option-set/option-set-id";
             }
             description "The ID field of relevant option-set to be provisioned to 
             clients of this network-range.";
@@ -256,7 +257,7 @@ module ietf-dhcpv6-server {
             	}
             	leaf option-set-id {
               	type leafref {
-              		path "/server/server-config/option-sets/option-set/id";
+              		path "/server/server-config/option-sets/option-set/option-set-id";
               	}
               	mandatory true;
               	description "The ID field of relevant option-set to be
@@ -326,7 +327,7 @@ module ietf-dhcpv6-server {
 	            }
 	            leaf option-set-id {
 	            	type leafref {
-	                	path "/server/server-config/option-sets/option-set/id";
+	                	path "/server/server-config/option-sets/option-set/option-set-id";
 	                }
 	                mandatory true;
 	                description "The ID field of relevant option-set to be
@@ -394,7 +395,7 @@ module ietf-dhcpv6-server {
 
               leaf option-set-id {
                 type leafref {
-                  path "/server/server-config/option-sets/option-set/id";
+                  path "/server/server-config/option-sets/option-set/option-set-id";
                 }
                 description "The ID field of relevant option-set to be provisioned 
                   in the host reservation.";
