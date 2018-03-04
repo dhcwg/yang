@@ -1,22 +1,21 @@
-module ietf-dhcpv6-client {
-  yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client";
+
   prefix "dhcpv6-client";
 
   import ietf-dhcpv6-options {
     prefix dhcpv6-options;
-    revision-date "2017-12-22";
   }
   import ietf-dhcpv6-types {
     prefix dhcpv6-types;
-    revision-date "2018-01-30";
   }
   import ietf-interfaces {
     prefix if;
   }
 
-  organization "DHC WG";
-  contact "yong@csnet1.cs.tsinghua.edu.cn
+  organization "DHC WG";module ietf-dhcpv6-client {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client";
+  contact 
+   "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -25,6 +24,12 @@ module ietf-dhcpv6-client {
 
   description "This model defines a YANG data model that can be
     used to configure and manage a DHCPv6 client.";
+
+  revision 2018-03-04 {
+    description "Resolved most issues on the DHC official
+    github";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
 
   revision 2017-12-22 {
 	  description "Resolve most issues on Ian's github.";
@@ -137,6 +142,67 @@ module ietf-dhcpv6-client {
           was configured. The potential configuration data may
           include DNS server addresses, SIP server domain names, etc.";
         uses dhcpv6-options:server-option-definitions;
+      }
+     container packet-stats {
+        config "false";
+        description "A container records
+          all the packet status information
+          of a specific interface.";
+        leaf solicit-count {
+          type uint32;
+          mandatory true;
+          description "solicit counter";
+        }
+        leaf request-count {
+          type uint32;
+          mandatory true;
+          description "request counter";
+        }
+        leaf renew-count {
+          type uint32;
+          mandatory true;
+          description "renew counter";
+        }
+        leaf rebind-count {
+          type uint32;
+          mandatory true;
+          description "rebind counter";
+        }
+        leaf decline-count {
+          type uint32;
+          mandatory true;
+          description "decline counter";
+        }
+        leaf release-count {
+          type uint32;
+          mandatory true;
+          description "release counter";
+        }
+        leaf info-req-count {
+          type uint32;
+          mandatory true;
+          description "information request counter";
+        }
+        leaf advertise-count {
+          type uint32;
+          mandatory true;
+          description "advertise counter";
+        }
+        leaf confirm-count {
+          type uint32;
+          mandatory true;
+          description "confirm counter";
+        }
+        leaf reply-count {
+          type uint32;
+          mandatory true;
+          description "reply counter";
+        }
+        leaf reconfigure-count {
+          type uint32;
+          mandatory true;
+          description "recofigure counter";
+        }
       }
     }
 
