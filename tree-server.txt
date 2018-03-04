@@ -22,14 +22,13 @@ module: ietf-dhcpv6-server
        |  |  +--rw name?                string
        |  |  +--rw description?         string
        |  |  +--rw ipv6-address*        inet:ipv6-address
-       |  |  +--rw rapid-commit         boolean
        |  |  +--rw interfaces-config*   if:interface-ref
        |  |  +--rw vendor-info
        |  |     +--rw ent-num    uint32
        |  |     +--rw data*      string
        |  +--rw option-sets
-       |  |  +--rw option-set* [id]
-       |  |     +--rw id                                    uint32
+       |  |  +--rw option-set* [option-set-id]
+       |  |     +--rw option-set-id                         uint32
        |  |     +--rw server-unicast-option! {server-unicast-op}?
        |  |     |  +--rw server-address?   inet:ipv6-address
        |  |     +--rw sip-server-domain-name-list-option! {sip-server-domain-name-list-op}?
@@ -195,68 +194,12 @@ module: ietf-dhcpv6-server
        |  |           +--rw operator-option-dns-wire-id    uint8
        |  |           +--rw operator-option-dns-wire       binary
        |  +--rw network-ranges
-       |  |  +--rw option-set-id?   -> /server/server-config/option-sets/option-set/id
+       |  |  +--rw option-set-id?   -> /server/server-config/option-sets/option-set/option-set-id
        |  |  +--rw network-range* [network-range-id]
        |  |     +--rw network-range-id       uint32
        |  |     +--rw network-description    string
        |  |     +--rw network-prefix         inet:ipv6-prefix
-       |  |     +--rw option-set-id?         -> /server/server-config/option-sets/option-set/id
-       |  |     +--rw reserved-addresses
-       |  |     |  +--rw static-binding* [cli-id]
-       |  |     |  |  +--rw cli-id               uint32
-       |  |     |  |  +--rw duid
-       |  |     |  |  |  +--rw type-code?                   uint16
-       |  |     |  |  |  +--rw (duid-type)?
-       |  |     |  |  |     +--:(duid-llt)
-       |  |     |  |  |     |  +--rw duid-llt-hardware-type?      uint16
-       |  |     |  |  |     |  +--rw duid-llt-time?               yang:timeticks
-       |  |     |  |  |     |  +--rw duid-llt-link-layer-addr?    yang:mac-address
-       |  |     |  |  |     +--:(duid-en)
-       |  |     |  |  |     |  +--rw duid-en-enterprise-number?   uint32
-       |  |     |  |  |     |  +--rw duid-en-identifier?          string
-       |  |     |  |  |     +--:(duid-ll)
-       |  |     |  |  |     |  +--rw duid-ll-hardware-type?       uint16
-       |  |     |  |  |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
-       |  |     |  |  |     +--:(duid-uuid)
-       |  |     |  |  |     |  +--rw uuid?                        yang:uuid
-       |  |     |  |  |     +--:(duid-unknown)
-       |  |     |  |  |        +--rw data?                        binary
-       |  |     |  |  +--rw cli-link-addr?       yang:mac-address
-       |  |     |  |  +--rw cli-remote-id?       string
-       |  |     |  |  +--rw cli-subscriber-id?   string
-       |  |     |  |  +--rw reserv-addr*         inet:ipv6-address
-       |  |     |  +--rw other-reserv-addr*   inet:ipv6-address
-       |  |     +--rw reserved-prefixes
-       |  |     |  +--rw static-binding* [cli-id]
-       |  |     |  |  +--rw cli-id               uint32
-       |  |     |  |  +--rw duid
-       |  |     |  |  |  +--rw type-code?                   uint16
-       |  |     |  |  |  +--rw (duid-type)?
-       |  |     |  |  |     +--:(duid-llt)
-       |  |     |  |  |     |  +--rw duid-llt-hardware-type?      uint16
-       |  |     |  |  |     |  +--rw duid-llt-time?               yang:timeticks
-       |  |     |  |  |     |  +--rw duid-llt-link-layer-addr?    yang:mac-address
-       |  |     |  |  |     +--:(duid-en)
-       |  |     |  |  |     |  +--rw duid-en-enterprise-number?   uint32
-       |  |     |  |  |     |  +--rw duid-en-identifier?          string
-       |  |     |  |  |     +--:(duid-ll)
-       |  |     |  |  |     |  +--rw duid-ll-hardware-type?       uint16
-       |  |     |  |  |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
-       |  |     |  |  |     +--:(duid-uuid)
-       |  |     |  |  |     |  +--rw uuid?                        yang:uuid
-       |  |     |  |  |     +--:(duid-unknown)
-       |  |     |  |  |        +--rw data?                        binary
-       |  |     |  |  +--rw cli-link-addr?       yang:mac-address
-       |  |     |  |  +--rw cli-remote-id?       string
-       |  |     |  |  +--rw cli-subscriber-id?   string
-       |  |     |  |  +--rw reserv-prefix-len    uint8
-       |  |     |  |  +--rw reserv-prefix        inet:ipv6-prefix
-       |  |     |  +--rw exclude-prefix-len     uint8
-       |  |     |  +--rw exclude-prefix         inet:ipv6-prefix
-       |  |     |  +--rw other-reserv-prefix* [reserv-id]
-       |  |     |     +--rw reserv-id     uint32
-       |  |     |     +--rw prefix-len    uint8
-       |  |     |     +--rw prefix        inet:ipv6-prefix
+       |  |     +--rw option-set-id?         -> /server/server-config/option-sets/option-set/option-set-id
        |  |     +--rw address-pools
        |  |     |  +--rw address-pool* [pool-id]
        |  |     |     +--rw pool-id               uint32
@@ -264,45 +207,56 @@ module: ietf-dhcpv6-server
        |  |     |     +--rw start-address         inet:ipv6-address-no-zone
        |  |     |     +--rw end-address           inet:ipv6-address-no-zone
        |  |     |     +--rw client-class?         string
+       |  |     |     +--rw valid-lifetime        yang:timeticks
        |  |     |     +--rw renew-time            yang:timeticks
        |  |     |     +--rw rebind-time           yang:timeticks
        |  |     |     +--rw preferred-lifetime    yang:timeticks
-       |  |     |     +--rw valid-lifetime        yang:timeticks
+       |  |     |     +--rw rapid-commit          boolean
        |  |     |     +--rw max-address-count     threshold
-       |  |     |     +--rw option-set-id         -> /server/server-config/option-sets/option-set/id
+       |  |     |     +--rw option-set-id         -> /server/server-config/option-sets/option-set/option-set-id
        |  |     +--rw pd-pools
        |  |     |  +--rw pd-pool* [pool-id]
        |  |     |     +--rw pool-id                    uint32
        |  |     |     +--rw prefix                     inet:ipv6-prefix
        |  |     |     +--rw prefix-length              uint8
        |  |     |     +--rw client-class?              string
+       |  |     |     +--rw valid-lifetime             yang:timeticks
        |  |     |     +--rw renew-time                 yang:timeticks
        |  |     |     +--rw rebind-time                yang:timeticks
        |  |     |     +--rw preferred-lifetime         yang:timeticks
-       |  |     |     +--rw valid-lifetime             yang:timeticks
+       |  |     |     +--rw rapid-commit               boolean
        |  |     |     +--rw max-pd-space-utlization    threshold
-       |  |     |     +--rw option-set-id              -> /server/server-config/option-sets/option-set/id
-       |  |     +--rw hosts
-       |  |        +--rw host* [cli-id]
-       |  |           +--rw cli-id           uint32
-       |  |           +--rw duid
-       |  |           |  +--rw type-code?                   uint16
-       |  |           |  +--rw (duid-type)?
-       |  |           |     +--:(duid-llt)
-       |  |           |     |  +--rw duid-llt-hardware-type?      uint16
-       |  |           |     |  +--rw duid-llt-time?               yang:timeticks
-       |  |           |     |  +--rw duid-llt-link-layer-addr?    yang:mac-address
-       |  |           |     +--:(duid-en)
-       |  |           |     |  +--rw duid-en-enterprise-number?   uint32
-       |  |           |     |  +--rw duid-en-identifier?          string
-       |  |           |     +--:(duid-ll)
-       |  |           |     |  +--rw duid-ll-hardware-type?       uint16
-       |  |           |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
-       |  |           |     +--:(duid-uuid)
-       |  |           |     |  +--rw uuid?                        yang:uuid
-       |  |           |     +--:(duid-unknown)
-       |  |           |        +--rw data?                        binary
-       |  |           +--rw option-set-id    -> /server/server-config/option-sets/option-set/id
+       |  |     |     +--rw option-set-id              -> /server/server-config/option-sets/option-set/option-set-id
+       |  |     +--rw host-reservations
+       |  |        +--rw host-reservation* [cli-id]
+       |  |           +--rw cli-id                       uint32
+       |  |           +--rw (client-identifier)?
+       |  |           |  +--:(duid)
+       |  |           |  |  +--rw type-code?                   uint16
+       |  |           |  |  +--rw (duid-type)?
+       |  |           |  |     +--:(duid-llt)
+       |  |           |  |     |  +--rw duid-llt-hardware-type?      uint16
+       |  |           |  |     |  +--rw duid-llt-time?               yang:timeticks
+       |  |           |  |     |  +--rw duid-llt-link-layer-addr?    yang:mac-address
+       |  |           |  |     +--:(duid-en)
+       |  |           |  |     |  +--rw duid-en-enterprise-number?   uint32
+       |  |           |  |     |  +--rw duid-en-identifier?          string
+       |  |           |  |     +--:(duid-ll)
+       |  |           |  |     |  +--rw duid-ll-hardware-type?       uint16
+       |  |           |  |     |  +--rw duid-ll-link-layer-addr?     yang:mac-address
+       |  |           |  |     +--:(duid-uuid)
+       |  |           |  |     |  +--rw uuid?                        yang:uuid
+       |  |           |  |     +--:(duid-unknown)
+       |  |           |  |        +--rw data?                        binary
+       |  |           |  +--:(hw-address)
+       |  |           |     +--rw hardware-address?            yang:mac-address
+       |  |           +--rw reserv-addr*                 inet:ipv6-address
+       |  |           +--rw prefix-reservation* [reserv-prefix-id]
+       |  |           |  +--rw reserv-prefix-id     uint32
+       |  |           |  +--rw reserv-prefix        inet:ipv6-prefix
+       |  |           |  +--rw reserv-prefix-len    uint8
+       |  |           +--rw hostname?                    string
+       |  |           +--rw option-set-id?               -> /server/server-config/option-sets/option-set/option-set-id
        |  +--rw relay-opaque-paras
        |  |  +--rw relays* [relay-name]
        |  |     +--rw relay-name        string
@@ -322,7 +276,7 @@ module: ietf-dhcpv6-server
        +--ro server-state
           +--ro network-ranges
           |  +--ro network-range* [network-range-id]
-          |     +--ro network-range-id    uint32
+          |     +--ro network-range-id     uint32
           |     +--ro address-pools
           |     |  +--ro address-pool* [pool-id]
           |     |  |  +--ro pool-id                    uint32
@@ -353,9 +307,34 @@ module: ietf-dhcpv6-server
           |     |        +--ro cli-addr*   inet:ipv6-address
           |     |        +--ro pool-id     uint32
           |     +--ro pd-pools
-          |        +--ro prefix-pool* [pool-id]
-          |        |  +--ro pool-id                 uint32
-          |        |  +--ro pd-space-utilization    threshold
+          |     |  +--ro prefix-pool* [pool-id]
+          |     |  |  +--ro pool-id                 uint32
+          |     |  |  +--ro pd-space-utilization    threshold
+          |     |  +--ro binding-info* [cli-id]
+          |     |     +--ro cli-id      uint32
+          |     |     +--ro duid
+          |     |     |  +--ro type-code?                   uint16
+          |     |     |  +--ro (duid-type)?
+          |     |     |     +--:(duid-llt)
+          |     |     |     |  +--ro duid-llt-hardware-type?      uint16
+          |     |     |     |  +--ro duid-llt-time?               yang:timeticks
+          |     |     |     |  +--ro duid-llt-link-layer-addr?    yang:mac-address
+          |     |     |     +--:(duid-en)
+          |     |     |     |  +--ro duid-en-enterprise-number?   uint32
+          |     |     |     |  +--ro duid-en-identifier?          string
+          |     |     |     +--:(duid-ll)
+          |     |     |     |  +--ro duid-ll-hardware-type?       uint16
+          |     |     |     |  +--ro duid-ll-link-layer-addr?     yang:mac-address
+          |     |     |     +--:(duid-uuid)
+          |     |     |     |  +--ro uuid?                        yang:uuid
+          |     |     |     +--:(duid-unknown)
+          |     |     |        +--ro data?                        binary
+          |     |     +--ro cli-iapd* [iaid]
+          |     |        +--ro iaid              uint32
+          |     |        +--ro cli-prefix*       inet:ipv6-prefix
+          |     |        +--ro cli-prefix-len*   uint8
+          |     |        +--ro pool-id           uint32
+          |     +--ro host-reservations
           |        +--ro binding-info* [cli-id]
           |           +--ro cli-id      uint32
           |           +--ro duid
@@ -375,11 +354,14 @@ module: ietf-dhcpv6-server
           |           |     |  +--ro uuid?                        yang:uuid
           |           |     +--:(duid-unknown)
           |           |        +--ro data?                        binary
+          |           +--ro cli-ia* [iaid]
+          |           |  +--ro ia-type     string
+          |           |  +--ro iaid        uint32
+          |           |  +--ro cli-addr*   inet:ipv6-address
           |           +--ro cli-iapd* [iaid]
           |              +--ro iaid              uint32
           |              +--ro cli-prefix*       inet:ipv6-prefix
           |              +--ro cli-prefix-len*   uint8
-          |              +--ro pool-id           uint32
           +--ro packet-stats
              +--ro solicit-count          uint32
              +--ro request-count          uint32
