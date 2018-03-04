@@ -15,8 +15,8 @@ module: ietf-dhcpv6-relay
        |  |     +--rw ent-num    uint32
        |  |     +--rw data*      string
        |  +--rw rsoo-option-sets
-       |  |  +--rw option-set* [id]
-       |  |     +--rw id                              uint32
+       |  |  +--rw option-set* [option-set-id]
+       |  |     +--rw option-set-id                   uint32
        |  |     +--rw erp-local-domain-name-option! {erp-local-domain-name-op}?
        |  |        +--rw erp-for-client* [cli-id]
        |  |           +--rw cli-id      uint32
@@ -39,11 +39,10 @@ module: ietf-dhcpv6-relay
        |  |           |        +--rw data?                        binary
        |  |           +--rw erp-name    string
        |  +--rw relay-if* [if-name]
-       |     +--rw if-name               string
-       |     +--rw enable                boolean
-       |     +--rw ipv6-address?         inet:ipv6-address
+       |     +--rw if-name               if:interface-ref
        |     +--rw interface-id?         string
-       |     +--rw rsoo-option-set-id?   -> /relay/relay-config/rsoo-option-sets/option-set/id
+       |     +--rw ipv6-address?         inet:ipv6-address
+       |     +--rw rsoo-option-set-id?   -> /relay/relay-config/rsoo-option-sets/option-set/option-set-id
        |     +--rw next-entity* [dest-addr]
        |        +--rw dest-addr    inet:ipv6-address
        |        +--rw available    boolean
