@@ -3,18 +3,16 @@ module ietf-dhcpv6-types {
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types";
   prefix "dhcpv6-types";
 
-
   import ietf-inet-types {
 		prefix inet;
-		revision-date "2013-07-15";
   }	
 	import ietf-yang-types {
  		prefix yang;
- 		revision-date "2013-07-15";
  	}
 
   organization "DHC WG";
-	contact "yong@csnet1.cs.tsinghua.edu.cn
+	contact 
+   "cuiyong@tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
     sladjana.zechlin@telekom.de
@@ -24,7 +22,8 @@ module ietf-dhcpv6-types {
     used to define some commonly used DHCPv6 types";
 
   revision 2018-01-30 {
-      description "Initial revision";
+    description "Initial revision";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
   /*
@@ -47,7 +46,13 @@ module ietf-dhcpv6-types {
   }
   
 	grouping duid {
-    description "DHCP Unique Identifier";
+    description 
+      "Each server and client has only one DUID (DHCP Unique Identifier). 
+      The DUID here identifies a unique DHCPv6 server for clients. DUID 
+      consists of a two-octet type field and an arbitrary length (no more 
+      than 128 bytes) content field. Currently there are four defined types 
+      of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and 
+      DUID-UUID. DUID-Uknown represents those unconventional DUIDs.";
     reference "RFC3315: Section 9 and RFC6355: Section 4";
     leaf type-code {
   		type uint16;
@@ -147,9 +152,10 @@ module ietf-dhcpv6-types {
   }
 
   grouping iaid {
-	  description "IA is a construct through which a server and a client 
-      can identify, group, and manage a set of related IPv6 addresses. 
-      The key of the list is a 4-byte number IAID defined in [RFC3315].";
+	  description "IA is a construct through which a server and a
+	      client can identify, group, and manage a set of related IPv6
+	      addresses. The key of the list is a 4-byte number IAID defined
+	      in [RFC3315].";
     list identity-association {
       config "false";
       description "IA";
