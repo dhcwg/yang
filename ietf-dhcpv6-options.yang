@@ -25,6 +25,11 @@ module ietf-dhcpv6-options {
   description "This model defines a YANG data model that can be
     used to configure DHCPv6 options.";
   
+  revision 2018-09-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
   revision 2018-03-04 {
     description "Resolved most issues on the DHC official
     github";
@@ -523,7 +528,7 @@ module ietf-dhcpv6-options {
   	container boot-file-url-option {
   		if-feature boot-file-url-op;
   		presence "Enable this option";
-  		description "OPT_BOOTFILE_URL (59) Boot File URL option";
+  		description "OPT_BOOTFILE_URL (59) Boot File URL Option";
   		reference "RFC5970: DHCPv6 Options for Network Boot";		
   		list boot-file {
   			key boot-file-id;
@@ -865,7 +870,7 @@ module ietf-dhcpv6-options {
             length";
         }
         leaf bind-ipv6-prefix {
-          type inet:ipv6-prefix;
+          type inet:ipv6-address;
           mandatory true;
           description "bind ipv6 prefix";
         }
