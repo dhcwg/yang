@@ -12,7 +12,7 @@ module ietf-dhcpv6-types {
 
   organization "DHC WG";
 	contact 
-   "cuiyong@tsinghua.edu.cn
+   "yong@csnet1.cs.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
     sladjana.zechlin@telekom.de
@@ -20,6 +20,11 @@ module ietf-dhcpv6-types {
 
   description "This model defines a YANG data model that can be
     used to define some commonly used DHCPv6 types";
+
+  revision 2018-09-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
 
   revision 2018-01-30 {
     description "Initial revision";
