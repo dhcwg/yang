@@ -30,6 +30,11 @@ module ietf-dhcpv6-server {
 	description "This model defines a YANG data model that can be
     	used to configure and manage a DHCPv6 server.";
 
+  revision 2018-09-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
   revision 2018-03-04 {
   	description "Resolved most issues on the DHC official
   	github";
@@ -110,6 +115,114 @@ module ietf-dhcpv6-server {
 	          address with a specific interface, he can use the format like 
 	          'eth1/2001:db8::1'.";
 		    }
+				container lease-storage {
+					description "Indicates how the server stores the lease";
+					choice storage-type {
+						description "the type of lease storage";
+						// leaf persist {
+						// 		type boolean;
+						// 		mandatory true;
+						// 		description "controls whether the new leases and updates to existing leases are 
+						// 		written to the file";
+						// }
+						case memfile {
+							description "the server stores lease information in a CSV file";
+
+							leaf memfile-name {
+								type string;
+								description "specifies an absolute location of the lease file in which new leases 
+								and lease updates will be recorded";
+							}
+
+							leaf memfile-lfc-interval {
+								type uint64;
+								description "specifies the interval in seconds, at which the server will perform a 
+								lease file cleanup (LFC)";
+							}
+
+						}
+						case mysql {
+							leaf mysql-name {
+								type string;
+								description "type of the database";
+							}
+							leaf mysql-host {
+								type string;
+								description "If the database is located 
+								on a different system to the DHCPv6 server, the database host name must also be specified.";
+							}
+							leaf mysql-password {
+								type string;
+								description "the credentials of the account under which the server will access the database";
+							}
+							leaf mysql-port {
+								type uint8;
+								description "If the database is located on a different system, the port number may be specified";
+							}
+							leaf mysql-lfc-interval {
+								type uint64;
+								description "specifies the interval in seconds, at which the server will perform a 
+								lease file cleanup (LFC)";
+							}
+							leaf mysql-connect-timeout {
+								type uint64;
+								description "If the database is located on a different system, a longer interval needs to be specified";
+							}
+
+						}
+						case postgresql {
+							leaf postgresql-name {
+								type string;
+								description "type of the database";
+							}
+							leaf postgresql-host {
+								type string;
+								description "If the database is located 
+								on a different system to the DHCPv6 server, the database host name must also be specified.";
+							}
+							leaf postgresql-password {
+								type string;
+								description "the credentials of the account under which the server will access the database";
+							}
+							leaf postgresql-port {
+								type uint8;
+								description "If the database is located on a different system, the port number may be specified";
+							}
+							leaf postgresql-lfc-interval {
+								type uint64;
+								description "specifies the interval in seconds, at which the server will perform a 
+								lease file cleanup (LFC)";
+							}
+							leaf postgresql-connect-timeout {
+								type uint64;
+								description "If the database is located on a different system, a longer interval needs to be specified";
+							}
+						}
+						case cassandra {
+							leaf cassandra-name {
+								type string;
+								description "type of the database";
+							}
+							leaf cassandra-contact-points {
+								type string;
+								description "Cassandra takes a list of comma separated IP addresses to contact the cluster";
+							}
+							leaf cassandra-password {
+								type string;
+								description "the credentials of the account under which the server will access the database";
+							}
+							leaf cassandra-lfc-interval {
+								type uint64;
+								description "specifies the interval in seconds, at which the server will perform a 
+								lease file cleanup (LFC)";
+							}
+							leaf cassandra-connect-timeout {
+								type uint64;
+								description "If the database is located on a different system, a longer interval needs to be specified";
+							}							
+						}
+					}
+				}
 		    uses dhcpv6-types:vendor-infor;
     	}
 
@@ -322,7 +435,7 @@ module ietf-dhcpv6-server {
                 type string;
                 description "client class";
               }
-	            leaf max-pd-space-utlization {
+	            leaf max-pd-space-utilization {
                 type threshold;
                 mandatory true;
                 description "Maximum utilization of pd space in this pool";
@@ -353,7 +466,7 @@ module ietf-dhcpv6-server {
 
               choice client-identifier {
                 description "When making reservations, the server needs to choose a
-                identifier to identify the server. Currently 'DUID' and 'hardware 
+                identifier to identify the client. Currently 'DUID' and 'hardware 
                 address' are supported.";
                 case duid {
                   description "DUID";
@@ -518,7 +631,6 @@ module ietf-dhcpv6-server {
           			description "A DHCPv6 server can be configured with 
             			several address pools. This list defines such address pools 
             			which are distinguished by the key called 'pool-id'.";
-          			description "";
               	leaf pool-id {
 	                type uint32;
 	                mandatory true;
