@@ -389,7 +389,7 @@ module: ietf-dhcpv6-server
      |  |     |     +--rw rapid-commit          boolean
      |  |     |     +--rw client-class?         string
      |  |     |     +--rw max-address-count     threshold
-     |  |     |     +--rw option-set-id         -> /server/server-config/option-sets/option-set/option-set-id
+     |  |     |     +--rw option-set-id?        -> /server/server-config/option-sets/option-set/option-set-id
      |  |     +--rw pd-pools
      |  |     |  +--rw pd-pool* [pool-id]
      |  |     |     +--rw pool-id                     uint32
@@ -402,7 +402,7 @@ module: ietf-dhcpv6-server
      |  |     |     +--rw rapid-commit                boolean
      |  |     |     +--rw client-class?               string
      |  |     |     +--rw max-pd-space-utilization    threshold
-     |  |     |     +--rw option-set-id               -> /server/server-config/option-sets/option-set/option-set-id
+     |  |     |     +--rw option-set-id?              -> /server/server-config/option-sets/option-set/option-set-id
      |  |     +--rw host-reservations
      |  |        +--rw host-reservation* [cli-id]
      |  |           +--rw cli-id                                   uint32
@@ -1724,7 +1724,6 @@ module ietf-dhcpv6-server {
               	type leafref {
               		path "/server/server-config/option-sets/option-set/option-set-id";
               	}
-              	mandatory true;
               	description "The ID field of relevant option-set to be
                 		provisioned to clients of this address-pool.";
             	}
@@ -1794,7 +1793,6 @@ module ietf-dhcpv6-server {
 	            	type leafref {
 	                	path "/server/server-config/option-sets/option-set/option-set-id";
 	                }
-	                mandatory true;
 	                description "The ID field of relevant option-set to be
 	                  provisioned to clients of this prefix-pool.";
 	            }
