@@ -717,8 +717,8 @@ module: ietf-dhcpv6-server
             address pools for a specific network. This list defines such address
             pools which are distinguish by the key called "pool-id".</t>
 
-          <t>rapid-commit: Setting the value to '1' represents the address/prefix 
-            pool support the Solicit-Reply message exchange. '0' means the server
+          <t>rapid-commit: Setting the value to 'true' represents the address/prefix 
+            pool support the Solicit-Reply message exchange. 'false' means the server
             will simply ignore the Rapid Commit option in Solicit message.</t>
 
           <t>client-class: If this is instantiated, the address/pd pool will only
@@ -1284,9 +1284,9 @@ module: ietf-dhcpv6-client
             request prefixes using prefix delegation (<xref target="RFC3633"/>).
           </t>
 
-          <t>rapid-commit: '1' indicates a client can initiate a Solicit-Reply
+          <t>rapid-commit: 'true' indicates a client can initiate a Solicit-Reply
             message exchange by adding a Rapid Commit option in Solicit message.
-            '0' means the client is not allowed to add a Rapid Commit option to
+            'false' means the client is not allowed to add a Rapid Commit option to
             request addresses in a two-message exchange pattern.</t>
 
           <t>client-configured-options: Similar to the server, the client also
@@ -2917,8 +2917,8 @@ module ietf-dhcpv6-client {
         leaf rapid-commit {
           type boolean;
           mandatory true;
-          description "'1' indicates a client can initiate a Solicit-Reply message 
-            exchange by adding a Rapid Commit option in Solicit message. '0' means 
+          description "'true' indicates a client can initiate a Solicit-Reply message 
+            exchange by adding a Rapid Commit option in Solicit message. 'false' means 
             the client is not allowed to add a Rapid Commit option to request 
             addresses in a two-message exchange pattern.";
         }
