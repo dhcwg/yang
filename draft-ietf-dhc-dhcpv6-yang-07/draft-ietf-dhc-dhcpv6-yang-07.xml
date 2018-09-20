@@ -394,7 +394,7 @@ module: ietf-dhcpv6-server
      |  |     |  +--rw pd-pool* [pool-id]
      |  |     |     +--rw pool-id                     uint32
      |  |     |     +--rw prefix                      inet:ipv6-prefix
-     |  |     |     +--rw prefix-length               uint8
+     |  |     |     +--rw delegated-length            uint8
      |  |     |     +--rw valid-lifetime              yang:timeticks
      |  |     |     +--rw renew-time                  yang:timeticks
      |  |     |     +--rw rebind-time                 yang:timeticks
@@ -1750,10 +1750,10 @@ module ietf-dhcpv6-server {
 	                mandatory true;
 	                description "ipv6 prefix";
 	            }
-	            leaf prefix-length {
+	            leaf delegated-length {
 	                type uint8;
 	                mandatory true;
-	                description "prefix length";
+	                description "default delegated prefix length";
 	            }
 	            leaf valid-lifetime {
 	            	type yang:timeticks;
