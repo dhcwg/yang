@@ -379,7 +379,7 @@ module: ietf-dhcpv6-server
      |  |     +--rw address-pools
      |  |     |  +--rw address-pool* [pool-id]
      |  |     |     +--rw pool-id               uint32
-     |  |     |     +--rw pool-prefix           inet:ipv6-prefix
+     |  |     |     +--rw pool-prefix?          inet:ipv6-prefix
      |  |     |     +--rw start-address         inet:ipv6-address-no-zone
      |  |     |     +--rw end-address           inet:ipv6-address-no-zone
      |  |     |     +--rw valid-lifetime        yang:timeticks
@@ -1660,7 +1660,8 @@ module ietf-dhcpv6-server {
             	key pool-id;
             	description "A DHCPv6 server can be configured with 
             	several address pools. This list defines such address pools 
-            	which are distinguished by the key called 'pool-id'.";
+            	which are distinguished by the key called 'pool-id' inside
+                a network range.";
             	leaf pool-id {
             		type uint32;
                 mandatory true;
@@ -1668,8 +1669,8 @@ module ietf-dhcpv6-server {
             	}
 	        		leaf pool-prefix {
               	type inet:ipv6-prefix;
-              	mandatory true;
-              	description "pool prefix";
+              	description "Pool prefix. SHOULD be set when the
+                'start-address..end-address' range is a prefix.";
 	            }
             	leaf start-address {
               	type inet:ipv6-address-no-zone;
