@@ -109,14 +109,14 @@
       deployment in their network.</t>
 
       <t>Since the publication of the original DHCPv6 specification,
-        there have been a large number of addional documents that
+        there have been a large number of additional documents that
         update the protocol's operation, add new functions and define
         new options. The YANG model described in this document incorporates
-        all relevent changes. A full list of the documents which have
-        been considedered in the development of this model is included
+        all relevant changes. A full list of the documents which have
+        been considered in the development of this model is included
         in Appendix A.</t>
 
-      <t>IF - Commment - Does anyone have this list?</t>
+      <t>IF - Comment - Does anyone have this list?</t>
 
       <t>It is worth noting that as DHCPv6 is itself a device configuration
         protocol, it is not the intention of this document to replace the
@@ -124,7 +124,7 @@
         protocol with the configuration of DHCPv6 options using NETCONF/YANG.
         The DHCPv6 client model is intended for the configuration of the
         DHCPv6 client function and also for obtaining read-only state
-        data from the client which has been learnt via the normal DHCPv6
+        data from the client which has been learned via the normal DHCPv6
         message flow. This gives an operator a better method for managing
         DHCPv6 clients and simplifies troubleshooting.</t>
 
@@ -138,7 +138,7 @@
           module structure.</t>
 
           <t>A simplified graphical representation of the data model is provided
-          in this d cument. For a description of the symbols in these diagrams,
+          in this document. For a description of the symbols in these diagrams,
           please refer to
           <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>.</t>
       </section>
@@ -264,8 +264,8 @@ module: ietf-dhcpv6-server
      |  |     |     +--rw suitable-net-if*      uint32
      |  |     |     +--rw boot-file-url         string
      |  |     +--rw boot-file-param-option! {boot-file-param-op}?
-     |  |     |  +--rw boot-file-paras* [para-id]
-     |  |     |     +--rw para-id      uint8
+     |  |     |  +--rw boot-file-params* [param-id]
+     |  |     |     +--rw param-id      uint8
      |  |     |     +--rw parameter    string
      |  |     +--rw aftr-name-option! {aftr-name-op}?
      |  |     |  +--rw tunnel-endpoint-name    string
@@ -433,7 +433,7 @@ module: ietf-dhcpv6-server
      |  |           |  +--rw reserv-prefix-len    uint8
      |  |           +--rw hostname?                                string
      |  |           +--rw option-set-id?                           -> /server/server-config/option-sets/option-set/option-set-id
-     |  +--rw relay-opaque-paras
+     |  +--rw relay-opaque-params
      |  |  +--rw relays* [relay-name]
      |  |     +--rw relay-name        string
      |  |     +--rw interface-info* [if-name]
@@ -697,7 +697,7 @@ module: ietf-dhcpv6-server
             level which is defined as the container "network-ranges". The
             following levels are defined as sub-containers under it. The
             "network-ranges" contains the parameters (e.g. option-sets) that
-            would be allocated to all the clients served by this server
+            would be allocated to all the clients served by this server.
           </t>
 
           <t>network-range: Under the "network-ranges" container, a
@@ -717,7 +717,7 @@ module: ietf-dhcpv6-server
             address pools for a specific network. This list defines such address
             pools which are distinguish by the key called "pool-id".</t>
 
-          <t>rapid-commit: Setting the value to '1' represents the adress/prefix 
+          <t>rapid-commit: Setting the value to '1' represents the address/prefix 
             pool support the Solicit-Reply message exchange. '0' means the server
             will simply ignore the Rapid Commit option in Solicit message.</t>
 
@@ -738,7 +738,7 @@ module: ietf-dhcpv6-server
             can also be configured with multiple prefix pools specified by a
             list called "prefix-pool".</t>
 
-          <t>max-pd-space-utlization: Maximum utilization of pd space in this pool
+          <t>max-pd-space-utilization: Maximum utilization of pd space in this pool.
           </t>
 
           <t>host-reservations: This container allows the server to make reservations 
@@ -749,7 +749,7 @@ module: ietf-dhcpv6-server
               reserve multiple addresses and prefixes for a single client.
           </t>
 
-          <t>relay-opaque-paras: This container contains some opaque values in
+          <t>relay-opaque-params: This container contains some opaque values in
             Relay Agent options that need to be configured on the server side
             only for value match. Such Relay Agent options include Interface-Id
             option, Remote-Id option and Subscriber-Id option.</t>
@@ -928,8 +928,8 @@ module: ietf-dhcpv6-relay
           <t>relay-if: A relay agent may have several interfaces, we should
             provide a way to configure and manage parameters on the
             interface-level. A list that describes specific interfaces
-            and their corresponding parameters is employed to fulfil the
-            configfuration. Here we use a string called "if-name" as the
+            and their corresponding parameters is employed to fulfill the
+            configuration. Here we use a string called "if-name" as the
             key of list.</t>
 
           <t>relay-state: This container contains the configuration data
@@ -1035,7 +1035,7 @@ module: ietf-dhcpv6-client
        |           +--rw link-layer-type    uint16
        |           +--rw link-layer-addr    string
        +--ro client-state
-          +--ro if-other-paras
+          +--ro if-other-params
           |  +--ro server-unicast-option! {server-unicast-op}?
           |  |  +--ro server-address?   inet:ipv6-address
           |  +--ro sip-server-domain-name-list-option! 
@@ -1098,8 +1098,8 @@ module: ietf-dhcpv6-client
           |  |     +--ro suitable-net-if*      uint32
           |  |     +--ro boot-file-url         string
           |  +--ro boot-file-param-option! {boot-file-param-op}?
-          |  |  +--ro boot-file-paras* [para-id]
-          |  |     +--ro para-id      uint8
+          |  |  +--ro boot-file-params* [param-id]
+          |  |     +--ro param-id      uint8
           |  |     +--ro parameter    string
           |  +--ro aftr-name-option! {aftr-name-op}?
           |  |  +--ro tunnel-endpoint-name    string
@@ -1290,7 +1290,7 @@ module: ietf-dhcpv6-client
             request addresses in a two-message exchange pattern.</t>
 
           <t>client-configured-options: Similar to the server, the client also
-            need to configure some options to fulfil some desired functions.
+            need to configure some options to fulfill some desired functions.
             This container include all the potential options that need to be
             configured at the client side. The relevant RFCs that define those
             options include: <xref target="RFC3315"/>, <xref target="RFC4704"/>,
@@ -1303,7 +1303,7 @@ module: ietf-dhcpv6-client
           <t>client-state: This container includes the state data
           of the client.</t>
 
-          <t>if-other-paras: A client can obtain extra configuration data other
+          <t>if-other-params: A client can obtain extra configuration data other
             than address and prefix information through DHCPv6 options. This
             container describes such data the client was configured through
             DHCPv6. The potential configuration data may include DNS server
@@ -1684,7 +1684,7 @@ module ietf-dhcpv6-server {
             	leaf valid-lifetime {
               	type yang:timeticks;
               	mandatory true;
-              	description "valid liftime for IA";
+              	description "valid lifetime for IA";
             	}
             	leaf renew-time {
               	type yang:timeticks;
@@ -1874,7 +1874,7 @@ module ietf-dhcpv6-server {
       	}
 			}
 		   
-    	container relay-opaque-paras {
+    	container relay-opaque-params {
         description "This container contains some opaque values in Relay Agent 
         	options that need to be configured on the server side only for value 
         	match. Such Relay Agent options include Interface-Id option,
@@ -2058,7 +2058,7 @@ module ietf-dhcpv6-server {
 	        		list binding-info {
 	        			key cli-id;
 	        			description "A list records a binding information for each DHCPv6 
-	        				client that has already been alloated IPv6 prefixes.";
+	        				client that has already been allocated IPv6 prefixes.";
 		    				leaf cli-id {
 		    					type uint32;   
 		    					mandatory true;
@@ -2099,7 +2099,7 @@ module ietf-dhcpv6-server {
 	        		key cli-id;
 	        		description 
 	        			"A list records a binding information for each DHCPv6 
-	        			client that has already been alloated IPv6 addresses or prefixes
+	        			client that has already been allocated IPv6 addresses or prefixes
 	        			by host reservations.";
 	    				leaf cli-id {
 	    					type uint32;   
@@ -2502,7 +2502,7 @@ module ietf-dhcpv6-relay {
         "A relay agent may have several interfaces, we should provide
          a way to configure and manage parameters on the interface-level. 
          A list that describes specific interfaces and their corresponding 
-         parameters is employed to fulfil the configfuration. Here we use 
+         parameters is employed to fulfill the configuration. Here we use 
          a string called 'if-name' as the key of list.";
         leaf if-name {
           type if:interface-ref;
@@ -2582,7 +2582,7 @@ module ietf-dhcpv6-relay {
         "A relay agent may have several interfaces, we should provide
          a way to configure and manage parameters on the interface-level. 
          A list that describes specific interfaces and their corresponding 
-         parameters is employed to fulfil the configfuration. Here we use 
+         parameters is employed to fulfill the configuration. Here we use 
          a string called 'if-name' as the key of list.";      
         leaf if-name{
           type string;
@@ -2592,7 +2592,7 @@ module ietf-dhcpv6-relay {
         }
         list pd-route {
           // if - need to look at if/how we model these. If they are
-          // going to be modelled, then they should be ro state
+          // going to be modeled, then they should be ro state
           // entries (we're not trying to configure routes here)
           key pd-route-id;
           description "pd route";
@@ -2658,7 +2658,7 @@ module ietf-dhcpv6-relay {
             leaf rebind-rvd-count {
               type uint32;
               mandatory true;
-              description "rebind recevied counter";
+              description "rebind received counter";
             }
             leaf decline-rvd-count {
               type uint32;
@@ -2743,7 +2743,7 @@ module ietf-dhcpv6-relay {
           type uint32;
           mandatory true;
           description 
-            "Relay reply recevied counter";
+            "Relay reply received counter";
         }
         leaf packet-to-cli-count {
           type uint32;
@@ -2937,7 +2937,7 @@ module ietf-dhcpv6-client {
             achieve configuration.";
             
             // if - not sure about the intended use here as it seems
-            // to be redfining what will be received in the PIO. Is
+            // to be redefining what will be received in the PIO. Is
             // the intention to be whether they PIO options will be
             // obeyed as received or overridden?
           leaf m-tab {
@@ -2963,7 +2963,7 @@ module ietf-dhcpv6-client {
     container client-state {
       config "false";
       description "state tree of client";
-      container if-other-paras {
+      container if-other-params {
         description "A client can obtain extra configuration 
           data other than address and prefix information through
           DHCPv6. This container describes such data the client 
@@ -3029,7 +3029,7 @@ module ietf-dhcpv6-client {
         leaf reconfigure-count {
           type uint32;
           mandatory true;
-          description "recofigure counter";
+          description "reconfigure counter";
         }
       }
     }
@@ -3306,7 +3306,7 @@ module ietf-dhcpv6-options {
 		description "Support for INF_MAX_RT option";
 	}
 	feature addr-selection-op {
-		description "Support for Address Selection opiton";
+		description "Support for Address Selection option";
 	}
 	feature pcp-server-op {
 		description "Support for Port Control Protocol (PCP)
@@ -3376,26 +3376,26 @@ module ietf-dhcpv6-options {
 		description "Support for Option with IPv6 Prefix";
 	}
 	feature operator-op-int32 {
-		description "Support for Opion with 32-bit
+		description "Support for Option with 32-bit
 			Integer Value";
 	}
 	feature operator-op-int16 {
-		description "Support for Opion with 16-bit Integer Value";
+		description "Support for Option with 16-bit Integer Value";
 	}
 	feature operator-op-int8 {
-		description "Support for Opion with 8-bit Integer Value";
+		description "Support for Option with 8-bit Integer Value";
 	}
 	feature operator-op-uri {
-		description "Support for Opion with URI";
+		description "Support for Option with URI";
 	}
 	feature operator-op-textstring {
-		description "Support for Opion with Text String";
+		description "Support for Option with Text String";
 	}
 	feature operator-op-var-data {
-		description "Support for Opion with Variable-Length Data";
+		description "Support for Option with Variable-Length Data";
 	}
 	feature operator-op-dns-wire {
-		description "Support for Opion with DNS Wire
+		description "Support for Option with DNS Wire
 			Format Domain Name List";
 	}
 	
@@ -3665,7 +3665,7 @@ module ietf-dhcpv6-options {
       //This option looks like it needs work to correctly model the
       //option as defined in the RFC.
     	
-      // Zihao - Re-modelled so it only contains one time source suboption
+      // Zihao - Re-modeled so it only contains one time source suboption
       
       if-feature ntp-server-op;
       presence "Enable this option";
@@ -3736,12 +3736,12 @@ module ietf-dhcpv6-options {
   	container boot-file-param-option {
   		if-feature boot-file-param-op;
   		presence "Enable this option";
-  		description "OPT_BOOTFiLE_PARAM (60) Boot File Parameters Option";
+  		description "OPT_BOOTFILE_PARAM (60) Boot File Parameters Option";
   		reference "RFC5970: DHCPv6 Options for Network Boot";
-      list boot-file-paras {
-        key para-id;
+      list boot-file-params {
+        key param-id;
         description "boot file parameters";
-        leaf para-id {
+        leaf param-id {
           type uint8;
           mandatory true;
           description "parameter id";
@@ -3969,7 +3969,7 @@ module ietf-dhcpv6-options {
           mandatory true;
           description "ipv6 prefix";
         }
-        uses dhcpv6-types:portset-para;
+        uses dhcpv6-types:portset-param;
       }
     }
 
@@ -4053,7 +4053,7 @@ module ietf-dhcpv6-options {
           mandatory true;
           description "bind ipv6 prefix";
         }
-        uses dhcpv6-types:portset-para;
+        uses dhcpv6-types:portset-param;
       }
     }
 
@@ -4532,7 +4532,7 @@ module ietf-dhcpv6-options {
       reference "RFC7227: Guidelines for Creating New DHCPv6 Options";
       list int32val {
         key var-data-id;
-        description "operator ivariable length data info";
+        description "operator invariable length data info";
         leaf var-data-id {
           type uint8;
           mandatory true;
@@ -4642,7 +4642,7 @@ module ietf-dhcpv6-types {
       consists of a two-octet type field and an arbitrary length (no more 
       than 128 bytes) content field. Currently there are four defined types 
       of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and 
-      DUID-UUID. DUID-Uknown represents those unconventional DUIDs.";
+      DUID-UUID. DUID-Unknown represents those unconventional DUIDs.";
     reference "RFC3315: Section 9 and RFC6355: Section 4";
     leaf type-code {
       type uint16;
@@ -4682,7 +4682,7 @@ module ietf-dhcpv6-types {
         }
         leaf duid-en-identifier {
           type string;
-          description "Indentifier, unique to the device that is 
+          description "Identifier, unique to the device that is 
           using it";
         }
       }
@@ -4701,7 +4701,7 @@ module ietf-dhcpv6-types {
       case duid-uuid {
         description "DUID Based on Universally Unique Identifier 
           (Type 4 - DUID-UUID)";
-        reference "RFC6335 Defination of the UUID-Based Unique Identifier";
+        reference "RFC6335 Definition of the UUID-Based Unique Identifier";
         leaf uuid {
           type yang:uuid;
           description "A Universally Unique IDentifier in the string 
@@ -4719,7 +4719,7 @@ module ietf-dhcpv6-types {
     }
   }
 
-  grouping portset-para {
+  grouping portset-param {
     description "portset parameters";
     container port-parameter {
       description "port parameter";
@@ -4816,7 +4816,7 @@ module ietf-dhcpv6-types {
         </list></t>
     </section>
 
-    <section anchor="acknowledgements" title="Acknowledgements">
+    <section anchor="acknowledgments" title="Acknowledgments">
       <t>The authors would like to thank Qi Sun, Lishan Li, Sladjana Zoric,
         Tomek Mrugalski, Marcin Siodelski, Bernie Volz and Bing Liu for
         their valuable comments and contributions to this work.</t>
