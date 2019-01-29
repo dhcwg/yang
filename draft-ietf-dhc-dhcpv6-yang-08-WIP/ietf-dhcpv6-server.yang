@@ -67,7 +67,7 @@ module ietf-dhcpv6-server {
     	}
   	}
   	description "Threshold value in percent";
-	}	
+	}
 
 	/*
  	* Data Nodes
@@ -80,8 +80,8 @@ module ietf-dhcpv6-server {
      * Configuration data
      */
     container server-config {
-    	description "This container contains the configuration data
-            of a server.";
+    	description "This container for the basic configuration parameters
+			  necessary to run the DHCPv6 server.";
     	container serv-attributes {
 		    description 
 		     "This container contains basic attributes of a DHCPv6 server 
@@ -93,23 +93,23 @@ module ietf-dhcpv6-server {
 		    }
 		    leaf name {
 	        type string;
-	        description "server's name";
+	        description "DHCPv6 server's name";
 		    }
 		    leaf description {
 	        type string;
-	        description "description of the server.";
+	        description "Description of the server.";
 		    }
 		    leaf-list ipv6-address {
 	        type inet:ipv6-address;
-	        description "server's IPv6 address.";
+	        description "Server's IPv6 address.";
 		    }
 		    leaf-list interfaces-config {
 	        // Note - this should probably be references to
 	        // entries in the ietf-interfaces model
 	        type if:interface-ref;
-	        description "A leaf list to denote which one or more interfaces 
+	        description "A leaf list to denote one or more interfaces that
 	        	the server should listen on. The default value is to listen 
-	        	on all the interfaces. This node is also used to set a unicast 
+	        	on all interfaces. This node is also used to set a unicast 
 	        	address for the server to listen with a specific interface.
 	          For example, if people want the server to listen on a unicast 
 	          address with a specific interface, he can use the format like 
@@ -130,14 +130,14 @@ module ietf-dhcpv6-server {
 
 							leaf memfile-name {
 								type string;
-								description "specifies an absolute location of the lease file in which new leases 
-								and lease updates will be recorded";
+								description "specifies an absolute location of the lease file
+								  in which new leases and lease updates will be recorded";
 							}
 
 							leaf memfile-lfc-interval {
 								type uint64;
-								description "specifies the interval in seconds, at which the server will perform a 
-								lease file cleanup (LFC)";
+								description "specifies the interval in seconds, at which the
+								  server will perform a lease file cleanup (LFC)";
 							}
 
 						}
@@ -148,27 +148,30 @@ module ietf-dhcpv6-server {
 							}
 							leaf mysql-host {
 								type string;
-								description "If the database is located 
-								on a different system to the DHCPv6 server, the database host name must also be specified.";
+								description "If the database is located on a different system to
+								  the DHCPv6 server, the database host name must also be
+									specified.";
 							}
 							leaf mysql-password {
 								type string;
-								description "the credentials of the account under which the server will access the database";
+								description "the credentials of the account under which the
+								  server will access the database";
 							}
 							leaf mysql-port {
 								type uint8;
-								description "If the database is located on a different system, the port number may be specified";
+								description "If the database is located on a different system,
+								  the port number may be specified";
 							}
 							leaf mysql-lfc-interval {
 								type uint64;
-								description "specifies the interval in seconds, at which the server will perform a 
-								lease file cleanup (LFC)";
+								description "specifies the interval in seconds, at which the
+								  server will perform a lease file cleanup (LFC)";
 							}
 							leaf mysql-connect-timeout {
 								type uint64;
-								description "If the database is located on a different system, a longer interval needs to be specified";
+								description "If the database is located on a different system,
+								  a longer interval needs to be specified";
 							}
-
 						}
 						case postgresql {
 							leaf postgresql-name {
@@ -178,24 +181,28 @@ module ietf-dhcpv6-server {
 							leaf postgresql-host {
 								type string;
 								description "If the database is located 
-								on a different system to the DHCPv6 server, the database host name must also be specified.";
+								on a different system to the DHCPv6 server, the database host
+								  name must also be specified.";
 							}
 							leaf postgresql-password {
 								type string;
-								description "the credentials of the account under which the server will access the database";
+								description "the credentials of the account under which the
+								  server will access the database";
 							}
 							leaf postgresql-port {
 								type uint8;
-								description "If the database is located on a different system, the port number may be specified";
+								description "If the database is located on a different system,
+								  the port number may be specified";
 							}
 							leaf postgresql-lfc-interval {
 								type uint64;
-								description "specifies the interval in seconds, at which the server will perform a 
-								lease file cleanup (LFC)";
+								description "specifies the interval in seconds, at which the
+								  server will perform a lease file cleanup (LFC)";
 							}
 							leaf postgresql-connect-timeout {
 								type uint64;
-								description "If the database is located on a different system, a longer interval needs to be specified";
+								description "If the database is located on a different system,
+								  a longer interval needs to be specified";
 							}
 						}
 						case cassandra {
@@ -205,20 +212,23 @@ module ietf-dhcpv6-server {
 							}
 							leaf cassandra-contact-points {
 								type string;
-								description "Cassandra takes a list of comma separated IP addresses to contact the cluster";
+								description "Cassandra takes a list of comma separated IP
+								  addresses to contact the cluster";
 							}
 							leaf cassandra-password {
 								type string;
-								description "the credentials of the account under which the server will access the database";
+								description "the credentials of the account under which the
+								  server will access the database";
 							}
 							leaf cassandra-lfc-interval {
 								type uint64;
-								description "specifies the interval in seconds, at which the server will perform a 
-								lease file cleanup (LFC)";
+								description "specifies the interval in seconds, at which the 
+								  server will perform a lease file cleanup (LFC)";
 							}
 							leaf cassandra-connect-timeout {
 								type uint64;
-								description "If the database is located on a different system, a longer interval needs to be specified";
+								description "If the database is located on a different system, 
+								  a longer interval needs to be specified";
 							}							
 						}
 					}
@@ -242,9 +252,9 @@ module ietf-dhcpv6-server {
             	option is corresponding to a container. Since all the options in
             	the list are optional, each container in this list has a 'presence'
             	statement to indicate whether this option (container) will be 
-            	included in the current option set or not. In addition, each container
-            	also has a 'if-feature' statement to indicate whether the server 
-            	supports this option (container).";
+            	included in the current option set or not. In addition, each
+							container also has a 'if-feature' statement to indicate whether
+							the server supports this option (container).";
             leaf option-set-id {
             	type uint32;
             	description "option set id";
@@ -357,11 +367,20 @@ module ietf-dhcpv6-server {
 	        			description "A boolean value specifies whether the pool 
 	        			supports client-server exchanges involving two messages.";
 		    			}
-              leaf client-class {
-                type string;
-                description 
-                "If this leaf is specified, this pool will only serve
-                the clients belonging to this class.";
+		    			list client-class-ids {
+								mandatory true;
+								description "List of the client class identifiers applicable
+									to clients served by this address pool";
+								key client-class-id-number;
+								leaf client-class-id-number {
+									type uint32;
+									description "Unique Identifier for client class
+										identification list entries.";
+								}
+								leaf client-class-id {
+									description "Client class identifier";
+									uses dhcpv6-types:client-class-id;
+								}
               }
             	leaf max-address-count {
               	type threshold;
@@ -388,12 +407,12 @@ module ietf-dhcpv6-server {
             list pd-pool {
             	key pool-id;
             	description "Similar to server's address pools, a delegating 
-            		router can also be configured with multiple prefix pools 
-            		specified by a list called 'prefix-pool'.";
+            		router can be configured with multiple prefix pools for lease
+								by clients, specified by a list called 'prefix-pool'.";
 							leaf pool-id {
 	            	type uint32;
 	              mandatory true;
-	              description "pool id";
+	              description "Pool id";
 	            }
 	            leaf prefix {
 	                type inet:ipv6-prefix;
@@ -413,39 +432,50 @@ module ietf-dhcpv6-server {
 	            leaf renew-time {
                 type yang:timeticks;
                 mandatory true;
-                description "renew time";
+                description "Renew time";
 	            }
             	leaf rebind-time {
                 type yang:timeticks;
                 mandatory true;
-                description "rebind time";
+                description "Rebind time";
           		}
 	            leaf preferred-lifetime {
                 type yang:timeticks;
                 mandatory true;
-                description "preferred lifetime for IA";
+                description "Preferred lifetime for IA";
 	            }
             	leaf rapid-commit {
 	        			type boolean;
 	        			mandatory true;
-	        			description "A boolean value specifies whether the server 
-	        			support client-server exchanges involving two messages defined.";
+	        			description "Specifies whether the server supports two message
+								  client-server exchanges.";
 		    			}
-		    			leaf client-class {
-                type string;
-                description "client class";
+		    			list client-class-ids {
+								mandatory true;
+								description "List of the client class identifiers applicable
+									to clients served by this pd-pool";
+								key client-class-id-number;
+								leaf client-class-id-number {
+									type uint32;
+									description "Unique Identifier for client class
+										identification list entries.";
+								}
+								leaf client-class-id {
+									description "Client class identifier";
+									uses dhcpv6-types:client-class-id;
+								}
               }
 	            leaf max-pd-space-utilization {
                 type threshold;
                 mandatory true;
-                description "Maximum utilization of pd space in this pool";
+                description "Maximum utilization of PD space in this pool.";
 	            }
 	            leaf option-set-id {
 	            	type leafref {
-	                	path "/server/server-config/option-sets/option-set/option-set-id";
-	                }
-	                mandatory true;
-	                description "The ID field of relevant option-set to be
+	                path "/server/server-config/option-sets/option-set/option-set-id";
+	              }
+	              mandatory true;
+	              description "The ID field of relevant option-set to be
 	                  provisioned to clients of this prefix-pool.";
 	            }
 	          }
@@ -463,41 +493,39 @@ module ietf-dhcpv6-server {
                 mandatory true;
                 description "client id";
               }
-
               choice client-identifier {
-                description "When making reservations, the server needs to choose a
-                identifier to identify the client. Currently 'DUID' and 'hardware 
-                address' are supported.";
+                description "For configuring a unique client identifier for the
+								  host reservation.";
+								mandatory true;
                 case duid {
-                  description "DUID";
+                  description "Client DUID.";
                   uses dhcpv6-types:duid;
                 }
                 case hw-address {
-                  description "hardware address";
+                  description "Client hardware address.";
                   leaf hardware-address {
                   type yang:mac-address;
-                  description "MAC address of client";
                   }
                 }
               }
 
               leaf-list reserv-addr {
+								description "IPv6 address reserved for the client.";
                 type inet:ipv6-address;
-                description "reserved addr";
               }
               
               list prefix-reservation {
               	key reserv-prefix-id;
-              	description "reserved prefix reservation";
+              	description "IPv6 prefix reserved for the client.";
               	leaf reserv-prefix-id {
               		type uint32;
               		mandatory true;
-              		description "reserved prefix id";
+              		description "Reserved prefix id";
               	}
               	leaf reserv-prefix {
 	                type inet:ipv6-prefix;
 	                mandatory true;
-	                description "reserved prefix";
+	                description "Reserved prefix";
 	              }
               	leaf reserv-prefix-len {
 	                type uint8;

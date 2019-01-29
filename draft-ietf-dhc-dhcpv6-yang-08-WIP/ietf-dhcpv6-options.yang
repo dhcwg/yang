@@ -90,6 +90,14 @@ module ietf-dhcpv6-options {
 	feature info-refresh-time-op {
 		description "Support for Information Refresh Time option";
 	}
+  feature bcmcs-server-d-op {
+    description "Support for Broadcast and Multicast Service Controller Domain
+    Name List Option for DHCPv6";
+  }
+  feature   bcmcs-server-a-op {
+    description "Support for Broadcast and Multicast Service Controller IPv6
+      Address Option for DHCPv6";
+  }
 	feature client-fqdn-op {
 		description "Support for Client FQDN option";
 	}
@@ -441,6 +449,44 @@ module ietf-dhcpv6-options {
         type yang:timeticks;
         mandatory true;
         description "The refresh time.";
+      }
+    }
+
+    container bcmcs-server-d {
+      if-feature bcmcs-server-d-op;
+      presence "Enable this option";
+      description "OPTION_BCMCS_SERVER_D (33) Broadcast and Multicast Service
+        Controller Domain Name List Option for DHCPv6";
+      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) Options for
+        Broadcast and Multicast Control Servers";
+      list bcmcs-control-server-domain-names {
+        leaf bcmcs-control-server-domain-name {
+          description "Domain name of BCMCS control server.";
+          type string;
+          mandatory true;
+  			}
+      }
+    }
+
+    /* Following need adding:
+    / 36	OPTION_GEOCONF_CIVIC [RFC4776]
+    / 37	OPTION_REMOTE_ID     [RFC4649]
+    / 38	OPTION_SUBSCRIBER_ID [RFC4580]
+    */
+
+    container bcmcs-server-a {
+      if-feature bcmcs-server-a-op;
+      presence "Enable this option";
+      description "OPTION_BCMCS_SERVER_A (34) Broadcast and Multicast Service
+        Controller IPv6 Address Option for DHCPv6";
+      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) Options for
+        Broadcast and Multicast Control Servers";
+      list bcmcs-control-server-addressess {
+        leaf bcmcs-control-server-address {
+          description "IPv6 address of BCMCS control server.";
+          type inet:ipv6-address;
+          mandatory true;
+  			}
       }
     }
 
@@ -1182,7 +1228,7 @@ module ietf-dhcpv6-options {
       description "operator ipv6 address option";
       reference "RFC7227: Guidelines for Creating New DHCPv6 Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1209,7 +1255,7 @@ module ietf-dhcpv6-options {
       reference "RFC7227: Guidelines for Creating New DHCPv6
         Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1236,7 +1282,7 @@ module ietf-dhcpv6-options {
       reference "RFC7227: Guidelines for Creating New DHCPv6
         Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1268,7 +1314,7 @@ module ietf-dhcpv6-options {
       reference "RFC7227: Guidelines for Creating New DHCPv6
         Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1295,7 +1341,7 @@ module ietf-dhcpv6-options {
       reference "RFC7227: Guidelines for Creating New DHCPv6
         Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1322,7 +1368,7 @@ module ietf-dhcpv6-options {
       reference "RFC7227: Guidelines for Creating New DHCPv6
         Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1348,7 +1394,7 @@ module ietf-dhcpv6-options {
       description "operator uri option";
       reference "RFC7227: Guidelines for Creating New DHCPv6 Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1374,7 +1420,7 @@ module ietf-dhcpv6-options {
       description "operator itext string option";
       reference "RFC7227: Guidelines for Creating New DHCPv6 Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
@@ -1400,22 +1446,22 @@ module ietf-dhcpv6-options {
       description "operator variable length data option";
       reference "RFC7227: Guidelines for Creating New DHCPv6 Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
       list int32val {
         key var-data-id;
-        description "operator ivariable length data info";
+        description "Operator ivariable length data info";
         leaf var-data-id {
           type uint8;
           mandatory true;
-          description "operator variable length id";
+          description "Operator variable length id";
         }
         leaf var-data {
           type binary;
           mandatory true;
-          description "operator variable length value";
+          description "Operator variable length value";
         }
       }
     }
@@ -1423,11 +1469,11 @@ module ietf-dhcpv6-options {
     container operator-option-dns-wire {
       if-feature operator-op-dns-wire;
       presence "Enable this option";
-      description "Operator DNS wire format domain name list option";
+      description "Operator DNS wire format domain name list option.";
       reference "RFC7227: Guidelines for Creating New DHCPv6
         Options";
       leaf option-code {
-        descrtiption "Operator defined DHCPv6 option code allocated
+        description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
       }
