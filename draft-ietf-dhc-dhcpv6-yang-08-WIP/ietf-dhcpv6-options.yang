@@ -22,8 +22,8 @@ module ietf-dhcpv6-options {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This model defines a YANG data model that can be
-    used to configure DHCPv6 options.";
+  description "This model defines a YANG data module containing definitions
+    of DHCPv6 options that can be used by DHCPv6 clients, relays and servers.";
   
   revision 2018-09-04 {
     description "";
@@ -53,123 +53,154 @@ module ietf-dhcpv6-options {
   
   //  features for server options
 	feature server-unicast-op {
-		description "Support for Server Unicast option";
+		description "Support for the Server Unicast option 
+      OPTION_UNICAST (12)";
 	}
 	feature sip-server-domain-name-list-op {
-		description "Support for SIP Server Domain Name List option";
+		description "Support for the SIP Server Domain Name List option
+      OPTION_SIP_SERVER_D (21)";
 	}
 	feature sip-server-address-list-op {
-		description "Support for SIP Server Address List option";
+		description "Support for the SIP Server Address List option
+      OPTION_SIP_SERVER_A (22)";
 	}
   feature dns-servers-op {
-    description "Support for DNS Servers Option";
+    description "Support for the DNS Servers option
+      OPTION_DNS_SERVERS (23)";
   }
 	feature domain-searchlist-op {
-		description "Support for Domain Search List Option";
+		description "Support for the Domain Search List option
+      OPTION_DOMAIN_LIST (24)";
 	}
 	feature nis-config-op {
-		description "Support for Network Information Service (NIS)
-			Servers option";
+		description "Support for the Network Information Service (NIS) Servers
+      option OPTION_NIS_SERVERS (27)";
 	}
 	feature nis-plus-config-op {
-		description "Support for Network Information Service V2 (NIS+) 
-			Servers option";
+		description "Support for the Network Information Service V2 (NIS+) 
+			Servers option OPTION_NISP_SERVERS (28)";
 	}
 	feature nis-domain-name-op {
-		description "Support for Network Information Service (NIS)
-			Domain Name option";
+		description "Support for the Network Information Service (NIS)
+			Domain Name option OPTION_NIS_DOMAIN_NAME (29)";
 	}
 	feature nis-plus-domain-name-op {
-		description "Support for Network Information Service V2 (NIS+)
-			Server option";
+		description "Support for the Network Information Service V2 (NIS+)
+			Server option OPTION_NISP_DOMAIN_NAME (30)";
 	}
 	feature sntp-server-op {
-		description "Support for Simple Network Protocol Configuration 
-			(SNTP) Servers option";
+		description "Support for the Simple Network Protocol Configuration 
+			(SNTP) Servers option OPTION_SNTP_SERVERS (31)";
 	}
 	feature info-refresh-time-op {
-		description "Support for Information Refresh Time option";
+		description "Support for the Information Refresh Time option
+      OPTION_INFORMATION_REFRESH_TIME (32)";
 	}
   feature bcmcs-server-d-op {
-    description "Support for Broadcast and Multicast Service Controller Domain
-    Name List Option for DHCPv6";
+    description "Support for the Broadcast and Multicast Service Controller
+      Domain Name List Option for DHCPv6 OPTION_BCMCS_SERVER_D (33)";
   }
-  feature   bcmcs-server-a-op {
-    description "Support for Broadcast and Multicast Service Controller IPv6
-      Address Option for DHCPv6";
+  feature bcmcs-server-a-op {
+    description "Support for the Broadcast and Multicast Service Controller IPv6
+      Address Option for DHCPv6 OPTION_BCMCS_SERVER_A (34)";
+  }
+  feature geoconf-civic-op {
+    description "Support for the  Civic Addresses Configuration Information
+      option OPTION_GEOCONF_CIVIC (36)";
   }
 	feature client-fqdn-op {
-		description "Support for Client FQDN option";
+		description "Support for the Client FQDN option
+      OPTION_CLIENT_FQDN (39)";
 	}
+  feature pana-agent-op {
+    description "Support for the PANA Authentication Agent DHCPv6 Option 
+      OPTION_PANA_AGENT (40)";
+  }
 	feature posix-timezone-op {
-		description "Support for New POIX Timezone option";
+		description "Support for the New POIX Timezone option
+      OPTION_NEW_POSIX_TIMEZONE (41)";
 	}
 	feature tzdb-timezone-op {
-		description "Support for New TZDB Timezone option";
+		description "Support for the New TZDB Timezone option
+      OPTION_NEW_TZDB_TIMEZONE (42)";
 	}
 	feature ntp-server-op {
-		description "Support for Network Time Protocol (NTP) 
-			Server option";
+		description "Support for the Network Time Protocol (NTP) Server option
+      OPTION_NTP_SERVER (56)";
 	}
 	feature boot-file-url-op {
-		description "Support for Boot File URL option";
+		description "Support for the Boot File URL option
+      OPT_BOOTFILE_URL (59)";
 	}
 	feature boot-file-param-op {
-		description "Support for Boot File Parameters option";
+		description "Support for the Boot File Parameters option
+      OPT_BOOTFILE_PARAM (60)";
 	}
 	feature aftr-name-op {
-		description "Support for Address Family Transition
-			Router (AFTR) option";
+		description "Support for the Address Family Transition Router (AFTR)
+      option OPTION_AFTR_NAME (64)";
 	}
 	feature kbr-default-name-op {
-		description "Support for Kerberos Default Name 
-			Option";
+		description "Support for the Kerberos Default Name option
+      OPTION_KRB_DEFAULT_REALM_NAME (77)";
 	}
 	feature kbr-kdc-op {
-		description "Support for Kerberos KDC option";
+		description "Support for the Kerberos KDC option
+      OPTION_KRB_KDC (78)";
 	}
 	feature sol-max-rt-op {
-		description "Support for SOL_MAX_RT option";
+		description "Support for the SOL_MAX_RT option
+      OPTION_SOL_MAX_RT (82)";
 	}
 	feature inf-max-rt-op {
-		description "Support for INF_MAX_RT option";
+		description "Support for the INF_MAX_RT option
+      OPTION_INF_MAX_RT (83)";
 	}
 	feature addr-selection-op {
-		description "Support for Address Selection opiton";
+		description "Support for Address Selection opiton
+      OPTION_ADDRSEL (84)";
 	}
 	feature pcp-server-op {
-		description "Support for Port Control Protocol (PCP)
-			option";
+		description "Support for the Port Control Protocol (PCP) option
+      OPTION_V6_PCP_SERVER (86)";
 	}
 	feature s46-rule-op {
-		description "Support for S46 Rule option";
+		description "Support for the S46 Rule option
+      OPTION_S46_RULE (89)";
 	}
 	feature s46-br-op {
-		description "Support for S46 Border Relay (BR) option";
+		description "Support for the S46 Border Relay (BR) option
+      OPTION_S46_BR (90)";
 	}
 	feature s46-dmr-op {
-		description "Support for S46 Default Mapping Rule 
-			(DMR) option";
+		description "Support for the S46 Default Mapping Rule (DMR) option
+      OPTION_S46_DMR (91)";
 	}
 	feature s46-v4-v6-binding-op {
-		description "Support for S46 IPv4/IPv6 Address
-			Bind option";
+		description "Support for the S46 IPv4/IPv6 Address Bind option
+      OPTION_S46_V4V6BIND (92)";
 	}
 	
 	// features for relay-supplied options
+  feature remote-id-op {
+    description "Support for the Relay Agent Remote-ID option
+      OPTION_REMOTE_ID (37)";
+  }
+  feature subscriber-id-op {
+    description "Support for the Relay Agent Subscriber-ID option
+      OPTION_SUBSCRIBER_ID (38)";
+  }
 	feature erp-local-domain-name-op {
-		description "Support for ERP Local Domain Name option";
+		description "Support for the ERP Local Domain Name option
+      OPTION_ERP_LOCAL_DOMAIN_NAME (65)";
 	}
 	
 	// features for client options
-	feature option-request-op {
-		description "Support for Option Request option";
-	}
 	feature rapid-commit-op {
-		description "Support for Rapid Commit option";
+		description "Support for the Rapid Commit option";
 	}
 	feature user-class-op {
-		description "Support for User Class option";
+		description "Support for the User Class option";
 	}
 	feature vendor-class-op {
 		description "Support for Vendor Class option";
@@ -468,12 +499,6 @@ module ietf-dhcpv6-options {
       }
     }
 
-    /* Following need adding:
-    / 36	OPTION_GEOCONF_CIVIC [RFC4776]
-    / 37	OPTION_REMOTE_ID     [RFC4649]
-    / 38	OPTION_SUBSCRIBER_ID [RFC4580]
-    */
-
     container bcmcs-server-a {
       if-feature bcmcs-server-a-op;
       presence "Enable this option";
@@ -487,6 +512,58 @@ module ietf-dhcpv6-options {
           type inet:ipv6-address;
           mandatory true;
   			}
+      }
+    }
+
+    /* Option 35 is Unassigned */
+
+    container geoconf-civic-option {
+      if-feature geoconf-civic-op;
+      presence "Enable this option";
+      description "OPTION_GEOCONF_CIVIC (36) Civic Addresses Configuration
+        Information option.";
+      reference "Dynamic Host Configuration Protocol (DHCPv4 and DHCPv6) Option
+          for Civic Addresses Configuration Information";
+      leaf what {
+        description "The 'what' element describes to which location the DHCP
+          entry refers.  Currently, three options are defined: the location of
+          the DHCP server (a value of 0), the location of the network element
+          believed to be closest to the client (a value of 1), or the
+          location of the client (a value of 2).  Option (2) SHOULD be used,
+          but may not be known.  Options (0) and (1) SHOULD NOT be used
+          unless it is known that the DHCP client is in close physical
+          proximity to the server or network element.";
+        mandatory true;
+        type uint8 {
+          range "0..2";
+        }
+      }
+      leaf country-code {
+        description "The two-letter ISO 3166 country code in capital ASCII
+          letters, e.g., DE or US.  (Civic addresses always contain country
+          designations, suggesting the use of a fixed-format field to save
+          space.)";
+        mandatory true;
+        type string {
+          length "2";
+        }
+      }
+      list civic-address-elements {
+        description "Zero or more elements comprising the civic and/or postal
+          address.";
+        leaf catype {
+          description "A one-octet descriptor of the data civic address value.";
+          type uint8;
+        }
+        leaf calength {
+          description "The length, in octets, of the CAvalue, not including the
+            CAlength field itself.";
+          type uint8;
+        }
+        leaf cavalue {
+          description "The civic address value";
+          type string;
+        }
       }
     }
 
@@ -510,6 +587,20 @@ module ietf-dhcpv6-options {
         type boolean;
         mandatory true;
         description "modify by client";
+      }
+    }
+
+    container pana-agent-option {
+      if-feature pana-agent-op;
+      presence "Enable this option";
+      description "OPTION_PANA_AGENT (40) PANA Authentication Agent 
+        DHCPv6 Option";
+      reference "RFC5192: DHCP Options for Protocol for Carrying 
+        Authentication for Network Access (PANA) Authentication Agents";
+      leaf-list paa-ipv6-addresses {
+        description "List of IPv6 PAA addresses for the client to use. The PAAs
+          are listed in the order of preference for use by the client.";
+        type inet:ipv6-address;
       }
     }
 
@@ -612,7 +703,7 @@ module ietf-dhcpv6-options {
   	container boot-file-param-option {
   		if-feature boot-file-param-op;
   		presence "Enable this option";
-  		description "OPT_BOOTFiLE_PARAM (60) Boot File Parameters Option";
+  		description "OPT_BOOTFILE_PARAM (60) Boot File Parameters Option";
   		reference "RFC5970: DHCPv6 Options for Network Boot";
       list boot-file-paras {
         key para-id;
@@ -932,11 +1023,41 @@ module ietf-dhcpv6-options {
         uses dhcpv6-types:portset-para;
       }
     }
-
   }
   //if - NB - The list of options needs to be updated.
 
   grouping relay-supplied-option-definitions {
+    container remote-id-option {
+      if-feature remote-id-op;
+      presence "Enable this option";
+      description "OPTION_REMOTE_ID (37) The Relay Agent Remote-ID Option";
+      reference "RFC4649: Dynamic Host Configuration Protocol for IPv6 (DHCPv6)
+        Relay Agent Remote-ID Option";
+      leaf enterprise-id {
+        description "The vendor's registered Enterprise Number as registered
+          with IANA";
+        type uint32;
+      }
+      leaf remote-id {
+        description "The opaque value for the remote-id.";
+        type string;
+      }
+    }
+    container subscriber-id-option {
+      if-feature subscriber-id-op;
+      presence "Enable this option";
+      description "OPTION_SUBSCRIBER_ID (3) The Relay Agent Subscriber-ID
+        Option";
+      reference "RFC4580: Dynamic Host Configuration Protocol for IPv6 (DHCPv6)
+        Relay Agent Subscriber-ID Option";
+      leaf subscriber-id {
+        description "The subscriber's identity.";
+        type string;
+      }
+    }
+        /* Following need adding:
+    / 38	OPTION_SUBSCRIBER_ID [RFC4580]
+    */
     // if - The structure here needs to be checked and probably reworked.
     description "OPTION_RSOO (66) Relay-Supplied Options option";
     reference "RFC6422: Relay-Supplied DHCP Options";
@@ -1005,9 +1126,10 @@ module ietf-dhcpv6-options {
     }
 
     container option-request-option {
-      if-feature option-request-op;
-      presence "Enable this option";
-      description "OPTION_ORO (6) Option Request Option";
+      description "OPTION_ORO (6) Option Request Option. A client MUST include
+        an Option Request option in a Solicit, Request, Renew, Rebind, or
+        Information-request message to inform the server about options the
+        client wants the server to send to the client.";
       reference "RFC3315: Dynamic Host Configuration Protocol for 
       IPv6 (DHCPv6)";
       list oro-option {
@@ -1021,8 +1143,7 @@ module ietf-dhcpv6-options {
         leaf description {
           type string;
           mandatory true;
-          description "description of oro
-            options";
+          description "description of oro options";
         }
       }
     }
@@ -1251,27 +1372,13 @@ module ietf-dhcpv6-options {
     container operator-option-single-flag {
       if-feature operator-op-single-flag;
       presence "Enable this option";
-      description "operator single flag";
-      reference "RFC7227: Guidelines for Creating New DHCPv6
-        Options";
+      description "Operator defined single flag option. The presence node is 
+        used to enable the option.";
+      reference "RFC7227: Guidelines for Creating New DHCPv6 Options";
       leaf option-code {
         description "Operator defined DHCPv6 option code allocated
           for this option.";
         type uint16;
-      }
-      list flag {
-        key flag-id;
-        description "operator single flag info";
-        leaf flag-id {
-          type uint8;
-          mandatory true;
-          description "operator single flag id";
-        }
-        leaf flag-value{
-          type boolean;
-          mandatory true;
-          description "operator single flag value";
-        }
       }
     }
 
