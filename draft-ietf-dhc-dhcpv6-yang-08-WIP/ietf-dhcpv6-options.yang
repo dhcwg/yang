@@ -180,7 +180,13 @@ module ietf-dhcpv6-options {
 		description "Support for the S46 IPv4/IPv6 Address Bind option
       OPTION_S46_V4V6BIND (92)";
 	}
-	
+
+  // features for options which can be sent be either the server or the client
+  feature rapid-commit-op {
+		description "Support for the Rapid Commit option
+      OPTION_RAPID_COMMIT (14)";
+	}
+
 	// features for relay-supplied options
   feature remote-id-op {
     description "Support for the Relay Agent Remote-ID option
@@ -190,15 +196,20 @@ module ietf-dhcpv6-options {
     description "Support for the Relay Agent Subscriber-ID option
       OPTION_SUBSCRIBER_ID (38)";
   }
+  feature ero-op {
+    description "Support for the DHCPv6 Relay Agent Echo Request option
+      OPTION_ERO (43)";
+  }
 	feature erp-local-domain-name-op {
 		description "Support for the ERP Local Domain Name option
       OPTION_ERP_LOCAL_DOMAIN_NAME (65)";
 	}
 	
 	// features for client options
-	feature rapid-commit-op {
-		description "Support for the Rapid Commit option";
-	}
+  feature mip6-hnidf-op {
+    description "Support for the MIPv6 Home Network ID FQDN Option
+      OPTION_MIP6_HNIDF (49)";
+  }
 	feature user-class-op {
 		description "Support for the User Class option";
 	}
@@ -266,6 +277,9 @@ module ietf-dhcpv6-options {
   grouping server-option-definitions {
     description "Contains definitions for options configured on the
       DHCPv6 server which will be supplied to clients.";
+
+    uses client-server-option-definitions;
+    uses server-relay-option-definitions;
 
     container server-unicast-option {
       if-feature server-unicast-op;
@@ -567,29 +581,6 @@ module ietf-dhcpv6-options {
       }
     }
 
-    container client-fqdn-option {
-      if-feature client-fqdn-op;
-      presence "Enable this option";
-      description "OPTION_CLIENT_FQDN (39) DHCPv6 Client FQDN Option";
-      reference "RFC4704: The Dynamic Host Configuration Protocol for IPv6
-        (DHCPv6) Client Fully Qualified Domain Name (FQDN) Option";
-      leaf server-initiate-update {
-        type boolean;
-        mandatory true;
-        description "server initiate";
-      }
-      leaf client-initiate-update {
-        type boolean;
-        mandatory true;
-        description "client initiate";
-      }
-      leaf modify-name-from-cli {
-        type boolean;
-        mandatory true;
-        description "modify by client";
-      }
-    }
-
     container pana-agent-option {
       if-feature pana-agent-op;
       presence "Enable this option";
@@ -627,6 +618,11 @@ module ietf-dhcpv6-options {
         description "Reference to the TZ Database";
       }
     }  
+
+    /* Options 44, 45, 46, 47, and 48 are for the DHCPv6 lease query mechanism.
+    (RFC5007) How (or if) this is modelled is a larger piece of work and the
+    options definition needs to be tackled as part of this.
+    */
 
     container ntp-server-option {
       //This option looks like it needs work to correctly model the
@@ -1024,9 +1020,58 @@ module ietf-dhcpv6-options {
       }
     }
   }
-  //if - NB - The list of options needs to be updated.
+  
+  grouping server-client-option-definitions {
+    description "Contains definitions for options which can be sent by either
+      the DHCPv6 server or client.";
+    
+    container rapid-commit-option {
+      if-feature rapid-commit-op;
+      presence "Enable this option";
+      description "OPTION_RAPID_COMMIT (14) Rapid Commit Option. The presence
+        node is used to enable the option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        (DHCPv6)";
+    }
+    container client-fqdn-option {
+      if-feature client-fqdn-op;
+      presence "Enable this option";
+      description "OPTION_CLIENT_FQDN (39) DHCPv6 Client FQDN Option";
+      reference "RFC4704: The Dynamic Host Configuration Protocol for IPv6
+        (DHCPv6) Client Fully Qualified Domain Name (FQDN) Option";
+      leaf server-initiate-update {
+        type boolean;
+        mandatory true;
+        description "server initiate";
+      }
+      leaf client-initiate-update {
+        type boolean;
+        mandatory true;
+        description "client initiate";
+      }
+      leaf modify-name-from-cli {
+        type boolean;
+        mandatory true;
+        description "modify by client";
+      }
+      leaf domain-name {
+        description "The partial or fully qualified domain name"; 
+        mandatory true;
+        type string;
+      }
+    }
+  }
+
+  grouping server-relay-option-definitions {
+    description "Contains definitions for options which can be sent by either
+      the DHCPv6 relay or server.";
+/* Add RFC6160 options */
+  }
 
   grouping relay-supplied-option-definitions {
+
+    uses server-relay-option-definitions;
+
     container remote-id-option {
       if-feature remote-id-op;
       presence "Enable this option";
@@ -1046,7 +1091,7 @@ module ietf-dhcpv6-options {
     container subscriber-id-option {
       if-feature subscriber-id-op;
       presence "Enable this option";
-      description "OPTION_SUBSCRIBER_ID (3) The Relay Agent Subscriber-ID
+      description "OPTION_SUBSCRIBER_ID (38) The Relay Agent Subscriber-ID
         Option";
       reference "RFC4580: Dynamic Host Configuration Protocol for IPv6 (DHCPv6)
         Relay Agent Subscriber-ID Option";
@@ -1055,9 +1100,18 @@ module ietf-dhcpv6-options {
         type string;
       }
     }
-        /* Following need adding:
-    / 38	OPTION_SUBSCRIBER_ID [RFC4580]
-    */
+    container ero-option {
+      if-feature ero-op;
+      presence "Enable this option";
+      description "OPTION_ERO (43) The Relay Agent Echo Request Option";
+      reference "RFC4994: DHCPv6 Relay Agent Echo Request Option";
+      leaf-list requested-option-codes {
+        description "The option code for an option requested by the relay
+          agent.";
+        type uint16;
+      }
+    }
+ 
     // if - The structure here needs to be checked and probably reworked.
     description "OPTION_RSOO (66) Relay-Supplied Options option";
     reference "RFC6422: Relay-Supplied DHCP Options";
@@ -1094,6 +1148,8 @@ module ietf-dhcpv6-options {
   grouping client-option-definitions {
     description "Contains definitions for options configured on the
       DHCPv6 client which will be sent to the server.";
+    
+    uses client-server-option-definitions;
     
     list new-or-standard-cli-option {
       key option-code;
@@ -1205,29 +1261,18 @@ module ietf-dhcpv6-options {
       }
     }
 
-    container client-fqdn-option {
-      if-feature client-fqdn-op;
+
+    container mip6-hnidf-option {
+      if-feature mip6-hnidf-op;
       presence "Enable this option";
-      description "OPTION_CLIENT_FQDN (39) The Dynamic Host
-        Configuration Protocol for IPv6 (DHCPv6) Client Fully
-        Qualified Domain Name (FQDN) Option";
-      reference "RFC4704: The Dynamic Host Configuration Protocol
-        for IPv6 (DHCPv6) Client Fully Qualified Domain Name (FQDN)
-        Option";
-      leaf fqdn {
+      description "OPTION_MIP6_HNIDF (49) MIPv6 Home Network ID FQDN Option";
+      reference "RFC6610: DHCP Options for Home Information Discovery in Mobile
+        IPv6 (MIPv6)";
+      leaf home-net-id-fqdn {
+        description "A Fully Qualified Domain Name (FQDN) that identifies a
+          mobile IP home network for which the client is seeking configuration
+          information.";
         type string;
-        mandatory true;
-        description "fqdn";
-      }
-      leaf server-initiate-update {
-        type boolean;
-        mandatory true;
-        description "whether server initiate";
-      }
-      leaf client-initiate-update {
-        type boolean;
-        mandatory true;
-        description "whether client initiate";
       }
     }
 
