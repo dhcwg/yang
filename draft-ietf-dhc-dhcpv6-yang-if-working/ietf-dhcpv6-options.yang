@@ -278,7 +278,7 @@ module ietf-dhcpv6-options {
     description "Contains definitions for options configured on the
       DHCPv6 server which will be supplied to clients.";
 
-    uses client-server-option-definitions;
+    uses server-client-option-definitions;
     uses server-relay-option-definitions;
 
     container server-unicast-option {
@@ -1065,7 +1065,60 @@ module ietf-dhcpv6-options {
   grouping server-relay-option-definitions {
     description "Contains definitions for options which can be sent by either
       the DHCPv6 relay or server.";
-/* Add RFC6160 options */
+    container mip6-options {
+      description "DHCP Options for Home Information Discovery in Mobile IPv6
+        (MIPv6)";
+      grouping mipv6-hn-prefix {
+        description "OPTION_MIP6_HNP (71) MIPv6 Home Network Prefix Option";
+        container mipv6-hn-prefix-option {
+          leaf hn-prefix-len {
+            description "Length of prefix";
+            mandatory true;
+            type uint8;
+          }
+          leaf hn-prefix {
+            description "Home Network Prefix";
+            mandatory true;
+            type inet:ipv6-address;
+          }
+        }
+      }
+      grouping mipv6-hn-address {
+        description "OPTION_MIP6_HAA (72) MIPv6 Home Agent Address Option";
+        container mipv6-hn-prefix-option {
+          leaf hn-address {
+            description "IP Address of home agent";
+            mandatory true;
+            type inet:ipv6-address;
+          }
+        }
+      }
+      grouping mipv6-hn-haf {
+        description "OPTION_MIP6_HAF (73) MIPv6 Home Agent FQDN Option";
+        container mipv6-hn-haf-option {
+          leaf hn-address {
+            description "FQDN resolving to one or more IPv4 and/or IPv6
+              addresses for the home agent.";
+            mandatory true;
+            type string;
+          }
+        }
+      }
+      container mipv6-vdinf-option {
+        description "OPTION_MIP6_VDINF (50) MIPv6 Visited Home Network
+          Information Option";
+        list vdinf-options {
+          description "One or more options, specifying information about the
+            local ASP (visited domain).";
+          choice vdinf-option {
+            case hn-prefix {
+              uses :server-relay-option-definitions/mipv6-hn-prefix;
+            }
+          }
+        }
+      }
+    }
+/* Add RFC6610 options */
   }
 
   grouping relay-supplied-option-definitions {
@@ -1149,7 +1202,7 @@ module ietf-dhcpv6-options {
     description "Contains definitions for options configured on the
       DHCPv6 client which will be sent to the server.";
     
-    uses client-server-option-definitions;
+    uses server-client-option-definitions;
     
     list new-or-standard-cli-option {
       key option-code;

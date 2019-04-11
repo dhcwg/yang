@@ -1,0 +1,382 @@
+module ietf-dhcpv6-options {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options";
+  prefix "dhcpv6-options";
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import ietf-dhcpv6-types {
+    prefix dhcpv6-types;
+  }
+
+  organization "DHC WG";
+  contact 
+   "cuiyong@tsinghua.edu.cn
+    wangh13@mails.tsinghua.edu.cn
+    lh.sunlinh@gmail.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com";
+
+  description "This model defines a YANG data module containing definitions
+    of DHCPv6 options that can be used by DHCPv6 clients, relays and servers.";
+  
+  revision 2018-09-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2018-03-04 {
+    description "Resolved most issues on the DHC official
+    github";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2017-12-22 {
+	  description "Resolve most issues on Ian's github.";
+	  reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+  
+  revision 2017-11-24 {
+    description "First version of the separated DHCPv6 options
+      YANG model.";
+    reference "I-D:draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  /*
+   * Features
+   */
+  
+  //  features for server options
+	feature server-unicast-op {
+		description "Support for the Server Unicast option 
+      OPTION_UNICAST (12)";
+	}
+	feature info-refresh-time-op {
+		description "Support for the Information Refresh Time option
+      OPTION_INFORMATION_REFRESH_TIME (32)";
+	}
+	feature sol-max-rt-op {
+		description "Support for the SOL_MAX_RT option
+      OPTION_SOL_MAX_RT (82)";
+	}
+	feature inf-max-rt-op {
+		description "Support for the INF_MAX_RT option
+      OPTION_INF_MAX_RT (83)";
+
+  // features for options which can be sent be either the server or the client
+  feature rapid-commit-op {
+		description "Support for the Rapid Commit option
+      OPTION_RAPID_COMMIT (14)";
+	}
+
+	// features for relay-supplied options
+	
+	// features for client options
+
+	feature user-class-op {
+		description "Support for the User Class option";
+	}
+	feature vendor-class-op {
+		description "Support for Vendor Class option";
+	}
+	feature client-arch-type-op {
+		description "Support for Client System Architecture
+			Type option";
+	}
+	feature client-network-interface-identifier-op {
+		description "Support for Client Network Interface
+			Identifier option";
+	}
+	feature kbr-principal-name-op {
+		description "Support for Kerberos Principal
+			Name option";
+	}
+	feature kbr-realm-name-op {
+		description "Support Kerberos Realm Name option";
+	}
+	feature client-link-layer-addr-op {
+		description "Support for Client Link-Layer Address
+			Option";
+	}
+		
+  /*
+   * Groupings
+   */
+  
+  grouping server-option-definitions {
+    description "Contains definitions for options configured on the
+      DHCPv6 server which will be supplied to clients.";
+
+    uses server-client-option-definitions;
+    uses server-relay-option-definitions;
+
+    container preference-option {
+      presence "Enable this option";
+      description "OPTION_PREFERENCE (7) Preference Option";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
+      leaf pref-value {
+        type uint8;
+        mandatory true;
+        description "The preference value for the server in this message.
+          A 1-octet unsigned integer.";
+      }
+    }
+
+    container server-unicast-option {
+      if-feature server-unicast-op;
+      presence "Enable this option";
+      description "OPTION_UNICAST (12) Server Unicast Option";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
+      leaf server-address {
+        type inet:ipv6-address;
+        mandatory true;
+        description "server ipv6 address";
+      }
+    }
+
+    container info-refresh-time-option {
+      if-feature info-refresh-time-op;
+      presence "Enable this option";	
+      description "OPTION_INFORMATION_REFRESH_TIME (32) Information Refresh
+        Time option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
+      leaf info-refresh-time {
+        type yang:timeticks;
+        mandatory true;
+        description "The refresh time.";
+      }
+    }
+
+    container sol-max-rt-option {
+      if-feature sol-max-rt-op;
+      presence "Enable this option";
+      description "OPTION_SOL_MAX_RT (82) sol max rt option";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
+        leaf sol-max-rt-value {
+          type yang:timeticks;
+          mandatory true;
+          description "sol max rt value";
+        }
+    }
+
+    container inf-max-rt-option {
+      if-feature inf-max-rt-op;
+      presence "Enable this option";
+      description "OPTION_INF_MAX_RT (83) inf max rt option";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
+      leaf inf-max-rt-value {
+        type yang:timeticks;
+        mandatory true;
+        description "inf max rt value";
+      }
+    }
+  }
+  
+  grouping server-relay-option-definitions {
+    description "Contains definitions for options which can be sent by either
+      the DHCPv6 relay or server.";
+    container auth-option {
+      description "OPTION_AUTH (11) Authentication Option";
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
+        (DHCPv6)";
+      leaf protocol {
+        type uint8;
+        mandatory true;
+        description "The authentication protocol used in this Authentication
+          option.";
+      }
+      leaf algorithm {
+        type uint8;
+        mandatory true;
+        description "The algorithm used in the authentication protocol.";
+      }
+      leaf rdm {
+        type uint8;
+        mandatory true;
+        description "The replay detection method used in this Authentication
+          option.";
+      }
+      leaf replay-detection {
+        type uint64;
+        mandatory true;
+        description "The replay detection information for the RDM.";
+      }
+      leaf auth-information {
+        type string;
+        mandatory true;
+        description "The authentication information, as specified by the
+          protocol and algorithm used in this Authentication option.";
+      }
+    }
+  }
+
+  grouping server-client-option-definitions {
+    description "Contains definitions for options which can be sent by either
+      the DHCPv6 server or client.";
+    
+    container rapid-commit-option {
+      if-feature rapid-commit-op;
+      presence "Enable this option";
+      description "OPTION_RAPID_COMMIT (14) Rapid Commit Option. The presence
+        node is used to enable the option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        (DHCPv6)";
+    }
+  }
+  
+  grouping relay-option-definitions {
+    description "Contains definitions for options configured on the
+      DHCPv6 relay which will be sent to the server.";
+    uses server-relay-option-definitions;
+  }
+
+  grouping client-option-definitions {
+    description "Contains definitions for options configured on the
+      DHCPv6 client which will be sent to the server.";
+    
+    uses server-client-option-definitions;
+    
+    list new-or-standard-cli-option {
+      key option-code;
+      description "new or standard client option";
+      leaf option-code {
+        type uint16;
+        mandatory true;
+        description "option code";
+      }
+      leaf option-name {
+        type string;
+        mandatory true;
+        description "option name";
+      }
+      leaf option-description {
+        type string;
+        mandatory true;
+        description "description of client
+          option";
+      }
+      leaf option-reference {
+        type string;
+        description "the reference of option";
+      }
+      leaf option-value {
+        type string;
+        mandatory true;
+        description "the option value";
+      }
+    }
+
+    container option-request-option {
+      description "OPTION_ORO (6) Option Request Option. A client MUST include
+        an Option Request option in a Solicit, Request, Renew, Rebind, or
+        Information-request message to inform the server about options the
+        client wants the server to send to the client.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
+      list oro-option {
+        key option-code;
+        description "oro option";
+        leaf option-code {
+          type uint16;
+          mandatory true;
+          description "option code";
+        }
+        leaf description {
+          type string;
+          mandatory true;
+          description "description of oro options";
+        }
+      }
+    }
+
+    container user-class-option {
+      if-feature user-class-op;
+      presence "Enable this option";
+      description "OPTION_USER_CLASS (15) User Class Option";
+      reference "RFC8415: Dynamic Host Configuration Protocol
+        for IPv6 (DHCPv6)";
+      list user-class {
+        key user-class-id;
+        description "user class";
+        leaf user-class-id {
+          type uint8;
+          mandatory true;
+          description "user class id";
+        }
+        leaf user-class-data {
+          type string;
+          mandatory true;
+          description "The information contained in the data area
+            of this option is contained in one or more opaque
+            fields that represent the user class or classes of
+            which the client is a member. ";
+        }
+      }
+    }
+
+    container vendor-class-option {
+      if-feature vendor-class-op;
+      presence "Enable this option";
+      description "OPTION_VENDOR_CLASS (16) Vendor Class Option";
+      reference "RFC8415: Dynamic Host Configuration Protocol
+        for IPv6 (DHCPv6)";
+      leaf enterprise-number {
+        type uint32;
+        mandatory true;
+        description "enterprise number";
+      }     
+      list vendor-class {
+    	  key vendor-class-id;
+    	  description "vendor class";
+        leaf vendor-class-id {
+          type uint8;
+          mandatory true;
+          description "vendor class id";
+        }
+        leaf vendor-class-data {
+      	  type string;
+      	  mandatory true;
+      	  description "The vendor-class-data is composed of a series of 
+            separate items, each of which describes some characteristic 
+            of the client's hardware configuration. Examples of 
+            vendor-class-data instances might include the version of the 
+            operating system the client is running or the amount of memory 
+            installed on the client.";
+        }
+      }
+    }
+  }
+
+  grouping client-server-relay-option-definitions {
+    description "Contains definitions for options which may be configured 
+      on a client, relay or server.";
+    container status-code-option {
+      description "OPTION_STATUS_CODE (13) Status Code Option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
+        (DHCPv6)";
+      leaf status-code {
+        type uint16;
+        mandatory true;
+        description "The numeric code for the status encoded in this option.
+          See the Status Codes registry at <https://www.iana.org/assignments/
+          dhcpv6-parameters> for the current list of status codes.";
+      }
+      leaf status-message {
+        type string;
+        mandatory true;
+        description "A UTF-8 encoded [RFC3629] text string suitable for display
+          to an end user. MUST NOT be null-terminated.";
+      }
+    }
+  }
+}
