@@ -1,0 +1,234 @@
+KEA
+===
+0. reference: https://jenkins.isc.org/job/Kea_doc/guide/kea-guide.html#classify
+1. classes can be required in shared-networks, subnets, reservations, pd-pools and pools by indicating class name in client-class field
+2. classes are defined in global scope
+3. class definition contains 4 fields: name, test, option-data and only-if-required
+4. test field contains an expression that checks if message from client should be assigned to given class
+5. class processing:
+5.1 order of classes definition is important due to MEMBER function in expressions
+5.2. order/precedence of processing is controlled by:
+   - only-if-required flag in class
+   - and require-client-classes in shared-networks, subnets or pools
+
+Examples
+--------
+
+1. class definition
+
+  "client-classes": [
+  // The first class attempts to match all packets coming in on ethX interface.
+  {
+      "name": "lab",
+      "test": "pkt.iface == 'ethX'",
+      "option-data": [{
+          "name": "dns-servers",
+          "data": "2001:db8::1"
+      }]
+  },
+
+  // This class is required by the second subnet and is evaluated only
+  // if it is required. The test expression returns true.
+  // Note it is not possible to depend on cable-modems class because it
+  // is not yet defined.
+  {
+      "name": "second_subnet",
+      "only-if-required": true,
+      "test": "member('ALL')",
+      "option-data": [{
+          "name": "dns-servers",
+          "data": "2001:db8::1"
+      }]
+  },
+
+  // Let's classify all incoming RENEW (message type 5) to a separate class.
+  {
+      "name": "renews",
+      "test": "pkt6.msgtype == 5"
+  },
+
+  // Let's pick cable modems. In this simple example we'll assume the device
+  // is a cable modem if it sends a vendor option with enterprise-id equal
+  // to 4491.
+  {
+      "name": "cable-modems",
+      "test": "vendor.enterprise == 4491"
+  },
+
+  // Both a cable modem (by evaluation or host reservation) and has a host
+  // reservation.
+  {
+      "name": "cable-modem-hosts",
+      "test": "member('cable-modems') and member('KNOWN')"
+  }
+
+
+
+ISC DHCP
+========
+0. reference: https://kb.isc.org/docs/isc-dhcp-44-manual-pages-dhcpdconf#CLIENT%20CLASSING
+1. classes and subclasses (more specific or specialized class)
+2. possible to limit number of leases in a class
+3. spawning classes - dynamically created class based on information from client message,
+   this informatio can be set by relay agent e.g. circuit-id
+4. classes can be required in pool only by 'allow/deny members of' statement
+5. allow/deny can be used inside class definition - this allows constructing trees of classes like in kea with MEMBER function
+6. class definition contains match/match if statements that indicate the condition for client membership
+
+Examples
+--------
+
+1. class definition
+
+  class "ras-clients" {
+    match if substring (option dhcp-client-identifier, 1, 3) = "RAS";
+  }
+
+2. classes and subclasses
+
+  class "allocation-class-1" {
+    match pick-first-value (option dhcp-client-identifier, hardware);
+  }
+
+  class "allocation-class-2" {
+    match pick-first-value (option dhcp-client-identifier, hardware);
+  }
+
+  subclass "allocation-class-1" 1:8:0:2b:4c:39:ad;
+  subclass "allocation-class-2" 1:8:0:2b:a9:cc:e3;
+  subclass "allocation-class-1" 1:0:0:c4:aa:29:44;
+
+  subnet 10.0.0.0 netmask 255.255.255.0 {
+    pool {
+      allow members of "allocation-class-1";
+      range 10.0.0.11 10.0.0.50;
+    }
+    pool {
+      allow members of "allocation-class-2";
+      range 10.0.0.51 10.0.0.100;
+    }
+  }
+
+  // subclass with scope
+  subclass "allocation-class-2" 1:08:00:2b:a1:11:31 {
+    option root-path "samsara:/var/diskless/alphapc";
+    filename "/tftpboot/netbsd.alphapc-diskless";
+  }
+
+  // subclass matching any client (not indicated by id)
+  class "vendor-classes" {
+    match option vendor-class-identifier;
+  }
+
+  subclass "vendor-classes" "SUNW.Ultra-5_10" {
+    vendor-option-space SUNW;
+    option SUNW.root-path "/export/root/sparc";
+  }
+
+  subclass "vendor-classes" "SUNW.i86pc" {
+    vendor-option-space SUNW;
+    option SUNW.root-path "/export/root/i86pc";
+  }
+
+3. limit number of leases
+
+  class "limited-1" {
+    lease limit 4;
+  }
+
+4. spawning class
+
+  class "customer" {
+    spawn with option agent.circuit-id;
+    lease limit 4;
+  }
+
+5. combinations
+
+  class "jr-cable-modems" {
+    match if option dhcp-vendor-identifier = "jrcm";
+    spawn with option agent.circuit-id;
+    lease limit 4;
+  }
+
+  class "dv-dsl-modems" {
+    match if option dhcp-vendor-identifier = "dvdsl";
+    spawn with option agent.circuit-id;
+    lease limit 16;
+  }
+
+
+CISCO DHCP
+==========
+0. references: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/xe-3se/3850/dhcp-xe-3se-3850-book/config-dhcp-server.pdf
+1. classes can be required in pool
+2. classification is made based on relay-information hex pattern[*] [bitmask mask]
+
+Examples
+--------
+
+1. classes based on relay info
+
+// Defines the DHCP classes and relay information patterns
+ip dhcp class CLASS1
+  relay agent information
+    relay-information hex 01030a0b0c02050000000123
+    relay-information hex 01030a0b0c02*
+    relay-information hex 01030a0b0c02050000000000 bitmask 0000000000000000000000FF
+ip dhcp class CLASS2
+  relay agent information
+    relay-information hex 01040102030402020102
+    relay-information hex 01040101030402020102
+ip dhcp class CLASS3
+  relay agent information
+
+// Associates the DHCP pool with DHCP classes
+ip dhcp pool ABC
+  network 10.0.20.0 255.255.255.0
+  class CLASS1
+    address range 10.0.20.1 10.0.20.100
+  class CLASS2
+    address range 10.0.20.101 10.0.20.200
+  class CLASS3
+    address range 10.0.20.201 10.0.20.254
+ip dhcp pool DEF
+  network 172.64.2.2 255.255.255.0
+  class CLASS1
+    address range 172.64.2.3 172.64.2.10
+  classCLASS2
+
+2. class based on other info (https://damn.technology/configure-cisco-ios-dhcp-to-use-vendor-class-ids)
+
+ip dhcp class DEFAULT
+  remark IP addresses for devices not providing a class-id
+!
+ip dhcp class CUSTOM_CLASS
+  remark IP addresses for devices providing "CUSTOM_CLASS"
+  option 60 hex 435553544f4d5f434c415353
+
+
+HP DHCP
+=======
+0. reference: http://h22208.www2.hpe.com/eginfolib/networking/docs/switches/5130ei/5200-3942_l3-ip-svcs_cg/content/index.htm
+   http://h22208.www2.hpe.com/eginfolib/networking/docs/switches/5130ei/5200-3942_l3-ip-svcs_cg/content/483572341.htm
+1. matching rule: if-match rule rule-number { hardware-address hardware-address mask hardware-address-mask | option option-code [ ascii ascii-string [ offset offset | partial ] | hex hex-string [ mask mask | offset offset length length | partial ] ] | relay-agent gateway-address }
+2. classes can be required in pool
+
+Examples
+--------
+
+[SwitchB] dhcp class tt
+[SwitchB-dhcp-class-tt] if-match rule 1 option 82
+[SwitchB-dhcp-class-tt] quit
+
+[SwitchB] dhcp class ss
+[SwitchB-dhcp-class-ss] if-match rule 1 hardware-address aabb-aabb-aab0 mask ffff-ffff-fff0
+[SwitchB-dhcp-class-ss] quit
+
+...
+
+[SwitchB-dhcp-pool-aa] class tt range 10.10.1.2 10.10.1.10
+
+...
+
+[SwitchB-dhcp-pool-aa] class ss range 10.10.1.11 10.10.1.26

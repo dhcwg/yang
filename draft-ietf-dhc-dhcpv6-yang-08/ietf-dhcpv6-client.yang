@@ -15,7 +15,7 @@ module ietf-dhcpv6-client {
 
   organization "DHC WG";
   contact 
-   "cuiyong@tsinghua.edu.cn
+    "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -24,7 +24,7 @@ module ietf-dhcpv6-client {
 
   description "This model defines a YANG data model that can be
     used to configure and manage a DHCPv6 client.";
-    
+
   revision 2018-09-04 {
     description "";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
@@ -32,7 +32,7 @@ module ietf-dhcpv6-client {
 
   revision 2018-03-04 {
     description "Resolved most issues on the DHC official
-    github";
+      github";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
@@ -40,13 +40,13 @@ module ietf-dhcpv6-client {
     description "Resolve most issues on Ian's github.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
-  
+
   revision 2017-11-24 {
-      description "First version of the separated client specific
-        YANG model.";
-      reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+    description "First version of the separated client specific
+      YANG model.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
-  
+
   /*
    * Data Nodes
    */
@@ -54,7 +54,7 @@ module ietf-dhcpv6-client {
   container client {
     presence "Enables the client";
     description "dhcpv6 client portion";
-    
+
     container client-config {
       description "configuration tree of client";
       container duid {
@@ -80,11 +80,11 @@ module ietf-dhcpv6-client {
         }
 
         /*
-        leaf description {
-          type string;
-          description "description of the client interface";
-        }
-        */
+           leaf description {
+           type string;
+           description "description of the client interface";
+           }
+         */
 
         leaf pd-function {
           type boolean;
@@ -102,33 +102,33 @@ module ietf-dhcpv6-client {
         }
 
         /*
-        container mo-tab {
-          description "The management tab label indicates the operation mode of the 
-            DHCPv6 client. 
-            'm'=1 and 'o'=1 indicate the client will use DHCPv6 to  obtain all the configuration 
-            data. 
-            'm'=1 and 'o'=0 are a meaningless combination. 
-            'm'=0 and 'o'=1 indicate the client will use stateless DHCPv6 to obtain configuration 
-            data apart from addresses/prefixes data.
-            'm'=0 and 'o'=0 represent the client will not use DHCPv6 but use SLAAC to 
-            achieve configuration.";
-            
-            // if - not sure about the intended use here as it seems
-            // to be redefining what will be received in the PIO. Is
-            // the intention to be whether they PIO options will be
-            // obeyed as received or overridden?
-          leaf m-tab {
-            type boolean;
-            mandatory true;
-            description "m tab";
-          }
-          leaf o-tab {
-            type boolean;
-            mandatory true;
-            description "o tab";
-          }
+           container mo-tab {
+           description "The management tab label indicates the operation mode of the 
+           DHCPv6 client. 
+           'm'=1 and 'o'=1 indicate the client will use DHCPv6 to  obtain all the configuration 
+           data. 
+           'm'=1 and 'o'=0 are a meaningless combination. 
+           'm'=0 and 'o'=1 indicate the client will use stateless DHCPv6 to obtain configuration 
+           data apart from addresses/prefixes data.
+           'm'=0 and 'o'=0 represent the client will not use DHCPv6 but use SLAAC to 
+           achieve configuration.";
+
+        // if - not sure about the intended use here as it seems
+        // to be redefining what will be received in the PIO. Is
+        // the intention to be whether they PIO options will be
+        // obeyed as received or overridden?
+        leaf m-tab {
+        type boolean;
+        mandatory true;
+        description "m tab";
         }
-        */
+        leaf o-tab {
+        type boolean;
+        mandatory true;
+        description "o tab";
+        }
+        }
+         */
 
         container client-configured-options {
           description "client configured options";
@@ -136,7 +136,7 @@ module ietf-dhcpv6-client {
         }
       }  
     }
-    
+
     container client-state {
       config "false";
       description "state tree of client";
@@ -148,7 +148,7 @@ module ietf-dhcpv6-client {
           include DNS server addresses, SIP server domain names, etc.";
         uses dhcpv6-options:server-option-definitions;
       }
-     container packet-stats {
+      container packet-stats {
         config "false";
         description "A container records
           all the packet status information

@@ -1,21 +1,21 @@
 module ietf-dhcpv6-types {
-	yang-version 1.1;
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types";
   prefix "dhcpv6-types";
 
   import ietf-inet-types {
-		prefix inet;
+    prefix inet;
   }	
-	import ietf-yang-types {
- 		prefix yang;
- 	}
+  import ietf-yang-types {
+    prefix yang;
+  }
   import ietf-interfaces {
-  	prefix if;
+    prefix if;
   }
 
   organization "DHC WG";
-	contact 
-   "yong@csnet1.cs.tsinghua.edu.cn
+  contact 
+    "yong@csnet1.cs.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
     sladjana.zechlin@telekom.de
@@ -35,107 +35,107 @@ module ietf-dhcpv6-types {
   }
 
   /*
- 	* Grouping
- 	*/
-	grouping vendor-infor {
-   	description "Vendor information.";
-		container vendor-info {
-			description "";
-  		leaf ent-num {
-     		type uint32;
-     		mandatory true;
-     		description "enterprise number";
-   		}
-   		leaf-list data {
-     		type string;
-     		description "specific vendor info";
-  		}
-   	}
+   * Grouping
+   */
+  grouping vendor-infor {
+    description "Vendor information.";
+    container vendor-info {
+      description "";
+      leaf ent-num {
+        type uint32;
+        mandatory true;
+        description "enterprise number";
+      }
+      leaf-list data {
+        type string;
+        description "specific vendor info";
+      }
+    }
   }
-  
-	grouping duid {
+
+  grouping duid {
     description 
       "Each server and client has only one DUID (DHCP Unique Identifier). 
       The DUID here identifies a unique DHCPv6 server for clients. DUID 
       consists of a two-octet type field and an arbitrary length (no more 
-      than 128 bytes) content field. Currently there are four defined types 
-      of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and 
+          than 128 bytes) content field. Currently there are four defined types 
+      of DUIDs in RFC8415 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and 
       DUID-UUID. DUID-Uknown represents those unconventional DUIDs.";
-    reference "RFC3315: Section 9 and RFC6355: Section 4";
+    reference "RFC8415: Section 9 and RFC6355: Section 4";
     leaf type-code {
-  		type uint16;
-  		default 65535;
-  		description "Type code of this DUID";
-  	}
-    choice duid-type {
-		default duid-unknown;
-      description "Selects the format for the DUID.";
-    	case duid-llt {
-      	description "DUID Based on Link-layer Address Plus Time 
-      		(Type 1 - DUID-LLT)";
-     		reference "RFC3315 Section 9.2";
-      	leaf duid-llt-hardware-type {
-        	type uint16;
-      		description "Hardware type as assigned by IANA (RFC826).";
-      	}
-      	leaf duid-llt-time {
-      		type yang:timeticks;
-      		description "The time value is the time that the DUID is 
-      		generated represented in seconds since midnight (UTC), 
-      		January 1, 2000, modulo 2^32.";
-      	}
-      	leaf duid-llt-link-layer-addr {
-       		type yang:mac-address;
-        	description "Link-layer address as described in RFC2464";
-     		}
-  		}
-    	case duid-en {
-      	description "DUID Assigned by Vendor Based on Enterprise Number 
-      		(Type 2 - DUID-EN)";
-  			reference "RFC3315 Section 9.3";
-    		leaf duid-en-enterprise-number {
-    			type uint32;
-    			description "Vendor's registered Private Enterprise Number as
-        		maintained by IANA";
-    		}
-      	leaf duid-en-identifier {
-      		type string;
-      		description "Indentifier, unique to the device that is 
-      		using it";
-      	}
-  		}
-    	case duid-ll {
-        	description "DUID Based on Link-layer Address (Type 3 - DUID-LL)";
-        	reference "RFC3315 Section 9.4";
-        	leaf duid-ll-hardware-type {
-        		type uint16;
-          	description "Hardware type as assigned by IANA (RFC826).";
-        	}
-        	leaf duid-ll-link-layer-addr {
-	        	type yang:mac-address;
-	        	description "Link-layer address as described in RFC2464";
-	    	}
-    	}
-    	case duid-uuid {
-    		description "DUID Based on Universally Unique Identifier 
-    			(Type 4 - DUID-UUID)";
-    		reference "RFC6335 Defination of the UUID-Based Unique Identifier";
-    		leaf uuid {
-    			type yang:uuid;
-  		  	description "A Universally Unique IDentifier in the string 
-  		  		representation defined in RFC 4122. The canonical 
-  		  		representation uses lowercase characters";
-    	 	}    	  
-    	}
-    	case duid-unknown {
-	  		description "DUID based on free raw bytes";
-	  		leaf data {
-	  			type binary;
-	  			description "The bits to be used as the identifier";
-	  		}
-    	}	      
+      type uint16;
+      default 65535;
+      description "Type code of this DUID";
     }
-	}
+    choice duid-type {
+      default duid-unknown;
+      description "Selects the format for the DUID.";
+      case duid-llt {
+        description "DUID Based on Link-layer Address Plus Time 
+          (Type 1 - DUID-LLT)";
+        reference "RFC8415 Section 9.2";
+        leaf duid-llt-hardware-type {
+          type uint16;
+          description "Hardware type as assigned by IANA (RFC826).";
+        }
+        leaf duid-llt-time {
+          type yang:timeticks;
+          description "The time value is the time that the DUID is 
+            generated represented in seconds since midnight (UTC), 
+                      January 1, 2000, modulo 2^32.";
+        }
+        leaf duid-llt-link-layer-addr {
+          type yang:mac-address;
+          description "Link-layer address as described in RFC2464";
+        }
+      }
+      case duid-en {
+        description "DUID Assigned by Vendor Based on Enterprise Number 
+          (Type 2 - DUID-EN)";
+        reference "RFC8415 Section 9.3";
+        leaf duid-en-enterprise-number {
+          type uint32;
+          description "Vendor's registered Private Enterprise Number as
+            maintained by IANA";
+        }
+        leaf duid-en-identifier {
+          type string;
+          description "Indentifier, unique to the device that is 
+            using it";
+        }
+      }
+      case duid-ll {
+        description "DUID Based on Link-layer Address (Type 3 - DUID-LL)";
+        reference "RFC8415 Section 9.4";
+        leaf duid-ll-hardware-type {
+          type uint16;
+          description "Hardware type as assigned by IANA (RFC826).";
+        }
+        leaf duid-ll-link-layer-addr {
+          type yang:mac-address;
+          description "Link-layer address as described in RFC2464";
+        }
+      }
+      case duid-uuid {
+        description "DUID Based on Universally Unique Identifier 
+          (Type 4 - DUID-UUID)";
+        reference "RFC6335 Defination of the UUID-Based Unique Identifier";
+        leaf uuid {
+          type yang:uuid;
+          description "A Universally Unique IDentifier in the string 
+            representation defined in RFC 4122. The canonical 
+            representation uses lowercase characters";
+        }    	  
+      }
+      case duid-unknown {
+        description "DUID based on free raw bytes";
+        leaf data {
+          type binary;
+          description "The bits to be used as the identifier";
+        }
+      }	      
+    }
+  }
 
   grouping portset-para {
     description "portset parameters";
@@ -160,9 +160,9 @@ module ietf-dhcpv6-types {
   }
 
   grouping iaid {
-	  description "IA is a construct through which a server and a client can
+    description "IA is a construct through which a server and a client can
       identify, group, and manage a set of related IPv6 addresses. The key of
-      the list is a 4-byte number IAID defined in [RFC3315].";
+      the list is a 4-byte number IAID defined in [RFC8415].";
     list identity-association {
       config "false";
       description "IA";
@@ -212,10 +212,10 @@ module ietf-dhcpv6-types {
   }
 
   grouping client-class-id {
-		description "Defintions for identification and classification of client
-		  messages";
-		choice id-type {
-			description "Definitions for different client identifier types.";
+    description "Defintions for identification and classification of client
+      messages";
+    choice id-type {
+      description "Definitions for different client identifier types.";
       mandatory true;
       case text-literal-id {
         description "Client class selection based on a string literal client
@@ -253,47 +253,47 @@ module ietf-dhcpv6-types {
           type inet:ipv6-address;
         }
       }
-			case relay-link-address-id {
-				description "Client class selection based on the prefix of the
+      case relay-link-address-id {
+        description "Client class selection based on the prefix of the
           link-address field in the relay agent message header.";
         leaf relay-link-address {
           description "Prefix of the link-address field in the relay agent
-				    message header.";
+            message header.";
           mandatory true;
-				  type inet:ipv6-prefix;
+          type inet:ipv6-prefix;
         }
-			}
-			case relay-peer-address-id {
-				description "Client class selection based on the value of the
+      }
+      case relay-peer-address-id {
+        description "Client class selection based on the value of the
           peer-address field in the relay agent message header.";
         leaf relay-peer-address {
           description "Prefix of the peer-address field in the relay agent
-				    message header.";
+            message header.";
           mandatory true;
-				  type inet:ipv6-prefix;
+          type inet:ipv6-prefix;
         }
-			}
+      }
       case vendor-class-present-id {
-				description "Client class selection based on the presence of 
+        description "Client class selection based on the presence of 
           OPTION_VENDOR_CLASS(16) in the received message.";
         leaf vendor-class-present {
           description "Presence of OPTION_VENDOR_CLASS(16) in the received
             message.";
           mandatory true;
-				  type boolean;
+          type boolean;
         }
-			}
+      }
       case vendor-class-option-ent-num-id {
-				description "Client class selection based on the value of the
+        description "Client class selection based on the value of the
           enterprise-number field in OPTION_VENDOR_CLASS(16).";
         leaf ent-num {
           description "Value of the enterprise-number field.";
           mandatory true;
-				  type uint32;
+          type uint32;
         }
-			}
+      }
       case vendor-class-option-data-id {
-				description "Client class selection based on the value of a data field
+        description "Client class selection based on the value of a data field
           within a vendor-class-data entry for a matching enterprise-number
           field in OPTION_VENDOR_CLASS(16).";
         container vendor-class-option-data {
@@ -309,12 +309,12 @@ module ietf-dhcpv6-types {
             type string;
           }
         }
-			}
-			case client-duid-id {
+      }
+      case client-duid-id {
         description "Client class selection based on the value of the received 
           client DUID.";
         uses duid;
       }
-		}
-	}
+    }
+  }
 }

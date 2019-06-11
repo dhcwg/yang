@@ -21,23 +21,23 @@ module ietf-dhcpv6-relay {
 
   contact
     "cuiyong@tsinghua.edu.cn
-     lh.sunlinh@gmail.com
-     ian.farrer@telekom.de
-     sladjana.zechlin@telekom.de
-     hezihao9512@gmail.com";
+    lh.sunlinh@gmail.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com";
 
   description 
     "This model defines a YANG data model that can be
-     used to configure and manage a DHCPv6 relay.";
+    used to configure and manage a DHCPv6 relay.";
 
-    revision 2018-09-04 {
+  revision 2018-09-04 {
     description "";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
   revision 2018-03-04 {
     description "Resolved most issues on the DHC official
-    github";
+      github";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
@@ -47,11 +47,11 @@ module ietf-dhcpv6-relay {
     reference
       "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
-  
+
   revision 2017-11-24 {
     description 
       "First version of the separated relay specific
-       YANG model.";
+      YANG model.";
     reference
       "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
@@ -65,7 +65,7 @@ module ietf-dhcpv6-relay {
       "Enables the relay";
     description
       "DHCPv6 relay portion";
-    
+
     container relay-config {
       description
         "This container contains the configuration data
@@ -73,10 +73,10 @@ module ietf-dhcpv6-relay {
       container relay-attributes {
         description
           "A container describes some basic attributes of the relay 
-           agent including some relay agent specific options data that
-           need to be configured previously. 
-           Such options include Remote-Id option and Subscriber-Id 
-           option.";
+          agent including some relay agent specific options data that
+          need to be configured previously. 
+          Such options include Remote-Id option and Subscriber-Id 
+          option.";
         leaf name {
           type string;
           description 
@@ -91,10 +91,10 @@ module ietf-dhcpv6-relay {
           type inet:ipv6-address;
           description 
             "Each DHCPv6 relay agent may be configured with a list
-             of destination addresses. 
-             This node defines such a list of IPv6 addresses that 
-             may include unicast addresses, multicast addresses or 
-             other addresses.";
+            of destination addresses. 
+            This node defines such a list of IPv6 addresses that 
+            may include unicast addresses, multicast addresses or 
+            other addresses.";
         }
         list subscribers {
           key subscriber;
@@ -135,25 +135,25 @@ module ietf-dhcpv6-relay {
 
       container rsoo-option-sets {
         description
-         "DHCPv6 relay agent could provide some information that would
+          "DHCPv6 relay agent could provide some information that would
           be useful to DHCPv6 client. 
           Since relay agent cannot provide options directly to the 
           client, RSOO-enabled options are defined to propose options
           for the server to send to the client.
-          This container models such RSOO-enabled options.";
+            This container models such RSOO-enabled options.";
         reference 
           "RFC6422";
         list option-set {
           key option-set-id;
           description
             "This list under the 'rsoo-option-sets' container is similar
-             to the that defined in server module. 
-             It allows the relay to implement several sets of RSOO-enabled
-             options for different interfaces. 
-             The list only includes the EAP Re-authentication Protocol 
-             (ERP) Local Domain Name DHCPv6 Option defined in RFC6440, 
-             since it is the only one RSOO-enabled options accepted by 
-             IANA so far.";
+            to the that defined in server module. 
+            It allows the relay to implement several sets of RSOO-enabled
+            options for different interfaces. 
+            The list only includes the EAP Re-authentication Protocol 
+            (ERP) Local Domain Name DHCPv6 Option defined in RFC6440, 
+            since it is the only one RSOO-enabled options accepted by 
+              IANA so far.";
           leaf option-set-id {
             type uint32;
             description "Option sed id";
@@ -166,11 +166,11 @@ module ietf-dhcpv6-relay {
         // if - This should reference an entry in ietf-interfaces
         key if-name;
         description 
-        "A relay agent may have several interfaces, we should provide
-         a way to configure and manage parameters on the interface-level. 
-         A list that describes specific interfaces and their corresponding 
-         parameters is employed to fulfill the configuration. Here we use 
-         a string called 'if-name' as the key of list.";
+          "A relay agent may have several interfaces, we should provide
+          a way to configure and manage parameters on the interface-level. 
+          A list that describes specific interfaces and their corresponding 
+          parameters is employed to fulfill the configuration. Here we use 
+          a string called 'if-name' as the key of list.";
         leaf if-name {
           type if:interface-ref;
           mandatory true;
@@ -184,12 +184,12 @@ module ietf-dhcpv6-relay {
         }
 
         /*
-        leaf enable {
-          type boolean;
-          mandatory true;
-          description "whether this interface is enabled";
-        }
-        */
+           leaf enable {
+           type boolean;
+           mandatory true;
+           description "whether this interface is enabled";
+           }
+         */
 
         leaf ipv6-address {
           type inet:ipv6-address;
@@ -203,13 +203,13 @@ module ietf-dhcpv6-relay {
           }
           description "Configured Relay Supplied Option set";
         }
-        
+
         list next-entity {
           key dest-addr;
           description 
             "This node defines a list that is used to describe the
-             next hop entity of this relay distinguished by their
-             addresses.";
+            next hop entity of this relay distinguished by their
+            addresses.";
           leaf dest-addr {
             type inet:ipv6-address;
             mandatory true;
@@ -237,8 +237,8 @@ module ietf-dhcpv6-relay {
         }
       }           
     }
-      
-      
+
+
     container relay-state {
       config "false";
       description 
@@ -246,17 +246,17 @@ module ietf-dhcpv6-relay {
       list relay-if {
         key if-name;
         description
-        "A relay agent may have several interfaces, we should provide
-         a way to configure and manage parameters on the interface-level. 
-         A list that describes specific interfaces and their corresponding 
-         parameters is employed to fulfill the configuration. Here we use 
-         a string called 'if-name' as the key of list.";      
-        leaf if-name{
-          type string;
-          mandatory true;
-          description 
-            "Interface name";
-        }
+          "A relay agent may have several interfaces, we should provide
+          a way to configure and manage parameters on the interface-level. 
+          A list that describes specific interfaces and their corresponding 
+          parameters is employed to fulfill the configuration. Here we use 
+          a string called 'if-name' as the key of list.";      
+          leaf if-name{
+            type string;
+            mandatory true;
+            description 
+              "Interface name";
+          }
         list pd-route {
           // if - need to look at if/how we model these. If they are
           // going to be modeled, then they should be ro state
@@ -451,7 +451,7 @@ module ietf-dhcpv6-relay {
         "DHCPv6 relay event";
       container topo-changed {
         description 
-        "Raised when the topology of the relay agent is changed.";
+          "Raised when the topology of the relay agent is changed.";
         leaf relay-if-name {
           type string;
           mandatory true;

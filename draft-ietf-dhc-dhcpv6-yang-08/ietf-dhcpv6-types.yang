@@ -12,7 +12,7 @@ module ietf-dhcpv6-types {
 
   organization "DHC WG";
   contact 
-   "cuiyong@tsinghua.edu.cn
+    "cuiyong@tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
     sladjana.zechlin@telekom.de
@@ -32,8 +32,8 @@ module ietf-dhcpv6-types {
   }
 
   /*
-  * Grouping
-  */
+   * Grouping
+   */
   grouping vendor-infor {
     description "Vendor information.";
     container vendor-info {
@@ -49,13 +49,13 @@ module ietf-dhcpv6-types {
       }
     }
   }
-  
+
   grouping duid {
     description 
       "Each server and client has only one DUID (DHCP Unique Identifier). 
       The DUID here identifies a unique DHCPv6 server for clients. DUID 
       consists of a two-octet type field and an arbitrary length (no more 
-      than 128 bytes) content field. Currently there are four defined types 
+          than 128 bytes) content field. Currently there are four defined types 
       of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and 
       DUID-UUID. DUID-Unknown represents those unconventional DUIDs.";
     reference "RFC3315: Section 9 and RFC6355: Section 4";
@@ -65,7 +65,7 @@ module ietf-dhcpv6-types {
       description "Type code of this DUID";
     }
     choice duid-type {
-    default duid-unknown;
+      default duid-unknown;
       description "Selects the format for the DUID.";
       case duid-llt {
         description "DUID Based on Link-layer Address Plus Time 
@@ -78,8 +78,8 @@ module ietf-dhcpv6-types {
         leaf duid-llt-time {
           type yang:timeticks;
           description "The time value is the time that the DUID is 
-          generated represented in seconds since midnight (UTC), 
-          January 1, 2000, modulo 2^32.";
+            generated represented in seconds since midnight (UTC), 
+                      January 1, 2000, modulo 2^32.";
         }
         leaf duid-llt-link-layer-addr {
           type yang:mac-address;
@@ -98,19 +98,19 @@ module ietf-dhcpv6-types {
         leaf duid-en-identifier {
           type string;
           description "Identifier, unique to the device that is 
-          using it";
+            using it";
         }
       }
       case duid-ll {
-          description "DUID Based on Link-layer Address (Type 3 - DUID-LL)";
-          reference "RFC3315 Section 9.4";
-          leaf duid-ll-hardware-type {
-            type uint16;
-            description "Hardware type as assigned by IANA (RFC826).";
-          }
-          leaf duid-ll-link-layer-addr {
-            type yang:mac-address;
-            description "Link-layer address as described in RFC2464";
+        description "DUID Based on Link-layer Address (Type 3 - DUID-LL)";
+        reference "RFC3315 Section 9.4";
+        leaf duid-ll-hardware-type {
+          type uint16;
+          description "Hardware type as assigned by IANA (RFC826).";
+        }
+        leaf duid-ll-link-layer-addr {
+          type yang:mac-address;
+          description "Link-layer address as described in RFC2464";
         }
       }
       case duid-uuid {
@@ -158,9 +158,9 @@ module ietf-dhcpv6-types {
 
   grouping iaid {
     description "IA is a construct through which a server and a
-        client can identify, group, and manage a set of related IPv6
-        addresses. The key of the list is a 4-byte number IAID defined
-        in [RFC3315].";
+      client can identify, group, and manage a set of related IPv6
+      addresses. The key of the list is a 4-byte number IAID defined
+      in [RFC3315].";
     list identity-association {
       config "false";
       description "IA";
