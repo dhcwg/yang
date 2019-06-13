@@ -1,11 +1,12 @@
 module ietf-dhcpv6-options-rfc3319 {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3319";
-  prefix "dhcpv6-options-rfc8415";
+  prefix "rfc3319";
 
   import ietf-dhcpv6-options-rfc8415 {
-    prefix rfc8415;
+    prefix "rfc8415";
   }
+
   import ietf-inet-types {
     prefix inet;
   }
@@ -19,8 +20,8 @@ module ietf-dhcpv6-options-rfc3319 {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This YANG module contains DHCPv6 options defined in RFC8415 that
-    can be used by DHCPv6 clients, relays and servers.";
+  description "This YANG module contains DHCPv6 options defined in RFC3319 that
+    can be used by DHCPv6 servers.";
 
   revision 2019-06-07 {
     description "Major reworking to only contain RFC8415 options. if-feature
@@ -41,7 +42,7 @@ module ietf-dhcpv6-options-rfc3319 {
    * Groupings
    */
   
-  augment "/rfc8415:option-definitions/" {
+  augment "/rfc8415:test" {
 
     container sip-server-domain-name-list-option {
       if-feature "server";
@@ -49,7 +50,7 @@ module ietf-dhcpv6-options-rfc3319 {
       reference "RFC3319: Dynamic Host Configuration Protocol
         (DHCPv6) Options for Session Initiation Protocol (SIP) Servers";
       leaf sip-serv-domain-name {
-        type yang:domain-name;
+        type inet:domain-name;
         mandatory true;
         description "sip server domain name";
       }

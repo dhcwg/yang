@@ -72,6 +72,7 @@ module ietf-dhcpv6-options-rfc8415 {
    */
   
   grouping option-definitions {
+    container test {
     description "Contains definitions for DHCv6 options configured on the
       DHCPv6 server, relay or client.";
 
@@ -89,8 +90,9 @@ module ietf-dhcpv6-options-rfc8415 {
           by option code.";
         leaf option-code {
           type uint16;
+          must "17 | 21..24 | 27..36 | 39..42 ";
           mandatory true;
-          description "option code";
+          description "Option code being requested by the client";
         }
       }
     }
@@ -353,4 +355,5 @@ module ietf-dhcpv6-options-rfc8415 {
       }
     }
   }
+}
 }
