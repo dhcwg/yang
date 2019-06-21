@@ -21,14 +21,12 @@ module my-dhcpv6-server {
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
-  //uses dhcpv6-server:server;
-
   augment "/dhcpv6-server:server/dhcpv6-server:server-config" {
     container client-classes {
       list class {
         description "List of the client class identifiers applicable
                   to clients served by this address pool";
-        key dhcpv6-classifying:client-class-name;
+        key client-class-name;
         uses dhcpv6-classifying:client-class-id;
       }
     }
@@ -36,20 +34,23 @@ module my-dhcpv6-server {
 
   augment "/dhcpv6-server:server/dhcpv6-server:server-config/dhcpv6-server:network-ranges/dhcpv6-server:network-range" {
     leaf-list client-class {
-      type string;
-      description "A list of user name patterns to allow";
+      type leafref {
+        path "/dhcpv6-server:server/dhcpv6-server:server-config/client-classes/class/client-class-name";
+      }
     }
   }
   augment "/dhcpv6-server:server/dhcpv6-server:server-config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:address-pools/dhcpv6-server:address-pool" {
     leaf-list client-class {
-      type string;
-      description "A list of user name patterns to allow";
+      type leafref {
+        path "/dhcpv6-server:server/dhcpv6-server:server-config/client-classes/class/client-class-name";
+      }
     }
   }
   augment "/dhcpv6-server:server/dhcpv6-server:server-config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:pd-pools/dhcpv6-server:pd-pool" {
     leaf-list client-class {
-      type string;
-      description "A list of user name patterns to allow";
+      type leafref {
+        path "/dhcpv6-server:server/dhcpv6-server:server-config/client-classes/class/client-class-name";
+      }
     }
   }
 }
