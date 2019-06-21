@@ -31,6 +31,20 @@ module ietf-dhcpv6-types {
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
+  typedef threshold {
+    type union {
+      type uint16 {
+        range 0..100;
+      }
+      type enumeration {
+        enum "disabled" {
+          description "No threshold";
+        }
+      }
+    }
+    description "Threshold value in percent";
+  }
+
   typedef timer-value-seconds32 {
     type uint32 {
       range "1..4294967295";

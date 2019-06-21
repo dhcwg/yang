@@ -1,0 +1,316 @@
+module ietf-dhcpv6-server-test {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server-test";
+  prefix "dhcpv6-server";
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import ietf-dhcpv6-server {
+    prefix server;
+  }
+  import ietf-dhcpv6-options-rfc8415 {
+    prefix dhcpv6-options;
+  }
+  import ietf-dhcpv6-types {
+    prefix dhcpv6-types;
+  }
+  import ietf-interfaces {
+    prefix if;
+  }
+
+  organization "DHC WG";
+  contact 
+    "cuiyong@tsinghua.edu.cn
+    lh.sunlinh@gmail.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com";
+
+  description "This model defines a YANG data model that can be
+    used to configure and manage a DHCPv6 server.";
+
+  revision 2018-09-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2018-03-04 {
+    description "Resolved most issues on the DHC official
+      github";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2017-12-22 {
+    description "Resolve most issues on Ian's github.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2017-11-24 {
+    description "First version of the separated server specific
+      YANG model.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  /*
+   * Typedef
+   */
+
+  /*
+   * Data Nodes
+   */
+  container server {
+    presence "Enables the server";
+    description "DHCPv6 server portion";
+
+    /* 
+     * Configuration data
+     */
+    container server-config {
+      description "This container contains the configuration data
+        of a server.";
+      container serv-attributes {
+        description 
+          "This container contains basic attributes of a DHCPv6 server 
+          such as IPv6 address, server name  and so on. Some optional 
+          functions that can be provided  by the server is also included.";
+        container duid {
+          description "Sets the DUID of server";
+          uses dhcpv6-types:duid;
+        }
+        leaf name {
+          type string;
+          description "server's name";
+        }
+        leaf description {
+          type string;
+          description "description of the server.";
+        }
+        leaf-list ipv6-address {
+          type inet:ipv6-address;
+          description "server's IPv6 address.";
+        }
+        leaf-list interfaces-config {
+          // Note - this should probably be references to
+          // entries in the ietf-interfaces model
+          type if:interface-ref;
+          description "A leaf list to denote which one or more interfaces 
+            the server should listen on. The default value is to listen 
+            on all the interfaces. This node is also used to set a unicast 
+            address for the server to listen with a specific interface.
+            For example, if people want the server to listen on a unicast 
+            address with a specific interface, he can use the format like 
+            'eth1/2001:db8::1'.";
+        }
+        container lease-storage {
+          description "Indicates how the server stores the lease";
+          choice storage-type {
+            description "the type of lease storage";
+            // leaf persist {
+            // 		type boolean;
+            // 		mandatory true;
+            // 		description "controls whether the new leases and updates to existing leases are 
+            // 		written to the file";
+            // }
+            case memfile {
+              description "the server stores lease information in a CSV file";
+
+              leaf memfile-name {
+                type string;
+                description "specifies an absolute location of the lease file in which new leases 
+                  and lease updates will be recorded";
+              }
+
+              leaf memfile-lfc-interval {
+                type uint64;
+                description "specifies the interval in seconds, at which the server will perform a 
+                  lease file cleanup (LFC)";
+              }
+
+            }
+            case mysql {
+              leaf mysql-name {
+                type string;
+                description "type of the database";
+              }
+              leaf mysql-host {
+                type string;
+                description "If the database is located 
+                  on a different system to the DHCPv6 server, the database host name must also be specified.";
+              }
+              leaf mysql-password {
+                type string;
+                description "the credentials of the account under which the server will access the database";
+              }
+              leaf mysql-port {
+                type uint8;
+                description "If the database is located on a different system, the port number may be specified";
+              }
+              leaf mysql-lfc-interval {
+                type uint64;
+                description "specifies the interval in seconds, at which the server will perform a 
+                  lease file cleanup (LFC)";
+              }
+              leaf mysql-connect-timeout {
+                type uint64;
+                description "If the database is located on a different system, a longer interval needs to be specified";
+              }
+
+            }
+            case postgresql {
+              leaf postgresql-name {
+                type string;
+                description "type of the database";
+              }
+              leaf postgresql-host {
+                type string;
+                description "If the database is located 
+                  on a different system to the DHCPv6 server, the database host name must also be specified.";
+              }
+              leaf postgresql-password {
+                type string;
+                description "the credentials of the account under which the server will access the database";
+              }
+              leaf postgresql-port {
+                type uint8;
+                description "If the database is located on a different system, the port number may be specified";
+              }
+              leaf postgresql-lfc-interval {
+                type uint64;
+                description "specifies the interval in seconds, at which the server will perform a 
+                  lease file cleanup (LFC)";
+              }
+              leaf postgresql-connect-timeout {
+                type uint64;
+                description "If the database is located on a different system, a longer interval needs to be specified";
+              }
+            }
+            case cassandra {
+              leaf cassandra-name {
+                type string;
+                description "type of the database";
+              }
+              leaf cassandra-contact-points {
+                type string;
+                description "Cassandra takes a list of comma separated IP addresses to contact the cluster";
+              }
+              leaf cassandra-password {
+                type string;
+                description "the credentials of the account under which the server will access the database";
+              }
+              leaf cassandra-lfc-interval {
+                type uint64;
+                description "specifies the interval in seconds, at which the server will perform a 
+                  lease file cleanup (LFC)";
+              }
+              leaf cassandra-connect-timeout {
+                type uint64;
+                description "If the database is located on a different system, a longer interval needs to be specified";
+              }							
+            }
+          }
+        }
+        uses dhcpv6-types:vendor-infor;
+        uses server:server;
+      }
+
+
+    /*
+     * State data
+     */
+
+
+  /* 	
+   * Notifications
+   */
+
+  notification notifications {
+    description "dhcpv6 server notification module";
+    container dhcpv6-server-event {
+      description "dhcpv6 server event";
+      container address-pool-running-out {
+        description "raised when the address pool is going to
+          run out.  A threshold for utilization ratio of the pool has
+          been defined in the server feature so that it will notify the
+          administrator when the utilization ratio reaches the
+          threshold, and such threshold is a settable parameter";
+        leaf total-address-count {
+          type uint64;
+          mandatory true;
+          description "count of total addresses in the pool";
+        }
+        leaf max-address-count {
+          type uint64;
+          mandatory true;
+          description "maximum count of addresses that can be allocated 
+            in the pool. This value may be less than count of total 
+            addresses";
+        }
+        leaf allocated-address-conut {
+          type uint64;
+          mandatory true;
+          description "count of allocated addresses in the pool";
+        }
+        container duid {
+          description "server duid";
+          uses dhcpv6-types:duid;
+        }
+        leaf serv-name {
+          type string;
+          description "server name";
+        }
+        leaf pool-name {
+          type string;
+          mandatory true;
+          description "pool name";
+        }
+      }
+      container pd-pool-running-out {
+        description "raised when the address/prefix pool is going to
+          run out.  A threshold for utilization ratio of the pool has
+          been defined in the server feature so that it will notify the
+          administrator when the utilization ratio reaches the
+          threshold, and such threshold is a settable parameter";
+        leaf max-pd-space-utilization {
+          type dhcpv6-types:threshold;
+          mandatory true;
+          description "maximum pd space utilization";
+        }
+        leaf pd-space-utilization {
+          type dhcpv6-types:threshold;
+          mandatory true;
+          description "current pd space utilization";
+        }
+        container duid {
+          description "Sets the DUID";
+          uses dhcpv6-types:duid;
+        }
+        leaf serv-name {
+          type string;
+          description "server name";
+        }
+        leaf pool-name {
+          type string;
+          mandatory true;
+          description "pool name";
+        }
+      }
+      container invalid-client-detected {
+        description "raised when the server has found a client which
+          can be regarded as a potential attacker. Some description
+          could also be included.";
+        container duid {
+          description "Sets the DUID";
+          uses dhcpv6-types:duid;
+        }
+        leaf description {
+          type string;
+          description "description of the event";
+        }
+      }
+    }
+  }
+}
