@@ -42,7 +42,7 @@ module ietf-dhcpv6-options-rfc3319 {
    * Groupings
    */
   
-  augment "/rfc8415:test" {
+  augment "/rfc8415:options" {
 
     container sip-server-domain-name-list-option {
       if-feature "server";
@@ -51,7 +51,6 @@ module ietf-dhcpv6-options-rfc3319 {
         (DHCPv6) Options for Session Initiation Protocol (SIP) Servers";
       leaf sip-serv-domain-name {
         type inet:domain-name;
-        mandatory true;
         description "sip server domain name";
       }
     }
@@ -66,12 +65,10 @@ module ietf-dhcpv6-options-rfc3319 {
         description "sip server info";
         leaf sip-serv-id {
           type uint8;
-          mandatory true;
           description "sip server id";
         }
         leaf sip-serv-addr {
           type inet:ipv6-address;
-          mandatory true;
           description "sip server addr";
         }
       }
