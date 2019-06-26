@@ -71,7 +71,7 @@ module ietf-dhcpv6-options-rfc8415 {
    * Groupings
    */
 
-/*  grouping option-definitions { */
+  grouping option-definitions { 
     container options {
       description "Contains definitions for DHCv6 options configured on the
         DHCPv6 server, relay or client.";
@@ -361,6 +361,6 @@ module ietf-dhcpv6-options-rfc8415 {
           description "inf max rt value";
         }
       }
-      }
     }
-
+  }
+}
