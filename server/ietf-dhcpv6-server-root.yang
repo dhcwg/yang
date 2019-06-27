@@ -1,0 +1,75 @@
+module ietf-dhcpv6-server-root {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server-root";
+  prefix "dhcpv6-server-config";
+
+  include "ietf-dhcpv6-server"; 
+
+  import ietf-dhcpv6-types {
+    prefix dhcpv6-types;
+  }
+  import ietf-dhcpv6-options-rfc8415 {
+    prefix rfc8415;
+  }
+  import ietf-dhcpv6-options-rfc3319 {
+    prefix rfc3319;
+  }
+
+  import ietf-dhcpv6-server-config {
+    prefix server-config;
+  }
+
+  organization "DHC WG";
+  contact 
+    "cuiyong@tsinghua.edu.cn
+    lh.sunlinh@gmail.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com";
+
+  description "This model defines a YANG data model that can be
+    used to configure and manage a DHCPv6 server.";
+
+  revision 2019-06-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  /*
+   * Groupings
+   */
+  grouping option-definitions {
+     description "Contains definitions for the set of DHCPv6 options which are
+       implmented by the server. Modules for additional options can be
+       augmented here as required.";
+     uses rfc8415:option-definitions;
+     uses rfc3319:option-definitions;
+  }
+  /*
+   * Data Nodes
+   */
+  /* 
+   * Configuration data
+   */
+  container server-config {
+    description "Parameters necessary for the configuration of a DHCPv6
+      server";
+    uses server-config:config;
+    uses dhcpv6-types:vendor-infor;
+  }
+
+  container dhcpv6-server {
+    description "Contains DHCPv6 configuration relevant for the provisioning
+      of DHCPv6 clients";
+    uses server;
+  }
+
+  container client-class-selector {
+
+  }
+
+  /* 	
+   * Notifications
+   */
+
+}

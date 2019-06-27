@@ -9,14 +9,8 @@ module ietf-dhcpv6-server-config {
   import ietf-yang-types {
     prefix yang;
   }
-  import ietf-dhcpv6-options {
-    prefix dhcpv6-options;
-  }
   import ietf-dhcpv6-types {
     prefix dhcpv6-types;
-  }
-  import ietf-dhcpv6-server {
-    prefix dhcpv6-server;
   }
   import ietf-interfaces {
     prefix if;
@@ -48,7 +42,7 @@ module ietf-dhcpv6-server-config {
   /* 
    * Configuration data
    */
-  container server-config {
+  grouping config {
     description "Parameters necessary for the configuration of a DHCPv6
       server";
     container serv-attributes {
@@ -192,13 +186,7 @@ module ietf-dhcpv6-server-config {
       }
       uses dhcpv6-types:vendor-infor;
     }
-
-    container dhcpv6-server {
-      description "Contains DHCPv6 configuration relevant for the provisioning
-        of DHCPv6 cliients";
-      uses dhcpv6-server:server;
-    }
-
+    
     /* 	
      * Notifications
      */

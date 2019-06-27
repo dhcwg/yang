@@ -3,17 +3,13 @@ module ietf-dhcpv6-options-rfc3319 {
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3319";
   prefix "rfc3319";
 
-  import ietf-dhcpv6-options-rfc8415 {
-    prefix "rfc8415";
-  }
-
   import ietf-inet-types {
     prefix inet;
   }
 
   organization "DHC WG";
   contact 
-   "cuiyong@tsinghua.edu.cn
+    "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -33,17 +29,16 @@ module ietf-dhcpv6-options-rfc3319 {
   /*
    * Features
    */
-  
+
   feature server {
     description "DHCPv6 server";
   }
-  		
+
   /*
    * Groupings
    */
-  
-  augment "/rfc8415:options" {
 
+  grouping option-definitions {
     container sip-server-domain-name-list-option {
       if-feature "server";
       description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
