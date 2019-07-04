@@ -259,8 +259,8 @@ module ietf-dhcpv6-server {
             type uint32;
             description "option set id";
           }
-          uses dhcpv6-options:server-option-definitions;
-          uses dhcpv6-options:custom-option-definitions;
+          //uses dhcpv6-options:server-option-definitions; // TODO: some lists from these groupings miss keys
+          //uses dhcpv6-options:custom-option-definitions;
         }
       }
 
@@ -367,21 +367,6 @@ module ietf-dhcpv6-server {
                 description "A boolean value specifies whether the pool 
                   supports client-server exchanges involving two messages.";
               }
-              list client-class-ids {
-                mandatory true;
-                description "List of the client class identifiers applicable
-                  to clients served by this address pool";
-                key client-class-id-number;
-                leaf client-class-id-number {
-                  type uint32;
-                  description "Unique Identifier for client class
-                    identification list entries.";
-                }
-                leaf client-class-id {
-                  description "Client class identifier";
-                  uses dhcpv6-types:client-class-id;
-                }
-              }
               leaf max-address-count {
                 type threshold;
                 mandatory true;
@@ -449,21 +434,6 @@ module ietf-dhcpv6-server {
                 mandatory true;
                 description "Specifies whether the server supports two message
                   client-server exchanges.";
-              }
-              list client-class-ids {
-                mandatory true;
-                description "List of the client class identifiers applicable
-                  to clients served by this pd-pool";
-                key client-class-id-number;
-                leaf client-class-id-number {
-                  type uint32;
-                  description "Unique Identifier for client class
-                    identification list entries.";
-                }
-                leaf client-class-id {
-                  description "Client class identifier";
-                  uses dhcpv6-types:client-class-id;
-                }
               }
               leaf max-pd-space-utilization {
                 type threshold;

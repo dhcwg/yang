@@ -7,8 +7,12 @@ module ietf-dhcpv6-options-rfc3319 {
     prefix inet;
   }
 
+  import ietf-dhcpv6-server {
+    prefix dhcpv6-server;
+  }
+
   organization "DHC WG";
-  contact 
+  contact
     "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
@@ -38,8 +42,8 @@ module ietf-dhcpv6-options-rfc3319 {
    * Groupings
    */
 
-  grouping option-definitions {
-    container sip-server-domain-name-list-option {
+  augment "/dhcpv6-server:config/dhcpv6-server:option-sets/dhcpv6-server:option-set/dhcpv6-server:options" {
+    case sip-server-domain-name-list-option {
       if-feature "server";
       description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
       reference "RFC3319: Dynamic Host Configuration Protocol
@@ -50,7 +54,7 @@ module ietf-dhcpv6-options-rfc3319 {
       }
     }
 
-    container sip-server-address-list-option {
+    case sip-server-address-list-option {
       if-feature "server";
       description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List";
       reference "RFC3319: Dynamic Host Configuration Protocol (DHCPv6)

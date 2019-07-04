@@ -1104,19 +1104,19 @@ module ietf-dhcpv6-options {
           }
         }
       }
-      container mipv6-vdinf-option {
-        description "OPTION_MIP6_VDINF (50) MIPv6 Visited Home Network
-          Information Option";
-        list vdinf-options {
-          description "One or more options, specifying information about the
-            local ASP (visited domain).";
-          choice vdinf-option {
-            case hn-prefix {
-              uses :server-relay-option-definitions/mipv6-hn-prefix;
-            }
-          }
-        }
-      }
+//      container mipv6-vdinf-option {
+//        description "OPTION_MIP6_VDINF (50) MIPv6 Visited Home Network
+//          Information Option";
+//        list vdinf-options {
+//          description "One or more options, specifying information about the
+//            local ASP (visited domain).";
+//          choice vdinf-option {
+//            case hn-prefix {
+//              uses :server-relay-option-definitions/mipv6-hn-prefix; // TODO: this causes error: bad argument value ":server-relay-option-definitions/mipv6-hn-prefix", should be of type identifier-ref
+//            }
+//          }
+//        }
+//      }
     }
 /* Add RFC6610 options */
   }

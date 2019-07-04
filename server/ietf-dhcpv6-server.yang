@@ -1,10 +1,7 @@
-submodule ietf-dhcpv6-server {
+module ietf-dhcpv6-server {
   yang-version 1.1;
-  /*namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server";*/
-  belongs-to ietf-dhcpv6-server-root {
-    prefix "dhcpv6-server-config";
-  }
- 
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server";
+  prefix "dhcpv6-server";
 
   import ietf-inet-types {
     prefix inet;
@@ -12,15 +9,12 @@ submodule ietf-dhcpv6-server {
   import ietf-yang-types {
     prefix yang;
   }
-  import ietf-dhcpv6-options-rfc8415 {
-    prefix dhcpv6-options;
-  }
   import ietf-dhcpv6-types {
     prefix dhcpv6-types;
   }
 
   organization "DHC WG";
-  contact 
+  contact
     "cuiyong@tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -59,7 +53,7 @@ submodule ietf-dhcpv6-server {
   /*
    * Data Nodes
    */
-  grouping server {
+  container config {
     container option-sets {
       description "DHCPv6 employs various options to carry additional
         information and parameters in DHCP messages. This container defines
@@ -75,41 +69,44 @@ submodule ietf-dhcpv6-server {
           possible options discussed above are defined in the list and each
           option is corresponding to a container. Since all the options in
           the list are optional, each container in this list has a 'presence'
-          statement to indicate whether this option (container) will be 
+          statement to indicate whether this option (container) will be
           included in the current option set or not. In addition, each container
-          also has a 'if-feature' statement to indicate whether the server 
+          also has a 'if-feature' statement to indicate whether the server
           supports this option (container).";
         leaf option-set-id {
           type uint32;
           description "option set id";
         }
-        uses option-definitions;
+        choice options {
+          description "Contains definitions for DHCv6 options configured on the
+          DHCPv6 server, relay or client.";
+        }
       }
     }
 
     container network-ranges {
       description "This model supports a hierarchy
-        to achieve dynamic configuration. That is to say we could configure the 
-        server at different levels through this model. The top level is a global 
-        level which is defined as the container 'network-ranges'. The following 
-        levels are defined as sub-containers under it. The 'network-ranges' 
+        to achieve dynamic configuration. That is to say we could configure the
+        server at different levels through this model. The top level is a global
+        level which is defined as the container 'network-ranges'. The following
+        levels are defined as sub-containers under it. The 'network-ranges'
         contains the parameters (e.g. option-sets) that would be allocated to
         all the clients served by this server.";
 
-      leaf option-set-id {
+      leaf-list option-set-id {
         type leafref {
-          path "../server/option-sets/option-set/option-set-id";
+          path "/config/option-sets/option-set/option-set-id";
         }
-        description 
-          "The ID field of relevant global option-set to be provisioned to 
+        description
+          "The ID field of relevant global option-set to be provisioned to
           clients.";
       }
       list network-range {
         key network-range-id;
-        description 
-          "Under the 'network-ranges' container, a 'network-range' list 
-          is defined to configure the server at a network level which is also 
-          considered as the second level. Different network are identified by the 
+        description
+          "Under the 'network-ranges' container, a 'network-range' list
+          is defined to configure the server at a network level which is also
+          considered as the second level. Different network are identified by the
           key 'network-range-id'. This is because a server may have different
           configuration parameters (e.g. option sets) for different networks.";
         leaf network-range-id {
@@ -127,22 +124,22 @@ submodule ietf-dhcpv6-server {
           mandatory true;
           description "subnet prefix";
         }
-        leaf option-set-id {
+        leaf-list option-set-id {
           type leafref {
-            path "/server/option-sets/option-set/option-set-id";
+            path "/config/option-sets/option-set/option-set-id";
           }
-          description "The ID field of relevant option-set to be provisioned to 
+          description "The ID field of relevant option-set to be provisioned to
             clients of this network-range.";
         }
 
         container address-pools {
-          description 
-            "A container that describes the DHCPv6 server's 
+          description
+            "A container that describes the DHCPv6 server's
             address pools.";
           list address-pool {
             key pool-id;
-            description "A DHCPv6 server can be configured with 
-              several address pools. This list defines such address pools 
+            description "A DHCPv6 server can be configured with
+              several address pools. This list defines such address pools
               which are distinguished by the key called 'pool-id'.";
             leaf pool-id {
               type uint32;
@@ -187,41 +184,34 @@ submodule ietf-dhcpv6-server {
             leaf rapid-commit {
               type boolean;
               mandatory true;
-              description "A boolean value specifies whether the pool 
+              description "A boolean value specifies whether the pool
                 supports client-server exchanges involving two messages.";
-            }
-            leaf client-class {
-              type string;
-              description 
-                "If this leaf is specified, this pool will only serve
-                the clients belonging to this class.";
             }
             leaf max-address-count {
               type dhcpv6-types:threshold;
               mandatory true;
-              description "maximum count of addresses that can 
-                be allocated in this pool. This value may be 
+              description "maximum count of addresses that can
+                be allocated in this pool. This value may be
                 less than count of total addresses.";
             }
-            leaf option-set-id {
+            leaf-list option-set-id {
               type leafref {
-                path "/server/option-sets/option-set/option-set-id";
+                path "/config/option-sets/option-set/option-set-id";
               }
-              mandatory true;
               description "The ID field of relevant option-set to be
                 provisioned to clients of this address-pool.";
             }
-          }    	               	                	            
+          }
         }
 
         container pd-pools {
-          description "If a server supports prefix delegation function, this 
-            container will be used to define  the delegating router's prefix 
+          description "If a server supports prefix delegation function, this
+            container will be used to define  the delegating router's prefix
             pools.";
           list pd-pool {
             key pool-id;
-            description "Similar to server's address pools, a delegating 
-              router can also be configured with multiple prefix pools 
+            description "Similar to server's address pools, a delegating
+              router can also be configured with multiple prefix pools
               specified by a list called 'prefix-pool'.";
             leaf pool-id {
               type uint32;
@@ -261,23 +251,18 @@ submodule ietf-dhcpv6-server {
             leaf rapid-commit {
               type boolean;
               mandatory true;
-              description "A boolean value specifies whether the server 
+              description "A boolean value specifies whether the server
                 support client-server exchanges involving two messages defined.";
-            }
-            leaf client-class {
-              type string;
-              description "client class";
             }
             leaf max-pd-space-utilization {
               type dhcpv6-types:threshold;
               mandatory true;
               description "Maximum utilization of pd space in this pool";
             }
-            leaf option-set-id {
+            leaf-list option-set-id {
               type leafref {
-                path "/server/option-sets/option-set/option-set-id";
+                path "/config/option-sets/option-set/option-set-id";
               }
-              mandatory true;
               description "The ID field of relevant option-set to be
                 provisioned to clients of this prefix-pool.";
             }
@@ -285,11 +270,11 @@ submodule ietf-dhcpv6-server {
         }
 
         container host-reservations {
-          description 
+          description
             "This container allows the server to make reservations at host level.";
           list host-reservation {
             key cli-id;
-            description "This list allows the server to reserve addresses, 
+            description "This list allows the server to reserve addresses,
               prefixes, hostname and options for different clients.";
             leaf cli-id {
               type uint32;
@@ -299,7 +284,7 @@ submodule ietf-dhcpv6-server {
 
             choice client-identifier {
               description "When making reservations, the server needs to choose a
-                identifier to identify the client. Currently 'DUID' and 'hardware 
+                identifier to identify the client. Currently 'DUID' and 'hardware
                 address' are supported.";
               case duid {
                 description "DUID";
@@ -344,11 +329,11 @@ submodule ietf-dhcpv6-server {
               description "reserved hostname";
             }
 
-            leaf option-set-id {
+            leaf-list option-set-id {
               type leafref {
-                path "/server/option-sets/option-set/option-set-id";
+                path "/config/option-sets/option-set/option-set-id";
               }
-              description "The ID field of relevant option-set to be provisioned 
+              description "The ID field of relevant option-set to be provisioned
                 in the host reservation.";
             }
           }
@@ -358,8 +343,8 @@ submodule ietf-dhcpv6-server {
     }
 
     container relay-opaque-paras {
-      description "This container contains some opaque values in Relay Agent 
-        options that need to be configured on the server side only for value 
+      description "This container contains some opaque values in Relay Agent
+        options that need to be configured on the server side only for value
         match. Such Relay Agent options include Interface-Id option,
         Remote-Id option and Subscriber-Id option.";
       list relays {
@@ -410,7 +395,7 @@ submodule ietf-dhcpv6-server {
             type string;
             mandatory true;
             description "remote id";
-          }		
+          }
         }
       }
     }
@@ -438,31 +423,31 @@ submodule ietf-dhcpv6-server {
   /*
    * State data
    */
-  container server-state {
+  container state {
     config "false";
-    description "states of server";    	 	
-    container network-ranges { 
-      description "This model supports a hierarchy to achieve dynamic configuration. 
-        That is to say we could configure the server  at different levels through 
-        this model. The top level is a global level which is defined as the container 
-        'network-ranges'. The following levels are defined as sub-containers under it. 
-        The 'network-ranges' contains the parameters (e.g. option-sets) that  would be 
+    description "states of server";
+    container network-ranges {
+      description "This model supports a hierarchy to achieve dynamic configuration.
+        That is to say we could configure the server  at different levels through
+        this model. The top level is a global level which is defined as the container
+        'network-ranges'. The following levels are defined as sub-containers under it.
+        The 'network-ranges' contains the parameters (e.g. option-sets) that  would be
         allocated to all the clients served by this server.";
       list network-range {
         key network-range-id;
-        description "The ID field of relevant option-set to be provisioned 
-          to clients of this network-range."; 
+        description "The ID field of relevant option-set to be provisioned
+          to clients of this network-range.";
           leaf network-range-id {
             type uint32;
             mandatory true;
             description "equivalent to subnet id";
           }
         container address-pools {
-          description "A container that describes the DHCPv6 server's address pools";   			
+          description "A container that describes the DHCPv6 server's address pools";
           list address-pool {
             key pool-id;
-            description "A DHCPv6 server can be configured with 
-              several address pools. This list defines such address pools 
+            description "A DHCPv6 server can be configured with
+              several address pools. This list defines such address pools
               which are distinguished by the key called 'pool-id'.";
             leaf pool-id {
               type uint32;
@@ -482,7 +467,7 @@ submodule ietf-dhcpv6-server {
           }
           list binding-info {
             key cli-id;
-            description "A list that records a binding information for each DHCPv6 
+            description "A list that records a binding information for each DHCPv6
               client that has already been allocated IPv6 addresses.";
             leaf cli-id {
               type uint32;
@@ -517,18 +502,18 @@ submodule ietf-dhcpv6-server {
               }
             }
           }
-        }    		
+        }
         container pd-pools {
-          description "If a server supports prefix delegation function, 
-            this container will be used to define the delegating 
+          description "If a server supports prefix delegation function,
+            this container will be used to define the delegating
             router's prefix pools.";
           list prefix-pool {
             key pool-id;
-            description "Similar to server's address pools, a delegating 
-              router can also be configured with multiple prefix pools 
+            description "Similar to server's address pools, a delegating
+              router can also be configured with multiple prefix pools
               specified by a list called 'prefix-pool'.";
             leaf pool-id {
-              type uint32;  
+              type uint32;
               mandatory true;
               description "pool id";
             }
@@ -540,10 +525,10 @@ submodule ietf-dhcpv6-server {
           }
           list binding-info {
             key cli-id;
-            description "A list records a binding information for each DHCPv6 
+            description "A list records a binding information for each DHCPv6
               client that has already been alloated IPv6 prefixes.";
             leaf cli-id {
-              type uint32;   
+              type uint32;
               mandatory true;
               description "client id";
             }
@@ -558,20 +543,20 @@ submodule ietf-dhcpv6-server {
                 type uint32;
                 mandatory true;
                 description "IAID";
-              }   					
+              }
               leaf-list cli-prefix {
                 type inet:ipv6-prefix;
                 description "client ipv6 prefix";
-              }    					
+              }
               leaf-list cli-prefix-len {
                 type uint8;
                 description "client prefix length";
-              }    					
+              }
               leaf pool-id {
                 type uint32;
                 mandatory true;
                 description "pool id";
-              }	
+              }
             }
           }
         }
@@ -580,12 +565,12 @@ submodule ietf-dhcpv6-server {
           description "This container provides host reservations in the host level.";
           list binding-info {
             key cli-id;
-            description 
-              "A list records a binding information for each DHCPv6 
+            description
+              "A list records a binding information for each DHCPv6
               client that has already been alloated IPv6 addresses or prefixes
               by host reservations.";
             leaf cli-id {
-              type uint32;   
+              type uint32;
               mandatory true;
               description "client id";
             }
@@ -619,24 +604,24 @@ submodule ietf-dhcpv6-server {
                 type uint32;
                 mandatory true;
                 description "IAID";
-              }   					
+              }
               leaf-list cli-prefix {
                 type inet:ipv6-prefix;
                 description "client ipv6 prefix";
-              }    					
+              }
               leaf-list cli-prefix-len {
                 type uint8;
                 description "client prefix length";
-              }    						
+              }
             }
           }
-        }        
+        }
 
-      }	        		        		
+      }
     }
 
     container packet-stats {
-      description "A container presents the packet statistics related to 
+      description "A container presents the packet statistics related to
         the DHCPv6 server.";
       leaf solicit-count {
         type uint32;
@@ -706,7 +691,7 @@ submodule ietf-dhcpv6-server {
     }
   }
 
-  /* 	
+  /*
    * Notifications
    */
 
@@ -728,8 +713,8 @@ submodule ietf-dhcpv6-server {
         leaf max-address-count {
           type uint64;
           mandatory true;
-          description "maximum count of addresses that can be allocated 
-            in the pool. This value may be less than count of total 
+          description "maximum count of addresses that can be allocated
+            in the pool. This value may be less than count of total
             addresses";
         }
         leaf allocated-address-conut {
