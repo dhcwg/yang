@@ -1,18 +1,13 @@
 module ietf-dhcpv6-server-root {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server-root";
-  prefix "dhcpv6-server-config";
+  prefix "dhcpv6-server-root";
 
   include "ietf-dhcpv6-server"; 
+  include "ietf-dhcpv6-options-rfc8415";
 
   import ietf-dhcpv6-types {
     prefix dhcpv6-types;
-  }
-  import ietf-dhcpv6-options-rfc8415 {
-    prefix rfc8415;
-  }
-  import ietf-dhcpv6-options-rfc3319 {
-    prefix rfc3319;
   }
 
   import ietf-dhcpv6-server-config {

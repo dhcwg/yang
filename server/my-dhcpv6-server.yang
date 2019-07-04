@@ -1,0 +1,56 @@
+module my-dhcpv6-server {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:my-dhcpv6-server";
+  prefix "my-dhcpv6-server";
+
+  import ietf-dhcpv6-server {
+    prefix dhcpv6-server;
+  }
+  import ietf-dhcpv6-classifying {
+    prefix dhcpv6-classifying;
+  }
+
+  organization "DHC WG";
+  contact
+    "me@yahoo.com";
+
+  description "This model defines TODO a DHCPv6 server.";
+
+  revision 2019-06-13 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  augment "/dhcpv6-server:server/dhcpv6-server:server-config" {
+    container client-classes {
+      list class {
+        description "List of the client class identifiers applicable
+                  to clients served by this address pool";
+        key client-class-name;
+        uses dhcpv6-classifying:client-class-id;
+      }
+    }
+  }
+
+  augment "/dhcpv6-server:server/dhcpv6-server:server-config/dhcpv6-server:network-ranges/dhcpv6-server:network-range" {
+    leaf-list client-class {
+      type leafref {
+        path "/dhcpv6-server:server/dhcpv6-server:server-config/client-classes/class/client-class-name";
+      }
+    }
+  }
+  augment "/dhcpv6-server:server/dhcpv6-server:server-config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:address-pools/dhcpv6-server:address-pool" {
+    leaf-list client-class {
+      type leafref {
+        path "/dhcpv6-server:server/dhcpv6-server:server-config/client-classes/class/client-class-name";
+      }
+    }
+  }
+  augment "/dhcpv6-server:server/dhcpv6-server:server-config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:pd-pools/dhcpv6-server:pd-pool" {
+    leaf-list client-class {
+      type leafref {
+        path "/dhcpv6-server:server/dhcpv6-server:server-config/client-classes/class/client-class-name";
+      }
+    }
+  }
+}
