@@ -1,0 +1,20 @@
+submodule submodule-one {
+  belongs-to top {
+    prefix "t";
+  }
+
+  import ietf-inet-types {
+    prefix "inet";
+  }
+
+  grouping one {
+    container something {
+      leaf an-integer {
+        type int32;
+      }
+      leaf an-address {
+        type inet:ip-address;
+      }
+    }
+  }
+}

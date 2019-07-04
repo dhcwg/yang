@@ -6,6 +6,9 @@ module ietf-dhcpv6-options-rfc3319 {
   import ietf-inet-types {
     prefix inet;
   }
+  import ietf-dhcpv6-server {
+    prefix "dhcpv6-server";
+  }
 
   organization "DHC WG";
   contact 
@@ -38,7 +41,7 @@ module ietf-dhcpv6-options-rfc3319 {
    * Groupings
    */
 
-  grouping option-definitions {
+  augment "/dhcpv6-server:option-sets/dhcpv6-server:option-set/dhcpv6-server:options" {
     container sip-server-domain-name-list-option {
       if-feature "server";
       description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";

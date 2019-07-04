@@ -15,6 +15,9 @@ module ietf-dhcpv6-server-config {
   import ietf-interfaces {
     prefix if;
   }
+  import ietf-dhcpv6-server {
+    prefix dhcpv6-server;
+  }
 
   organization "DHC WG";
   contact 
@@ -42,9 +45,7 @@ module ietf-dhcpv6-server-config {
   /* 
    * Configuration data
    */
-  grouping config {
-    description "Parameters necessary for the configuration of a DHCPv6
-      server";
+  augment "/" {
     container serv-attributes {
       description 
         "This container contains basic attributes of a DHCPv6 server 

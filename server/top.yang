@@ -1,0 +1,10 @@
+module top {
+  namespace "http://tail-f.com/top";
+  prefix "t";
+
+  include "submodule-one";
+  include "submodule-two";
+
+  uses one;
+  uses two;
+}

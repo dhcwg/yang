@@ -32,24 +32,22 @@ module ietf-dhcpv6-server-root {
 
   /*
    * Groupings
-   */
   grouping option-definitions {
      description "Contains definitions for the set of DHCPv6 options which are
        implmented by the server. Modules for additional options can be
        augmented here as required.";
      uses rfc8415:option-definitions;
      uses rfc3319:option-definitions;
-  }
+  }*/
   /*
    * Data Nodes
    */
   /* 
    * Configuration data
-   */
   container server-config {
     description "Parameters necessary for the configuration of a DHCPv6
       server";
-    uses server-config:config;
+    uses server;
     uses dhcpv6-types:vendor-infor;
   }
 
@@ -58,7 +56,7 @@ module ietf-dhcpv6-server-root {
       of DHCPv6 clients";
     uses server;
   }
-
+  */
   container client-class-selector {
 
   }
