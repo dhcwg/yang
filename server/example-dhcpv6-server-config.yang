@@ -1,6 +1,6 @@
 module example-dhcpv6-server-config {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server-config";
+  namespace "urn:ietf:params:xml:ns:yang:example-dhcpv6-server-config";
   prefix "dhcpv6-server-config";
 
   import ietf-inet-types {
@@ -9,11 +9,14 @@ module example-dhcpv6-server-config {
   import ietf-yang-types {
     prefix yang;
   }
+  import ietf-interfaces {
+    prefix if;
+  }
   import ietf-dhcpv6-types {
     prefix dhcpv6-types;
   }
-  import ietf-interfaces {
-    prefix if;
+  import ietf-dhcpv6-server {
+    prefix dhcpv6-server;
   }
 
   organization "DHC WG";
@@ -191,5 +194,9 @@ module example-dhcpv6-server-config {
      * Notifications
      */
 
+  }
+
+  augment "/dhcpv6-server:config" {
+    uses dhcpv6-server-config:config;
   }
 }

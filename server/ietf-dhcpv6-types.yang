@@ -5,13 +5,13 @@ module ietf-dhcpv6-types {
 
   import ietf-inet-types {
     prefix inet;
-  }	
+  }
   import ietf-yang-types {
     prefix yang;
   }
 
   organization "DHC WG";
-  contact 
+  contact
     "yong@csnet1.cs.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -64,7 +64,7 @@ module ietf-dhcpv6-types {
       description "";
       leaf ent-num {
         type uint32;
-        mandatory true;
+        // mandatory true; // TODO: vendor-infor is used indirectly in augmentation and thus it cannot be mandatory
         description "enterprise number";
       }
       leaf-list data {
@@ -75,12 +75,12 @@ module ietf-dhcpv6-types {
   }
 
   grouping duid {
-    description 
-      "Each server and client has only one DUID (DHCP Unique Identifier). 
-      The DUID here identifies a unique DHCPv6 server for clients. DUID 
-      consists of a two-octet type field and an arbitrary length (no more 
-          than 128 bytes) content field. Currently there are four defined types 
-      of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and 
+    description
+      "Each server and client has only one DUID (DHCP Unique Identifier).
+      The DUID here identifies a unique DHCPv6 server for clients. DUID
+      consists of a two-octet type field and an arbitrary length (no more
+          than 128 bytes) content field. Currently there are four defined types
+      of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and
       DUID-UUID. DUID-Uknown represents those unconventional DUIDs.";
     reference "RFC3315: Section 9 and RFC6355: Section 4";
     leaf type-code {
@@ -92,7 +92,7 @@ module ietf-dhcpv6-types {
       default duid-unknown;
       description "Selects the format for the DUID.";
       case duid-llt {
-        description "DUID Based on Link-layer Address Plus Time 
+        description "DUID Based on Link-layer Address Plus Time
           (Type 1 - DUID-LLT)";
         reference "RFC3315 Section 9.2";
         leaf duid-llt-hardware-type {
@@ -101,8 +101,8 @@ module ietf-dhcpv6-types {
         }
         leaf duid-llt-time {
           type yang:timeticks;
-          description "The time value is the time that the DUID is 
-            generated represented in seconds since midnight (UTC), 
+          description "The time value is the time that the DUID is
+            generated represented in seconds since midnight (UTC),
                       January 1, 2000, modulo 2^32.";
         }
         leaf duid-llt-link-layer-addr {
@@ -111,7 +111,7 @@ module ietf-dhcpv6-types {
         }
       }
       case duid-en {
-        description "DUID Assigned by Vendor Based on Enterprise Number 
+        description "DUID Assigned by Vendor Based on Enterprise Number
           (Type 2 - DUID-EN)";
         reference "RFC3315 Section 9.3";
         leaf duid-en-enterprise-number {
@@ -121,7 +121,7 @@ module ietf-dhcpv6-types {
         }
         leaf duid-en-identifier {
           type string;
-          description "Indentifier, unique to the device that is 
+          description "Indentifier, unique to the device that is
             using it";
         }
       }
@@ -138,15 +138,15 @@ module ietf-dhcpv6-types {
         }
       }
       case duid-uuid {
-        description "DUID Based on Universally Unique Identifier 
+        description "DUID Based on Universally Unique Identifier
           (Type 4 - DUID-UUID)";
         reference "RFC6335 Defination of the UUID-Based Unique Identifier";
         leaf uuid {
           type yang:uuid;
-          description "A Universally Unique IDentifier in the string 
-            representation defined in RFC 4122. The canonical 
+          description "A Universally Unique IDentifier in the string
+            representation defined in RFC 4122. The canonical
             representation uses lowercase characters";
-        }    	  
+        }
       }
       case duid-unknown {
         description "DUID based on free raw bytes";
@@ -154,7 +154,7 @@ module ietf-dhcpv6-types {
           type binary;
           description "The bits to be used as the identifier";
         }
-      }	      
+      }
     }
   }
 
