@@ -1,4 +1,4 @@
-module ietf-dhcpv6-class-selector {
+module example-dhcpv6-class-selector {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-class-selector";
   prefix "dhcpv6-class-selector";

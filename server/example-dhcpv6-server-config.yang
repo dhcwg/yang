@@ -1,4 +1,4 @@
-module ietf-dhcpv6-server-config {
+module example-dhcpv6-server-config {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server-config";
   prefix "dhcpv6-server-config";
@@ -17,7 +17,7 @@ module ietf-dhcpv6-server-config {
   }
 
   organization "DHC WG";
-  contact 
+  contact
     "cuiyong@tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
@@ -39,16 +39,16 @@ module ietf-dhcpv6-server-config {
   /*
    * Data Nodes
    */
-  /* 
+  /*
    * Configuration data
    */
   grouping config {
     description "Parameters necessary for the configuration of a DHCPv6
       server";
     container serv-attributes {
-      description 
-        "This container contains basic attributes of a DHCPv6 server 
-        such as IPv6 address, server name  and so on. Some optional 
+      description
+        "This container contains basic attributes of a DHCPv6 server
+        such as IPv6 address, server name  and so on. Some optional
         functions that can be provided  by the server is also included.";
       container duid {
         description "Sets the DUID of server";
@@ -70,12 +70,12 @@ module ietf-dhcpv6-server-config {
         // Note - this should probably be references to
         // entries in the ietf-interfaces model
         type if:interface-ref;
-        description "A leaf list to denote which one or more interfaces 
-          the server should listen on. The default value is to listen 
-          on all the interfaces. This node is also used to set a unicast 
+        description "A leaf list to denote which one or more interfaces
+          the server should listen on. The default value is to listen
+          on all the interfaces. This node is also used to set a unicast
           address for the server to listen with a specific interface.
-          For example, if people want the server to listen on a unicast 
-          address with a specific interface, he can use the format like 
+          For example, if people want the server to listen on a unicast
+          address with a specific interface, he can use the format like
           'eth1/2001:db8::1'.";
       }
       container lease-storage {
@@ -85,7 +85,7 @@ module ietf-dhcpv6-server-config {
           // leaf persist {
           // 		type boolean;
           // 		mandatory true;
-          // 		description "controls whether the new leases and updates to existing leases are 
+          // 		description "controls whether the new leases and updates to existing leases are
           // 		written to the file";
           // }
           case memfile {
@@ -93,13 +93,13 @@ module ietf-dhcpv6-server-config {
 
             leaf memfile-name {
               type string;
-              description "specifies an absolute location of the lease file in which new leases 
+              description "specifies an absolute location of the lease file in which new leases
                 and lease updates will be recorded";
             }
 
             leaf memfile-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a 
+              description "specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
           }
@@ -110,7 +110,7 @@ module ietf-dhcpv6-server-config {
             }
             leaf mysql-host {
               type string;
-              description "If the database is located 
+              description "If the database is located
                 on a different system to the DHCPv6 server, the database host name must also be specified.";
             }
             leaf mysql-password {
@@ -123,7 +123,7 @@ module ietf-dhcpv6-server-config {
             }
             leaf mysql-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a 
+              description "specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
             leaf mysql-connect-timeout {
@@ -138,7 +138,7 @@ module ietf-dhcpv6-server-config {
             }
             leaf postgresql-host {
               type string;
-              description "If the database is located 
+              description "If the database is located
                 on a different system to the DHCPv6 server, the database host name must also be specified.";
             }
             leaf postgresql-password {
@@ -151,7 +151,7 @@ module ietf-dhcpv6-server-config {
             }
             leaf postgresql-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a 
+              description "specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
             leaf postgresql-connect-timeout {
@@ -174,20 +174,20 @@ module ietf-dhcpv6-server-config {
             }
             leaf cassandra-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a 
+              description "specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
             leaf cassandra-connect-timeout {
               type uint64;
               description "If the database is located on a different system, a longer interval needs to be specified";
-            }							
+            }
           }
         }
       }
       uses dhcpv6-types:vendor-infor;
     }
-    
-    /* 	
+
+    /*
      * Notifications
      */
 

@@ -1,4 +1,4 @@
-module my-dhcpv6-server {
+module example-dhcpv6-server {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:my-dhcpv6-server";
   prefix "my-dhcpv6-server";
@@ -18,12 +18,12 @@ module my-dhcpv6-server {
   }
 
   // extra: class selection
-  import ietf-dhcpv6-class-selector {
+  import example-dhcpv6-class-selector {
     prefix dhcpv6-class-selector;
   }
 
   // my:  specific stuff
-  import ietf-dhcpv6-server-config {
+  import example-dhcpv6-server-config {
     prefix dhcpv6-server-config;
   }
 
