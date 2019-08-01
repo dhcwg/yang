@@ -43,7 +43,7 @@ module ietf-dhcpv6-options-rfc3319 {
    */
 
   augment "/dhcpv6-server:config/dhcpv6-server:option-sets/dhcpv6-server:option-set/dhcpv6-server:options" {
-    case sip-server-domain-name-list-option {
+    container sip-server-domain-name-list-option {
       if-feature "server";
       description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
       reference "RFC3319: Dynamic Host Configuration Protocol
@@ -54,7 +54,7 @@ module ietf-dhcpv6-options-rfc3319 {
       }
     }
 
-    case sip-server-address-list-option {
+    container sip-server-address-list-option {
       if-feature "server";
       description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List";
       reference "RFC3319: Dynamic Host Configuration Protocol (DHCPv6)
