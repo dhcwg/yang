@@ -55,6 +55,10 @@ module ietf-dhcpv6-server {
   /*
    * Data Nodes
    */
+
+  container vendor-server-config {
+    description "augment vendors stuff here";
+  }
   container option-sets {
     description "DHCPv6 employs various options to carry additional
       information and parameters in DHCP messages. This container defines
