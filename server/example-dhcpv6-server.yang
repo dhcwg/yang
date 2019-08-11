@@ -1,0 +1,40 @@
+module example-dhcpv6-server {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:example-dhcpv6-server";
+  prefix "my-dhcpv6-server";
+
+  // basics
+  import ietf-dhcpv6-server {
+    prefix dhcpv6-server;
+  }
+
+  // extra: rfc8415 options
+  import ietf-dhcpv6-options-rfc8415 {
+    prefix dhcpv6-options-rfc8415;
+  }
+  // extra: rfc3319 options
+  import ietf-dhcpv6-options-rfc3319 {
+    prefix dhcpv6-options-rfc3319;
+  }
+
+  // extra: class selection
+  import example-dhcpv6-class-selector {
+    prefix dhcpv6-class-selector;
+  }
+
+  // my:  specific stuff
+  import example-dhcpv6-server-config {
+    prefix dhcpv6-server-config;
+  }
+
+  organization "DHC WG";
+  contact
+    "me@yahoo.com";
+
+  description "This model defines TODO a DHCPv6 server.";
+
+  revision 2019-06-13 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+}
