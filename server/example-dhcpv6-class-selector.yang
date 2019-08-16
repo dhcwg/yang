@@ -9,8 +9,8 @@ module example-dhcpv6-class-selector {
   import ietf-interfaces {
     prefix if;
   }
-  import ietf-dhcpv6-types {
-    prefix dhcpv6-types;
+  import ietf-dhcpv6-common {
+    prefix dhcpv6-common;
   }
   import ietf-dhcpv6-server {
     prefix dhcpv6-server;
@@ -191,7 +191,7 @@ module example-dhcpv6-class-selector {
       case client-duid-id {
         description "Client class selection based on the value of the received
           client DUID.";
-        uses dhcpv6-types:duid;
+        uses dhcpv6-common:duid;
       }
     }
   }

@@ -9,8 +9,8 @@ module ietf-dhcpv6-server {
   import ietf-yang-types {
     prefix yang;
   }
-  import ietf-dhcpv6-types {
-    prefix dhcpv6-types;
+  import ietf-dhcpv6-common {
+    prefix dhcpv6-common;
   }
 
   organization "DHC WG";
@@ -52,7 +52,7 @@ module ietf-dhcpv6-server {
 
   identity dhcpv6-node-type-server {
     description "Type for a DHCPv6 server";
-    base dhcpv6-types:dhcpv6-node-type;
+    base dhcpv6-common:dhcpv6-node-type;
   }
 
   /*
@@ -189,7 +189,7 @@ module ietf-dhcpv6-server {
                 supports client-server exchanges involving two messages.";
             }
             leaf max-address-count {
-              type dhcpv6-types:threshold;
+              type dhcpv6-common:threshold;
               mandatory true;
               description "maximum count of addresses that can
                 be allocated in this pool. This value may be
@@ -256,7 +256,7 @@ module ietf-dhcpv6-server {
                 support client-server exchanges involving two messages defined.";
             }
             leaf max-pd-space-utilization {
-              type dhcpv6-types:threshold;
+              type dhcpv6-common:threshold;
               mandatory true;
               description "Maximum utilization of pd space in this pool";
             }
@@ -289,7 +289,7 @@ module ietf-dhcpv6-server {
                 address' are supported.";
               case duid {
                 description "DUID";
-                uses dhcpv6-types:duid;
+                uses dhcpv6-common:duid;
               }
               case hw-address {
                 description "hardware address";
@@ -477,7 +477,7 @@ module ietf-dhcpv6-server {
             }
             container duid {
               description "Read the DUID";
-              uses dhcpv6-types:duid;
+              uses dhcpv6-common:duid;
             }
             list cli-ia {
               key iaid;
@@ -519,7 +519,7 @@ module ietf-dhcpv6-server {
               description "pool id";
             }
             leaf pd-space-utilization {
-              type dhcpv6-types:threshold;
+              type dhcpv6-common:threshold;
               mandatory true;
               description "current PD space utilization";
             }
@@ -535,7 +535,7 @@ module ietf-dhcpv6-server {
             }
             container duid {
               description "Reads the DUID";
-              uses dhcpv6-types:duid;
+              uses dhcpv6-common:duid;
             }
             list cli-iapd {
               key iaid;
@@ -577,7 +577,7 @@ module ietf-dhcpv6-server {
             }
             container duid {
               description "Reads the DUID";
-              uses dhcpv6-types:duid;
+              uses dhcpv6-common:duid;
             }
             list cli-ia {
               key iaid;
@@ -725,7 +725,7 @@ module ietf-dhcpv6-server {
         }
         container duid {
           description "server duid";
-          uses dhcpv6-types:duid;
+          uses dhcpv6-common:duid;
         }
         leaf serv-name {
           type string;
@@ -744,18 +744,18 @@ module ietf-dhcpv6-server {
           administrator when the utilization ratio reaches the
           threshold, and such threshold is a settable parameter";
         leaf max-pd-space-utilization {
-          type dhcpv6-types:threshold;
+          type dhcpv6-common:threshold;
           mandatory true;
           description "maximum pd space utilization";
         }
         leaf pd-space-utilization {
-          type dhcpv6-types:threshold;
+          type dhcpv6-common:threshold;
           mandatory true;
           description "current pd space utilization";
         }
         container duid {
           description "Sets the DUID";
-          uses dhcpv6-types:duid;
+          uses dhcpv6-common:duid;
         }
         leaf serv-name {
           type string;
@@ -773,7 +773,7 @@ module ietf-dhcpv6-server {
           could also be included.";
         container duid {
           description "Sets the DUID";
-          uses dhcpv6-types:duid;
+          uses dhcpv6-common:duid;
         }
         leaf description {
           type string;

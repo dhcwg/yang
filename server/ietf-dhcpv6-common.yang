@@ -1,6 +1,6 @@
-module ietf-dhcpv6-types {
+module ietf-dhcpv6-common {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common";
   prefix "dhcpv6-types";
 
   import ietf-inet-types {
