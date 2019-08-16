@@ -1,7 +1,7 @@
-module example-dhcpv6-server {
+module example-dhcpv6-server-root {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:example-dhcpv6-server";
-  prefix "my-dhcpv6-server";
+  prefix "example-dhcpv6-server-root";
 
   // basics
   import ietf-dhcpv6-server {
