@@ -12,8 +12,8 @@ module example-dhcpv6-server-config {
   import ietf-interfaces {
     prefix if;
   }
-  import ietf-dhcpv6-types {
-    prefix dhcpv6-types;
+  import ietf-dhcpv6-common {
+    prefix dhcpv6-common;
   }
   import ietf-dhcpv6-server {
     prefix dhcpv6-server;
@@ -55,7 +55,7 @@ module example-dhcpv6-server-config {
         functions that can be provided  by the server is also included.";
       container duid {
         description "Sets the DUID of server";
-        uses dhcpv6-types:duid;
+        uses dhcpv6-common:duid;
       }
       leaf name {
         type string;
@@ -187,7 +187,7 @@ module example-dhcpv6-server-config {
           }
         }
       }
-      uses dhcpv6-types:vendor-infor;
+      uses dhcpv6-common:vendor-infor;
     }
 
     /*
@@ -196,7 +196,7 @@ module example-dhcpv6-server-config {
 
   }
 
-  augment "/dhcpv6-server:config" {
+  augment "/dhcpv6-server:config/dhcpv6-server:vendor-config" {
     uses dhcpv6-server-config:config;
   }
 }
