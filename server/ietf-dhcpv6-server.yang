@@ -95,6 +95,10 @@ module ietf-dhcpv6-server {
       }
     }
 
+    container class-selector {
+      description "Mount point for class selection configuration.";
+    }
+
     container network-ranges {
       description "This model supports a hierarchy
         to achieve dynamic configuration. That is to say we could configure the
