@@ -706,90 +706,97 @@ module ietf-dhcpv6-server {
    * Notifications
    */
 
-  notification notifications {
-    description "dhcpv6 server notification module";
-    container dhcpv6-server-event {
-      description "dhcpv6 server event";
-      container address-pool-running-out {
-        description "raised when the address pool is going to
+  notification address-pool-running-out {
+    description "raised when the address pool is going to
           run out.  A threshold for utilization ratio of the pool has
           been defined in the server feature so that it will notify the
           administrator when the utilization ratio reaches the
           threshold, and such threshold is a settable parameter";
-        leaf total-address-count {
-          type uint64;
-          mandatory true;
-          description "count of total addresses in the pool";
-        }
-        leaf max-address-count {
-          type uint64;
-          mandatory true;
-          description "maximum count of addresses that can be allocated
+    leaf total-address-count {
+      type uint64;
+      mandatory true;
+      description "count of total addresses in the pool";
+    }
+    leaf max-address-count {
+      type uint64;
+      mandatory true;
+      description "maximum count of addresses that can be allocated
             in the pool. This value may be less than count of total
             addresses";
-        }
-        leaf allocated-address-conut {
-          type uint64;
-          mandatory true;
-          description "count of allocated addresses in the pool";
-        }
-        container duid {
-          description "server duid";
-          uses dhcpv6-common:duid;
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf pool-name {
-          type string;
-          mandatory true;
-          description "pool name";
-        }
-      }
-      container pd-pool-running-out {
-        description "raised when the address/prefix pool is going to
+    }
+    leaf allocated-address-conut {
+      type uint64;
+      mandatory true;
+      description "count of allocated addresses in the pool";
+    }
+    leaf pool-id {
+      type uint32;
+      mandatory true;
+      description "pool id";
+    }
+  }
+
+  notification pd-pool-running-out {
+    description "Raised when the address/prefix pool is going to
           run out.  A threshold for utilization ratio of the pool has
           been defined in the server feature so that it will notify the
           administrator when the utilization ratio reaches the
           threshold, and such threshold is a settable parameter";
-        leaf max-pd-space-utilization {
-          type dhcpv6-common:threshold;
-          mandatory true;
-          description "maximum pd space utilization";
-        }
-        leaf pd-space-utilization {
-          type dhcpv6-common:threshold;
-          mandatory true;
-          description "current pd space utilization";
-        }
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf pool-name {
-          type string;
-          mandatory true;
-          description "pool name";
-        }
-      }
-      container invalid-client-detected {
-        description "raised when the server has found a client which
+    leaf max-pd-space-utilization {
+      type dhcpv6-common:threshold;
+      mandatory true;
+      description "maximum pd space utilization";
+    }
+    leaf pd-space-utilization {
+      type dhcpv6-common:threshold;
+      mandatory true;
+      description "current pd space utilization";
+    }
+    leaf pool-id {
+      type uint32;
+      mandatory true;
+      description "pool id";
+    }
+  }
+
+  notification invalid-client-detected {
+    description "raised when the server has found a client which
           can be regarded as a potential attacker. Some description
           could also be included.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
-        }
-        leaf description {
-          type string;
-          description "description of the event";
-        }
-      }
+    container duid {
+      description "Client's DUID";
+      uses dhcpv6-common:duid;
+    }
+    leaf description {
+      type string;
+      description "description of the event";
+    }
+  }
+
+  notification decline-received {
+    description "Raised when the server has received DECLINE message
+      from a client.";
+    container duid {
+      description "Client's DUID";
+      uses dhcpv6-common:duid;
+    }
+    leaf-list addresses {
+      type inet:ipv6-address;
+      description "List of suspicious addresses";
+    }
+  }
+
+  notification non-success-code-sent {
+    description "Raised when the server responded to a client
+      with non-success status code.";
+    leaf status-code {
+      type uint16;
+      mandatory true;
+      description "Status code returned to a client";
+    }
+    container duid {
+      description "Client's DUID";
+      uses dhcpv6-common:duid;
     }
   }
 }
