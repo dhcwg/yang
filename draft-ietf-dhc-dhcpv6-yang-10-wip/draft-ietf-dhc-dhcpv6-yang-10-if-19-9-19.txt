@@ -1,0 +1,896 @@
+
+
+
+
+DHC Working Group                                                 Y. Cui
+Internet-Draft                                                    L. Sun
+Intended status: Standards Track                     Tsinghua University
+Expires: March 23, 2020                                        I. Farrer
+                                                              S. Zechlin
+                                                     Deutsche Telekom AG
+                                                                   Z. He
+                                                     Tsinghua University
+                                                      September 20, 2019
+
+
+                YANG Data Model for DHCPv6 Configuration
+                     draft-ietf-dhc-dhcpv6-yang-10
+
+Abstract
+
+   This document describes several YANG data modules [RFC7950] for the
+   configuration and management of DHCPv6 servers, relays, and clients.
+
+Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119] .
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on March 23, 2020.
+
+Copyright Notice
+
+   Copyright (c) 2019 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 1]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   4
+   2.  DHCPv6 Tree Diagram . . . . . . . . . . . . . . . . . . . . .   4
+     2.1.  DHCPv6 Server Tree Diagrams . . . . . . . . . . . . . . .   4
+     2.2.  DHCPv6 Relay Tree Diagrams  . . . . . . . . . . . . . . .   7
+     2.3.  DHCPv6 Client Tree Diagrams . . . . . . . . . . . . . . .   9
+   3.  DHCPv6 YANG Model . . . . . . . . . . . . . . . . . . . . . .  10
+     3.1.  DHCPv6 Server YANG Model  . . . . . . . . . . . . . . . .  10
+     3.2.  DHCPv6 Relay YANG Model . . . . . . . . . . . . . . . . .  10
+     3.3.  DHCPv6 Client YANG Model  . . . . . . . . . . . . . . . .  10
+     3.4.  DHCPv6 Options YANG Model . . . . . . . . . . . . . . . .  11
+     3.5.  DHCPv6 Types YANG Model . . . . . . . . . . . . . . . . .  11
+   4.  Security Considerations (TBD) . . . . . . . . . . . . . . . .  11
+   5.  IANA Considerations (TBD) . . . . . . . . . . . . . . . . . .  11
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  11
+   7.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  11
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  12
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  13
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
+
+1.  Introduction
+
+   DHCPv6 [RFC8415] is widely used for supplying configuration and other
+   relevant parameters to clients in IPv6 networks.  This document
+   defines DHCPv6 YANG data modules for the configuration and management
+   of DHCPv6 servers, relays and clients.
+
+   [RFC8415] describes the current version of the DHCPv6 base protocol
+   specification.  In addition to this, a large number of additon
+   specifications have also been published.  These extend DHCPv6 element
+   funciontionality and add new options.  The YANG modules contained in
+   this document do not attempt to capture all of these extensions and
+   additions, rather to model the DHCPv6 functions and options covered
+   in [RFC8415].  A focus has also been given on the extensability of
+
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 2]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   the modules so that it is easy to augment in additional funtionality
+   as required by a particular implementation or deployment scenario.
+
+   The modules in this document only attempt to model DHCPv6 specific
+   behaviour.  They do not cover the configuration and management of
+   specific DHCPv6 element's implementations.  There is too much
+   variance between implementations to be attempt to standardize these
+   functions in a way that is useful without being restrictive.
+
+   However, it is recognised that implementation specific configuration
+   and management is also an essential part of element deployment and
+   operations.  To resolve this, the Appendix of this document contains
+   an example module for the configuration of implementation specfic
+   funtions, illustrating how this functionality can be augemented into
+   the main ietf-dhcpv6-server.yang module.
+
+   In DHCPv6 the concept of 'class selection' for messaages received by
+   the server is common.  This is the identification of messages based
+   on a number of parameters so that messages can be correctly
+   identified and classified and the correct provisioning information
+   can be supplied.  For example, taking a prefix from the correct pool,
+   or supplying a set of options relevant for a specific vendor's client
+   implementation.  During the development of this document, research
+   has been carried out into a number of vendor's class selection
+   implementations and the findings were that while this function is
+   common to all, the method for implementing this differs greatly.
+   Therefore, this function has been ommitted from the DHCPv6 server
+   module.  The appendix provides an example module for the class
+   selection function, intended to demonstrate how this is intended to
+   integrate with the main ieft-dhcpv6-server.yang module.
+
+   DHCPv6 options vary in their applicablity.  Some are permitted only
+   to be sent by either the server, relay, or client.  Some may be sent
+   by more than one of these elements.  In order to avoid duplication of
+   the option definitions, a single module containing all of the
+   [RFC8415] options is defined here.  YANG identities are then used to
+   define the applicability of each option for the relevant DHCPv6
+   element(s).
+
+   A large number of DHCPv6 options have been created in addition to
+   those defined in [RFC8415].  As implementations differ in which
+   specific DHCPv6 options that they support, the following approach has
+   been taken to defining options: The set of DHCPv6 options defined in
+   [RFC8415] are included in this document.  Further options can be
+   added in new YANG modules via augmentation.  The Appendixes provide
+   an example of how this can be done.
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 3]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   It is worth noting that as DHCPv6 is itself a client configuration
+   protocol, it is not the intention of this document to replace the
+   allocation of DHCPv6 assigned addressing and parameters using
+   NETCONF/YANG.  The DHCPv6 client model is intended for the
+   configuration of the DHCPv6 client function and also for obtaining
+   DHCPv6 provisioned read-only state data from the client, learned via
+   the normal DHCPv6 message flow.  This gives the network operator
+   better management and troubleshooting capabilities.
+
+1.1.  Terminology
+
+   The reader should be familiar with the YANG data modelling language
+   defined in [RFC7950].
+
+   The YANG modules in this document adopt the Network Management
+   Datastore Architecture (NMDA) [RFC8342].  The meanings of the symbols
+   used in tree diagrams are defined in [RFC8340].
+
+   The reader should be familiar with the terms defined in DHCPv6
+   [RFC8415] and other relevant documents.
+
+   The DHCPv6 tree diagrams provide a concise representation of a YANG
+   module to help the reader understand the module structure.
+
+   A simplified graphical representation of the data model is provided
+   in this document.  For a description of the symbols in these
+   diagrams, please refer to [I-D.ietf-netmod-yang-tree-diagrams].
+
+2.  DHCPv6 Tree Diagram
+
+2.1.  DHCPv6 Server Tree Diagrams
+
+
+                      INSERT SERVER TREE DIAGRAM HERE
+
+
+                   Figure 1: DHCPv6 Data Model Structure
+
+   Introduction of important nodes:
+
+   o  server-config: This container contains the configuration data of a
+      server.
+
+   o  serv-attributes: This container contains basic attributes of a
+      DHCPv6 server such as DUID, server name and so on.  Some optional
+      functions that can be provided by the server is also included.
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 4]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   o  duid: Each server and client has only one DUID (DHCP Unique
+      Identifier).  The DUID here identifies a unique DHCPv6 server for
+      clients.  DUID consists of a two-octet type field and an arbitrary
+      length (no more than 128 bytes) content field.  Currently there
+      are four defined types of DUIDs in [RFC8415] and [RFC6355] - DUID-
+      LLT, DUID-EN, DUID-LL and DUID-UUID.  DUID-Unknown represents
+      those unconventional DUIDs.
+
+   o  lease-storage: The server can store lease data in different
+      repositories, whether in a CSV file for smaller deployments or in
+      a database for larger deployments.
+
+   o  operator-option-ipv6-address, operator-option-single-flag,
+      operator-option-ipv6-prefix, operator-option-int32, operator-
+      option-int16, operator-option-int8, operator-option-uri, operator-
+      option-textstring, operator-option-var-data, operator-option-dns-
+      wire: are generic option formats described in [RFC7227].
+
+   o  interfaces-config: A leaf list to denote which one or more
+      interfaces the server should listen on.  The default value is to
+      listen on all the interfaces.  This node is also used to set a
+      unicast address for the server to listen with a specific
+      interface.  For example, if the server is being configured to
+      listen on a unicast address assigned to a specific interface, the
+      format "eth1/2001:db8::1" can be used.
+
+   o  option-sets: DHCPv6 employs various options to carry additional
+      information and parameters in DHCP messages.  This container
+      defines all the possible options that need to be configured at the
+      server side.  The relevant RFCs that define those options include:
+      [RFC8415], [RFC3319], [RFC3646], [RFC3898], [RFC4242], [RFC4704],
+      [RFC4833], [RFC5908], [RFC5970], [RFC4075], [RFC6334], [RFC6784],
+      [RFC7078], [RFC7083], [RFC7291], [RFC7598].
+
+   o  option-set: A server may allow different option sets to be
+      configured for different conditions (i.e. different networks,
+      clients and etc).  This "option-set" list enables various sets of
+      options being defined and configured in a single server.
+      Different sets are distinguished by the key called "option-set-
+      id".  All the possible options discussed above are defined in the
+      list and each option is corresponding to a container.  Since all
+      the options in the list are optional, each container in this list
+      has a 'presence' statement to indicate whether this option
+      (container) will be included in the current option set or not.  In
+      addition, each container also has a 'if-feature' statement to
+      indicate whether the server supports this option (container).
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 5]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   o  network-ranges: This model supports a hierarchy to achieve dynamic
+      configuration.  That is to say we could configure the server at
+      different levels through this model.  The top level is a global
+      level which is defined as the container "network-ranges".  The
+      following levels are defined as sub-containers under it.  The
+      "network-ranges" contains the parameters (e.g. option-sets) that
+      would be allocated to all the clients served by this server.
+
+   o  network-range: Under the "network-ranges" container, a "network-
+      range" list is defined to configure the server at a network level
+      which is also considered as the second level.  Different network
+      are identified by the key "network-range-id".  This is because a
+      server may have different configuration parameters (e.g. option
+      sets) for different networks.
+
+   o  address-pools: Under the "network-range" list, a container
+      describes the DHCPv6 server's address pools for a specific network
+      is defined.  This container supports the server to be configured
+      at a pool level.
+
+   o  address-pool: A DHCPv6 server can be configured with several
+      address pools for a specific network.  This list defines such
+      address pools which are distinguish by the key called "pool-id".
+
+   o  rapid-commit: Setting the value to 'true' represents the address/
+      prefix pool support the Solicit-Reply message exchange. 'false'
+      means the server will simply ignore the Rapid Commit option in
+      Solicit message.
+
+   o  client-class: If this is instantiated, the address/pd pool will
+      only serve the clients belonging to this class.
+
+   o  max-address-count: Maximum count of addresses that can be
+      allocated in this pool.  This value may be less than count of
+      total addresses in this pool.
+
+   o  prefix-pools: If a server supports prefix delegation function,
+      this container under the "network-range" list will be valid to
+      define the delegating router's prefix pools for a specific
+      network.  This container also supports the server to be configured
+      at a pool level.
+
+   o  prefix-pool: Similar to server's address pools, a delegating
+      router can also be configured with multiple prefix pools specified
+      by a list called "prefix-pool".
+
+   o  max-pd-space-utilization: Maximum utilization of pd space in this
+      pool.
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 6]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   o  host-reservations: This container allows the server to make
+      reservations at host level.
+
+   o  host-reservation: This list allows the server to reserve
+      addresses, prefixes, hostname and options for different clients.
+      A server may reserve multiple addresses and prefixes for a single
+      client.
+
+   o  relay-opaque-params: This container contains some opaque values in
+      Relay Agent options that need to be configured on the server side
+      only for value match.  Such Relay Agent options include Interface-
+      Id option, Remote-Id option and Subscriber-Id option.
+
+   o  rsoo-enabled-options: [RFC6422] requires that the server SHOULD
+      have an administrator-configurable list of RSOO-enabled options.
+      This container include a list called "rsoo-enabled-option" to
+      allow new RSOO-enabled options to be defined at the server side.
+
+   o  server-state: This container includes the state data of a server.
+
+   o  binding-info: A list records a static binding information for each
+      DHCPv6 client that has already been assigned IPv6 addresses/
+      prefixes that are dynamically allocated and reserved in advance.
+
+   o  packet-stats: A container presents the packet statistics related
+      to the DHCPv6 server.
+
+   Information about notifications:
+
+   o  address/pd-pool-running-out: raised when the address/prefix pool
+      is going to run out.  A threshold for utilization ratio of the
+      pool (max-address-count/max-pd-space utilization) has been defined
+      in the server feature so that it will notify the administrator
+      when the utilization ratio reaches the threshold, and such
+      threshold is a settable parameter.
+
+   o  invalid-client-detected: raised when the server has found a client
+      which can be regarded as a potential attacker.  Some description
+      could also be included.
+
+2.2.  DHCPv6 Relay Tree Diagrams
+
+   INSERT RELAY TREE DIAGRAM HERE
+
+   Introduction of important nodes:
+
+   o  relay-config: This container contains the configuration data of
+      the relay.
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 7]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   o  relay-attributes: A container describes some basic attributes of
+      the relay agent including some relay agent specific options data
+      that need to be configured previously.  Such options include
+      Remote-Id option and Subscriber-Id option.
+
+   o  dest-addrs: Each DHCPv6 relay agent may be configured with a list
+      of destination addresses.  This node defines such a list of IPv6
+      addresses that may include unicast addresses, multicast addresses
+      or other addresses.
+
+   o  rsoo-options-sets: DHCPv6 relay agent could provide some
+      information that would be useful to DHCPv6 client.  Since relay
+      agent cannot provide options directly to the client, [RFC6422]
+      defines RSOO-enabled options to propose options for the server to
+      send to the client.  This container models such RSOO-enabled
+      options.
+
+   o  option-set: This list under the "rsoo-option-sets" container is
+      similar to the that defined in server module.  It allows the relay
+      to implement several sets of RSOO-enabled options for different
+      interfaces.  The list only include the EAP Re-authentication
+      Protocol (ERP) Local Domain Name DHCPv6 Option defined in
+      [RFC6440], since it is the only one RSOO-enabled options accepted
+      by IANA so far.
+
+   o  relay-if: A relay agent may have several interfaces, we should
+      provide a way to configure and manage parameters on the interface-
+      level.  A list that describes specific interfaces and their
+      corresponding parameters is employed to fulfill the configuration.
+      Here we use a string called "if-name" as the key of list.
+
+   o  relay-state: This container contains the configuration data of the
+      relay.
+
+   o  pd-route: A sub-container of "relay-if" which describes the route
+      for delegated prefixes into the provider edge router.
+
+   o  next-entity: This node defines a list that is used to describe the
+      next hop entity of this relay agent.  Different entities are
+      distinguished by their addresses.
+
+   o  packet-stats: A container shows packet state information of a
+      specific data communication.
+
+   o  relay-stats: The "relay-stats" container records and presents the
+      overall packet statistics of the relay agent.
+
+   Information about notifications:
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 8]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   o  topo-changed: raised when the topology of the relay agent is
+      changed.
+
+2.3.  DHCPv6 Client Tree Diagrams
+
+   INSERT CLIENT TREE DIAGRAM HERE
+
+
+   Introduction of important nodes:
+
+   o  client-config: This container includes the configuration data of
+      the client.
+
+   o  duid: Each server and client has only one DUID (DHCP Unique
+      Identifier).  The DUID here will be carried in the Client ID
+      option to identify a specific DHCPv6 client.  This leaf are same
+      as the "duid" leaf in "dhcpv6-server" feature.
+
+   o  client-if: A client may have several interfaces, it is more
+      reasonable to configure and manage parameters on the interface-
+      level.  The list defines a specific client interface and its data.
+      Different interfaces are distinguished by the "ifName" key which
+      is a configurable string value.
+
+   o  pd-function: Whether the client can act as a requesting router to
+      request prefixes using prefix delegation ([RFC3633]).
+
+   o  rapid-commit: 'true' indicates a client can initiate a Solicit-
+      Reply message exchange by adding a Rapid Commit option in Solicit
+      message.  'false' means the client is not allowed to add a Rapid
+      Commit option to request addresses in a two-message exchange
+      pattern.
+
+   o  client-configured-options: Similar to the server, the client also
+      need to configure some options to fulfill some desired functions.
+      This container include all the potential options that need to be
+      configured at the client side.  The relevant RFCs that define
+      those options include: [RFC8415], [RFC4704], [RFC5970], [RFC6784],
+      [RFC6939].
+
+   o  option-request-option: This container provide a way to configure
+      the list of options that the client will request in its ORO
+      option.
+
+   o  client-state: This container includes the state data of the
+      client.
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                 [Page 9]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   o  if-other-params: A client can obtain extra configuration data
+      other than address and prefix information through DHCPv6 options.
+      This container describes such data the client was configured
+      through DHCPv6.  The potential configuration data may include DNS
+      server parameters, SIP server parameters and etc.
+
+   o  packet-stats: A container records all the packet status
+      information of a specific interface.
+
+   Information about notifications:
+
+   o  ia-lease-event: raised when the client was allocated a new IA from
+      the server or it renew/rebind/release its current IA.
+
+   o  invalid-ia-detected: raised when the identity association of the
+      client can be proved to be invalid.  Possible condition includes
+      duplicated address, illegal address, etc.
+
+   o  retransmission-failed: raised when the retransmission mechanism
+      defined in [RFC8415] is failed.
+
+   o  failed-status-turn-up: raised when the client receives a message
+      includes an unsuccessful Status Code option.
+
+3.  DHCPv6 YANG Model
+
+3.1.  DHCPv6 Server YANG Model
+
+   This module imports typedefs from [RFC6991], [RFC7223].
+
+   INSERT SERVER YANG
+
+3.2.  DHCPv6 Relay YANG Model
+
+   This module imports typedefs from [RFC6991], [RFC7223].
+
+   INSERT RELAY YANG
+
+3.3.  DHCPv6 Client YANG Model
+
+   This module imports typedefs from [RFC6991], [RFC7223].
+
+   INSERT CLIENT YANG
+
+
+
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 10]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+3.4.  DHCPv6 Options YANG Model
+
+   This module imports typedefs from [RFC6991], [RFC7223].
+
+   INSERT RFC8415 OPTIONS YANG
+
+3.5.  DHCPv6 Types YANG Model
+
+   This module imports typedefs from [RFC6991].
+
+   INSERT COMMON YANG here
+
+4.  Security Considerations (TBD)
+
+   TBD
+
+5.  IANA Considerations (TBD)
+
+   This document registers the following YANG modules in the "YANG
+   Module Names" registry [RFC6020].
+
+   name:           ietf-dhcpv6
+   namespace:      urn:ietf:params:xml:ns:yang:ietf-dhcpv6
+   prefix:         dhcpv6
+   reference:      TBD
+
+6.  Acknowledgments
+
+   The authors would like to thank Qi Sun, Lishan Li, Sladjana Zoric,
+   Tomek Mrugalski, Marcin Siodelski, Bernie Volz and Bing Liu for their
+   valuable comments and contributions to this work.
+
+7.  Contributors
+
+   The following individuals contributed to this effort:
+     Hao Wang
+     Tsinghua University
+     Beijing 100084
+     P.R.China
+     Phone: +86-10-6278-5822
+     Email: wangh13@mails.tsinghua.edu.cn
+
+
+
+
+
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 11]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+     Ted Lemon
+     Nomium, Inc
+     950 Charter St.
+     Redwood City, CA 94043
+     USA
+     Email: Ted.Lemon@nomium.com
+
+
+     Bernie Volz
+     Cisco Systems, Inc.
+     1414 Massachusetts Ave
+     Boxborough, MA 01719
+     USA
+     Email: volz@cisco.com
+
+
+8.  References
+
+8.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC3633]  Troan, O. and R. Droms, "IPv6 Prefix Options for Dynamic
+              Host Configuration Protocol (DHCP) version 6", RFC 3633,
+              DOI 10.17487/RFC3633, December 2003,
+              <https://www.rfc-editor.org/info/rfc3633>.
+
+   [RFC6020]  Bjorklund, M., Ed., "YANG - A Data Modeling Language for
+              the Network Configuration Protocol (NETCONF)", RFC 6020,
+              DOI 10.17487/RFC6020, October 2010,
+              <https://www.rfc-editor.org/info/rfc6020>.
+
+   [RFC6087]  Bierman, A., "Guidelines for Authors and Reviewers of YANG
+              Data Model Documents", RFC 6087, DOI 10.17487/RFC6087,
+              January 2011, <https://www.rfc-editor.org/info/rfc6087>.
+
+   [RFC6355]  Narten, T. and J. Johnson, "Definition of the UUID-Based
+              DHCPv6 Unique Identifier (DUID-UUID)", RFC 6355,
+              DOI 10.17487/RFC6355, August 2011,
+              <https://www.rfc-editor.org/info/rfc6355>.
+
+   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
+              RFC 6991, DOI 10.17487/RFC6991, July 2013,
+              <https://www.rfc-editor.org/info/rfc6991>.
+
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 12]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   [RFC7223]  Bjorklund, M., "A YANG Data Model for Interface
+              Management", RFC 7223, DOI 10.17487/RFC7223, May 2014,
+              <https://www.rfc-editor.org/info/rfc7223>.
+
+   [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
+              RFC 7950, DOI 10.17487/RFC7950, August 2016,
+              <https://www.rfc-editor.org/info/rfc7950>.
+
+   [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
+              BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
+              <https://www.rfc-editor.org/info/rfc8340>.
+
+   [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
+              and R. Wilton, "Network Management Datastore Architecture
+              (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
+              <https://www.rfc-editor.org/info/rfc8342>.
+
+   [RFC8415]  Mrugalski, T., Siodelski, M., Volz, B., Yourtchenko, A.,
+              Richardson, M., Jiang, S., Lemon, T., and T. Winters,
+              "Dynamic Host Configuration Protocol for IPv6 (DHCPv6)",
+              RFC 8415, DOI 10.17487/RFC8415, November 2018,
+              <https://www.rfc-editor.org/info/rfc8415>.
+
+8.2.  Informative References
+
+   [I-D.ietf-netmod-yang-tree-diagrams]
+              Bjorklund, M. and L. Berger, "YANG Tree Diagrams", draft-
+              ietf-netmod-yang-tree-diagrams-06 (work in progress),
+              February 2018.
+
+   [RFC3319]  Schulzrinne, H. and B. Volz, "Dynamic Host Configuration
+              Protocol (DHCPv6) Options for Session Initiation Protocol
+              (SIP) Servers", RFC 3319, DOI 10.17487/RFC3319, July 2003,
+              <https://www.rfc-editor.org/info/rfc3319>.
+
+   [RFC3646]  Droms, R., Ed., "DNS Configuration options for Dynamic
+              Host Configuration Protocol for IPv6 (DHCPv6)", RFC 3646,
+              DOI 10.17487/RFC3646, December 2003,
+              <https://www.rfc-editor.org/info/rfc3646>.
+
+   [RFC3898]  Kalusivalingam, V., "Network Information Service (NIS)
+              Configuration Options for Dynamic Host Configuration
+              Protocol for IPv6 (DHCPv6)", RFC 3898,
+              DOI 10.17487/RFC3898, October 2004,
+              <https://www.rfc-editor.org/info/rfc3898>.
+
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 13]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   [RFC4075]  Kalusivalingam, V., "Simple Network Time Protocol (SNTP)
+              Configuration Option for DHCPv6", RFC 4075,
+              DOI 10.17487/RFC4075, May 2005,
+              <https://www.rfc-editor.org/info/rfc4075>.
+
+   [RFC4242]  Venaas, S., Chown, T., and B. Volz, "Information Refresh
+              Time Option for Dynamic Host Configuration Protocol for
+              IPv6 (DHCPv6)", RFC 4242, DOI 10.17487/RFC4242, November
+              2005, <https://www.rfc-editor.org/info/rfc4242>.
+
+   [RFC4704]  Volz, B., "The Dynamic Host Configuration Protocol for
+              IPv6 (DHCPv6) Client Fully Qualified Domain Name (FQDN)
+              Option", RFC 4704, DOI 10.17487/RFC4704, October 2006,
+              <https://www.rfc-editor.org/info/rfc4704>.
+
+   [RFC4833]  Lear, E. and P. Eggert, "Timezone Options for DHCP",
+              RFC 4833, DOI 10.17487/RFC4833, April 2007,
+              <https://www.rfc-editor.org/info/rfc4833>.
+
+   [RFC5908]  Gayraud, R. and B. Lourdelet, "Network Time Protocol (NTP)
+              Server Option for DHCPv6", RFC 5908, DOI 10.17487/RFC5908,
+              June 2010, <https://www.rfc-editor.org/info/rfc5908>.
+
+   [RFC5970]  Huth, T., Freimann, J., Zimmer, V., and D. Thaler, "DHCPv6
+              Options for Network Boot", RFC 5970, DOI 10.17487/RFC5970,
+              September 2010, <https://www.rfc-editor.org/info/rfc5970>.
+
+   [RFC6334]  Hankins, D. and T. Mrugalski, "Dynamic Host Configuration
+              Protocol for IPv6 (DHCPv6) Option for Dual-Stack Lite",
+              RFC 6334, DOI 10.17487/RFC6334, August 2011,
+              <https://www.rfc-editor.org/info/rfc6334>.
+
+   [RFC6422]  Lemon, T. and Q. Wu, "Relay-Supplied DHCP Options",
+              RFC 6422, DOI 10.17487/RFC6422, December 2011,
+              <https://www.rfc-editor.org/info/rfc6422>.
+
+   [RFC6440]  Zorn, G., Wu, Q., and Y. Wang, "The EAP Re-authentication
+              Protocol (ERP) Local Domain Name DHCPv6 Option", RFC 6440,
+              DOI 10.17487/RFC6440, December 2011,
+              <https://www.rfc-editor.org/info/rfc6440>.
+
+   [RFC6784]  Sakane, S. and M. Ishiyama, "Kerberos Options for DHCPv6",
+              RFC 6784, DOI 10.17487/RFC6784, November 2012,
+              <https://www.rfc-editor.org/info/rfc6784>.
+
+   [RFC6939]  Halwasia, G., Bhandari, S., and W. Dec, "Client Link-Layer
+              Address Option in DHCPv6", RFC 6939, DOI 10.17487/RFC6939,
+              May 2013, <https://www.rfc-editor.org/info/rfc6939>.
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 14]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   [RFC7078]  Matsumoto, A., Fujisaki, T., and T. Chown, "Distributing
+              Address Selection Policy Using DHCPv6", RFC 7078,
+              DOI 10.17487/RFC7078, January 2014,
+              <https://www.rfc-editor.org/info/rfc7078>.
+
+   [RFC7083]  Droms, R., "Modification to Default Values of SOL_MAX_RT
+              and INF_MAX_RT", RFC 7083, DOI 10.17487/RFC7083, November
+              2013, <https://www.rfc-editor.org/info/rfc7083>.
+
+   [RFC7227]  Hankins, D., Mrugalski, T., Siodelski, M., Jiang, S., and
+              S. Krishnan, "Guidelines for Creating New DHCPv6 Options",
+              BCP 187, RFC 7227, DOI 10.17487/RFC7227, May 2014,
+              <https://www.rfc-editor.org/info/rfc7227>.
+
+   [RFC7291]  Boucadair, M., Penno, R., and D. Wing, "DHCP Options for
+              the Port Control Protocol (PCP)", RFC 7291,
+              DOI 10.17487/RFC7291, July 2014,
+              <https://www.rfc-editor.org/info/rfc7291>.
+
+   [RFC7598]  Mrugalski, T., Troan, O., Farrer, I., Perreault, S., Dec,
+              W., Bao, C., Yeh, L., and X. Deng, "DHCPv6 Options for
+              Configuration of Softwire Address and Port-Mapped
+              Clients", RFC 7598, DOI 10.17487/RFC7598, July 2015,
+              <https://www.rfc-editor.org/info/rfc7598>.
+
+Authors' Addresses
+
+   Yong Cui
+   Tsinghua University
+   Beijing  100084
+   P.R.China
+
+   Phone: +86-10-6260-3059
+   Email: cuiyong@tsinghua.edu.cn
+
+
+   Linhui Sun
+   Tsinghua University
+   Beijing  100084
+   P.R.China
+
+   Phone: +86-10-6278-5822
+   Email: lh.sunlinh@gmail.com
+
+
+
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 15]
+
+Internet-Draft              DHCPv6 YANG Model             September 2019
+
+
+   Ian Farrer
+   Deutsche Telekom AG
+   CTO-ATI, Landgrabenweg 151
+   Bonn, NRW  53227
+   Germany
+
+   Email: ian.farrer@telekom.de
+
+
+   Sladjana Zechlin
+   Deutsche Telekom AG
+   CTO-IPT, Landgrabenweg 151
+   Bonn, NRW  53227
+   Germany
+
+   Email: sladjana.zechlin@telekom.de
+
+
+   Zihao He
+   Tsinghua University
+   Beijing  100084
+   P.R.China
+
+   Phone: +86-10-6278-5822
+   Email: hezihao9512@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cui, et al.              Expires March 23, 2020                [Page 16]

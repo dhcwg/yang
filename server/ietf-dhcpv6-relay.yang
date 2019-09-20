@@ -163,7 +163,9 @@ module ietf-dhcpv6-relay {
         }
         uses dhcpv6-options:relay-supplied-option-definitions;
       }
-    }*/
+      uses dhcpv6-options:relay-supplied-option-definitions;
+      }
+      }*/
 
     list relay-if {
       key if-name;
@@ -201,10 +203,10 @@ module ietf-dhcpv6-relay {
 
       /*leaf rsoo-option-set-id {
         type leafref {
-          path "/relay/relay-config/rsoo-option-sets/option-set/option-set-id";
+        path "/relay/relay-config/rsoo-option-sets/option-set/option-set-id";
         }
         description "Configured Relay Supplied Option set";
-      }*/
+        }*/
 
       list next-entity {
         key dest-addr;
