@@ -12,7 +12,7 @@ module ietf-dhcpv6-client {
   }
 
   organization "DHC WG";
-  contact 
+  contact
     "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
@@ -82,9 +82,9 @@ module ietf-dhcpv6-client {
     }
     list client-if {
       key if-name;
-      description "A client may have several interfaces, it is more reasonable to 
-        configure and manage parameters on the interface-level. The list defines 
-        specific client interfaces and their data. Different interfaces are 
+      description "A client may have several interfaces, it is more reasonable to
+        configure and manage parameters on the interface-level. The list defines
+        specific client interfaces and their data. Different interfaces are
         distinguished by the key which is a configurable string value.";
       leaf if-name {
         type if:interface-ref;
@@ -105,22 +105,22 @@ module ietf-dhcpv6-client {
       leaf rapid-commit {
         type boolean;
         mandatory true;
-        description "'1' indicates a client can initiate a Solicit-Reply message 
-          exchange by adding a Rapid Commit option in Solicit message. '0' means 
-          the client is not allowed to add a Rapid Commit option to request 
+        description "'1' indicates a client can initiate a Solicit-Reply message
+          exchange by adding a Rapid Commit option in Solicit message. '0' means
+          the client is not allowed to add a Rapid Commit option to request
           addresses in a two-message exchange pattern.";
       }
 
       /*
          container mo-tab {
-         description "The management tab label indicates the operation mode of the 
-         DHCPv6 client. 
-         'm'=1 and 'o'=1 indicate the client will use DHCPv6 to  obtain all the configuration 
-         data. 
-         'm'=1 and 'o'=0 are a meaningless combination. 
-         'm'=0 and 'o'=1 indicate the client will use stateless DHCPv6 to obtain configuration 
+         description "The management tab label indicates the operation mode of the
+         DHCPv6 client.
+         'm'=1 and 'o'=1 indicate the client will use DHCPv6 to  obtain all the configuration
+         data.
+         'm'=1 and 'o'=0 are a meaningless combination.
+         'm'=0 and 'o'=1 indicate the client will use stateless DHCPv6 to obtain configuration
          data apart from addresses/prefixes data.
-         'm'=0 and 'o'=0 represent the client will not use DHCPv6 but use SLAAC to 
+         'm'=0 and 'o'=0 represent the client will not use DHCPv6 but use SLAAC to
          achieve configuration.";
 
       // if - not sure about the intended use here as it seems
@@ -144,16 +144,16 @@ module ietf-dhcpv6-client {
         description "Definitions for client DHCPv6 options are augmented
           from other modules at this location.";
       }
-    }  
+    }
   }
 
   container client-state {
     config "false";
     description "state tree of client";
     container if-other-paras {
-      description "A client can obtain extra configuration 
+      description "A client can obtain extra configuration
         data other than address and prefix information through
-        DHCPv6. This container describes such data the client 
+        DHCPv6. This container describes such data the client
         was configured. The potential configuration data may
         include DNS server addresses, SIP server domain names, etc.";
       //uses dhcpv6-options:server-option-definitions;
@@ -225,130 +225,82 @@ module ietf-dhcpv6-client {
    * Notifications
    */
 
-  notification notifications {
-    description "dhcpv6 client notification module";
-    container dhcpv6-client-event {
-      description "dhcpv6 client event";
-
-      container ia-lease-event {
-        description "raised when the client was allocated 
+  notification ia-lease-event {
+    description "raised when the client was allocated
           a new IA from the server or it renew/rebind/release
           its current IA";
-        leaf event-type {
-          type enumeration {
-            enum "allocation" {
-              description "allocate";
-            }
-            enum "rebind" {
-              description "rebind";
-            }
-            enum "renew" {
-              description "renew";
-            }
-            enum "release" {
-              description "release";
-            }
-          }
-          mandatory true;
-          description "event type";
+    leaf event-type {
+      type enumeration {
+        enum "allocation" {
+          description "allocate";
         }
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
+        enum "rebind" {
+          description "rebind";
         }
-        leaf iaid {
-          type uint32;
-          mandatory true;
-          description "IAID";
+        enum "renew" {
+          description "renew";
         }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf description {
-          type string;
-          description "description of event";
+        enum "release" {
+          description "release";
         }
       }
+      mandatory true;
+      description "event type";
+    }
+    leaf iaid {
+      type uint32;
+      mandatory true;
+      description "IAID";
+    }
+    container duid {
+      description "Server's DUID";
+      uses dhcpv6-common:duid;
+    }
+  }
 
-      container invalid-ia-detected {
-        description "raised when the identity association of the 
-          client can be proved to be invalid.  Possible condition 
+  notification invalid-ia-detected {
+    description "raised when the identity association of the
+          client can be proved to be invalid.  Possible condition
           includes duplicated address, illegal address, etc.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
-        }
-        leaf cli-duid {
-          type uint32;
-          mandatory true;
-          description "duid of client";
-        }
-        leaf iaid {
-          type uint32;
-          mandatory true;
-          description "IAID";
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf description {
-          type string;
-          description "description of the event";
-        }
-      }
+    leaf iaid {
+      type uint32;
+      mandatory true;
+      description "IAID";
+    }
+    leaf description {
+      type string;
+      description "description of the event";
+    }
+  }
 
-      container retransmission-failed {
-        description "raised when the retransmission mechanism defined 
+  notification retransmission-failed {
+    description "raised when the retransmission mechanism defined
           in [RFC3315] is failed.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
+    leaf description {
+      type enumeration {
+        enum "MRC failed" {
+          description "MRC failed";
         }
-        leaf description {
-          type enumeration {
-            enum "MRC failed" {
-              description "MRC failed";
-            }
-            enum "MRD failed" {
-              description "MRD failed";
-            }
-          }
-          mandatory true;
-          description "description of failure";
+        enum "MRD failed" {
+          description "MRD failed";
         }
       }
+      mandatory true;
+      description "description of failure";
+    }
+  }
 
-      container failed-status-turn-up {
-        description "raised when the client receives a message includes 
+  notification failed-status-turn-up {
+    description "raised when the client receives a message includes
           an unsuccessful Status Code option.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
-        }
-        leaf status-code {
-          type enumeration {
-            enum "1" {
-              description "UnspecFail";
-            }
-            enum "2" {
-              description "NoAddrAvail";
-            }
-            enum "3" {
-              description "NoBinding";
-            }
-            enum "4" {
-              description "NotOnLink";
-            }
-            enum "5" {
-              description "UseMulticast";
-            }
-          }
-          mandatory true;
-          description "employed status code";
-        }
-      }
+    leaf status-code {
+      type uint16;
+      mandatory true;
+      description "Status code recevied by a client";
+    }
+    container duid {
+      description "Server's DUID";
+      uses dhcpv6-common:duid;
     }
   }
 }
