@@ -24,12 +24,25 @@ module ietf-dhcpv6-relay {
     hezihao9512@gmail.com";
 
   description 
-    "This model defines a YANG data model that can be
-    used to configure and manage a DHCPv6 relay.";
+    "This is a YANG data module for the configuration and management
+    of DHCPv6 relay agents.
 
-  revision 2018-09-04 {
+    Copyright (c) 2018 IETF Trust and the persons identified as
+    authors of the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and subject
+    to the license terms contained in, the Simplified BSD License
+    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    Relating to IETF Documents
+    (http://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC 8513; see
+    the RFC itself for full legal notices.";
+
+  revision 2019-09-20 {
     description "";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-10";
   }
 
   revision 2018-03-04 {
@@ -40,7 +53,7 @@ module ietf-dhcpv6-relay {
 
   revision 2017-12-22 {
     description
-      "Resolve most issues on Ian's github.";
+      "Resolve most issues on Ians github.";
     reference
       "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
@@ -55,6 +68,7 @@ module ietf-dhcpv6-relay {
 
   identity relay {
     base "dhcpv6-common:dhcpv6-node";
+    description "DHCPv6 relay agent.";
   }
 
   leaf dhcpv6-node-type {
@@ -63,7 +77,6 @@ module ietf-dhcpv6-relay {
       base "dhcpv6-relay:relay";
     }
   }
-
 
   /*
    * Data Nodes
@@ -75,11 +88,8 @@ module ietf-dhcpv6-relay {
       of the relay.";
     container relay-attributes {
       description
-        "A container describes some basic attributes of the relay 
-        agent including some relay agent specific options data that
-        need to be configured previously. 
-        Such options include Remote-Id option and Subscriber-Id 
-        option.";
+        "Describes some basic attributes of the relay 
+        agent.  Relay agent specific option data.";
       leaf name {
         type string;
         description 
