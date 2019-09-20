@@ -61,6 +61,43 @@ module ietf-dhcpv6-server {
     }
   }
 
+  grouping level-config {
+    description "Level config.";
+    leaf-list option-set-id {
+      type leafref {
+        path "/config/option-sets/option-set/option-set-id";
+      }
+      description "The ID field of relevant option-set to be provisioned to
+            clients of this network-range.";
+    }
+    leaf valid-lifetime {
+      type yang:timeticks;
+      mandatory true;
+      description "valid liftime for IA";
+    }
+    leaf renew-time {
+      type yang:timeticks;
+      mandatory true;
+      description "renew time";
+    }
+    leaf rebind-time {
+      type yang:timeticks;
+      mandatory true;
+      description "rebind time";
+    }
+    leaf preferred-lifetime {
+      type yang:timeticks;
+      mandatory true;
+      description "preferred lifetime for IA";
+    }
+    leaf rapid-commit {
+      type boolean;
+      mandatory true;
+      description "A boolean value specifies whether the pool
+                supports client-server exchanges involving two messages.";
+    }
+  }
+
   /*
    * Data Nodes
    */
@@ -104,14 +141,8 @@ module ietf-dhcpv6-server {
         contains the parameters (e.g. option-sets) that would be allocated to
         all the clients served by this server.";
 
-      leaf-list option-set-id {
-        type leafref {
-          path "/config/option-sets/option-set/option-set-id";
-        }
-        description
-          "The ID field of relevant global option-set to be provisioned to
-          clients.";
-      }
+      uses level-config;
+
       list network-range {
         key network-range-id;
         description
@@ -135,13 +166,8 @@ module ietf-dhcpv6-server {
           mandatory true;
           description "subnet prefix";
         }
-        leaf-list option-set-id {
-          type leafref {
-            path "/config/option-sets/option-set/option-set-id";
-          }
-          description "The ID field of relevant option-set to be provisioned to
-            clients of this network-range.";
-        }
+
+        uses level-config;
 
         container address-pools {
           description
@@ -172,32 +198,6 @@ module ietf-dhcpv6-server {
               mandatory true;
               description "end address";
             }
-            leaf valid-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "valid liftime for IA";
-            }
-            leaf renew-time {
-              type yang:timeticks;
-              mandatory true;
-              description "renew time";
-            }
-            leaf rebind-time {
-              type yang:timeticks;
-              mandatory true;
-              description "rebind time";
-            }
-            leaf preferred-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "preferred lifetime for IA";
-            }
-            leaf rapid-commit {
-              type boolean;
-              mandatory true;
-              description "A boolean value specifies whether the pool
-                supports client-server exchanges involving two messages.";
-            }
             leaf max-address-count {
               type dhcpv6-common:threshold;
               mandatory true;
@@ -205,13 +205,8 @@ module ietf-dhcpv6-server {
                 be allocated in this pool. This value may be
                 less than count of total addresses.";
             }
-            leaf-list option-set-id {
-              type leafref {
-                path "/config/option-sets/option-set/option-set-id";
-              }
-              description "The ID field of relevant option-set to be
-                provisioned to clients of this address-pool.";
-            }
+
+            uses level-config;
           }
         }
 
@@ -239,44 +234,13 @@ module ietf-dhcpv6-server {
               mandatory true;
               description "prefix length";
             }
-            leaf valid-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "valid lifetime for IA";
-            }
-            leaf renew-time {
-              type yang:timeticks;
-              mandatory true;
-              description "renew time";
-            }
-            leaf rebind-time {
-              type yang:timeticks;
-              mandatory true;
-              description "rebind time";
-            }
-            leaf preferred-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "preferred lifetime for IA";
-            }
-            leaf rapid-commit {
-              type boolean;
-              mandatory true;
-              description "A boolean value specifies whether the server
-                support client-server exchanges involving two messages defined.";
-            }
             leaf max-pd-space-utilization {
               type dhcpv6-common:threshold;
               mandatory true;
               description "Maximum utilization of pd space in this pool";
             }
-            leaf-list option-set-id {
-              type leafref {
-                path "/config/option-sets/option-set/option-set-id";
-              }
-              description "The ID field of relevant option-set to be
-                provisioned to clients of this prefix-pool.";
-            }
+
+            uses level-config;
           }
         }
 
@@ -340,13 +304,7 @@ module ietf-dhcpv6-server {
               description "reserved hostname";
             }
 
-            leaf-list option-set-id {
-              type leafref {
-                path "/config/option-sets/option-set/option-set-id";
-              }
-              description "The ID field of relevant option-set to be provisioned
-                in the host reservation.";
-            }
+            uses level-config;
           }
         }
 
