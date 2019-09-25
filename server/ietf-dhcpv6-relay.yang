@@ -25,7 +25,7 @@ module ietf-dhcpv6-relay {
 
   description
     "This model defines a YANG data model that can be
-    used to configure and manage a DHCPv6 relay.";
+    used to configure and manage a DHCPv6 relay.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
