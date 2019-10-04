@@ -155,7 +155,9 @@
         of the option definitions, based on their applicability, a single 
         module containing all of the <xref target="RFC8415"/> options is
         defined. The
+      </t>
 
+      <t>
         A large number of DHCPv6 options have been created in addition to
         those defined in <xref target="RFC8415"/>. As implementations differ
         in which specific DHCPv6 options that they support, the following
