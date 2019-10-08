@@ -21,8 +21,21 @@ module ietf-dhcpv6-server {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This model defines a YANG data model that can be
-    used to configure and manage a DHCPv6 server.";
+  description "This is a YANG data module for the configuration and management
+    of DHCPv6 servers.
+
+    Copyright (c) 2018 IETF Trust and the persons identified as
+    authors of the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and subject
+    to the license terms contained in, the Simplified BSD License
+    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    Relating to IETF Documents
+    (http://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC 8513; see
+    the RFC itself for full legal notices.";
 
   revision 2018-09-04 {
     description "";
@@ -52,12 +65,50 @@ module ietf-dhcpv6-server {
 
   identity server {
     base "dhcpv6-common:dhcpv6-node";
+    description "DHCPv6 server.";
   }
 
   leaf dhcpv6-node-type {
     description "Type for a DHCPv6 server";
     type identityref {
       base "dhcpv6-server:server";
+    }
+  }
+
+  grouping level-config {
+    description "Level config.";
+    leaf-list option-set-id {
+      type leafref {
+        path "/config/option-sets/option-set/option-set-id";
+      }
+      description "The ID field of relevant option-set to be provisioned to
+            clients of this network-range.";
+    }
+    leaf valid-lifetime {
+      type yang:timeticks;
+      mandatory true;
+      description "valid liftime for IA";
+    }
+    leaf renew-time {
+      type yang:timeticks;
+      mandatory true;
+      description "renew time";
+    }
+    leaf rebind-time {
+      type yang:timeticks;
+      mandatory true;
+      description "rebind time";
+    }
+    leaf preferred-lifetime {
+      type yang:timeticks;
+      mandatory true;
+      description "preferred lifetime for IA";
+    }
+    leaf rapid-commit {
+      type boolean;
+      mandatory true;
+      description "A boolean value specifies whether the pool
+                supports client-server exchanges involving two messages.";
     }
   }
 
@@ -78,7 +129,7 @@ module ietf-dhcpv6-server {
         key option-set-id;
         description "A server may allow different option sets to be
           configured for different conditions (i.e. different networks,
-          clients and etc). This 'option-set' list enables various sets of
+              clients and etc). This 'option-set' list enables various sets of
           options being defined and configured in a single server. Different
           sets are distinguished by the key called 'option-set-id'. All the
           possible options discussed above are defined in the list and each
@@ -95,6 +146,10 @@ module ietf-dhcpv6-server {
       }
     }
 
+    container class-selector {
+      description "Mount point for class selection configuration.";
+    }
+
     container network-ranges {
       description "This model supports a hierarchy
         to achieve dynamic configuration. That is to say we could configure the
@@ -104,14 +159,8 @@ module ietf-dhcpv6-server {
         contains the parameters (e.g. option-sets) that would be allocated to
         all the clients served by this server.";
 
-      leaf-list option-set-id {
-        type leafref {
-          path "/config/option-sets/option-set/option-set-id";
-        }
-        description
-          "The ID field of relevant global option-set to be provisioned to
-          clients.";
-      }
+      uses level-config;
+
       list network-range {
         key network-range-id;
         description
@@ -135,13 +184,8 @@ module ietf-dhcpv6-server {
           mandatory true;
           description "subnet prefix";
         }
-        leaf-list option-set-id {
-          type leafref {
-            path "/config/option-sets/option-set/option-set-id";
-          }
-          description "The ID field of relevant option-set to be provisioned to
-            clients of this network-range.";
-        }
+
+        uses level-config;
 
         container address-pools {
           description
@@ -172,32 +216,6 @@ module ietf-dhcpv6-server {
               mandatory true;
               description "end address";
             }
-            leaf valid-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "valid liftime for IA";
-            }
-            leaf renew-time {
-              type yang:timeticks;
-              mandatory true;
-              description "renew time";
-            }
-            leaf rebind-time {
-              type yang:timeticks;
-              mandatory true;
-              description "rebind time";
-            }
-            leaf preferred-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "preferred lifetime for IA";
-            }
-            leaf rapid-commit {
-              type boolean;
-              mandatory true;
-              description "A boolean value specifies whether the pool
-                supports client-server exchanges involving two messages.";
-            }
             leaf max-address-count {
               type dhcpv6-common:threshold;
               mandatory true;
@@ -205,13 +223,8 @@ module ietf-dhcpv6-server {
                 be allocated in this pool. This value may be
                 less than count of total addresses.";
             }
-            leaf-list option-set-id {
-              type leafref {
-                path "/config/option-sets/option-set/option-set-id";
-              }
-              description "The ID field of relevant option-set to be
-                provisioned to clients of this address-pool.";
-            }
+
+            uses level-config;
           }
         }
 
@@ -239,44 +252,13 @@ module ietf-dhcpv6-server {
               mandatory true;
               description "prefix length";
             }
-            leaf valid-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "valid lifetime for IA";
-            }
-            leaf renew-time {
-              type yang:timeticks;
-              mandatory true;
-              description "renew time";
-            }
-            leaf rebind-time {
-              type yang:timeticks;
-              mandatory true;
-              description "rebind time";
-            }
-            leaf preferred-lifetime {
-              type yang:timeticks;
-              mandatory true;
-              description "preferred lifetime for IA";
-            }
-            leaf rapid-commit {
-              type boolean;
-              mandatory true;
-              description "A boolean value specifies whether the server
-                support client-server exchanges involving two messages defined.";
-            }
             leaf max-pd-space-utilization {
               type dhcpv6-common:threshold;
               mandatory true;
               description "Maximum utilization of pd space in this pool";
             }
-            leaf-list option-set-id {
-              type leafref {
-                path "/config/option-sets/option-set/option-set-id";
-              }
-              description "The ID field of relevant option-set to be
-                provisioned to clients of this prefix-pool.";
-            }
+
+            uses level-config;
           }
         }
 
@@ -286,7 +268,7 @@ module ietf-dhcpv6-server {
           list host-reservation {
             key cli-id;
             description "This list allows the server to reserve addresses,
-              prefixes, hostname and options for different clients.";
+                        prefixes, hostname and options for different clients.";
             leaf cli-id {
               type uint32;
               mandatory true;
@@ -340,13 +322,7 @@ module ietf-dhcpv6-server {
               description "reserved hostname";
             }
 
-            leaf-list option-set-id {
-              type leafref {
-                path "/config/option-sets/option-set/option-set-id";
-              }
-              description "The ID field of relevant option-set to be provisioned
-                in the host reservation.";
-            }
+            uses level-config;
           }
         }
 
@@ -448,11 +424,11 @@ module ietf-dhcpv6-server {
         key network-range-id;
         description "The ID field of relevant option-set to be provisioned
           to clients of this network-range.";
-          leaf network-range-id {
-            type uint32;
-            mandatory true;
-            description "equivalent to subnet id";
-          }
+        leaf network-range-id {
+          type uint32;
+          mandatory true;
+          description "equivalent to subnet id";
+        }
         container address-pools {
           description "A container that describes the DHCPv6 server's address pools";
           list address-pool {
@@ -516,8 +492,8 @@ module ietf-dhcpv6-server {
         }
         container pd-pools {
           description "If a server supports prefix delegation function,
-            this container will be used to define the delegating
-            router's prefix pools.";
+                      this container will be used to define the delegating
+                        router's prefix pools.";
           list prefix-pool {
             key pool-id;
             description "Similar to server's address pools, a delegating
@@ -706,90 +682,97 @@ module ietf-dhcpv6-server {
    * Notifications
    */
 
-  notification notifications {
-    description "dhcpv6 server notification module";
-    container dhcpv6-server-event {
-      description "dhcpv6 server event";
-      container address-pool-running-out {
-        description "raised when the address pool is going to
+  notification address-pool-running-out {
+    description "raised when the address pool is going to
           run out.  A threshold for utilization ratio of the pool has
           been defined in the server feature so that it will notify the
           administrator when the utilization ratio reaches the
           threshold, and such threshold is a settable parameter";
-        leaf total-address-count {
-          type uint64;
-          mandatory true;
-          description "count of total addresses in the pool";
-        }
-        leaf max-address-count {
-          type uint64;
-          mandatory true;
-          description "maximum count of addresses that can be allocated
+    leaf total-address-count {
+      type uint64;
+      mandatory true;
+      description "count of total addresses in the pool";
+    }
+    leaf max-address-count {
+      type uint64;
+      mandatory true;
+      description "maximum count of addresses that can be allocated
             in the pool. This value may be less than count of total
             addresses";
-        }
-        leaf allocated-address-conut {
-          type uint64;
-          mandatory true;
-          description "count of allocated addresses in the pool";
-        }
-        container duid {
-          description "server duid";
-          uses dhcpv6-common:duid;
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf pool-name {
-          type string;
-          mandatory true;
-          description "pool name";
-        }
-      }
-      container pd-pool-running-out {
-        description "raised when the address/prefix pool is going to
+    }
+    leaf allocated-address-conut {
+      type uint64;
+      mandatory true;
+      description "count of allocated addresses in the pool";
+    }
+    leaf pool-id {
+      type uint32;
+      mandatory true;
+      description "pool id";
+    }
+  }
+
+  notification pd-pool-running-out {
+    description "Raised when the address/prefix pool is going to
           run out.  A threshold for utilization ratio of the pool has
           been defined in the server feature so that it will notify the
           administrator when the utilization ratio reaches the
           threshold, and such threshold is a settable parameter";
-        leaf max-pd-space-utilization {
-          type dhcpv6-common:threshold;
-          mandatory true;
-          description "maximum pd space utilization";
-        }
-        leaf pd-space-utilization {
-          type dhcpv6-common:threshold;
-          mandatory true;
-          description "current pd space utilization";
-        }
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf pool-name {
-          type string;
-          mandatory true;
-          description "pool name";
-        }
-      }
-      container invalid-client-detected {
-        description "raised when the server has found a client which
+    leaf max-pd-space-utilization {
+      type dhcpv6-common:threshold;
+      mandatory true;
+      description "maximum pd space utilization";
+    }
+    leaf pd-space-utilization {
+      type dhcpv6-common:threshold;
+      mandatory true;
+      description "current pd space utilization";
+    }
+    leaf pool-id {
+      type uint32;
+      mandatory true;
+      description "pool id";
+    }
+  }
+
+  notification invalid-client-detected {
+    description "raised when the server has found a client which
           can be regarded as a potential attacker. Some description
           could also be included.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-common:duid;
-        }
-        leaf description {
-          type string;
-          description "description of the event";
-        }
-      }
+    container duid {
+      description "Client's DUID";
+      uses dhcpv6-common:duid;
+    }
+    leaf description {
+      type string;
+      description "description of the event";
+    }
+  }
+
+  notification decline-received {
+    description "Raised when the server has received DECLINE message
+      from a client.";
+    container duid {
+      description "Client's DUID";
+      uses dhcpv6-common:duid;
+    }
+    leaf-list addresses {
+      type inet:ipv6-address;
+      description "List of suspicious addresses";
+    }
+  }
+
+  notification non-success-code-sent {
+    description "Raised when the server responded to a client
+      with non-success status code.";
+    leaf status-code {
+      type uint16;
+      mandatory true;
+      description "Status code returned to a client";
+    }
+    container duid {
+      description "Client's DUID";
+      uses dhcpv6-common:duid;
     }
   }
 }
