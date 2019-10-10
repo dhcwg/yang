@@ -650,6 +650,17 @@ INSERT example-dhcpv6-server-config.yang here
         for classifying clients. So this standard does not try to
         provide full specificiation for class selection, it only shows
         an example how it can be defined.
+
+        At the end of this example there are presented augment statements
+        that add:
+
+        - class selector configuration to main part of DHCPv6 configuration
+        - client-class leafref in `network-range`, `address-pool` and `pd-pool`
+        that points to client-class-name which is required
+
+        The mechanism is as follows: class is associated to client based on rules
+        and then client is allowed to get address from given `network-range`
+        or pool if class name matches.
         </t>
       </section>
 
