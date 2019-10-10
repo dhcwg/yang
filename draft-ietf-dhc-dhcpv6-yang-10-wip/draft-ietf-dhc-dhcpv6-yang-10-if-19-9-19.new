@@ -67,7 +67,6 @@
       </address>
     </author>
 
-
     <author fullname="Zihao He" initials="Z." surname="He">
       <organization>Tsinghua University</organization>
       <address>
@@ -82,18 +81,7 @@
       </address>
     </author>
 
-    <author fullname="Michal Nowikowski" initials="M.N." surname="Nowikowski">
-      <organization>Internet Systems Consortium</organization>
-      <address>
-        <postal>
-          <city>Gdansk</city>
-          <country>Poland</country>
-        </postal>
-        <email>godfryd@isc.org</email>
-      </address>
-    </author>
-
-    <date year="2019" />
+    <date year="2019"/>
     <workgroup>DHC Working Group</workgroup>
 
     <abstract>
@@ -118,14 +106,6 @@
         and management of DHCPv6 servers, relays and clients.
       </t>
 
-      <t>The included modules are broken down initially by the functional 
-        element they are intended for, so there are separate server, relay and
-        client modules. A 'common' module has been created to contain groupings
-        which are used by two more of the elements models. Likewise, a single
-        module contains definitions for all of the configurable DHCP options.
-      </t>
-
-    <section title="Scope">
       <t><xref target="RFC8415"/> describes the current version of the DHCPv6
         base protocol specification. In addition to this, a large number
         of additon specifications have also been published. These extend
@@ -144,9 +124,7 @@
         variance between implementations to be attempt to standardize these
         functions in a way that is useful without being restrictive.
       </t>
-      </section>
-      
-    <section title="Extensibility">
+
       <t>However, it is recognised that implementation specific configuration
         and management is also an essential part of element deployment and
         operations. To resolve this, the Appendix of this document contains
@@ -171,6 +149,15 @@
         ieft-dhcpv6-server.yang module.
       </t>
 
+      <t>DHCPv6 options vary in their applicablity. Some are permitted only
+        to be sent by either the server, relay, or client. Some may be sent
+        by more than one of these elements. In order to avoid duplication
+        of the option definitions, a single module containing all of the
+        <xref target="RFC8415"/> options is defined here. YANG identities are
+        then used to define the applicability of each option for the relevant
+        DHCPv6 element(s).
+      </t>
+
       <t>
         A large number of DHCPv6 options have been created in addition to
         those defined in <xref target="RFC8415"/>. As implementations differ
@@ -181,7 +168,6 @@
         augmentation. The Appendixes provide an example of how this can be
         done.
       </t>
-      </section>
 
       <t>It is worth noting that as DHCPv6 is itself a client configuration
         protocol, it is not the intention of this document to replace the
@@ -539,11 +525,8 @@ INSERT CLIENT TREE DIAGRAM HERE
           <t>failed-status-turn-up: raised when the client receives a message
             includes an unsuccessful Status Code option.
           </t>
-
         </list></t>
-
       </section>
-
     </section>
 
     <section anchor="yang-model" title="DHCPv6 YANG Model">

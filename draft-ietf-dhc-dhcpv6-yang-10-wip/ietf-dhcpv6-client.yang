@@ -1,0 +1,320 @@
+module ietf-dhcpv6-client {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client";
+  prefix "dhcpv6-client";
+
+  import ietf-dhcpv6-common {
+    prefix dhcpv6-common;
+  }
+
+  import ietf-interfaces {
+    prefix if;
+  }
+
+  organization "DHC WG";
+  contact
+    "cuiyong@tsinghua.edu.cn
+    wangh13@mails.tsinghua.edu.cn
+    lh.sunlinh@gmail.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com
+    godfryd@isc.org";
+
+  description "This is a YANG data module for the configuration and management
+    of DHCPv6 clients.
+
+    Copyright (c) 2018 IETF Trust and the persons identified as
+    authors of the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and subject
+    to the license terms contained in, the Simplified BSD License
+    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    Relating to IETF Documents
+    (http://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC 8513; see
+    the RFC itself for full legal notices.";
+
+  revision 2018-09-04 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2018-03-04 {
+    description "Resolved most issues on the DHC official
+      github";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2017-12-22 {
+    description "Resolve most issues on Ian's github.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2017-11-24 {
+    description "First version of the separated client specific
+      YANG model.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  identity client {
+    base "dhcpv6-common:dhcpv6-node";
+    description "DHCPv6 client.";
+  }
+
+  leaf dhcpv6-node-type {
+    description "Type for a DHCPv6 client";
+    type identityref {
+      base "dhcpv6-client:client";
+    }
+  }
+
+  /*
+   * Groupings
+   */
+
+  grouping if-leases {
+    container client-configured-options {
+      description "Definitions for DHCPv6 options that can be be sent by the
+        client are augmented to this location from other YANG modules as
+        required.";
+    }
+    list ia-na {
+      key iaid;
+      description "Configuration relevant for an IA_NA.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        (DHCPv6)";
+      leaf iaid {
+        type uint32;
+        description "The unique identifier for this IA_NA.";
+      }
+      container ia-na-options {
+        description "An augmenation point for additional options that the
+          client will send in the IA_NA-options field of OPTION_IA_NA
+          options.";
+      }
+    }
+    list ia-ta {
+      key iaid;
+      description "Configuration relevant for an IA_TA.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        (DHCPv6)";        
+        leaf iaid {
+          type uint32;
+          description "The unique identifier for this IA_TA.";
+        }
+      container ia-ta-options {
+        description "An augmenation point for additional options that the
+          client will send in the IA_TA-options field of OPTION_IA_TA
+          options.";
+      }
+    }
+    list ia-pd {
+      key iaid;
+      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        (DHCPv6)";
+      description "Configuration relevant for an IA_PD.";
+      leaf iaid {
+        type uint32;
+        description "The unique identifier for this IA_PD.";
+      }
+      container ia-pd-options {
+        description "An augmenation point for additional options that the
+          client will send in the IA_PD-options field of OPTION_IA_TA
+          options.";
+      }
+    }
+  }
+
+  grouping lease-stats {
+    description "Contains counters for DHCPv6 lease messages.";
+    leaf solicit-count {
+      type uint32;
+      description "Number of solicit messages sent.";
+    }
+    leaf request-count {
+      type uint32;
+      description "Number of request messages sent.";
+    }
+    leaf renew-count {
+      type uint32;
+      description "Number of renew messages sent.";
+    }
+    leaf rebind-count {
+      type uint32;
+      description "Number of rebind messages sent.";
+    }
+    leaf decline-count {
+      type uint32;
+      description "Number of decline messages sent.";
+    }
+    leaf release-count {
+      type uint32;
+      description "Number of release messages sent.";
+    }
+    leaf advertise-count {
+      type uint32;
+      description "Number of rebind messages received.";
+    }
+    leaf confirm-count {
+      type uint32;
+      description "Number of confirm messages sent.";
+    }
+    leaf reply-count {
+      type uint32;
+      description "Number of reply messages received.";
+    }
+    leaf reconfigure-count {
+      type uint32;
+      description "Number of reconfigure messages received.";
+    }
+  }
+
+  /*
+   * Data Nodes
+   */
+
+  container client-config {
+    description "DHCPv6 client configuration.";
+    list client-if {
+      key if-name;
+      description "The list of interfaces that the client will be 
+        requesting DHCPv6 configuration for.";
+      leaf if-name {
+        type if:interface-ref;
+        mandatory true;
+        description "Reference to the interface entry that the requested
+          configuration is relevant to.";
+      }
+      uses dhcpv6-common:duid;
+      uses if-leases;
+    }
+  }
+
+  container client-state {
+    config "false";
+    description "State data for the DHCPv6 client";
+    list client-if {
+      key if-name;
+      description "The list of interfaces that the client will be 
+        requesting DHCPv6 configuration for.";
+      leaf if-name {
+        type if:interface-ref;
+        mandatory true;
+        description "Reference to the interface entry that the requested
+          configuration is relevant to.";
+      }
+      leaf info-req-count {
+        type uint32;
+        mandatory true;
+        description "Number of information request messages sent.";
+      }
+      leaf reply-count {
+        type uint32;
+        description "Number of reply messages received.";
+      }
+      uses dhcpv6-common:duid;
+      uses if-leases {
+        augment "ia-na" {
+          description "Provides statisitic for the number and type of messages
+            received for this IAID.";
+          uses lease-stats;
+        }
+        augment "ia-ta" {
+          description "Provides statisitic for the number and type of messages
+            received for this IAID.";
+          uses lease-stats;
+        }
+        augment "ia-pd" {
+          description "Provides statisitic for the number and type of messages
+            received for this IAID.";
+          uses lease-stats;
+        }
+      }
+    }
+  }
+
+  /*
+   * Notifications
+   */
+
+  notification ia-lease-event {
+    description "An event is generated when the client is allocated a new IA by
+      a the server or a current IA is renewed, /rebound or released";
+    leaf event-type {
+      type enumeration {
+        enum "allocation" {
+          description "allocate";
+        }
+        enum "rebind" {
+          description "rebind";
+        }
+        enum "renew" {
+          description "renew";
+        }
+        enum "release" {
+          description "release";
+        }
+      }
+      mandatory true;
+      description "event type";
+    }
+    leaf iaid {
+      type uint32;
+      mandatory true;
+      description "IAID";
+    }
+    container duid {
+      description "Server's DUID";
+      uses dhcpv6-common:duid;
+    }
+  }
+
+  notification invalid-ia-detected {
+    description "Raised when the identity association of the
+      client can be proved to be invalid.  Possible condition
+      includes duplicated address, illegal address, etc.";
+    leaf iaid {
+      type uint32;
+      mandatory true;
+      description "IAID";
+    }
+    leaf description {
+      type string;
+      description "description of the event";
+    }
+  }
+
+  notification retransmission-failed {
+    description "raised when the retransmission mechanism defined
+      in [RFC3315] is failed.";
+    leaf description {
+      type enumeration {
+        enum "MRC failed" {
+          description "MRC failed";
+        }
+        enum "MRD failed" {
+          description "MRD failed";
+        }
+      }
+      mandatory true;
+      description "description of failure";
+    }
+  }
+
+  notification failed-status-turn-up {
+    description "raised when the client receives a message includes
+      an unsuccessful Status Code option.";
+    leaf status-code {
+      type uint16;
+      mandatory true;
+      description "Status code recevied by a client";
+    }
+    container duid {
+      description "Server's DUID";
+      uses dhcpv6-common:duid;
+    }
+  }
+}

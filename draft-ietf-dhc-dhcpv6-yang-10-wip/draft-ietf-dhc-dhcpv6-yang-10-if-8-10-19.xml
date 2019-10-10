@@ -86,6 +86,7 @@
       <organization>Internet Systems Consortium</organization>
       <address>
         <postal>
+          <street/>
           <city>Gdansk</city>
           <country>Poland</country>
         </postal>
@@ -125,6 +126,16 @@
         module contains definitions for all of the configurable DHCP options.
       </t>
 
+      <t>It is worth noting that as DHCPv6 is itself a client configuration
+        protocol, it is not the intention of this document to replace the
+        allocation of DHCPv6 assigned addressing and parameters using
+        NETCONF/YANG.  The DHCPv6 client model is intended for the
+        configuration of the DHCPv6 client function and also for obtaining
+        DHCPv6 provisioned read-only state data from the client, learned via
+        the normal DHCPv6 message flow. This gives the network operator
+        better management and troubleshooting capabilities.
+      </t>
+
     <section title="Scope">
       <t><xref target="RFC8415"/> describes the current version of the DHCPv6
         base protocol specification. In addition to this, a large number
@@ -145,7 +156,7 @@
         functions in a way that is useful without being restrictive.
       </t>
       </section>
-      
+
     <section title="Extensibility">
       <t>However, it is recognised that implementation specific configuration
         and management is also an essential part of element deployment and
@@ -168,7 +179,7 @@
         ommitted from the DHCPv6 server module. The appendix provides an
         example module for the class selection function, intended to demonstrate
         how this is intended to integrate with the main
-        ieft-dhcpv6-server.yang module.
+        ietf-dhcpv6-server.yang module.
       </t>
 
       <t>
@@ -181,17 +192,8 @@
         augmentation. The Appendixes provide an example of how this can be
         done.
       </t>
-      </section>
 
-      <t>It is worth noting that as DHCPv6 is itself a client configuration
-        protocol, it is not the intention of this document to replace the
-        allocation of DHCPv6 assigned addressing and parameters using
-        NETCONF/YANG.  The DHCPv6 client model is intended for the
-        configuration of the DHCPv6 client function and also for obtaining
-        DHCPv6 provisioned read-only state data from the client, learned via
-        the normal DHCPv6 message flow. This gives the network operator
-        better management and troubleshooting capabilities.
-      </t>
+      </section>
 
       <section anchor="terminology" title="Terminology">
 
@@ -556,8 +558,6 @@ INSERT SERVER YANG
         ]]></artwork></figure>
   </section>
 
-
-
       <section anchor="relay-model" title="DHCPv6 Relay YANG Model">
         <t>This module imports typedefs from <xref target="RFC6991"></xref>,
         <xref target="RFC7223"></xref>.
@@ -703,5 +703,11 @@ The following individuals contributed to this effort:
       <?rfc include='reference.RFC.7598'?>
       <?rfc include="reference.I-D.ietf-netmod-yang-tree-diagrams" ?>
     </references>
+    <section title="Example of Adding New DHCPv6 Option Definitions">
+    </section>
+    <section title="Example Vendor Specific Server Configuration Module">
+    </section>
+    <section title="Example Vendor Sepcific Client Class Selector Module">
+    </section>
   </back>
 </rfc>
