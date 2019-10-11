@@ -159,6 +159,11 @@ module ietf-dhcpv6-common {
         }
       }
     }
+    leaf active-duid {
+      config "false";
+      description "The DUID which is currently in use";
+      type binary;
+    }
   }
 
   grouping portset-para {
