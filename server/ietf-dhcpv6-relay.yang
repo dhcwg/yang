@@ -130,10 +130,10 @@ module ietf-dhcpv6-relay {
         }
       }
       list remote-host {
-        key ent-num;
+        key enterprise-number;
         description
           "Remote host";
-        leaf ent-num {
+        leaf enterprise-number {
           type uint32;
           mandatory true;
           description
@@ -368,7 +368,7 @@ module ietf-dhcpv6-relay {
             mandatory true;
             description "relay reply received counter";
           }
-          leaf packet-to-cli-count {
+          leaf packet-to-client-count {
             type uint32;
             mandatory true;
             description "packet to client counter";
@@ -406,51 +406,51 @@ module ietf-dhcpv6-relay {
         }
       }
     }
-    container relay-stats {
+    container relay-statistics {
       config "false";
       description
         "Relay statistics";
-      leaf cli-packet-rvd-count {
+      leaf client-packet-received-count {
         type uint32;
         mandatory true;
         description
-          "Client packet received counter";
+          "Client packets received count";
       }
-      leaf relay-for-rvd-count {
+      leaf relay-forward-received-count {
         type uint32;
         mandatory true;
         description
-          "Relay forward received counter";
+          "Relay forward packets received count";
       }
-      leaf relay-rep-rvd-count {
+      leaf relay-reply-received-count {
         type uint32;
         mandatory true;
         description
-          "Relay reply recevied counter";
+          "Relay reply packets recevied count";
       }
-      leaf packet-to-cli-count {
+      leaf packet-to-client-count {
         type uint32;
         mandatory true;
         description
-          "Packet to client counter";
+          "Packet to client count";
       }
-      leaf relay-for-sent-count {
+      leaf relay-forward-sent-count {
         type uint32;
         mandatory true;
         description
-          "Relay forward sent counter";
+          "Relay forward packets sent count";
       }
-      leaf relay-rep-sent-count {
+      leaf relay-reply-sent-count {
         type uint32;
         mandatory true;
         description
-          "Relay reply sent counter";
+          "Relay reply packets sent count";
       }
       leaf discarded-packet-count {
         type uint32;
         mandatory true;
         description
-          "Discarded packet counter";
+          "Discarded packets count";
       }
     }
   }
