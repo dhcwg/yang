@@ -65,7 +65,7 @@ module ietf-dhcpv6-common {
     description "Vendor information.";
     container vendor-info {
       description "";
-      leaf ent-num {
+      leaf enterprise-number {
         type uint32;
         // mandatory true; // TODO: vendor-infor is used indirectly in augmentation and thus it cannot be mandatory
         description "enterprise number";
@@ -106,9 +106,9 @@ module ietf-dhcpv6-common {
           type yang:timeticks;
           description "The time value is the time that the DUID is
             generated represented in seconds since midnight (UTC),
-                      January 1, 2000, modulo 2^32.";
+            January 1, 2000, modulo 2^32.";
         }
-        leaf duid-llt-link-layer-addr {
+        leaf duid-llt-link-layer-address {
           type yang:mac-address;
           description "Link-layer address as described in RFC2464";
         }
@@ -135,7 +135,7 @@ module ietf-dhcpv6-common {
           type uint16;
           description "Hardware type as assigned by IANA (RFC826).";
         }
-        leaf duid-ll-link-layer-addr {
+        leaf duid-ll-link-layer-address {
           type yang:mac-address;
           description "Link-layer address as described in RFC2464";
         }
@@ -161,7 +161,8 @@ module ietf-dhcpv6-common {
     }
   }
 
-  grouping portset-para {
+  // TODO: is it used anywhere? if not should it be removed?
+  grouping portset-parameters {
     description "portset parameters";
     container port-parameter {
       description "port parameter";
@@ -203,35 +204,35 @@ module ietf-dhcpv6-common {
       }
       leaf-list ipv6-addr {
         type inet:ipv6-address;
-        description "ipv6 address";
+        description "IPv6 address";
       }
       leaf-list ipv6-prefix {
         type inet:ipv6-prefix;
-        description "ipv6 prefix";
+        description "IPv6 prefix";
       }
       leaf-list prefix-length {
         type uint8;
-        description "ipv6 prefix length";
+        description "IPv6 prefix length";
       }
       leaf t1-time {
         type yang:timeticks;
         mandatory true;
-        description "t1 time";
+        description "T1 time";
       }
       leaf t2-time {
         type yang:timeticks;
         mandatory true;
-        description "t2 time";
+        description "T2 time";
       }
       leaf preferred-lifetime {
         type yang:timeticks;
         mandatory true;
-        description "preferred lifetime";
+        description "Preferred lifetime";
       }
       leaf valid-lifetime {
         type yang:timeticks;
         mandatory true;
-        description "valid lifetime";
+        description "Valid lifetime";
       }
     }
   }

@@ -91,10 +91,10 @@ module ietf-dhcpv6-client {
         mandatory true;
         description "Interface name";
       }
-      leaf cli-id {
+      leaf client-id {
         type uint32;
         mandatory true;
-        description "client id";
+        description "Client ID";
       }
       leaf pd-function {
         type boolean;
@@ -150,7 +150,7 @@ module ietf-dhcpv6-client {
   container client-state {
     config "false";
     description "state tree of client";
-    container if-other-paras {
+    container if-other-parameters {
       description "A client can obtain extra configuration
         data other than address and prefix information through
         DHCPv6. This container describes such data the client
@@ -158,7 +158,7 @@ module ietf-dhcpv6-client {
         include DNS server addresses, SIP server domain names, etc.";
       //uses dhcpv6-options:server-option-definitions;
     }
-    container packet-stats {
+    container packet-statistics {
       config "false";
       description "A container records
         all the packet status information
@@ -166,57 +166,57 @@ module ietf-dhcpv6-client {
       leaf solicit-count {
         type uint32;
         mandatory true;
-        description "solicit counter";
+        description "Solicit packets count";
       }
       leaf request-count {
         type uint32;
         mandatory true;
-        description "request counter";
+        description "Request packets count";
       }
       leaf renew-count {
         type uint32;
         mandatory true;
-        description "renew counter";
+        description "Renew packets count";
       }
       leaf rebind-count {
         type uint32;
         mandatory true;
-        description "rebind counter";
+        description "Rebind packets count";
       }
       leaf decline-count {
         type uint32;
         mandatory true;
-        description "decline counter";
+        description "Decline packets count";
       }
       leaf release-count {
         type uint32;
         mandatory true;
-        description "release counter";
+        description "Release packets count";
       }
-      leaf info-req-count {
+      leaf info-request-count {
         type uint32;
         mandatory true;
-        description "information request counter";
+        description "Information request packets count";
       }
       leaf advertise-count {
         type uint32;
         mandatory true;
-        description "advertise counter";
+        description "Advertise packets count";
       }
       leaf confirm-count {
         type uint32;
         mandatory true;
-        description "confirm counter";
+        description "Confirm packets count";
       }
       leaf reply-count {
         type uint32;
         mandatory true;
-        description "reply counter";
+        description "Reply packets count";
       }
       leaf reconfigure-count {
         type uint32;
         mandatory true;
-        description "recofigure counter";
+        description "Recofigure packets count";
       }
     }
   }
@@ -226,7 +226,7 @@ module ietf-dhcpv6-client {
    */
 
   notification ia-lease-event {
-    description "raised when the client was allocated
+    description "Notification sent when the client was allocated
           a new IA from the server or it renew/rebind/release
           its current IA";
     leaf event-type {
@@ -259,7 +259,7 @@ module ietf-dhcpv6-client {
   }
 
   notification invalid-ia-detected {
-    description "raised when the identity association of the
+    description "Notification sent when the identity association of the
           client can be proved to be invalid.  Possible condition
           includes duplicated address, illegal address, etc.";
     leaf iaid {
@@ -269,12 +269,12 @@ module ietf-dhcpv6-client {
     }
     leaf description {
       type string;
-      description "description of the event";
+      description "Description of the event";
     }
   }
 
   notification retransmission-failed {
-    description "raised when the retransmission mechanism defined
+    description "Notification sent when the retransmission mechanism defined
           in [RFC3315] is failed.";
     leaf description {
       type enumeration {
@@ -286,12 +286,12 @@ module ietf-dhcpv6-client {
         }
       }
       mandatory true;
-      description "description of failure";
+      description "Description of failure";
     }
   }
 
   notification failed-status-turn-up {
-    description "raised when the client receives a message includes
+    description "Notification sent when the client receives a message includes
           an unsuccessful Status Code option.";
     leaf status-code {
       type uint16;
