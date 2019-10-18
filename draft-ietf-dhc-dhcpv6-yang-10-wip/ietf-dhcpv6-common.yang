@@ -61,21 +61,6 @@ module ietf-dhcpv6-common {
   /*
    * Grouping
    */
-  grouping vendor-infor {
-    description "Vendor information.";
-    container vendor-info {
-      description "";
-      leaf ent-num {
-        type uint32;
-        // mandatory true; // TODO: vendor-infor is used indirectly in augmentation and thus it cannot be mandatory
-        description "enterprise number";
-      }
-      leaf-list data {
-        type string;
-        description "specific vendor info";
-      }
-    }
-  }
 
   grouping duid {
     description

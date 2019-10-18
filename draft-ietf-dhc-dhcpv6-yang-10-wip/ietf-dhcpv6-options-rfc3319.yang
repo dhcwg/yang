@@ -7,36 +7,22 @@ module ietf-dhcpv6-options-rfc3319 {
     prefix inet;
   }
 
-  import ietf-dhcpv6-common {
-    prefix dhcpv6-common;
-  }
-
   import ietf-dhcpv6-server {
     prefix dhcpv6-server;
   }
 
   organization "DHC WG";
   contact 
-    "cuiyong@tsinghua.edu.cn
-    wangh13@mails.tsinghua.edu.cn
-    lh.sunlinh@gmail.com
-    ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de
-    hezihao9512@gmail.com";
+    "ian.farrer@telekom.de
+    godfryd@isc.org";
 
   description "This YANG module contains DHCPv6 options defined in RFC3319 that
     can be used by DHCPv6 servers.";
 
-  revision 2019-06-07 {
-    description "Major reworking to only contain RFC8415 options. if-feature
-      for each option removed. Removed groupings of features by device or
-      combination of devices. Added ";
+  revision 2019-10-18 {
+    description "Initial version.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
-
-  /*
-   * Features
-   */
 
   /*
    * Groupings
@@ -73,7 +59,7 @@ module ietf-dhcpv6-options-rfc3319 {
     }
   }
 
-  augment "/dhcpv6-server:config/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
     uses sip-server-domain-name-list-option-group;
     uses sip-server-address-list-option-group;

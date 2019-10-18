@@ -389,7 +389,7 @@ module ietf-dhcpv6-options-rfc8415 {
     }
   }
 
-  augment "/dhcpv6-server:config/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
     uses preference-option-group;
     uses auth-option-group;
@@ -403,13 +403,13 @@ module ietf-dhcpv6-options-rfc8415 {
     uses sol-max-rt-option-group;
     uses inf-max-rt-option-group;
   }
-  augment "/dhcpv6-relay:relay-config/dhcpv6-relay:relay-if" {
+  augment "/dhcpv6-relay:dhcpv6-relay/dhcpv6-relay:relay-if" {
     when "../../dhcpv6-relay:dhcpv6-node-type='dhcpv6-relay:relay'";
     uses auth-option-group;
     uses status-code-option-group;
     uses interface-id-option-group;
   }
-  augment "/dhcpv6-client:client-config/dhcpv6-client:client-if/dhcpv6-client:client-configured-options" {
+  augment "/dhcpv6-client:dhcpv6-client/dhcpv6-client:client-if/dhcpv6-client:client-configured-options" {
     when "../../../dhcpv6-client:dhcpv6-node-type='dhcpv6-client:client'";
     uses option-request-option-group;
     uses status-code-option-group;
