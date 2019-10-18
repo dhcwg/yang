@@ -1,6 +1,9 @@
 YANGER?=../yanger/bin/yanger
 XML2RFC?=../venv/bin/xml2rfc
 
+#SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-8-10-19.v2v3
+
 
 all: text html
 
@@ -34,6 +37,8 @@ INCLUDES+=ietf-dhcpv6-server.yang
 INCLUDES+=ietf-dhcpv6-relay.yang
 INCLUDES+=ietf-dhcpv6-options-rfc8415.yang
 INCLUDES+=ietf-dhcpv6-common.yang
+INCLUDES+=example-dhcpv6-class-selector.yang
+INCLUDES+=example-dhcpv6-server-config.yang
 INCLUDES+=ietf-dhcpv6-server.yang.tree
 INCLUDES+=ietf-dhcpv6-relay.yang.tree
 INCLUDES+=ietf-dhcpv6-client.yang.tree
@@ -42,12 +47,12 @@ FULL_INCLUDES=
 $(foreach inc_file,$(INCLUDES),$(eval $(call file_to_xml,server/$(inc_file))))
 
 
-text: draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3.txt
-draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3.txt: draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3.xml $(FULL_INCLUDES)
+text: $(SPEC_NAME).txt
+$(SPEC_NAME).txt: $(SPEC_NAME).xml $(FULL_INCLUDES)
 	$(XML2RFC) -n -N --text --v3 $<
 
-html: draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3.html
-draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3.html: draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3.xml $(FULL_INCLUDES)
+html: $(SPEC_NAME).html
+$(SPEC_NAME).html: $(SPEC_NAME).xml $(FULL_INCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
 
 clean:
