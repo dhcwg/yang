@@ -1,0 +1,164 @@
+module: ietf-dhcpv6-options-rfc3319
+
+  augment /dhcpv6-server:config/dhcpv6-server:option-sets/dhcpv6-server:option-set:
+    +--rw sip-server-domain-name-list-option
+    |  +--rw sip-serv-domain-name?   inet:domain-name
+    +--rw sip-server-address-list-option
+       +--rw sip-server* [sip-serv-id]
+          +--rw sip-serv-id?     uint8
+          +--rw sip-serv-addr?   inet:ipv6-address
+
+module: ietf-dhcpv6-options-rfc8415
+
+  augment /dhcpv6-server:config/dhcpv6-server:option-sets/dhcpv6-server:option-set:
+    +--rw preference-option
+    |  +--rw pref-value?   uint8
+    +--rw auth-option
+    |  +--rw protocol?           uint8
+    |  +--rw algorithm?          uint8
+    |  +--rw rdm?                uint8
+    |  +--rw replay-detection?   uint64
+    |  +--rw auth-information?   string
+    +--rw server-unicast-option
+    |  +--rw server-address?   inet:ipv6-address
+    +--rw status-code-option
+    |  +--rw status-code?      uint16
+    |  +--rw status-message?   string
+    +--rw rapid-commit-option!
+    +--rw vendor-specific-information-option
+    |  +--rw vendor-specific-information-option-instances* [enterprise-number]
+    |     +--rw enterprise-number?    uint32
+    |     +--rw vendor-option-data* [sub-option-code]
+    |        +--rw sub-option-code?   uint16
+    |        +--rw sub-option-data?   string
+    +--rw reconfigure-message-option
+    |  +--rw msg-type?   uint8
+    +--rw reconfigure-accept-option!
+    +--rw info-refresh-time-option
+    |  +--rw info-refresh-time?   dhcpv6-common:timer-value-seconds32
+    +--rw sol-max-rt-option
+    |  +--rw sol-max-rt-value?   dhcpv6-common:timer-value-seconds32
+    +--rw inf-max-rt-option
+       +--rw inf-max-rt-value?   dhcpv6-common:timer-value-seconds32
+  augment /dhcpv6-relay:relay-config/dhcpv6-relay:relay-if:
+    +--rw auth-option
+    |  +--rw protocol?           uint8
+    |  +--rw algorithm?          uint8
+    |  +--rw rdm?                uint8
+    |  +--rw replay-detection?   uint64
+    |  +--rw auth-information?   string
+    +--rw status-code-option
+    |  +--rw status-code?      uint16
+    |  +--rw status-message?   string
+    +--rw interface-id-option
+       +--rw interface-id?   string
+
+module: ietf-dhcpv6-client
+  +--rw dhcpv6-node-type?   identityref
+  +--rw config
+  |  +--rw duid
+  |  |  +--rw type-code?                           uint16
+  |  |  +--rw (duid-type)?
+  |  |     +--:(duid-llt)
+  |  |     |  +--rw duid-llt-hardware-type?        uint16
+  |  |     |  +--rw duid-llt-time?                 yang:timeticks
+  |  |     |  +--rw duid-llt-link-layer-address?   yang:mac-address
+  |  |     +--:(duid-en)
+  |  |     |  +--rw duid-en-enterprise-number?     uint32
+  |  |     |  +--rw duid-en-identifier?            string
+  |  |     +--:(duid-ll)
+  |  |     |  +--rw duid-ll-hardware-type?         uint16
+  |  |     |  +--rw duid-ll-link-layer-address?    yang:mac-address
+  |  |     +--:(duid-uuid)
+  |  |     |  +--rw uuid?                          yang:uuid
+  |  |     +--:(duid-unknown)
+  |  |        +--rw data?                          binary
+  |  +--rw client-if* [if-name]
+  |     +--rw if-name                      if:interface-ref
+  |     +--rw client-id                    uint32
+  |     +--rw pd-function                  boolean
+  |     +--rw rapid-commit                 boolean
+  |     +--rw client-configured-options
+  |        +--rw rfc8415:option-request-option
+  |        |  +--rw rfc8415:oro-option*   uint16
+  |        +--rw rfc8415:status-code-option
+  |        |  +--rw rfc8415:status-code?      uint16
+  |        |  +--rw rfc8415:status-message?   string
+  |        +--rw rfc8415:rapid-commit-option!
+  |        +--rw rfc8415:user-class-option
+  |        |  +--rw rfc8415:user-class-data* [user-class-datum-id]
+  |        |     +--rw rfc8415:user-class-datum-id?   uint8
+  |        |     +--rw rfc8415:user-class-datum?      string
+  |        +--rw rfc8415:vendor-class-option
+  |        |  +--rw rfc8415:vendor-class-option-instances* [enterprise-number]
+  |        |     +--rw rfc8415:enterprise-number?   uint32
+  |        |     +--rw rfc8415:vendor-class* [vendor-class-datum-id]
+  |        |        +--rw rfc8415:vendor-class-datum-id?   uint8
+  |        |        +--rw rfc8415:vendor-class-datum?      string
+  |        +--rw rfc8415:vendor-specific-information-option
+  |        |  +--rw rfc8415:vendor-specific-information-option-instances* [enterprise-number]
+  |        |     +--rw rfc8415:enterprise-number?    uint32
+  |        |     +--rw rfc8415:vendor-option-data* [sub-option-code]
+  |        |        +--rw rfc8415:sub-option-code?   uint16
+  |        |        +--rw rfc8415:sub-option-data?   string
+  |        +--rw rfc8415:reconfigure-accept-option!
+  +--ro client-state
+     +--ro if-other-parameters
+     +--ro packet-statistics
+        +--ro solicit-count         uint32
+        +--ro request-count         uint32
+        +--ro renew-count           uint32
+        +--ro rebind-count          uint32
+        +--ro decline-count         uint32
+        +--ro release-count         uint32
+        +--ro info-request-count    uint32
+        +--ro advertise-count       uint32
+        +--ro confirm-count         uint32
+        +--ro reply-count           uint32
+        +--ro reconfigure-count     uint32
+
+  notifications:
+    +---n ia-lease-event           
+    |  +--ro event-type    enumeration
+    |  +--ro iaid          uint32
+    |  +--ro duid
+    |     +--ro type-code?                           uint16
+    |     +--ro (duid-type)?
+    |        +--:(duid-llt)
+    |        |  +--ro duid-llt-hardware-type?        uint16
+    |        |  +--ro duid-llt-time?                 yang:timeticks
+    |        |  +--ro duid-llt-link-layer-address?   yang:mac-address
+    |        +--:(duid-en)
+    |        |  +--ro duid-en-enterprise-number?     uint32
+    |        |  +--ro duid-en-identifier?            string
+    |        +--:(duid-ll)
+    |        |  +--ro duid-ll-hardware-type?         uint16
+    |        |  +--ro duid-ll-link-layer-address?    yang:mac-address
+    |        +--:(duid-uuid)
+    |        |  +--ro uuid?                          yang:uuid
+    |        +--:(duid-unknown)
+    |           +--ro data?                          binary
+    +---n invalid-ia-detected      
+    |  +--ro iaid           uint32
+    |  +--ro description?   string
+    +---n retransmission-failed    
+    |  +--ro description    enumeration
+    +---n failed-status-turn-up    
+       +--ro status-code    uint16
+       +--ro duid
+          +--ro type-code?                           uint16
+          +--ro (duid-type)?
+             +--:(duid-llt)
+             |  +--ro duid-llt-hardware-type?        uint16
+             |  +--ro duid-llt-time?                 yang:timeticks
+             |  +--ro duid-llt-link-layer-address?   yang:mac-address
+             +--:(duid-en)
+             |  +--ro duid-en-enterprise-number?     uint32
+             |  +--ro duid-en-identifier?            string
+             +--:(duid-ll)
+             |  +--ro duid-ll-hardware-type?         uint16
+             |  +--ro duid-ll-link-layer-address?    yang:mac-address
+             +--:(duid-uuid)
+             |  +--ro uuid?                          yang:uuid
+             +--:(duid-unknown)
+                +--ro data?                          binary
