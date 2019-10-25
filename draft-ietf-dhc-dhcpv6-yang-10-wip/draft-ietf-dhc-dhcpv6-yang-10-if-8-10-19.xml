@@ -200,7 +200,7 @@
         <name>DHCPv6 Server Tree Diagrams</name>
         <figure anchor="structure">
           <name>DHCPv6 Data Model Structure</name>
-            <xi:include href="../server/ietf-dhcpv6-server.yang.tree.xml"/>
+            <xi:include href="ietf-dhcpv6-server.yang.tree.xml"/>
         </figure>
         <t>Introduction of important nodes:</t>
         <ul spacing="normal">
@@ -338,7 +338,7 @@
       </section>
       <section anchor="dhcpv6-relay-tree">
         <name>DHCPv6 Relay Tree Diagrams</name>
-        <xi:include href="../server/ietf-dhcpv6-relay.yang.tree.xml"/>
+        <xi:include href="ietf-dhcpv6-relay.yang.tree.xml"/>
 
         <t>Introduction of important nodes:</t>
         <ul spacing="normal">
@@ -392,7 +392,7 @@
       </section>
       <section anchor="dhcpv6-client-tree">
         <name>DHCPv6 Client Tree Diagrams</name>
-        <xi:include href="../server/ietf-dhcpv6-client.yang.tree.xml"/>
+        <xi:include href="ietf-dhcpv6-client.yang.tree.xml"/>
 
         <t>Introduction of important nodes:</t>
         <ul spacing="normal">
@@ -457,31 +457,31 @@
         <name>DHCPv6 Server YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC7223"/>.</t>
-        <xi:include href="../server/ietf-dhcpv6-server.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-server.yang.xml"/>
       </section>
       <section anchor="relay-model">
         <name>DHCPv6 Relay YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC7223"/>.
         </t>
-        <xi:include href="../server/ietf-dhcpv6-relay.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-relay.yang.xml"/>
       </section>
       <section anchor="client-model">
         <name>DHCPv6 Client YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC7223"/>.</t>
-        <xi:include href="../server/ietf-dhcpv6-client.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-client.yang.xml"/>
       </section>
       <section anchor="option-model">
         <name>DHCPv6 Options YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC7223"/>.</t>
-        <xi:include href="../server/ietf-dhcpv6-options-rfc8415.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-options-rfc8415.yang.xml"/>
       </section>
       <section anchor="type-model">
         <name>DHCPv6 Types YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.</t>
-        <xi:include href="../server/ietf-dhcpv6-common.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-common.yang.xml"/>
       </section>
     </section>
     <section anchor="appendix">
@@ -513,7 +513,7 @@
       </section>
       <section anchor="vendor-specific-configuration-example-yang">
         <name>Example DHCPv6 Server Config YANG Model</name>
-        <xi:include href="../server/example-dhcpv6-server-config.yang.xml"/>
+        <xi:include href="example-dhcpv6-server-config.yang.xml"/>
       </section>
       <section anchor="class-selector-example">
         <name>Example definition of class selector configuration</name>
@@ -544,7 +544,7 @@
       </section>
       <section anchor="class-selector-example-yang">
         <name>Example Class Selector YANG Model</name>
-        <xi:include href="../server/example-dhcpv6-class-selector.yang.xml"/>
+        <xi:include href="example-dhcpv6-class-selector.yang.xml"/>
       </section>
     </section>
     <section anchor="security">

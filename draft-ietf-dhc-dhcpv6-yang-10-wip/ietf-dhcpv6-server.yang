@@ -81,7 +81,7 @@ module ietf-dhcpv6-server {
       server's addressing hierarchy.";
     leaf-list option-set-id {
       type leafref {
-        path "/config/option-sets/option-set/option-set-id";
+        path "/dhcpv6-server/option-sets/option-set/option-set-id";
       }
       description "The ID field of relevant option-set to be provisioned to
         clients of this network-range.";
