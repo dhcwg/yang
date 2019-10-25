@@ -83,7 +83,7 @@ module ietf-dhcpv6-client {
    * Groupings
    */
 
-  grouping message-stats {
+  grouping message-statistics {
     description "Counters for DHCPv6 lease messages.";
     leaf solicit-count {
       config "false";
@@ -166,7 +166,7 @@ module ietf-dhcpv6-client {
       list ia-na {
         key iaid;
         description "Configuration relevant for an IA_NA.";
-        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
           (DHCPv6).";
         leaf iaid {
           type uint32;
@@ -224,8 +224,8 @@ module ietf-dhcpv6-client {
       list ia-ta {
         key iaid;
         description "Configuration relevant for an IA_TA.";
-        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
-          (DHCPv6).";        
+        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
+          (DHCPv6).";
           leaf iaid {
             type uint32;
             description "The unique identifier for this IA_TA.";
@@ -269,7 +269,7 @@ module ietf-dhcpv6-client {
       }
       list ia-pd {
         key iaid;
-        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
+        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
           (DHCPv6).";
         description "Configuration relevant for an IA_PD.";
         leaf iaid {
@@ -325,7 +325,7 @@ module ietf-dhcpv6-client {
           }
         }
       }
-      uses message-stats;
+      uses message-statistics;
     }
   }
 
@@ -366,8 +366,8 @@ module ietf-dhcpv6-client {
   }
 
   notification invalid-ia-detected {
-    description "Raised when the identity association of the client can be
-      proved to be invalid.  Possible conditions include a duplicate or 
+    description "Notification sent when the identity association of the client can be
+      proved to be invalid.  Possible conditions include a duplicate or
       otherwise illegal address.";
     leaf iaid {
       type uint32;
@@ -381,7 +381,7 @@ module ietf-dhcpv6-client {
   }
 
   notification retransmission-failed {
-    description "Raised when the retransmission mechanism defined in [RFC8415]
+    description "Notification sent when the retransmission mechanism defined in [RFC8415]
       is unsucessful.";
     leaf failure-type {
       type enumeration {
@@ -398,7 +398,7 @@ module ietf-dhcpv6-client {
   }
 
   notification unsuccessful-status-code {
-    description "Raised when the client receives a message that includes an
+    description "Notification sent when the client receives a message that includes an
       unsuccessful Status Code option.";
     leaf status-code {
       type uint16;

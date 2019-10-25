@@ -137,7 +137,7 @@ module ietf-dhcpv6-server {
         }
         leaf description {
           type string;
-          description "An optional field for storing addional information 
+          description "An optional field for storing addional information
             relevant to the option set.";
         }
       }
@@ -175,17 +175,17 @@ module ietf-dhcpv6-server {
         leaf network-range-id {
           type uint32;
           mandatory true;
-          description "equivalent to subnet id";
+          description "Equivalent to subnet ID";
         }
         leaf network-description {
           type string;
           mandatory true;
-          description "description of the subnet";
+          description "Description of the network range.";
         }
         leaf network-prefix {
           type inet:ipv6-prefix;
           mandatory true;
-          description "subnet prefix";
+          description "Network prefix";
         }
 
         uses resource-config;
@@ -202,27 +202,27 @@ module ietf-dhcpv6-server {
             leaf pool-id {
               type uint32;
               mandatory true;
-              description "pool id";
+              description "Pool ID";
             }
             leaf pool-prefix {
               type inet:ipv6-prefix;
               mandatory true;
-              description "pool prefix";
+              description "Pool prefix";
             }
             leaf start-address {
               type inet:ipv6-address-no-zone;
               mandatory true;
-              description "start address";
+              description "Start address";
             }
             leaf end-address {
               type inet:ipv6-address-no-zone;
               mandatory true;
-              description "end address";
+              description "End address";
             }
             leaf max-address-count {
               type dhcpv6-common:threshold;
               mandatory true;
-              description "maximum count of addresses that can
+              description "Maximum count of addresses that can
                 be allocated in this pool. This value may be
                 less than count of total addresses.";
             }
@@ -243,17 +243,17 @@ module ietf-dhcpv6-server {
             leaf pool-id {
               type uint32;
               mandatory true;
-              description "pool id";
+              description "Pool ID";
             }
             leaf prefix {
               type inet:ipv6-prefix;
               mandatory true;
-              description "ipv6 prefix";
+              description "IPv6 prefix";
             }
             leaf prefix-length {
               type uint8;
               mandatory true;
-              description "prefix length";
+              description "Prefix length";
             }
             leaf max-pd-space-utilization {
               type dhcpv6-common:threshold;
@@ -269,13 +269,13 @@ module ietf-dhcpv6-server {
           description
             "This container allows the server to make reservations at host level.";
           list host-reservation {
-            key cli-id;
+            key client-id;
             description "This list allows the server to reserve addresses,
                         prefixes, hostname and options for different clients.";
-            leaf cli-id {
+            leaf client-id {
               type uint32;
               mandatory true;
-              description "client id";
+              description "Client ID";
             }
 
             choice client-identifier {
@@ -287,7 +287,7 @@ module ietf-dhcpv6-server {
                 uses dhcpv6-common:duid;
               }
               case hw-address {
-                description "hardware address";
+                description "Hardware address";
                 leaf hardware-address {
                   type yang:mac-address;
                   description "MAC address of client";
@@ -295,34 +295,34 @@ module ietf-dhcpv6-server {
               }
             }
 
-            leaf-list reserv-addr {
+            leaf-list reserved-address {
               type inet:ipv6-address;
-              description "reserved addr";
+              description "Reserved address";
             }
 
             list prefix-reservation {
               key reserv-prefix-id;
-              description "reserved prefix reservation";
+              description "Reserved prefix reservation";
               leaf reserv-prefix-id {
                 type uint32;
                 mandatory true;
-                description "reserved prefix id";
+                description "Reserved prefix ID";
               }
               leaf reserv-prefix {
                 type inet:ipv6-prefix;
                 mandatory true;
-                description "reserved prefix";
+                description "Reserved prefix";
               }
               leaf reserv-prefix-len {
                 type uint8;
                 mandatory true;
-                description "reserved prefix length";
+                description "Reserved prefix length";
               }
             }
 
             leaf hostname {
               type string;
-              description "reserved hostname";
+              description "Reserved hostname";
             }
 
             uses resource-config;
@@ -332,78 +332,78 @@ module ietf-dhcpv6-server {
       }
     }
 
-    container relay-opaque-paras {
+    container relay-opaque-parameters {
       description "This container contains some opaque values in Relay Agent
         options that need to be configured on the server side only for value
         match. Such Relay Agent options include Interface-Id option,
         Remote-Id option and Subscriber-Id option.";
       list relays {
         key relay-name;
-        description "relay agents";
+        description "Relay agents";
         leaf relay-name {
           type string;
           mandatory true;
-          description "relay agent name";
+          description "Relay agent name";
         }
         list interface-info {
           key if-name;
-          description "interface info";
+          description "Interface info";
           leaf if-name {
             type string;
             mandatory true;
-            description "interface name";
+            description "Interface name";
           }
           leaf interface-id {
             type string;
             mandatory true;
-            description "interface id";
+            description "Interface ID";
           }
         }
         list subscribers {
           key subscriber;
-          description "subscribers";
+          description "Subscribers";
           leaf subscriber {
             type uint32;
             mandatory true;
-            description "subscriber";
+            description "Subscriber";
           }
           leaf subscriber-id {
             type string;
             mandatory true;
-            description "subscriber id";
+            description "Subscriber ID";
           }
         }
         list remote-host {
-          key ent-num;
-          description "remote host";
-          leaf ent-num {
+          key enterprise-number;
+          description "Remote host";
+          leaf enterprise-number {
             type uint32;
             mandatory true;
-            description "enterprise number";
+            description "Enterprise number";
           }
           leaf remote-id {
             type string;
             mandatory true;
-            description "remote id";
+            description "Remote ID";
           }
         }
       }
     }
 
     container rsoo-enabled-options {
-      description "rsoo enabled options";
+      description "RSOO enabled options";
       list rsoo-enabled-option {
         key option-code;
-        description "rsoo enabled option";
+        description "RSOO enabled option";
         leaf option-code {
           type uint16;
           mandatory true;
-          description "option code";
+          description "Option code";
         }
         leaf description {
           type string;
           mandatory true;
-          description "description of the option";
+          description "Description of the option";
         }
       }
     }
@@ -415,7 +415,7 @@ module ietf-dhcpv6-server {
    */
   container state {
     config "false";
-    description "states of server";
+    description "States of Server";
     container network-ranges {
       description "This model supports a hierarchy to achieve dynamic configuration.
         That is to say we could configure the server  at different levels through
@@ -430,7 +430,7 @@ module ietf-dhcpv6-server {
         leaf network-range-id {
           type uint32;
           mandatory true;
-          description "equivalent to subnet id";
+          description "Equivalent to subnet ID";
         }
         container address-pools {
           description "A container that describes the DHCPv6 server's address pools";
@@ -442,35 +442,35 @@ module ietf-dhcpv6-server {
             leaf pool-id {
               type uint32;
               mandatory true;
-              description "pool id";
+              description "Pool ID";
             }
             leaf total-address-count {
               type uint64;
               mandatory true;
-              description "count of total addresses in the pool";
+              description "Count of total addresses in the pool";
             }
             leaf allocated-address-conut {
               type uint64;
               mandatory true;
-              description "count of allocated addresses in the pool";
+              description "Count of allocated addresses in the pool";
             }
           }
           list binding-info {
-            key cli-id;
+            key client-id;
             description "A list that records a binding information for each DHCPv6
               client that has already been allocated IPv6 addresses.";
-            leaf cli-id {
+            leaf client-id {
               type uint32;
               mandatory true;
-              description "client id";
+              description "Client ID";
             }
             container duid {
               description "Read the DUID";
               uses dhcpv6-common:duid;
             }
-            list cli-ia {
+            list client-ia {
               key iaid;
-              description "client IA";
+              description "Client IA";
               leaf ia-type {
                 type string;
                 mandatory true;
@@ -481,14 +481,14 @@ module ietf-dhcpv6-server {
                 mandatory true;
                 description "IAID";
               }
-              leaf-list cli-addr {
+              leaf-list client-address {
                 type inet:ipv6-address;
-                description "client addr";
+                description "Client address";
               }
               leaf pool-id {
                 type uint32;
                 mandatory true;
-                description "pool id";
+                description "Pool ID";
               }
             }
           }
@@ -505,47 +505,47 @@ module ietf-dhcpv6-server {
             leaf pool-id {
               type uint32;
               mandatory true;
-              description "pool id";
+              description "Pool ID";
             }
             leaf pd-space-utilization {
               type dhcpv6-common:threshold;
               mandatory true;
-              description "current PD space utilization";
+              description "Current PD space utilization";
             }
           }
           list binding-info {
-            key cli-id;
+            key client-id;
             description "A list records a binding information for each DHCPv6
               client that has already been alloated IPv6 prefixes.";
-            leaf cli-id {
+            leaf client-id {
               type uint32;
               mandatory true;
-              description "client id";
+              description "Client ID";
             }
             container duid {
               description "Reads the DUID";
               uses dhcpv6-common:duid;
             }
-            list cli-iapd {
+            list client-iapd {
               key iaid;
-              description "client IAPD";
+              description "Client IAPD";
               leaf iaid {
                 type uint32;
                 mandatory true;
                 description "IAID";
               }
-              leaf-list cli-prefix {
+              leaf-list client-prefix {
                 type inet:ipv6-prefix;
-                description "client ipv6 prefix";
+                description "Client IPv6 prefix";
               }
-              leaf-list cli-prefix-len {
+              leaf-list client-prefix-len {
                 type uint8;
-                description "client prefix length";
+                description "Client prefix length";
               }
               leaf pool-id {
                 type uint32;
                 mandatory true;
-                description "pool id";
+                description "Pool ID";
               }
             }
           }
@@ -554,54 +554,54 @@ module ietf-dhcpv6-server {
         container host-reservations {
           description "This container provides host reservations in the host level.";
           list binding-info {
-            key cli-id;
+            key client-id;
             description
               "A list records a binding information for each DHCPv6
               client that has already been alloated IPv6 addresses or prefixes
               by host reservations.";
-            leaf cli-id {
+            leaf client-id {
               type uint32;
               mandatory true;
-              description "client id";
+              description "Client ID";
             }
             container duid {
               description "Reads the DUID";
               uses dhcpv6-common:duid;
             }
-            list cli-ia {
+            list client-ia {
               key iaid;
-              description "client IA";
+              description "Client IA";
               leaf ia-type {
                 type string;
                 mandatory true;
-                description "IA type, IA_NA or IA_TA";
+                description "IA type: IA_NA or IA_TA";
               }
               leaf iaid {
                 type uint32;
                 mandatory true;
                 description "IAID";
               }
-              leaf-list cli-addr {
+              leaf-list client-address {
                 type inet:ipv6-address;
-                description "client addr";
+                description "Client address";
               }
             }
 
-            list cli-iapd {
+            list client-iapd {
               key iaid;
-              description "client IAPD";
+              description "Client IA_PD";
               leaf iaid {
                 type uint32;
                 mandatory true;
                 description "IAID";
               }
-              leaf-list cli-prefix {
+              leaf-list client-prefix {
                 type inet:ipv6-prefix;
-                description "client ipv6 prefix";
+                description "Client IPv6 prefix";
               }
-              leaf-list cli-prefix-len {
+              leaf-list client-prefix-len {
                 type uint8;
-                description "client prefix length";
+                description "Client prefix length";
               }
             }
           }
@@ -609,73 +609,72 @@ module ietf-dhcpv6-server {
       }
     }
 
-    container packet-stats {
-      description "A container presents the packet statistics related to
-        the DHCPv6 server.";
-      leaf solicit-count {
+    container message-statistics {
+      description "Contains counters for DHCPv6 messages.";
+      leaf solicit-received-count {
         type uint32;
         mandatory true;
-        description "solicit counter";
+        description "Number of Solicit (1) messages received.";
       }
-      leaf request-count {
+      leaf advertise-sent-count {
         type uint32;
         mandatory true;
-        description "request counter";
+        description "Number of Advertise (2) messages sent.";
       }
-      leaf renew-count {
+      leaf request-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "renew counter";
+        description "Number of Request (3) messages received.";
       }
-      leaf rebind-count {
+      leaf confirm-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "rebind counter";
+        description "Number of Confirm (4) messages received.";
       }
-      leaf decline-count {
+      leaf renew-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "decline count";
+        description "Number of Renew (5) messages received.";
       }
-      leaf release-count {
+      leaf rebind-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "release counter";
+        description "Number of Rebind (6) messages received.";
       }
-      leaf info-req-count {
+      leaf reply-sent-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "information request counter";
+        description "Number of Reply (7) messages received.";
       }
-      leaf advertise-count {
+      leaf release-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "advertise counter";
+        description "Number of Release (8) messages sent.";
       }
-      leaf confirm-count {
+      leaf decline-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "confirm counter";
+        description "Number of Decline (9) messages sent.";
       }
-      leaf reply-count {
+      leaf reconfigure-sent-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "reply counter";
+        description "Number of Reconfigure (10) messages sent.";
       }
-      leaf reconfigure-count {
+      leaf information-request-received-count {
+        config "false";
         type uint32;
-        mandatory true;
-        description "reconfigure counter";
+        description "Number of Information-request (11) messages received.";
       }
       leaf relay-forward-count {
         type uint32;
         mandatory true;
-        description "relay forward counter";
+        description "Number of Relay Forward messages.";
       }
       leaf relay-reply-count {
         type uint32;
         mandatory true;
-        description "relay reply counter";
+        description "Number of Relay Reply messages.";
       }
     }
   }
@@ -685,7 +684,7 @@ module ietf-dhcpv6-server {
    */
 
   notification address-pool-running-out {
-    description "raised when the address pool is going to
+    description "Notification sent when the address pool is going to
           run out.  A threshold for utilization ratio of the pool has
           been defined in the server feature so that it will notify the
           administrator when the utilization ratio reaches the
@@ -693,29 +692,29 @@ module ietf-dhcpv6-server {
     leaf total-address-count {
       type uint64;
       mandatory true;
-      description "count of total addresses in the pool";
+      description "Count of total addresses in the pool";
     }
     leaf max-address-count {
       type uint64;
       mandatory true;
-      description "maximum count of addresses that can be allocated
+      description "Maximum count of addresses that can be allocated
             in the pool. This value may be less than count of total
             addresses";
     }
     leaf allocated-address-conut {
       type uint64;
       mandatory true;
-      description "count of allocated addresses in the pool";
+      description "Count of allocated addresses in the pool";
     }
     leaf pool-id {
       type uint32;
       mandatory true;
-      description "pool id";
+      description "Pool ID";
     }
   }
 
   notification pd-pool-running-out {
-    description "Raised when the address/prefix pool is going to
+    description "Notification sent when the address/prefix pool is going to
           run out.  A threshold for utilization ratio of the pool has
           been defined in the server feature so that it will notify the
           administrator when the utilization ratio reaches the
@@ -723,22 +722,22 @@ module ietf-dhcpv6-server {
     leaf max-pd-space-utilization {
       type dhcpv6-common:threshold;
       mandatory true;
-      description "maximum pd space utilization";
+      description "Maximum PD space utilization";
     }
     leaf pd-space-utilization {
       type dhcpv6-common:threshold;
       mandatory true;
-      description "current pd space utilization";
+      description "Current PD space utilization";
     }
     leaf pool-id {
       type uint32;
       mandatory true;
-      description "pool id";
+      description "Pool ID";
     }
   }
 
   notification invalid-client-detected {
-    description "Raised when the server has found a client which
+    description "Notification sent when the server has found a client which
           can be regarded as a potential attacker. Some description
           could also be included.";
     container duid {
@@ -747,12 +746,12 @@ module ietf-dhcpv6-server {
     }
     leaf description {
       type string;
-      description "description of the event";
+      description "Description of the event";
     }
   }
 
   notification decline-received {
-    description "Raised when the server has received DECLINE message
+    description "Notification sent when the server has received DECLINE message
       from a client.";
     container duid {
       description "Client's DUID";
@@ -765,7 +764,7 @@ module ietf-dhcpv6-server {
   }
 
   notification non-success-code-sent {
-    description "Raised when the server responded to a client
+    description "Notification sent when the server responded to a client
       with non-success status code.";
     leaf status-code {
       type uint16;
