@@ -84,7 +84,7 @@ module ietf-dhcpv6-client {
    */
 
   grouping message-stats {
-    description "Counters for DHCPv6 lease messages.";
+    description "Counters for DHCPv6 messages.";
     leaf solicit-count {
       config "false";
       type uint32;
@@ -137,7 +137,7 @@ module ietf-dhcpv6-client {
     leaf information-request-count {
       config "false";
       type uint32;
-      description "Number of Information-request (11) messages received.";
+      description "Number of Information-request (11) messages sent.";
     }
   }
 
@@ -256,8 +256,8 @@ module ietf-dhcpv6-client {
             description "Time and date that the address was first leased.";
             type yang:date-and-time;
           }
-          leaf last-renew {
-            description "Time of the last successful refresh or renew of the
+          leaf last-renew-rebind {
+            description "Time of the last successful renew or rebind of the
               address.";
             type yang:date-and-time;
           }
@@ -332,7 +332,7 @@ module ietf-dhcpv6-client {
   /*
    * Notifications
    */
-
+/*
   notification ia-lease-event {
     description "An event is generated when the client is allocated a new IA by
       a the server or a current IA is renewed, rebound or released.";
@@ -363,7 +363,7 @@ module ietf-dhcpv6-client {
       description "DUID of the leasing server.";
       type binary;
     }
-  }
+  }*/
 
   notification invalid-ia-detected {
     description "Raised when the identity association of the client can be
