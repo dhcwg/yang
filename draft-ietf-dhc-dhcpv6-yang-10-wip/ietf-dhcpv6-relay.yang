@@ -82,7 +82,7 @@ module ietf-dhcpv6-relay {
     }
   }
 
-  feature delegating-router {
+  feature prefix-delegation {
     description "Enable if the relay functions as a delegating router for
       prefix delegation.";
   }
@@ -262,7 +262,7 @@ module ietf-dhcpv6-relay {
         description "Controls and holds state information for prefix
           delegation.";
         presence "Enables prefix delegation for this interface.";
-        if-feature delegating-router;
+        if-feature prefix-delegation;
         uses pd-lease-state;
       }
     }
