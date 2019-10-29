@@ -4,12 +4,14 @@ XML2RFC?=../venv/bin/xml2rfc
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3
 SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-8-10-19
 
+MODELS_DIR:=draft-ietf-dhc-dhcpv6-yang-10-wip
+
 
 all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(YANGER) -t expand -f tree -p server $$< server/ietf-dhcpv6-options-rfc8415.yang server/ietf-dhcpv6-options-rfc3319.yang -o $$@
+	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang -o $$@
 endef
 
 
@@ -17,7 +19,7 @@ MODULES=
 MODULES+=ietf-dhcpv6-server.yang
 MODULES+=ietf-dhcpv6-client.yang
 MODULES+=ietf-dhcpv6-relay.yang
-$(foreach mod_file,$(MODULES),$(eval $(call file_to_tree,server/$(mod_file))))
+$(foreach mod_file,$(MODULES),$(eval $(call file_to_tree,$(MODELS_DIR)/$(mod_file))))
 
 
 define file_to_xml =
@@ -44,7 +46,7 @@ INCLUDES+=ietf-dhcpv6-relay.yang.tree
 INCLUDES+=ietf-dhcpv6-client.yang.tree
 
 FULL_INCLUDES=
-$(foreach inc_file,$(INCLUDES),$(eval $(call file_to_xml,server/$(inc_file))))
+$(foreach inc_file,$(INCLUDES),$(eval $(call file_to_xml,$(MODELS_DIR)/$(inc_file))))
 
 
 text: $(SPEC_NAME).txt
@@ -56,4 +58,4 @@ $(SPEC_NAME).html: $(SPEC_NAME).xml $(FULL_INCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
 
 clean:
-	rm -f $(FULL_INCLUDES) draft-ietf-dhc-dhcpv6-yang-10-wip/*html draft-ietf-dhc-dhcpv6-yang-10-wip/*txt server/*tree
+	rm -f $(FULL_INCLUDES) draft-ietf-dhc-dhcpv6-yang-10-wip/*html draft-ietf-dhc-dhcpv6-yang-10-wip/*txt $(MODELS_DIR)/*tree

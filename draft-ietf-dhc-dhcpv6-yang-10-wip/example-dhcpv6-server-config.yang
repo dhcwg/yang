@@ -36,13 +36,6 @@ module example-dhcpv6-server-config {
   }
 
   /*
-   * Typedef
-   */
-
-  /*
-   * Data Nodes
-   */
-  /*
    * Configuration data
    */
   grouping config {
@@ -92,33 +85,37 @@ module example-dhcpv6-server-config {
           // 		written to the file";
           // }
           case memfile {
-            description "the server stores lease information in a CSV file";
+            description "Configuration for storing leases information in a CSV file.";
 
             leaf memfile-name {
               type string;
-              description "specifies an absolute location of the lease file in which new leases
-                and lease updates will be recorded";
+              description "Specifies an absolute location of the lease file in which new leases
+                and lease updates are recorded.";
             }
 
             leaf memfile-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a
-                lease file cleanup (LFC)";
+              description "Specifies the interval in seconds, at which the server will perform a
+                lease file cleanup (LFC).";
             }
           }
           case mysql {
             leaf mysql-name {
               type string;
-              description "type of the database";
+              description "Name of the database.";
             }
             leaf mysql-host {
               type string;
               description "If the database is located
                 on a different system to the DHCPv6 server, the database host name must also be specified.";
             }
+            leaf mysql-user {
+              type string;
+              description "User name of the account under which the server will access the database.";
+            }
             leaf mysql-password {
               type string;
-              description "the credentials of the account under which the server will access the database";
+              description "Password of the account under which the server will access the database";
             }
             leaf mysql-port {
               type uint8;
@@ -126,27 +123,31 @@ module example-dhcpv6-server-config {
             }
             leaf mysql-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a
+              description "Specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
             leaf mysql-connect-timeout {
               type uint64;
-              description "If the database is located on a different system, a longer interval needs to be specified";
+              description "If the database is located on a different system, a longer interval can be specified";
             }
           }
           case postgresql {
             leaf postgresql-name {
               type string;
-              description "type of the database";
+              description "Name of the database.";
             }
             leaf postgresql-host {
               type string;
               description "If the database is located
                 on a different system to the DHCPv6 server, the database host name must also be specified.";
             }
+            leaf postgresql-user {
+              type string;
+              description "User name of the account under which the server will access the database";
+            }
             leaf postgresql-password {
               type string;
-              description "the credentials of the account under which the server will access the database";
+              description "Password of the account under which the server will access the database";
             }
             leaf postgresql-port {
               type uint8;
@@ -154,45 +155,45 @@ module example-dhcpv6-server-config {
             }
             leaf postgresql-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a
+              description "Specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
             leaf postgresql-connect-timeout {
               type uint64;
-              description "If the database is located on a different system, a longer interval needs to be specified";
+              description "If the database is located on a different system, a longer interval can be specified";
             }
           }
           case cassandra {
             leaf cassandra-name {
               type string;
-              description "type of the database";
+              description "Name of the database";
             }
             leaf cassandra-contact-points {
               type string;
               description "Cassandra takes a list of comma separated IP addresses to contact the cluster";
             }
+            leaf cassandra-user {
+              type string;
+              description "User name of the account under which the server will access the database";
+            }
             leaf cassandra-password {
               type string;
-              description "the credentials of the account under which the server will access the database";
+              description "Password of the account under which the server will access the database";
             }
             leaf cassandra-lfc-interval {
               type uint64;
-              description "specifies the interval in seconds, at which the server will perform a
+              description "Specifies the interval in seconds, at which the server will perform a
                 lease file cleanup (LFC)";
             }
             leaf cassandra-connect-timeout {
               type uint64;
-              description "If the database is located on a different system, a longer interval needs to be specified";
+              description "If the database is located on a different system, a longer interval can be specified";
             }
           }
         }
       }
       uses dhcpv6-common:vendor-infor;
     }
-
-    /*
-     * Notifications
-     */
 
   }
 

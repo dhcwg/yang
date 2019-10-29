@@ -117,7 +117,7 @@ module ietf-dhcpv6-relay {
     }
   }
 
-  grouping message-stats {
+  grouping message-statistics {
     description "Contains counters for DHCPv6 messages.";
     leaf solicit-received-count {
       config "false";
@@ -194,7 +194,7 @@ module ietf-dhcpv6-relay {
     }
   }
 
-  grouping global-stats {
+  grouping global-statistics {
     leaf relay-forward-sent-count {
       config "false";
       type uint32;
@@ -257,7 +257,7 @@ module ietf-dhcpv6-relay {
           length "0..16";
         }
       }
-      uses message-stats;
+      uses message-statistics;
       container prefix-delegation {
         description "Controls and holds state information for prefix
           delegation.";
@@ -266,7 +266,7 @@ module ietf-dhcpv6-relay {
         uses pd-lease-state;
       }
     }
-    uses global-stats;
+    uses global-statistics;
   }
 
   /*

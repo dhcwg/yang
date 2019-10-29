@@ -91,9 +91,9 @@ module ietf-dhcpv6-common {
           type yang:timeticks;
           description "The time value is the time that the DUID is
             generated represented in seconds since midnight (UTC),
-                      January 1, 2000, modulo 2^32.";
+            January 1, 2000, modulo 2^32.";
         }
-        leaf duid-llt-link-layer-addr {
+        leaf duid-llt-link-layer-address {
           type yang:mac-address;
           description "Link-layer address as described in RFC2464";
         }
@@ -120,7 +120,7 @@ module ietf-dhcpv6-common {
           type uint16;
           description "Hardware type as assigned by IANA (RFC826).";
         }
-        leaf duid-ll-link-layer-addr {
+        leaf duid-ll-link-layer-address {
           type yang:mac-address;
           description "Link-layer address as described in RFC2464";
         }
@@ -151,7 +151,8 @@ module ietf-dhcpv6-common {
     }
   }
 
-  grouping portset-para {
+  // TODO: is it used anywhere? if not should it be removed?
+  grouping portset-parameters {
     description "portset parameters";
     container port-parameter {
       description "port parameter";
