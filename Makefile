@@ -2,7 +2,8 @@ YANGER?=../yanger/bin/yanger
 XML2RFC?=../venv/bin/xml2rfc
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-8-10-19
+#SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-8-10-19
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
 
 MODELS_DIR:=draft-ietf-dhc-dhcpv6-yang-10-wip
 
