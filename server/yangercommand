@@ -1,1 +1,0 @@
-yanger -t expand -f tree -p ~/yang/standard/ietf/RFC ietf-dhcpv6-server.yang ietf-dhcpv6-options-rfc8415.yang ietf-dhcpv6-options-rfc3319.yang example-dhcpv6-class-selector.yang example-dhcpv6-server-config.yang
