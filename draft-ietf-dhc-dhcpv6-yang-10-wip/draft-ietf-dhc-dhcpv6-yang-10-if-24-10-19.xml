@@ -166,10 +166,10 @@
         ommitted from the DHCPv6 server module. The appendix provides an
         example module for the class selection function, intended to demonstrate
         how this is intended to integrate with the main
-        ietf-dhcpv6-server.yang module.
+        "ietf-dhcpv6-server.yang" module.
         </t>
         <section>
-        <title>DHCPv6 Option Definitions</title>
+        <name>DHCPv6 Option Definitions</name>
         <t>
         A large number of DHCPv6 options have been created in addition to
         those defined in <xref target="RFC8415"/>. As implementations differ
@@ -178,7 +178,7 @@
         options defined in <xref target="RFC8415"/> are included in this
         document. Further options definitions can be added by additional YANG
         modules via augmentation into the relevant elemant modules from this
-        document. The Appendixes provide an example module for this.
+        document. Appendixes provide an example module for this.
         </t>
       </section>
       </section>
@@ -484,69 +484,6 @@
         <xi:include href="../server/ietf-dhcpv6-common.yang.xml"/>
       </section>
     </section>
-    <section anchor="appendix">
-      <name>Appendix</name>
-      <t>
-      This appendix shows how to adapt YANG modules defined in this document for
-      specific, vendor implementation of DHCP solution. It presents how to define
-      a vendor specific configuration of DHCPv6 like location of database
-      for storing leases or class selection rules. It also indicates
-      mountpoints and their usage while extending standard configuration definition
-      by augment statetment.
-      </t>
-      <section anchor="vendor-specific-configuration-example">
-        <name>Vendor Specific Server Configuration Example</name>
-        <t>
-        A module <em>example-dhcpv6-server-config</em> shows how to extended standard
-        definition of DHCPv6 cofiguration with vendor specific elements.
-
-        The example module defines additional server attributes like duid
-        or name and description. Then it defines storage for leases in
-        <em>lease-storage</em> conainer. It allows storing leases in one of three options:
-        memfile, mysql and posgresql. For each case there are provided specific
-        parameters.
-
-        At the end there is an augment statment which places vendor specific
-        configuration defined in "dhcpv6-server-config:config" under
-        "/dhcpv6-server:config/dhcpv6-server:vendor-config" mountpoint.
-        </t>
-      </section>
-      <section anchor="vendor-specific-configuration-example-yang">
-        <name>Example DHCPv6 Server Config YANG Model</name>
-        <xi:include href="../server/example-dhcpv6-server-config.yang.xml"/>
-      </section>
-      <section anchor="class-selector-example">
-        <name>Example definition of class selector configuration</name>
-        <t>
-        A module <em>example-dhcpv6-class-selector</em> shows how to create a vendor
-        specific class selector configuration definition for DHCPv6.
-
-        The example module defines <em>client-class-name</em>s with associated
-        matching rules. A client can be classified based on <em>client id</em>,
-        <em>interface-id</em> which was used to receive client's packets,
-        packets source or destination address, relay link address,
-        relay link interface id and more. Actually there is endless methods
-        for classifying clients. So this standard does not try to
-        provide full specificiation for class selection, it only shows
-        an example how it can be defined.
-
-        At the end of this example there are presented augment statements
-        that add:
-
-        - class selector configuration to main part of DHCPv6 configuration
-        - client-class leafref in <em>network-range</em>, <em>address-pool</em>
-        and <em>pd-pool</em> that points to client-class-name which is required
-
-        The mechanism is as follows: class is associated to client based on rules
-        and then client is allowed to get address from given <em>network-range</em>
-        or pool if class name matches.
-        </t>
-      </section>
-      <section anchor="class-selector-example-yang">
-        <name>Example Class Selector YANG Model</name>
-        <xi:include href="../server/example-dhcpv6-class-selector.yang.xml"/>
-      </section>
-    </section>
     <section anchor="security">
       <name>Security Considerations (TBD)</name>
       <t>TBD</t>
@@ -645,11 +582,76 @@ The following individuals contributed to this effort:
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-netmod-yang-tree-diagrams-06.xml"/>
       </references>
     </references>
-    <section>
+        <section>
       <name>Example of Adding New DHCPv6 Option Definitions</name>
-    </section>
-    <section>
+      </section>
+
+        <section anchor="appendix">
+      <name>Appendix</name>
+      <t>
+      This appendix shows how to adapt YANG modules defined in this document for
+      specific, vendor implementation of DHCP solution. It presents how to define
+      a vendor specific configuration of DHCPv6 like location of database
+      for storing leases or class selection rules. It also indicates
+      mountpoints and their usage while extending standard configuration definition
+      by augment statetment.
+      </t>
+          <section anchor="vendor-specific-configuration-example">
       <name>Example Vendor Specific Server Configuration Module</name>
+      <section anchor="vendor-specific-configuration-example">
+        <name>Vendor Specific Server Configuration Example</name>
+        <t>
+        A module <em>example-dhcpv6-server-config</em> shows how to extended standard
+        definition of DHCPv6 cofiguration with vendor specific elements.
+
+        The example module defines additional server attributes like duid
+        or name and description. Then it defines storage for leases in
+        <em>lease-storage</em> conainer. It allows storing leases in one of three options:
+        memfile, mysql and posgresql. For each case there are provided specific
+        parameters.
+
+        At the end there is an augment statment which places vendor specific
+        configuration defined in "dhcpv6-server-config:config" under
+        "/dhcpv6-server:config/dhcpv6-server:vendor-config" mountpoint.
+        </t>
+      </section>
+      <section anchor="vendor-specific-configuration-example-yang">
+        <name>Example DHCPv6 Server Config YANG Model</name>
+        <xi:include href="../server/example-dhcpv6-server-config.yang.xml"/>
+      </section>
+      <section anchor="class-selector-example">
+        <name>Example definition of class selector configuration</name>
+        <t>
+        A module <em>example-dhcpv6-class-selector</em> shows how to create a vendor
+        specific class selector configuration definition for DHCPv6.
+
+        The example module defines <em>client-class-name</em>s with associated
+        matching rules. A client can be classified based on <em>client id</em>,
+        <em>interface-id</em> which was used to receive client's packets,
+        packets source or destination address, relay link address,
+        relay link interface id and more. Actually there is endless methods
+        for classifying clients. So this standard does not try to
+        provide full specificiation for class selection, it only shows
+        an example how it can be defined.
+
+        At the end of this example there are presented augment statements
+        that add:
+
+        - class selector configuration to main part of DHCPv6 configuration
+        - client-class leafref in <em>network-range</em>, <em>address-pool</em>
+        and <em>pd-pool</em> that points to client-class-name which is required
+
+        The mechanism is as follows: class is associated to client based on rules
+        and then client is allowed to get address from given <em>network-range</em>
+        or pool if class name matches.
+        </t>
+      </section>
+      <section anchor="class-selector-example-yang">
+        <name>Example Class Selector YANG Model</name>
+        <xi:include href="../server/example-dhcpv6-class-selector.yang.xml"/>
+      </section>
+    </section>
+
     </section>
     <section>
       <name>Example Vendor Sepcific Client Class Selector Module</name>
