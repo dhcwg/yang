@@ -1,2 +1,5 @@
 *.swp
 .DS_Store
+*.yang.tree
+*.yang.tree.xml
+*.yang.xml

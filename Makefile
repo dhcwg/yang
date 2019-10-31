@@ -12,7 +12,7 @@ all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang -o $$@
+	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang |fold -w 70 > $$@
 endef
 
 
