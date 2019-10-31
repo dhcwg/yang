@@ -414,9 +414,9 @@ module ietf-dhcpv6-client {
   }
 
   notification server-duid-changed {
-    description "Notification sent when the client receives a lease from new server
-      with different DUID than previously.";
-    leaf server-duid {
+    description "Notification sent when the client receives a lease from a server
+      with different DUID to the one currently stored by the client.";
+    leaf new-server-duid {
       description "DUID of the new server.";
       mandatory true;
       type binary;
