@@ -1,5 +1,5 @@
 YANGER?=../yanger/bin/yanger
-PYANG=../venv/bin/pyang
+PYANG?=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3
