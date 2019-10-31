@@ -1,4 +1,5 @@
 YANGER?=../yanger/bin/yanger
+PYANG=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3
@@ -12,7 +13,8 @@ all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang |fold -w 70 > $$@
+#	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang |fold -w 69 > $$@
+	$(PYANG) -f tree --tree-line-length 69 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang > $$@
 endef
 
 
