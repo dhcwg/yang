@@ -257,6 +257,11 @@ module ietf-dhcpv6-relay {
           length "0..16";
         }
       }
+      container relay-options {
+        description "Definitions for DHCPv6 options that can be be sent by the
+          relay are augmented to this location from other YANG modules as
+          required.";
+      }
       uses message-statistics;
       container prefix-delegation {
         description "Controls and holds state information for prefix
