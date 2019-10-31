@@ -485,7 +485,7 @@ module ietf-dhcpv6-server {
             in the pool. This value may be less than count of total
             addresses";
     }
-    leaf allocated-address-conut {
+    leaf allocated-address-count {
       type uint64;
       mandatory true;
       description "Count of allocated addresses in the pool";

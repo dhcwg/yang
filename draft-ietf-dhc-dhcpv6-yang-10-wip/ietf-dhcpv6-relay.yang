@@ -243,7 +243,7 @@ module ietf-dhcpv6-relay {
       leaf if-name {
         type if:interface-ref;
       }
-      leaf-list destination-address {
+      leaf-list destination-addresses {
         type inet:ipv6-address;
         description
           "Each DHCPv6 relay agent may be configured with a list of destination
