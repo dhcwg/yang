@@ -24,7 +24,7 @@ module ietf-dhcpv6-options-rfc8415 {
   }
 
   organization "DHC WG";
-  contact 
+  contact
     "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
@@ -32,12 +32,14 @@ module ietf-dhcpv6-options-rfc8415 {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This YANG module contains DHCPv6 options defined in RFC8415 that can be used by DHCPv6 clients, relays and servers.";
+  description "This YANG module contains DHCPv6 options defined
+    in RFC8415 that can be used by DHCPv6 clients, relays
+    and servers.";
 
   revision 2019-06-07 {
-    description "Major reworking to only contain RFC8415 options. if-feature
-      for each option removed. Removed groupings of features by device or
-        combination of devices. Added ";
+    description "Major reworking to only contain RFC8415 options.
+      if-feature for each option removed. Removed groupings
+      of features by device or combination of devices. Added ";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
@@ -75,39 +77,42 @@ module ietf-dhcpv6-options-rfc8415 {
       (DHCPv6)";
     leaf IPv6-address {
       type inet:ipv6-address;
-      description "An IPv6 address.  A client MUST NOT form an iplicit prefix
-        with a length other than 128 for this address.";
+      description "An IPv6 address.  A client MUST NOT form
+        an iplicit prefix with a length other than 128
+        for this address.";
     }
     leaf preferred-lifetime {
       type uint32;
-      description "The preferred lifetime for the address in the option,
-                   expressed in units of seconds.";
+      description "The preferred lifetime for the address
+        in the option, expressed in units of seconds.";
     }
     leaf valid-lifetime {
       type uint32;
-      description "The preferred lifetime for the address in the option,
-                  expressed in units of seconds.";
+      description "The preferred lifetime for the address
+        in the option, expressed in units of seconds.";
     }
     container iaaddr-options {
-      description "Definitions for DHCPv6 options that can be be sent by the
-        client are augmented to this location from other YANG modules as
-        required.";
+      description "Definitions for DHCPv6 options that can be be sent
+        by the client are augmented to this location from other YANG
+        modules as required.";
     }
   }
 
   grouping option-request-option-group {
     container option-request-option {
-      description "OPTION_ORO (6) Option Request Option. A client MUST include
-        an Option Request option in a Solicit, Request, Renew, Rebind, or
-        Information-request message to inform the server about options the
-        client wants the server to send to the client.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      description "OPTION_ORO (6) Option Request Option. A client
+        MUST include an Option Request option in a Solicit, Request,
+        Renew, Rebind, or Information-request message to inform
+        the server about options the client wants the server to send
+        to the client.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf-list oro-option {
-        description "List of options that the client is requesting, identified
-          by option code";
+        description "List of options that the client is requesting,
+          identified by option code";
         type uint16 {
-          range "17 | 21..24 | 27..36 | 39..42 | 49..52 | 54..60 | 62..65 | 69..78";
+          range "17 | 21..24 | 27..36 | 39..42 | 49..52 | 54..60 |
+            62..65 | 69..78";
         }
       }
     }
@@ -116,12 +121,12 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping preference-option-group {
     container preference-option {
       description "OPTION_PREFERENCE (7) Preference Option";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf pref-value {
         type uint8;
-        description "The preference value for the server in this message.
-          A 1-octet unsigned integer.";
+        description "The preference value for the server
+          in this message. A 1-octet unsigned integer.";
       }
     }
   }
@@ -129,21 +134,22 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping auth-option-group {
     container auth-option {
       description "OPTION_AUTH (11) Authentication Option";
-      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
-        (DHCPv6)";
+      reference "RFC8415: Dynamic Host Configuration Protocol
+        for IPv6 (DHCPv6)";
       leaf protocol {
         type uint8;
-        description "The authentication protocol used in this Authentication
-          option.";
+        description "The authentication protocol used
+          in this Authentication option.";
       }
       leaf algorithm {
         type uint8;
-        description "The algorithm used in the authentication protocol.";
+        description "The algorithm used in the authentication
+          protocol.";
       }
       leaf rdm {
         type uint8;
-        description "The replay detection method used in this Authentication
-          option.";
+        description "The replay detection method used
+          in this Authentication option.";
       }
       leaf replay-detection {
         type uint64;
@@ -151,8 +157,9 @@ module ietf-dhcpv6-options-rfc8415 {
       }
       leaf auth-information {
         type string;
-        description "The authentication information, as specified by the
-          protocol and algorithm used in this Authentication option.";
+        description "The authentication information, as specified
+          by the protocol and algorithm used in this Authentication
+          option.";
       }
     }
   }
@@ -160,7 +167,7 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping server-unicast-option-group {
     container server-unicast-option {
       description "OPTION_UNICAST (12) Server Unicast Option";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf server-address {
         type inet:ipv6-address;
@@ -173,18 +180,19 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping status-code-option-group {
     container status-code-option {
       description "OPTION_STATUS_CODE (13) Status Code Option.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
-        (DHCPv6)";
+      reference "RFC8415: Dynamic Host Configuration Protocol
+        for IPv6 (DHCPv6)";
       leaf status-code {
         type uint16;
-        description "The numeric code for the status encoded in this option.
-          See the Status Codes registry at <https://www.iana.org/assignments/
-          dhcpv6-parameters> for the current list of status codes.";
+        description "The numeric code for the status encoded
+          in this option. See the Status Codes registry at
+          <https://www.iana.org/assignments/dhcpv6-parameters>
+          for the current list of status codes.";
       }
       leaf status-message {
         type string;
-        description "A UTF-8 encoded text string suitable for display to
-          an end user. MUST NOT be null-terminated.";
+        description "A UTF-8 encoded text string suitable
+          for display to an end user. MUST NOT be null-terminated.";
       }
     }
   }
@@ -192,10 +200,10 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping rapid-commit-option-group {
     container rapid-commit-option {
       presence "Enable sending of this option";
-      description "OPTION_RAPID_COMMIT (14) Rapid Commit Option. The presence
-        node is used to enable the option.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
-        (DHCPv6)";
+      description "OPTION_RAPID_COMMIT (14) Rapid Commit Option.
+        The presence node is used to enable the option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for
+        IPv6 (DHCPv6)";
     }
   }
 
@@ -207,15 +215,16 @@ module ietf-dhcpv6-options-rfc8415 {
       list user-class-data {
         key user-class-datum-id;
         min-elements 1;
-        description "The user classes of which the client is a member.";
+        description "The user classes of which the client
+          is a member.";
         leaf user-class-datum-id {
           type uint8;
           description "User class datum ID";
         }
         leaf user-class-datum {
           type string;
-          description "Opaque field representing a User Class of which the
-            client is a member.";
+          description "Opaque field representing a User Class
+            of which the client is a member.";
         }
       }
     }
@@ -228,25 +237,26 @@ module ietf-dhcpv6-options-rfc8415 {
         for IPv6 (DHCPv6)";
       list vendor-class-option-instances {
         key enterprise-number;
-        description "The vendor class option allows for multiple instances in
-          a single message. Each list entry defines the contents of an instance
-          of the option.";
+        description "The vendor class option allows for multiple
+          instances in a single message. Each list entry defines
+          the contents of an instance of the option.";
         leaf enterprise-number {
           type uint32;
-          description "The vendor's registered Enterprise Number as maintained
-            by IANA.";
-        }     
+          description "The vendor's registered Enterprise Number
+            as maintained by IANA.";
+        }
         list vendor-class {
           key vendor-class-datum-id;
-          description "The vendor classes of which the client is a member.";
+          description "The vendor classes of which the client
+            is a member.";
           leaf vendor-class-datum-id {
             type uint8;
             description "Vendor class datum ID";
           }
           leaf vendor-class-datum {
             type string;
-            description "Opaque field representing a vendor class of which the
-              client is a member.";
+            description "Opaque field representing a vendor class
+              of which the client is a member.";
           }
         }
       }
@@ -255,23 +265,24 @@ module ietf-dhcpv6-options-rfc8415 {
 
   grouping vendor-specific-information-option-group {
     container vendor-specific-information-option {
-      description "OPTION_VENDOR_OPTS (17) Vendor-specific Information Option";
+      description "OPTION_VENDOR_OPTS (17) Vendor-specific
+        Information Option";
       reference "RFC8415: Dynamic Host Configuration Protocol
         for IPv6 (DHCPv6)";
       list vendor-specific-information-option-instances {
         key enterprise-number;
-        description "The vendor specific information option allows for multiple
-          instances in a single message. Each list entry defines the contents of
-          an instance of the option.";
+        description "The vendor specific information option allows
+          for multiple instances in a single message. Each list entry
+          defines the contents of an instance of the option.";
         leaf enterprise-number {
           type uint32;
-          description "The vendor's registered Enterprise Number, as maintained
-            by IANA.";
-        }     
+          description "The vendor's registered Enterprise Number,
+            as maintained by IANA.";
+        }
         list vendor-option-data {
           key sub-option-code;
-          description "Vendor options, interpreted by vendor-specific client/
-            server functions.";
+          description "Vendor options, interpreted by vendor-specific
+            client/server functions.";
           leaf sub-option-code {
             type uint16;
             description "The code for the sub-option.";
@@ -288,25 +299,27 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping interface-id-option-group {
     container interface-id-option {
       description "OPTION_INTERFACE_ID (18) Interface-Id Option";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf interface-id {
         type string;
-        description "An opaque value of arbitrary length generated by the relay
-          agent to identify one of the relay agent's interfaces.";
+        description "An opaque value of arbitrary length generated
+          by the relay agent to identify one of the relay agent's
+          interfaces.";
       }
     }
   }
 
   grouping reconfigure-message-option-group {
     container reconfigure-message-option {
-      description "OPTION_RECONF_MSG (19) Reconfigure Message Option.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
-        (DHCPv6)";
+      description "OPTION_RECONF_MSG (19) Reconfigure Message
+        Option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol
+        for IPv6 (DHCPv6)";
       leaf msg-type {
         type uint8;
-        description "5 for Renew message, 6 for Rebind message, 11 for
-          Information-request message.";
+        description "5 for Renew message, 6 for Rebind message,
+          11 for Information-request message.";
       }
     }
   }
@@ -314,15 +327,16 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping reconfigure-accept-option-group {
     container reconfigure-accept-option {
       presence "Enable sending of this option";
-      description "OPTION_RECONF_ACCEPT (20)  Rapid Commit Option. A client uses
-        the Reconfigure Accept option to announce to the server whether the
-        client is willing to accept Reconfigure messages, and a server uses this
-        option to tell the client whether or not to accept Reconfigure messages.
-        In the absence of this option, the default behavior is that the client
-        is unwilling to accept Reconfigure messages.
+      description "OPTION_RECONF_ACCEPT (20)  Rapid Commit Option.
+        A client uses the Reconfigure Accept option to announce
+        to the server whether the client is willing to accept
+        Reconfigure messages, and a server uses this option to tell
+        the client whether or not to accept Reconfigure messages.
+        In the absence of this option, the default behavior is that
+        the client is unwilling to accept Reconfigure messages.
         The presence node is used to enable the option.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for IPv6 
-        (DHCPv6)";
+      reference "RFC8415: Dynamic Host Configuration Protocol
+        for IPv6 (DHCPv6)";
     }
   }
 
@@ -332,35 +346,35 @@ module ietf-dhcpv6-options-rfc8415 {
       (DHCPv6)";
     leaf preferred-lifetime {
       type uint32;
-      description "The preferred lifetime for the prefix in the option,
-                   expressed in units of seconds.";
+      description "The preferred lifetime for the prefix
+        in the option, expressed in units of seconds.";
     }
     leaf valid-lifetime {
       type uint32;
-      description "The preferred lifetime for the prefix in the option,
-                  expressed in units of seconds.";
+      description "The preferred lifetime for the prefix
+        in the option, expressed in units of seconds.";
     }
     leaf IPv6-prefix {
       type inet:ipv6-prefix;
       description "The IPv6 prefix delegated to the client.";
     }
     container iaprefix-options {
-      description "Definitions for DHCPv6 options that can be be sent by the
-        client are augmented to this location from other YANG modules as
-        required.";
+      description "Definitions for DHCPv6 options that can be
+        sent by the client are augmented to this location from other
+        YANG modules as required.";
     }
   }
 
   grouping info-refresh-time-option-group {
     container info-refresh-time-option {
-      description "OPTION_INFORMATION_REFRESH_TIME (32) Information Refresh
-        Time option.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      description "OPTION_INFORMATION_REFRESH_TIME (32)
+        Information Refresh Time option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf info-refresh-time {
         type dhcpv6-common:timer-value-seconds32;
-        description "Time duration relative to the current time, expressed in
-          units of seconds.";
+        description "Time duration relative to the current time,
+          expressed in units of seconds.";
       }
     }
   }
@@ -368,7 +382,7 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping sol-max-rt-option-group {
     container sol-max-rt-option {
       description "OPTION_SOL_MAX_RT (82) sol max rt option";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf sol-max-rt-value {
         type dhcpv6-common:timer-value-seconds32;
@@ -380,7 +394,7 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping inf-max-rt-option-group {
     container inf-max-rt-option {
       description "OPTION_INF_MAX_RT (83) inf max rt option";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf inf-max-rt-value {
         type dhcpv6-common:timer-value-seconds32;
@@ -418,5 +432,5 @@ module ietf-dhcpv6-options-rfc8415 {
     uses vendor-class-option-group;
     uses vendor-specific-information-option-group;
     uses reconfigure-accept-option-group;
-  }    
+  }
 }

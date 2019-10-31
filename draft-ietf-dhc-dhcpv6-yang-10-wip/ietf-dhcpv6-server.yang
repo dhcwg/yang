@@ -22,8 +22,8 @@ module ietf-dhcpv6-server {
     hezihao9512@gmail.com
     godfryd@isc.org";
 
-  description "This is a YANG data module for the configuration and management
-    of DHCPv6 servers.
+  description "This is a YANG data module for the configuration
+    and management of DHCPv6 servers.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -81,14 +81,14 @@ module ietf-dhcpv6-server {
   }
 
   grouping resource-config {
-    description "Nodes that are reused by multiple levels in the DHCPv6
-      server's addressing hierarchy.";
+    description "Nodes that are reused by multiple levels
+      in the DHCPv6 server's addressing hierarchy.";
     leaf-list option-set-id {
       type leafref {
         path "/dhcpv6-server/option-sets/option-set/option-set-id";
       }
-      description "The ID field of relevant option-set to be provisioned to
-        clients of this network-range.";
+      description "The ID field of relevant option-set
+        to be provisioned to clients of this network-range.";
     }
     leaf valid-lifetime {
       type dhcpv6-common:timer-value-seconds32;
@@ -113,8 +113,8 @@ module ietf-dhcpv6-server {
     leaf rapid-commit {
       type boolean;
       mandatory true;
-      description "A value of 1 specifies that the pool supports client-server
-        exchanges involving two messages.";
+      description "A value of 1 specifies that the pool supports
+        client-server exchanges involving two messages.";
     }
   }
 
@@ -131,8 +131,8 @@ module ietf-dhcpv6-server {
     }
     list binding-info {
       key client-duid;
-      description "Records binding information for each client that has 
-        previously been allocated IPv6 addresses.";
+      description "Records binding information for each client that
+        has previously been allocated IPv6 addresses.";
       leaf client-duid {
         description "Client DUID.";
         type binary;
@@ -154,24 +154,26 @@ module ietf-dhcpv6-server {
           type yang:date-and-time;
         }
         leaf preferred-lifetime {
-          description "The preferred lifetime expressed in units of seconds.";
+          description "The preferred lifetime expressed in units
+            of seconds.";
           type dhcpv6-common:timer-value-seconds32;
         }
         leaf valid-lifetime {
-          description "The valid lifetime for the leased prefix expressed
-            in units of seconds.";
+          description "The valid lifetime for the leased prefix
+            expressed in units of seconds.";
           type dhcpv6-common:timer-value-seconds32;
         }
         leaf lease-t1 {
-          description "The time interval after which the client should contact
-            the server from which the addresses in the IA_NA were obtained to
-            extend the lifetimes of the addresses assigned to the IA_PD.";
+          description "The time interval after which the client
+            should contact the server from which the addresses
+            in the IA_NA were obtained to extend the lifetimes
+            of the addresses assigned to the IA_PD.";
           type dhcpv6-common:timer-value-seconds32;
         }
         leaf lease-t2 {
-          description "The time interval after which the client should contact
-            any available server to extend the lifetimes of the addresses
-            assigned to the IA_PD.";
+          description "The time interval after which the client
+            should contact any available server to extend
+            the lifetimes of the addresses assigned to the IA_PD.";
           type dhcpv6-common:timer-value-seconds32;
         }
       }
@@ -232,7 +234,8 @@ module ietf-dhcpv6-server {
     leaf information-request-count {
       config "false";
       type uint32;
-      description "Number of Information-request (11) messages received.";
+      description "Number of Information-request (11) messages
+        received.";
     }
   }
 
@@ -245,57 +248,62 @@ module ietf-dhcpv6-server {
       uses dhcpv6-common:duid;
     }
     container vendor-config {
-      description "This container provides a location for augmenting vendor or
-        implementation specific configuration nodes.";
+      description "This container provides a location for augmenting
+        vendor or implementation specific configuration nodes.";
     }
     container option-sets {
-      description "A server may allow different option sets to be configured for
-        clients matching specific parameters such as topological location or
-        client type. The 'option-set' list is a set of options and their
-        contents that will be returned to clients.";
+      description "A server may allow different option sets
+        to be configured for clients matching specific parameters
+        such as topological location or client type. The 'option-set'
+        list is a set of options and their contents that
+        will be returned to clients.";
       list option-set {
         key option-set-id;
-        description "YANG definitions for DHCPv6 options are contained in
-          separate YANG modules and augmented to this container as required.";
+        description "YANG definitions for DHCPv6 options are
+          contained in separate YANG modules and augmented to this
+          container as required.";
         leaf option-set-id {
           type uint32;
           description "Option set identifier.";
         }
         leaf description {
           type string;
-          description "An optional field for storing addional information
-            relevant to the option set.";
+          description "An optional field for storing addional
+            information relevant to the option set.";
         }
       }
     }
 
     container class-selector {
-      description "DHCPv6 servers use a 'class-selector' function in order to
-        identify and classify incomming client messages so that they can
-        be given the correct configuration. The mechanisms used for implementing
-        this function vary greatly between different implementations such that
-        they are not possible to include in this module. This container provides
-        a locatioon for server implementors to augment their own class-selector
-        YANG.";
+      description "DHCPv6 servers use a 'class-selector' function
+        in order to identify and classify incomming client messages
+        so that they can be given the correct configuration.
+        The mechanisms used for implementing this function vary
+        greatly between different implementations such that they are
+        not possible to include in this module. This container
+        provides a locatioon for server implementors to augment their
+        own class-selector YANG.";
     }
 
     container network-ranges {
       description "This model supports a hierarchy to achieve dynamic
-        configuration. That is to say we could configure the server at different
-        levels through this model. The top level is a global level which is
-        defined as the container 'network-ranges'. The following levels are
-        defined as sub-containers under it. The 'network-ranges' contains the
+        configuration. That is to say we could configure the server
+        at different levels through this model. The top level is
+        a global level which is defined as the container
+        'network-ranges'. The following levels are defined
+        as sub-containers under it. The 'network-ranges' contains the
         parameters (e.g. option-sets) that would be allocated to
         all the clients served by this server.";
       uses resource-config;
       list network-range {
         key network-range-id;
-        description
-          "Under the 'network-ranges' container, a 'network-range' list
-          is defined to configure the server at a network level which is also
-          considered as the second level. Different network are identified by the
-          key 'network-range-id'. This is because a server may have different
-          configuration parameters (e.g. option sets) for different networks.";
+        description "Under the 'network-ranges' container,
+          a 'network-range' list is defined to configure the server
+          at a network level which is also considered as the second
+          level. Different network are identified by the key
+          'network-range-id'. This is because a server may have
+          different configuration parameters (e.g. option sets)
+          for different networks.";
         leaf network-range-id {
           type uint32;
           mandatory true;
@@ -319,8 +327,9 @@ module ietf-dhcpv6-server {
           list address-pool {
             key pool-id;
             description "A DHCPv6 server can be configured with
-              several address pools. This list defines such address pools
-              which are distinguished by the key called 'pool-id'.";
+              several address pools. This list defines such address
+              pools which are distinguished by the key called
+              'pool-id'.";
             leaf pool-id {
               type uint32;
               mandatory true;
@@ -350,8 +359,8 @@ module ietf-dhcpv6-server {
             }
             uses resource-config;
             container host-reservations {
-              description "Configuration for host reservations in the address
-                pool.";
+              description "Configuration for host reservations
+                in the address pool.";
               list host-reservation {
                 key reserved-addr;
                 leaf client-duid {
@@ -396,12 +405,13 @@ module ietf-dhcpv6-server {
           }
         }
         container prefix-pools {
-          description "Defines IPv6 prefix pools to be delegated to clients.";
+          description "Defines IPv6 prefix pools to be delegated
+            to clients.";
           if-feature prefix-delegation;
           list prefix-pool {
             key pool-id;
-            description "A server can be configured with multiple prefix
-              pools.";
+            description "A server can be configured with multiple
+              prefix pools.";
             leaf pool-id {
               type uint32;
               mandatory true;
@@ -415,18 +425,19 @@ module ietf-dhcpv6-server {
             leaf prefix-length {
               type uint8;
               mandatory true;
-              description "Length of prefixes that will be delegated to
-                clients.";
+              description "Length of prefixes that will be delegated
+                to clients.";
             }
             leaf max-pd-space-utilization {
               type dhcpv6-common:threshold;
               mandatory true;
-              description "Maximum utilization of pd space in this pool";
+              description "Maximum utilization of PD space
+                in this pool";
             }
             uses resource-config;
             container host-reservations {
-              description "Configuration for host reservations in the prefix
-                pool.";
+              description "Configuration for host reservations
+                in the prefix pool.";
               list prefix-reservation {
                 description "reserved prefix reservation";
                 key reserved-prefix;
@@ -469,10 +480,10 @@ module ietf-dhcpv6-server {
 
   notification address-pool-running-out {
     description "Notification sent when the address pool is going to
-          run out.  A threshold for utilization ratio of the pool has
-          been defined in the server feature so that it will notify the
-          administrator when the utilization ratio reaches the
-          threshold, and such threshold is a settable parameter";
+      run out. A threshold for utilization ratio of the pool has
+      been defined in the server feature so that it will notify the
+      administrator when the utilization ratio reaches the
+      threshold, and such threshold is a settable parameter";
     leaf total-address-count {
       type uint64;
       mandatory true;
@@ -482,8 +493,8 @@ module ietf-dhcpv6-server {
       type uint64;
       mandatory true;
       description "Maximum count of addresses that can be allocated
-            in the pool. This value may be less than count of total
-            addresses";
+        in the pool. This value may be less than count of total
+        addresses";
     }
     leaf allocated-address-count {
       type uint64;
@@ -498,11 +509,12 @@ module ietf-dhcpv6-server {
   }
 
   notification pd-pool-running-out {
-    description "Notification sent when the address/prefix pool is going to
-          run out.  A threshold for utilization ratio of the pool has
-          been defined in the server feature so that it will notify the
-          administrator when the utilization ratio reaches the
-          threshold, and such threshold is a settable parameter";
+    description "Notification sent when the address/prefix pool
+      is going to run out. A threshold for utilization ratio
+      of the pool has been defined in the server feature so that
+      it will notify the administrator when the utilization ratio
+      reaches the threshold, and such threshold is a settable
+      parameter";
     leaf max-pd-space-utilization {
       type dhcpv6-common:threshold;
       mandatory true;
@@ -521,9 +533,9 @@ module ietf-dhcpv6-server {
   }
 
   notification invalid-client-detected {
-    description "Notification sent when the server has found a client which
-          can be regarded as a potential attacker. Some description
-          could also be included.";
+    description "Notification sent when the server has found a client
+      which can be regarded as a potential attacker. Some description
+      could also be included.";
     leaf duid {
       description "Client's DUID";
       type binary;
@@ -535,8 +547,8 @@ module ietf-dhcpv6-server {
   }
 
   notification decline-received {
-    description "Notification sent when the server has received DECLINE message
-      from a client.";
+    description "Notification sent when the server has received
+      DECLINE message from a client.";
     leaf duid {
       description "Client's DUID";
       type binary;
@@ -548,8 +560,8 @@ module ietf-dhcpv6-server {
   }
 
   notification non-success-code-sent {
-    description "Notification sent when the server responded to a client
-      with non-success status code.";
+    description "Notification sent when the server responded
+      to a client with non-success status code.";
     leaf status-code {
       type uint16;
       mandatory true;
@@ -561,4 +573,3 @@ module ietf-dhcpv6-server {
     }
   }
 }
-

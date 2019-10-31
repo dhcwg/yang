@@ -3,3 +3,6 @@
 *.yang.tree
 *.yang.tree.xml
 *.yang.xml
+metadata.min.js
+*.html
+draft-ietf-dhc-dhcpv6-yang-*.txt

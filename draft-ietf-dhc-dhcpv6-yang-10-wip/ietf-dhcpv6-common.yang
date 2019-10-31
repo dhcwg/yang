@@ -63,13 +63,13 @@ module ietf-dhcpv6-common {
    */
 
   grouping duid {
-    description
-      "Each server and client has only one DUID (DHCP Unique Identifier).
-      The DUID here identifies a unique DHCPv6 server for clients. DUID
-      consists of a two-octet type field and an arbitrary length (no more
-          than 128 bytes) content field. Currently there are four defined types
-      of DUIDs in RFC3315 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and
-      DUID-UUID. DUID-Uknown represents those unconventional DUIDs.";
+    description "Each server and client has only one DUID (DHCP
+      Unique Identifier). The DUID here identifies a unique DHCPv6
+      server for clients. DUID consists of a two-octet type field
+      and an arbitrary length (no more than 128 bytes) content field.
+      Currently there are four defined types of DUIDs in RFC3315
+      and RFC6355 - DUID-LLT, DUID-EN, DUID-LL and DUID-UUID.
+      DUID-Uknown represents those unconventional DUIDs.";
     reference "RFC3315: Section 9 and RFC6355: Section 4";
     leaf type-code {
       type uint16;
@@ -99,13 +99,13 @@ module ietf-dhcpv6-common {
         }
       }
       case duid-en {
-        description "DUID Assigned by Vendor Based on Enterprise Number
-          (Type 2 - DUID-EN)";
+        description "DUID Assigned by Vendor Based on Enterprise
+          Number (Type 2 - DUID-EN)";
         reference "RFC3315 Section 9.3";
         leaf duid-en-enterprise-number {
           type uint32;
-          description "Vendor's registered Private Enterprise Number as
-            maintained by IANA";
+          description "Vendor's registered Private Enterprise Number
+            as maintained by IANA";
         }
         leaf duid-en-identifier {
           type string;
@@ -114,7 +114,8 @@ module ietf-dhcpv6-common {
         }
       }
       case duid-ll {
-        description "DUID Based on Link-layer Address (Type 3 - DUID-LL)";
+        description "DUID Based on Link-layer Address
+          (Type 3 - DUID-LL)";
         reference "RFC3315 Section 9.4";
         leaf duid-ll-hardware-type {
           type uint16;
@@ -128,7 +129,8 @@ module ietf-dhcpv6-common {
       case duid-uuid {
         description "DUID Based on Universally Unique Identifier
           (Type 4 - DUID-UUID)";
-        reference "RFC6335 Defination of the UUID-Based Unique Identifier";
+        reference "RFC6335 Defination of the UUID-Based Unique
+          Identifier";
         leaf uuid {
           type yang:uuid;
           description "A Universally Unique IDentifier in the string
