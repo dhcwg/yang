@@ -404,7 +404,7 @@ module ietf-dhcpv6-options-rfc8415 {
     uses inf-max-rt-option-group;
   }
   augment "/dhcpv6-relay:dhcpv6-relay/dhcpv6-relay:relay-if/dhcpv6-relay:relay-options" {
-    when "../../..dhcpv6-relay:dhcpv6-node-type='dhcpv6-relay:relay'";
+    when "../../../dhcpv6-relay:dhcpv6-node-type='dhcpv6-relay:relay'";
     uses auth-option-group;
     uses status-code-option-group;
     uses interface-id-option-group;
