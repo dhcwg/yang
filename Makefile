@@ -13,8 +13,8 @@ all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-#	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang |fold -w 69 > $$@
-	$(PYANG) -f tree --tree-line-length 69 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/ietf-dhcpv6-options-rfc3319.yang > $$@
+#	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang |fold -w 69 > $$@
+	$(PYANG) -f tree --tree-line-length 69 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang > $$@
 endef
 
 
