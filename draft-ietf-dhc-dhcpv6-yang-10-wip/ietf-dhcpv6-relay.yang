@@ -278,7 +278,7 @@ module ietf-dhcpv6-relay {
    * Notifications
    */
 
-  notification dhcpv6-relay-event {
+  notification relay-event {
     description
       "DHCPv6 relay event";
     container topology-change {
@@ -286,8 +286,10 @@ module ietf-dhcpv6-relay {
         "Raised if the entry for and interface with DHCPv6 related configuration
           or state is removed from if:interface-refs.";
       leaf relay-if-name {
-        type string;
         description "Name of the interface that has been removed.";
+        type leafref {
+          path "/dhcpv6-relay/relay-if/if-name";
+        }
       }
       leaf last-ipv6-addr {
         type inet:ipv6-address;
