@@ -93,7 +93,7 @@ module ietf-dhcpv6-server {
     leaf valid-lifetime {
       type dhcpv6-common:timer-value-seconds32;
       mandatory true;
-      description "Valid liftime for the IA.";
+      description "Valid lifetime for the IA.";
     }
     leaf renew-time {
       type dhcpv6-common:timer-value-seconds32;
@@ -124,7 +124,7 @@ module ietf-dhcpv6-server {
       mandatory true;
       description "count of total addresses in the pool";
     }
-    leaf allocated-address-conut {
+    leaf allocated-address-count {
       type uint64;
       mandatory true;
       description "count of allocated addresses in the pool";
@@ -268,7 +268,7 @@ module ietf-dhcpv6-server {
         }
         leaf description {
           type string;
-          description "An optional field for storing addional
+          description "An optional field for storing additional
             information relevant to the option set.";
         }
       }
@@ -276,12 +276,12 @@ module ietf-dhcpv6-server {
 
     container class-selector {
       description "DHCPv6 servers use a 'class-selector' function
-        in order to identify and classify incomming client messages
+        in order to identify and classify incoming client messages
         so that they can be given the correct configuration.
         The mechanisms used for implementing this function vary
         greatly between different implementations such that they are
         not possible to include in this module. This container
-        provides a locatioon for server implementors to augment their
+        provides a location for server implementors to augment their
         own class-selector YANG.";
     }
 
