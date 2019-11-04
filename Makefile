@@ -14,7 +14,7 @@ all: text html
 define file_to_tree =
 $(1).tree: $(1)
 #	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang |fold -w 69 > $$@
-	$(PYANG) -f tree --tree-line-length 69 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang |fold -w 67 > $$@
 endef
 
 
@@ -30,7 +30,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
-	cat $$< >> $$@
+	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
 FULL_INCLUDES+=$(1).xml
@@ -44,6 +44,7 @@ INCLUDES+=ietf-dhcpv6-options-rfc8415.yang
 INCLUDES+=ietf-dhcpv6-common.yang
 INCLUDES+=example-dhcpv6-class-selector.yang
 INCLUDES+=example-dhcpv6-server-config.yang
+INCLUDES+=example-dhcpv6-options-rfc3319.yang
 INCLUDES+=ietf-dhcpv6-server.yang.tree
 INCLUDES+=ietf-dhcpv6-relay.yang.tree
 INCLUDES+=ietf-dhcpv6-client.yang.tree

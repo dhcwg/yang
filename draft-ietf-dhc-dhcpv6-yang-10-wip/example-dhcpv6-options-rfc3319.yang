@@ -12,12 +12,12 @@ module example-dhcpv6-options-rfc3319 {
   }
 
   organization "DHC WG";
-  contact 
+  contact
     "ian.farrer@telekom.de
     godfryd@isc.org";
 
-  description "This YANG module contains DHCPv6 options defined in RFC3319 that
-    can be used by DHCPv6 servers.";
+  description "This YANG module contains DHCPv6 options defined
+    in RFC3319 that can be used by DHCPv6 servers.";
 
   revision 2019-10-18 {
     description "Initial version.";
@@ -29,9 +29,11 @@ module example-dhcpv6-options-rfc3319 {
    */
   grouping sip-server-domain-name-list-option-group {
     container sip-server-domain-name-list-option {
-      description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
+      description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name
+        List";
       reference "RFC3319: Dynamic Host Configuration Protocol
-        (DHCPv6) Options for Session Initiation Protocol (SIP) Servers";
+        (DHCPv6) Options for Session Initiation Protocol (SIP)
+        Servers";
       leaf sip-serv-domain-name {
         type inet:domain-name;
         description "sip server domain name";
@@ -41,9 +43,11 @@ module example-dhcpv6-options-rfc3319 {
 
   grouping sip-server-address-list-option-group {
     container sip-server-address-list-option {
-      description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List";
-      reference "RFC3319: Dynamic Host Configuration Protocol (DHCPv6)
-        Options for Session Initiation Protocol (SIP) Servers";
+      description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address
+        List";
+      reference "RFC3319: Dynamic Host Configuration Protocol
+        (DHCPv6) Options for Session Initiation Protocol (SIP)
+        Servers";
       list sip-server {
         key sip-serv-id;
         description "sip server info";
