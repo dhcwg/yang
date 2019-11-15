@@ -218,7 +218,7 @@ module example-dhcpv6-server-config {
 
   }
 
-  augment "/dhcpv6-server:config/dhcpv6-server:vendor-config" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:vendor-config" {
     uses dhcpv6-server-config:config;
   }
 }
