@@ -53,7 +53,7 @@ module example-dhcpv6-server-config {
       }
       leaf name {
         type string;
-        description "Name of the DHCpv6 server";
+        description "Name of the DHCPv6 server";
       }
       leaf description {
         type string;
