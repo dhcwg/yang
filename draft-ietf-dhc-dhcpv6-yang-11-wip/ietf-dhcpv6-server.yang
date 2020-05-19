@@ -22,8 +22,8 @@ module ietf-dhcpv6-server {
     hezihao9512@gmail.com
     godfryd@isc.org";
 
-  description "This is a YANG data module for the configuration
-    and management of DHCPv6 servers.
+  description "This YANG module defines components for the 
+    configuration and management of DHCPv6 servers.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -88,12 +88,12 @@ module ietf-dhcpv6-server {
   }
 
   feature prefix-delegation {
-    description "Enable if the server implements prefix delegation.";
+    description "Denotes that the server implements DHCPv6 prefix delegation.";
   }
 
   grouping resource-config {
-    description "Nodes that are reused at multiple levels
-      in the DHCPv6 server's addressing hierarchy.";
+    description "Nodes that are reused at multiple levels in the DHCPv6 
+      server's addressing hierarchy.";
     leaf-list option-set-id {
       type leafref {
         path "/dhcpv6-server/option-sets/option-set/option-set-id";
@@ -103,27 +103,22 @@ module ietf-dhcpv6-server {
     }
     leaf valid-lifetime {
       type dhcpv6-common:timer-value-seconds32;
-      mandatory true;
       description "Valid lifetime for the Identity Association (IA).";
     }
     leaf renew-time {
       type dhcpv6-common:timer-value-seconds32;
-      mandatory true;
       description "Renew (T1) time.";
     }
     leaf rebind-time {
       type dhcpv6-common:timer-value-seconds32;
-      mandatory true;
       description "Rebind (T2) time.";
     }
     leaf preferred-lifetime {
       type dhcpv6-common:timer-value-seconds32;
-      mandatory true;
       description "Preferred lifetime for the Identity Association (IA).";
     }
     leaf rapid-commit {
       type boolean;
-      mandatory true;
       description "A value of 1 specifies that the pool supports
         client-server exchanges involving two messages.";
     }
@@ -297,24 +292,15 @@ module ietf-dhcpv6-server {
     }
 
     container network-ranges {
-      description "This model supports a hierarchy to achieve dynamic
-        configuration. That is to say we could configure the server
-        at different levels through this model. The top level is
-        a global level which is defined as the container
-        'network-ranges'. The following levels are defined
-        as sub-containers under it. The 'network-ranges' contains the
-        parameters (e.g. option-sets) that would be allocated to
-        all the clients served by this server.";
+      description "This model is based on an address and paramet allocation 
+        hierarchy.  The top level is 'global' - which is defined 
+        as the container for all network-ranges. Under this are the 
+        individual network-ranges.";
       uses resource-config;
       list network-range {
         key network-range-id;
-        description "Under the 'network-ranges' container,
-          a 'network-range' list is defined to configure the server
-          at a network level which is also considered as the second
-          level. Different network are identified by the key
-          'network-range-id'. This is because a server may have
-          different configuration parameters (e.g. option sets)
-          for different networks.";
+        description "Network-ranges are identified by the
+          'network-range-id' key.";
         leaf network-range-id {
           type uint32;
           mandatory true;
@@ -323,7 +309,7 @@ module ietf-dhcpv6-server {
         leaf network-description {
           type string;
           mandatory true;
-          description "Description of the network range.";
+          description "Description for the network range.";
         }
         leaf network-prefix {
           type inet:ipv6-prefix;
@@ -332,79 +318,56 @@ module ietf-dhcpv6-server {
         }
         uses resource-config;
         container address-pools {
-          description "Describes the DHCPv6 server's
-            address pools.";
+          description "Configuration for the DHCPv6 server's address pools.";
           list address-pool {
             key pool-id;
-            description "A DHCPv6 server can be configured with
-              several address pools. This list defines such address
-              pools which are distinguished by the key called
-              'pool-id'.";
+            description "List of address pools for allocation to clients,
+              distinguished by 'pool-id'.";
             leaf pool-id {
               type uint32;
               mandatory true;
-              description "Pool ID";
+              description "Unique identifier for the pool.";
             }
             leaf pool-prefix {
               type inet:ipv6-prefix;
               mandatory true;
-              description "Pool prefix";
+              description "IPv6 prefix for the pool.";
             }
             leaf start-address {
               type inet:ipv6-address-no-zone;
               mandatory true;
-              description "Start address";
+              description "Start IPv6 address for the pool.";
             }
             leaf end-address {
               type inet:ipv6-address-no-zone;
               mandatory true;
-              description "End address";
+              description "End IPv6 address for the pool.";
             }
             leaf max-address-count {
               type dhcpv6-common:threshold;
               mandatory true;
-              description "Maximum count of addresses that can
-                be allocated in this pool. This value may be
-                less than count of total addresses.";
+              description "Maximum number of addresses that can
+                be simultaneously allocated from this pool.";
             }
             uses resource-config;
             container host-reservations {
-              description "Configuration of host reservations
-                in the address pool.";
+              description "Configuration for host reservations from
+                the address pool.";
               list host-reservation {
                 key reserved-addr;
                 leaf client-duid {
                   type binary;
-                  description "Client DUID.";
+                  description "Client DUID for the reservation.";
                 }
                 leaf reserved-addr {
                   type inet:ipv6-address;
-                  description "reserved addr";
+                  description "Reserved IPv6 address.";
                 }
-                list prefix-reservation {
-                  key reserved-prefix-id;
-                  description "reserved prefix reservation";
-                  leaf reserved-prefix-id {
-                    type uint32;
-                    mandatory true;
-                    description "reserved prefix id";
-                  }
-                  leaf reserved-prefix {
-                    type inet:ipv6-prefix;
-                    mandatory true;
-                    description "reserved prefix";
-                  }
-                  leaf reserved-prefix-len {
-                    type uint8;
-                    mandatory true;
-                    description "reserved prefix length";
-                  }
-                }
-                uses resource-config;
+               uses resource-config;
               }
             }
             list active-leases {
-              description "Holds state for active client leases.";
+              description "Holds state related to active client leases.";
               config false;
               key leased-address;
               leaf leased-address {
@@ -415,72 +378,70 @@ module ietf-dhcpv6-server {
           }
         }
         container prefix-pools {
-          description "Defines IPv6 prefix pools to be delegated
-            to clients.";
+          description "Configuration for the DHCPv6 server's prefix pools.";
           if-feature prefix-delegation;
           list prefix-pool {
             key pool-id;
-            description "A server can be configured with multiple
-              prefix pools.";
+            description "List of prefix pools for allocation to clients,
+              distinguished by 'pool-id'.";
             leaf pool-id {
               type uint32;
               mandatory true;
               description "Unique identifier for the pool.";
             }
-            leaf prefix {
+            leaf pool-prefix {
               type inet:ipv6-prefix;
               mandatory true;
-              description "IPv6 prefix";
+              description "IPv6 prefix for the pool.";
             }
-            leaf prefix-length {
+            leaf client-prefix-length {
               type uint8;
               mandatory true;
-              description "Length of prefixes that will be delegated
+              description "Length of the prefixes that will be delegated
                 to clients.";
             }
             leaf max-pd-space-utilization {
               type dhcpv6-common:threshold;
               mandatory true;
-              description "Maximum utilization of PD space
+              description "Maximum percentage utilization of the prefix pool
                 in this pool.";
             }
             uses resource-config;
             container host-reservations {
-              description "Configuration for host reservations
-                in the prefix pool.";
+              description "Configuration for host reservations from the
+                prefix pool.";
               list prefix-reservation {
                 description "reserved prefix reservation";
                 key reserved-prefix;
                 leaf client-duid {
                   type binary;
-                  description "Client DUID.";
+                  description "Client DUID for the reservation.";
                 }
                 leaf reserved-prefix {
                   type inet:ipv6-prefix;
-                  mandatory true;
-                  description "reserved prefix";
+                  description "Reserved IPv6 prefix";
                 }
                 leaf reserved-prefix-len {
                   type uint8;
-                  mandatory true;
-                  description "reserved prefix length";
+                  description "Reserved IPv6 prefix length.";
                 }
               }
               uses resource-config;
-              list active-leases {
-                description "Holds state for active client leases.";
-                config false;
-                key leased-prefix;
-                leaf leased-prefix{
-                  type inet:ipv6-prefix;
-                }
-                uses lease-information;
+            }
+            list active-leases {
+              description "Holds state related to for active client prefix 
+                leases.";
+              config false;
+              key leased-prefix;
+              leaf leased-prefix {
+                type inet:ipv6-prefix;
               }
+              uses lease-information;
             }
           }
         }
-        uses message-stats;
       }
+      uses message-stats;
     }
   }
 
@@ -489,11 +450,8 @@ module ietf-dhcpv6-server {
    */
 
   notification address-pool-running-out {
-    description "Notification sent when the address pool is going to
-      run out. A threshold for utilization ratio of the pool has
-      been defined in the server feature so that it will notify the
-      administrator when the utilization ratio reaches the
-      threshold, and such threshold is a settable parameter";
+    description "Notification sent when the address pool utilization exceeds
+      the configured threshold.";
     leaf pool-id {
       type leafref {
         path "/dhcpv6-server/network-ranges/network-range/
@@ -503,81 +461,82 @@ module ietf-dhcpv6-server {
     leaf total-address-count {
       type uint64;
       mandatory true;
-      description "Count of total addresses in the pool";
+      description "Count of the total addresses in the pool.";
     }
     leaf max-address-count {
       type uint64;
       mandatory true;
       description "Maximum count of addresses that can be allocated
         in the pool. This value may be less than count of total
-        addresses";
+        addresses.";
     }
     leaf allocated-address-count {
       type uint64;
       mandatory true;
-      description "Count of allocated addresses in the pool";
+      description "Count of allocated addresses in the pool.";
     }
     leaf pool-id {
       type uint32;
       mandatory true;
-      description "Pool ID";
+      description "Pool identifier.";
     }
   }
 
   notification pd-pool-running-out {
-    description "Notification sent when the address/prefix pool
-      is going to run out. A threshold for utilization ratio
-      of the pool has been defined in the server feature so that
-      it will notify the administrator when the utilization ratio
-      reaches the threshold, and such threshold is a settable
-      parameter";
+    description "Notification sent when the prefix pool utilization exceeds
+      the configured threshold.";
     leaf pool-id {
       type leafref {
         path "/dhcpv6-server/network-ranges/network-range/
           prefix-pools/prefix-pool/pool-id";
       }
+      mandatory true;
     }
     leaf max-pd-space-utilization {
-      type dhcpv6-common:threshold;
+      description "PD space utilization threshold.";
+      type leafref {
+        path "/dhcpv6-server/network-ranges/network-rage/
+          prefix-pools/prefix-pool/max-pd-space-utilization";
+      }
       mandatory true;
-      description "Maximum PD space utilization";
     }
     leaf pd-space-utilization {
-      type dhcpv6-common:threshold;
-      mandatory true;
       description "Current PD space utilization";
-    }
-    leaf pool-id {
-      type uint32;
-      mandatory true;
-      description "Pool ID";
-    }
+      type yang:uint64;
+    } 
+    mandatory true;
   }
 
   notification invalid-client-detected {
-    description "Notification sent when the server has found a client
-      which can be regarded as a potential attacker. Some description
-      could also be included.";
+    description "Notification sent when the server detect an invalid client.";
     leaf duid {
-      description "Client's DUID";
+      description "Client DUID.";
       type binary;
     }
     leaf description {
       type string;
-      description "Description of the event";
+      description "Description of the event (e.g. and error code or log
+        message).";
     }
   }
 
   notification decline-received {
-    description "Notification sent when the server has received
-      DECLINE message from a client.";
+    description "Notification sent when the server has received a
+      Decline (9) message from a client.";
     leaf duid {
-      description "Client's DUID";
+      description "Client DUID.";
       type binary;
     }
-    leaf-list addresses {
-      type inet:ipv6-address;
-      description "List of declined addresses.";
+    leaf-list declined-resources {
+      description "List of declined addresses and/or prefixes.";
+      choice resource-type {
+        case address {
+          type inet:ipv6-address;
+        }
+        case prefix {
+          type inet:ipv6-prefix;
+        }
+      }
     }
   }
 
@@ -587,10 +546,10 @@ module ietf-dhcpv6-server {
     leaf status-code {
       type uint16;
       mandatory true;
-      description "Status code returned to a client";
+      description "Status code returned to the client.";
     }
     leaf duid {
-      description "Client's DUID";
+      description "Client DUID.";
       type binary;
     }
   }

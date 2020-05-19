@@ -28,8 +28,8 @@ module ietf-dhcpv6-relay {
     godfryd@isc.org";
 
   description
-    "This model defines a YANG data model that can be
-    used to configure and manage a DHCPv6 relay.
+    "This YANG module defines components necessary for the 
+    configururation and management of DHCPv6 relays.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -82,7 +82,7 @@ module ietf-dhcpv6-relay {
   }
 
   leaf dhcpv6-node-type {
-    description "Type for a DHCPv6 relay";
+    description "Type for a DHCPv6 relay.";
     type identityref {
       base "dhcpv6-relay:relay";
     }
@@ -90,17 +90,17 @@ module ietf-dhcpv6-relay {
 
   feature prefix-delegation {
     description "Enable if the relay functions as a delegating router
-      for prefix delegation.";
+      for DHCPv6 prefix delegation.";
   }
 
   grouping pd-lease-state {
-    description "State data for the relay";
+    description "State data for the relay.";
     list pd-leases {
       config false;
       key ia-pd-prefix;
       description "Information about an active IA_PD prefix
         delegation.";
-      leaf ia-pd-prefix {
+     leaf ia-pd-prefix {
         description "Prefix that is delegated.";
         type inet:ipv6-prefix;
       }
@@ -114,7 +114,7 @@ module ietf-dhcpv6-relay {
         type inet:ipv6-address;
       }
       leaf client-duid {
-        description "DUID of the client.";
+        description "DUID of the leasing client.";
         type binary;
       }
       leaf server-duid {
@@ -125,7 +125,8 @@ module ietf-dhcpv6-relay {
   }
 
   grouping message-statistics {
-    description "Contains counters for DHCPv6 messages.";
+    description "Contains counters for the different DHCPv6 
+      message types.";
     leaf solicit-received-count {
       config "false";
       type uint32;
@@ -244,7 +245,8 @@ module ietf-dhcpv6-relay {
 
   container dhcpv6-relay {
     description
-      "This container contains the configuration data of the relay.";
+      "This container contains the configuration data nodes for 
+      the relay.";
     list relay-if {
       key if-name;
       leaf if-name {
@@ -255,7 +257,7 @@ module ietf-dhcpv6-relay {
         description "Each DHCPv6 relay agent may be configured with
           a list of destination addresses for relayed messages.
           The list may include unicast addresses, multicast addresses
-          or other addresses.";
+          or other valid addresses.";
       }
       leaf link-address {
         description "An address that may be used by the server
@@ -287,11 +289,11 @@ module ietf-dhcpv6-relay {
 
   notification relay-event {
     description
-      "DHCPv6 relay event";
+      "DHCPv6 relay event notifications.";
     container topology-change {
       description "Raised if the entry for and interface with DHCPv6
-        related configuration or state is removed
-        from if:interface-refs.";
+        related configuration or state is removed from 
+        if:interface-refs.";
       leaf relay-if-name {
         description "Name of the interface that has been removed.";
         type leafref {

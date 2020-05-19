@@ -26,8 +26,9 @@ module ietf-dhcpv6-client {
     hezihao9512@gmail.com
     godfryd@isc.org";
 
-  description "This is a YANG data module for the configuration
-    and management of DHCPv6 clients.
+  description 
+    "This YANG module defines componenets necesarry for the 
+    configuration and management of DHCPv6 clients.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -80,7 +81,7 @@ module ietf-dhcpv6-client {
   }
 
   leaf dhcpv6-node-type {
-    description "Type for a DHCPv6 client";
+    description "Type for a DHCPv6 client.";
     type identityref {
       base "dhcpv6-client:client";
     }
@@ -179,12 +180,12 @@ module ietf-dhcpv6-client {
           for IPv6 (DHCPv6).";
         leaf iaid {
           type uint32;
-          description "The unique identifier for this IA_NA.";
+          description "A unique identifier for this IA_NA.";
         }
         container ia-na-options {
           description "An augmenation point for additional options
             that the client will send in the IA_NA-options field
-            of OPTION_IA_NA options.";
+            of OPTION_IA_NA.";
         }
         container lease-state {
           config "false";
@@ -244,7 +245,7 @@ module ietf-dhcpv6-client {
         container ia-ta-options {
           description "An augmenation point for additional options
             that the client will send in the IA_TA-options field
-            of OPTION_IA_TA options.";
+            of OPTION_IA_TA.";
         }
         container lease-state {
           config "false";
@@ -291,7 +292,7 @@ module ietf-dhcpv6-client {
         container ia-pd-options {
           description "An augmenation point for additional options
             that the client will send in the IA_PD-options field
-            of OPTION_IA_TA options.";
+            of OPTION_IA_TA.";
         }
         container lease-state {
           config "false";
