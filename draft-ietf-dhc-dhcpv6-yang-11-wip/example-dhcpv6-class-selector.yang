@@ -6,12 +6,15 @@ module example-dhcpv6-class-selector {
   import ietf-inet-types {
     prefix inet;
   }
+
   import ietf-interfaces {
     prefix if;
   }
+
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
   }
+
   import ietf-dhcpv6-server {
     prefix dhcpv6-server;
   }
@@ -24,8 +27,10 @@ module example-dhcpv6-class-selector {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This model defines a YANG data model that can be
-    used to define client class selector for DHCPv6 Server model.";
+  description "This YANG module defines components for the definition
+    and configuration of the client class selector function for a DHCPv6
+    server.  As this functionality varies greatly between different 
+    implementations, the module provided as an example only.";
 
   revision 2020-01-10 {
     description "Version update for draft -11 publication and
@@ -38,17 +43,18 @@ module example-dhcpv6-class-selector {
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
+  /*
+   * Groupings
+   */
 
   grouping client-class-id {
-    description "Defintions for client classification for
+    description "Defintions of client message classification for
       authorization and assignment purposes.";
-
     leaf client-class-name {
       type string;
       description "Unique Identifier for client class identification
         list entries.";
     }
-
     choice id-type {
       description "Definitions for different client identifier
         types.";
@@ -191,8 +197,9 @@ module example-dhcpv6-class-selector {
     }
   }
 
-
-  /* Augmentations of dhcpv6 server */
+  /*
+   * Augmentations 
+   */
 
   augment "/dhcpv6-server:config/dhcpv6-server:class-selector" {
     container client-classes {
@@ -212,6 +219,7 @@ module example-dhcpv6-class-selector {
       }
     }
   }
+
   augment "/dhcpv6-server:config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:address-pools/dhcpv6-server:address-pool" {
     leaf-list client-class {
       type leafref {
@@ -219,6 +227,7 @@ module example-dhcpv6-class-selector {
       }
     }
   }
+
   augment "/dhcpv6-server:config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:pd-pools/dhcpv6-server:pd-pool" {
     leaf-list client-class {
       type leafref {
@@ -226,5 +235,4 @@ module example-dhcpv6-class-selector {
       }
     }
   }
-
 }
