@@ -33,6 +33,7 @@ module example-dhcpv6-options-rfc3319 {
   /*
    * Groupings
    */
+
   grouping sip-server-domain-name-list-option-group {
     container sip-server-domain-name-list-option {
       description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name
@@ -68,6 +69,10 @@ module example-dhcpv6-options-rfc3319 {
       }
     }
   }
+  
+  /*
+   * Augmentations
+   */
 
   augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";

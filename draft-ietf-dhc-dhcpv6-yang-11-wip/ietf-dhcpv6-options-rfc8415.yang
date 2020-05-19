@@ -72,11 +72,9 @@ module ietf-dhcpv6-options-rfc8415 {
   }
 
   /*
-   * Features
-
-  /*
    * Groupings
    */
+
   grouping option-iaaddr-option {
     description "OPTION_IAADDR (5) IA Address Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
@@ -408,6 +406,10 @@ module ietf-dhcpv6-options-rfc8415 {
       }
     }
   }
+
+  /*
+   * Augmentations
+   */
 
   augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";

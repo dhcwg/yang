@@ -6,9 +6,11 @@ module ietf-dhcpv6-server {
   import ietf-inet-types {
     prefix inet;
   }
+
   import ietf-yang-types {
     prefix yang;
   }
+
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
   }
@@ -72,7 +74,7 @@ module ietf-dhcpv6-server {
   }
 
   /*
-   * Typedef
+   * Identities
    */
 
   identity server {
@@ -87,9 +89,17 @@ module ietf-dhcpv6-server {
     }
   }
 
+  /*
+   * Features
+   */
+
   feature prefix-delegation {
     description "Denotes that the server implements DHCPv6 prefix delegation.";
   }
+
+  /*
+   * Groupings
+   */
 
   grouping resource-config {
     description "Nodes that are reused at multiple levels in the DHCPv6 
@@ -248,6 +258,7 @@ module ietf-dhcpv6-server {
   /*
    * Data Nodes
    */
+
   container dhcpv6-server {
     container server-duid {
       description "DUID of the server.";

@@ -27,8 +27,10 @@ module example-dhcpv6-server-config {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This model defines a YANG data model that can be
-    used to configure and manage a DHCPv6 server.";
+  description "This YANG module defines components for the configuration
+    and mangagement of vendor/implementation specific DHCPv6 server 
+    functioniality. As this functionality varies greatly between 
+    different implementations, the module provided as an example only.";
 
   revision 2020-01-10 {
     description "Version update for draft -11 publication and
@@ -42,66 +44,47 @@ module example-dhcpv6-server-config {
   }
 
   /*
-   * Configuration data
+   * Groupings
    */
+
   grouping config {
-    description "Parameters necessary for the configuration
-      of a DHCPv6 server";
+    description "Parameters necessary for the configuration of a 
+      DHCPv6 server";
     container serv-attributes {
       description
-        "This container contains basic attributes of a DHCPv6 server
-        such as IPv6 address, server name  and so on. Some optional
-        functions that can be provided  by the server is also
-        included.";
-      container duid {
-        description "Sets the DUID of server";
-        uses dhcpv6-common:duid;
-      }
+        "Contains basic attributes necessary for running a DHCPv6 server.";
       leaf name {
         type string;
-        description "Name of the DHCPv6 server";
+        description "Name of the DHCPv6 server.";
       }
       leaf description {
         type string;
-        description "Description of the DHCPv6 server";
+        description "Description of the DHCPv6 server.";
       }
-      leaf-list ipv6-address {
+      leaf-list ipv6-listen-addresses {
         type inet:ipv6-address;
-        description "List of IPv6 address(es) the server will ";
+        description "List of IPv6 address(es) that the server will listen
+          for incomming messages on.";
       }
       leaf-list interfaces-config {
-        // Note - this should probably be references to
-        // entries in the ietf-interfaces model
         type if:interface-ref;
         description "A leaf list to denote which one or more
-          interfaces the server should listen on. The default value
-          is to listen on all the interfaces. This node is also used
-          to set a unicast address for the server to listen with
-          a specific interface. For example, if people want
-          the server to listen on a unicast address with a specific
-          interface, he can use the format like 'eth1/2001:db8::1'.";
+          interfaces the server should listen on.";
       }
       container lease-storage {
-        description "Indicates how the server stores the lease";
+        description "Configures how the server wil stores leases.";
         choice storage-type {
-          description "the type of lease storage";
-          // leaf persist {
-          // 		type boolean;
-          // 		mandatory true;
-          // 		description "controls whether the new leases and updates to existing leases are
-          // 		written to the file";
-          // }
+          description "The type storage that will be used for lease 
+            information.";
           case memfile {
             description "Configuration for storing leases information
               in a CSV file.";
-
             leaf memfile-name {
               type string;
-              description "Specifies an absolute location
-                of the lease file in which new leases and lease
-                updates are recorded.";
+              description "Specifies the absolute location
+                of the lease file. The format of the string follow
+                the semantics of the relevant operating system.";
             }
-
             leaf memfile-lfc-interval {
               type uint64;
               description "Specifies the interval in seconds,
@@ -114,115 +97,102 @@ module example-dhcpv6-server-config {
               type string;
               description "Name of the database.";
             }
-            leaf mysql-host {
-              type string;
-              description "If the database is located on a different
-                system to the DHCPv6 server, the database host name
-                must also be specified.";
+            choice host {
+              case hostname { 
+                type yang:domain-name;
+                default "localhost";
+                description "If the database is located on a different
+                  system to the DHCPv6 server, the domain name can be
+                  specified.";
+              }
+              case address {
+                type inet:ip-address;
+                default "::";
+                description "Configure the location of the database 
+                  using an IP (v6 or v6) literal address";
+              }
             }
-            leaf mysql-user {
+            leaf username {
               type string;
               description "User name of the account under which
                 the server will access the database.";
             }
-            leaf mysql-password {
+            leaf password {
               type string;
               description "Password of the account under which
-                the server will access the database";
+                the server will access the database.";
             }
-            leaf mysql-port {
-              type uint8;
+            leaf port {
+              type uint16;
               description "If the database is located on a different
-                system, the port number may be specified";
+                system, the port number may be specified.";
             }
-            leaf mysql-lfc-interval {
+            leaf lfc-interval {
               type uint64;
               description "Specifies the interval in seconds,
                 at which the server will perform a lease file cleanup
-                (LFC)";
+                (LFC).";
             }
-            leaf mysql-connect-timeout {
+            leaf connect-timeout {
               type uint64;
-              description "If the database is located on a different
-                system, a longer interval can be specified";
+              description "Defines the timeout interval for connecting to 
+                the database. A longer interval can be specified if the 
+                database is remote.";
             }
           }
           case postgresql {
-            leaf postgresql-name {
-              type string;
-              description "Name of the database.";
+            choice host {
+              case hostname {
+                type yang:domain-name;
+                default "localhost";
+                description "If the database is located on a different
+                  system to the DHCPv6 server, the domain name can be
+                  specified.";
+              }
+              case address {
+                type inet:ip-address;
+                default "::";
+                description "Configure the location of the database
+                  using an IP (v6 or v6) literal address";
+              }
             }
-            leaf postgresql-host {
-              type string;
-              description "If the database is located on a different
-                system to the DHCPv6 server, the database host name
-                must also be specified.";
-            }
-            leaf postgresql-user {
+            leaf username {
               type string;
               description "User name of the account under which
                 the server will access the database";
             }
-            leaf postgresql-password {
+            leaf password {
               type string;
               description "Password of the account under which
                 the server will access the database";
             }
-            leaf postgresql-port {
-              type uint8;
+            leaf port {
+              type uint16;
               description "If the database is located on a different
                 system, the port number may be specified";
             }
-            leaf postgresql-lfc-interval {
+            leaf lfc-interval {
               type uint64;
-              description "Specifies the interval in seconds,
-                at which the server will perform a lease file cleanup
-                (LFC)";
+             description "Specifies the interval in seconds,
+               at which the server will perform a lease file cleanup
+               (LFC)";
             }
-            leaf postgresql-connect-timeout {
+            leaf connect-timeout {
               type uint64;
-              description "If the database is located on a different
-                system, a longer interval can be specified";
-            }
-          }
-          case cassandra {
-            leaf cassandra-name {
-              type string;
-              description "Name of the database";
-            }
-            leaf cassandra-contact-points {
-              type string;
-              description "Cassandra takes a list of comma separated
-                IP addresses to contact the cluster";
-            }
-            leaf cassandra-user {
-              type string;
-              description "User name of the account under which
-                the server will access the database";
-            }
-            leaf cassandra-password {
-              type string;
-              description "Password of the account under which
-                the server will access the database";
-            }
-            leaf cassandra-lfc-interval {
-              type uint64;
-              description "Specifies the interval in seconds,
-                at which the server will perform a lease file cleanup
-                (LFC)";
-            }
-            leaf cassandra-connect-timeout {
-              type uint64;
-              description "If the database is located on a different
-                system, a longer interval can be specified";
+              description "Defines the timeout interval for connecting to 
+                the database. A longer interval can be specified if the 
+                database is remote.";
             }
           }
         }
       }
       uses dhcpv6-common:vendor-infor;
     }
+ }
 
-  }
+  /*
+   * Augmentations
+   */
 
   augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:vendor-config" {
     uses dhcpv6-server-config:config;

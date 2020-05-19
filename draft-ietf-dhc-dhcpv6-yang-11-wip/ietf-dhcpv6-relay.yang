@@ -6,12 +6,15 @@ module ietf-dhcpv6-relay {
   import ietf-inet-types {
     prefix inet;
   }
+
   import ietf-yang-types {
     prefix yang;
   }
+
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
   }
+
   import ietf-interfaces {
     prefix if;
   }
@@ -29,7 +32,7 @@ module ietf-dhcpv6-relay {
 
   description
     "This YANG module defines components necessary for the 
-    configururation and management of DHCPv6 relays.
+    configuration and management of DHCPv6 relays.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -76,6 +79,10 @@ module ietf-dhcpv6-relay {
       "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
+  /*
+   * Indenties
+   */
+
   identity relay {
     base "dhcpv6-common:dhcpv6-node";
     description "DHCPv6 relay agent identity.";
@@ -88,10 +95,18 @@ module ietf-dhcpv6-relay {
     }
   }
 
+  /*
+   * Features
+   */
+
   feature prefix-delegation {
     description "Enable if the relay functions as a delegating router
       for DHCPv6 prefix delegation.";
   }
+
+  /*
+   * Groupings
+   */
 
   grouping pd-lease-state {
     description "State data for the relay.";

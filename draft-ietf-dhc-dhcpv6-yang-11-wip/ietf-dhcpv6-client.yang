@@ -6,12 +6,15 @@ module ietf-dhcpv6-client {
   import ietf-inet-types {
     prefix inet;
   }
+
   import ietf-yang-types {
     prefix yang;
   }
+
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
   }
+
   import ietf-interfaces {
     prefix if;
   }
@@ -75,6 +78,10 @@ module ietf-dhcpv6-client {
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
+  /*
+   * Identities
+   */
+
   identity client {
     base "dhcpv6-common:dhcpv6-node";
     description "DHCPv6 client identity.";
@@ -87,11 +94,11 @@ module ietf-dhcpv6-client {
     }
   }
 
+
   /*
    * Groupings
    */
-
-
+  
   grouping message-statistics {
     description "Counters for DHCPv6 messages.";
     leaf solicit-count {
