@@ -291,7 +291,6 @@ module: ietf-dhcpv6-server
      |  |     |     +--rw policy-id     uint8
      |  |     |     +--rw label         uint8
      |  |     |     +--rw precedence    uint8
-     |  |     |     +--rw prefix-len    uint8
      |  |     |     +--rw prefix        inet:ipv6-prefix
      |  |     +--rw pcp-server-option! {pcp-server-op}?
      |  |     |  +--rw pcp-server* [pcp-serv-id]
@@ -301,9 +300,7 @@ module: ietf-dhcpv6-server
      |  |     |  +--rw s46-rule* [rule-id]
      |  |     |     +--rw rule-id           uint8
      |  |     |     +--rw rule-type         enumeration
-     |  |     |     +--rw prefix4-len       uint8
      |  |     |     +--rw ipv4-prefix       inet:ipv4-prefix
-     |  |     |     +--rw prefix6-len       uint8
      |  |     |     +--rw ipv6-prefix       inet:ipv6-prefix
      |  |     |     +--rw port-parameter
      |  |     |        +--rw offset      uint8
@@ -316,13 +313,11 @@ module: ietf-dhcpv6-server
      |  |     +--rw s46-dmr-option! {s46-dmr-op}?
      |  |     |  +--rw dmr* [dmr-id]
      |  |     |     +--rw dmr-id             uint8
-     |  |     |     +--rw dmr-prefix-len     uint8
      |  |     |     +--rw dmr-ipv6-prefix    inet:ipv6-prefix
      |  |     +--rw s46-v4-v6-binding-option! {s46-v4-v6-binding-op}?
      |  |     |  +--rw ce* [ce-id]
      |  |     |     +--rw ce-id               uint8
      |  |     |     +--rw ipv4-addr           inet:ipv4-address
-     |  |     |     +--rw bind-prefix6-len    uint8
      |  |     |     +--rw bind-ipv6-prefix    inet:ipv6-prefix
      |  |     |     +--rw port-parameter
      |  |     |        +--rw offset      uint8
@@ -339,7 +334,6 @@ module: ietf-dhcpv6-server
      |  |     +--rw operator-option-ipv6-prefix! {operator-op-ipv6-prefix}?
      |  |     |  +--rw operator-ipv6-prefix* [operator-ipv6-prefix-id]
      |  |     |     +--rw operator-ipv6-prefix-id      uint8
-     |  |     |     +--rw operator-ipv6-prefix6-len    uint8
      |  |     |     +--rw operator-ipv6-prefix         inet:ipv6-prefix
      |  |     +--rw operator-option-int32! {operator-op-int32}?
      |  |     |  +--rw int32val* [int32val-id]
@@ -430,7 +424,6 @@ module: ietf-dhcpv6-server
      |  |           +--rw prefix-reservation* [reserv-prefix-id]
      |  |           |  +--rw reserv-prefix-id     uint32
      |  |           |  +--rw reserv-prefix        inet:ipv6-prefix
-     |  |           |  +--rw reserv-prefix-len    uint8
      |  |           +--rw hostname?                                string
      |  |           +--rw option-set-id?                           -> /server/server-config/option-sets/option-set/option-set-id
      |  +--rw relay-opaque-params
@@ -508,7 +501,6 @@ module: ietf-dhcpv6-server
         |     |     +--ro cli-iapd* [iaid]
         |     |        +--ro iaid              uint32
         |     |        +--ro cli-prefix*       inet:ipv6-prefix
-        |     |        +--ro cli-prefix-len*   uint8
         |     |        +--ro pool-id           uint32
         |     +--ro host-reservations
         |        +--ro binding-info* [cli-id]
@@ -537,7 +529,6 @@ module: ietf-dhcpv6-server
         |           +--ro cli-iapd* [iaid]
         |              +--ro iaid              uint32
         |              +--ro cli-prefix*       inet:ipv6-prefix
-        |              +--ro cli-prefix-len*   uint8
         +--ro packet-stats
            +--ro solicit-count          uint32
            +--ro request-count          uint32
@@ -1125,7 +1116,6 @@ module: ietf-dhcpv6-client
           |  |     +--ro policy-id     uint8
           |  |     +--ro label         uint8
           |  |     +--ro precedence    uint8
-          |  |     +--ro prefix-len    uint8
           |  |     +--ro prefix        inet:ipv6-prefix
           |  +--ro pcp-server-option! {pcp-server-op}?
           |  |  +--ro pcp-server* [pcp-serv-id]
@@ -1135,9 +1125,7 @@ module: ietf-dhcpv6-client
           |  |  +--ro s46-rule* [rule-id]
           |  |     +--ro rule-id           uint8
           |  |     +--ro rule-type         enumeration
-          |  |     +--ro prefix4-len       uint8
           |  |     +--ro ipv4-prefix       inet:ipv4-prefix
-          |  |     +--ro prefix6-len       uint8
           |  |     +--ro ipv6-prefix       inet:ipv6-prefix
           |  |     +--ro port-parameter
           |  |        +--ro offset      uint8
@@ -1150,13 +1138,11 @@ module: ietf-dhcpv6-client
           |  +--ro s46-dmr-option! {s46-dmr-op}?
           |  |  +--ro dmr* [dmr-id]
           |  |     +--ro dmr-id             uint8
-          |  |     +--ro dmr-prefix-len     uint8
           |  |     +--ro dmr-ipv6-prefix    inet:ipv6-prefix
           |  +--ro s46-v4-v6-binding-option! {s46-v4-v6-binding-op}?
           |     +--ro ce* [ce-id]
           |        +--ro ce-id               uint8
           |        +--ro ipv4-addr           inet:ipv4-address
-          |        +--ro bind-prefix6-len    uint8
           |        +--ro bind-ipv6-prefix    inet:ipv6-prefix
           |        +--ro port-parameter
           |           +--ro offset      uint8
@@ -1848,11 +1834,6 @@ module ietf-dhcpv6-server {
 	                mandatory true;
 	                description "reserved prefix";
 	              }
-              	leaf reserv-prefix-len {
-	                type uint8;
-	                mandatory true;
-	                description "reserved prefix length";
-              	}
               }
               
               leaf hostname {
@@ -2079,10 +2060,6 @@ module ietf-dhcpv6-server {
 		    						type inet:ipv6-prefix;
 		    						description "client ipv6 prefix";
 		    					}    					
-		    					leaf-list cli-prefix-len {
-		    						type uint8;
-		    						description "client prefix length";
-		    					}    					
 		    					leaf pool-id {
 		    						type uint32;
 		    						mandatory true;
@@ -2140,10 +2117,6 @@ module ietf-dhcpv6-server {
 	    						type inet:ipv6-prefix;
 	    						description "client ipv6 prefix";
 	    					}    					
-	    					leaf-list cli-prefix-len {
-	    						type uint8;
-	    						description "client prefix length";
-	    					}    						
 	    				}
         		}
         	}        
@@ -3887,11 +3860,6 @@ module ietf-dhcpv6-options {
           mandatory true;
           description "precedence";
         }
-        leaf prefix-len {
-          type uint8;
-          mandatory true;
-          description "prefix length";
-        }
         leaf prefix {
           type inet:ipv6-prefix;
           mandatory true;
@@ -3948,20 +3916,10 @@ module ietf-dhcpv6-options {
           mandatory true;
           description "rule type";
         }
-        leaf prefix4-len {
-          type uint8;
-          mandatory true;
-          description "ipv4 prefix length";
-        }
         leaf ipv4-prefix {
           type inet:ipv4-prefix;
           mandatory true;
           description "ipv4 prefix";
-        }
-        leaf prefix6-len {
-          type uint8;
-          mandatory true;
-          description "ipv6 prefix length";
         }
         leaf ipv6-prefix {
           type inet:ipv6-prefix;
@@ -4008,11 +3966,6 @@ module ietf-dhcpv6-options {
           mandatory true;
           description "dmr id";
         }
-        leaf dmr-prefix-len {
-          type uint8;
-          mandatory true;
-          description "dmr prefix length";
-        }
         leaf dmr-ipv6-prefix {
           type inet:ipv6-prefix;
           mandatory true;
@@ -4040,12 +3993,6 @@ module ietf-dhcpv6-options {
           type inet:ipv4-address;
           mandatory true;
           description "ce ipv4 addr";
-        }
-        leaf bind-prefix6-len {
-          type uint8;
-          mandatory true;
-          description "bind ipv6 prefix
-            length";
         }
         leaf bind-ipv6-prefix {
           type inet:ipv6-address;
@@ -4402,11 +4349,6 @@ module ietf-dhcpv6-options {
           type uint8;
           mandatory true;
           description "operator ipv6 prefix id";
-        }
-        leaf operator-ipv6-prefix6-len {
-          type uint8;
-          mandatory true;
-          description "operator ipv6 prefix length";
         }
         leaf operator-ipv6-prefix {
           type inet:ipv6-prefix;
@@ -4765,10 +4707,6 @@ module ietf-dhcpv6-types {
       leaf-list ipv6-prefix {
         type inet:ipv6-prefix;
         description "ipv6 prefix";
-      }
-      leaf-list prefix-length {
-        type uint8;
-        description "ipv6 prefix length";
       }
       leaf t1-time {
         type yang:timeticks;
