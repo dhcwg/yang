@@ -449,7 +449,7 @@ module ietf-dhcpv6-server {
    * Notifications
    */
 
-  notification address-pool-running-out {
+  notification address-pool-utilization-threshold-exceeded {
     description "Notification sent when the address pool utilization exceeds
       the configured threshold.";
     leaf pool-id {
@@ -482,7 +482,7 @@ module ietf-dhcpv6-server {
     }
   }
 
-  notification pd-pool-running-out {
+  notification prefix-pool-utilization-threshold-exceeded {
     description "Notification sent when the prefix pool utilization exceeds
       the configured threshold.";
     leaf pool-id {
@@ -508,7 +508,8 @@ module ietf-dhcpv6-server {
   }
 
   notification invalid-client-detected {
-    description "Notification sent when the server detect an invalid client.";
+    description "Notification sent when the server detects an 
+      invalid client.";
     leaf duid {
       description "Client DUID.";
       type binary;
