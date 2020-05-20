@@ -384,7 +384,7 @@ module ietf-dhcpv6-server {
                   type inet:ipv6-address;
                   description "Reserved IPv6 address.";
                 }
-               uses resource-config;
+                uses resource-config;
               }
             }
             list active-leases {
@@ -477,8 +477,7 @@ module ietf-dhcpv6-server {
       utilization exceeds the configured threshold.";
     leaf pool-id {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/
-          address-pools/address-pool/pool-id";
+        path "/dhcpv6-server/network-ranges/network-range/address-pools/address-pool/pool-id";
       }
     }
     leaf total-address-count {
@@ -498,11 +497,6 @@ module ietf-dhcpv6-server {
       mandatory true;
       description "Count of allocated addresses in the pool.";
     }
-    leaf pool-id {
-      type uint32;
-      mandatory true;
-      description "Pool identifier.";
-    }
   }
 
   notification prefix-pool-utilization-threshold-exceeded {
@@ -510,24 +504,21 @@ module ietf-dhcpv6-server {
       utilization exceeds the configured threshold.";
     leaf pool-id {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/
-          prefix-pools/prefix-pool/pool-id";
+        path "/dhcpv6-server/network-ranges/network-range/prefix-pools/prefix-pool/pool-id";
       }
       mandatory true;
     }
     leaf max-pd-space-utilization {
       description "PD space utilization threshold.";
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-rage/
-          prefix-pools/prefix-pool/max-pd-space-utilization";
+        path "/dhcpv6-server/network-ranges/network-range/prefix-pools/prefix-pool/max-pd-space-utilization";
       }
       mandatory true;
     }
     leaf pd-space-utilization {
       description "Current PD space utilization";
-      type yang:uint64;
+      type uint64;
     } 
-    mandatory true;
   }
 
   notification invalid-client-detected {
@@ -551,14 +542,18 @@ module ietf-dhcpv6-server {
       description "Client DUID.";
       type binary;
     }
-    leaf-list declined-resources {
+    list declined-resources {
       description "List of declined addresses and/or prefixes.";
       choice resource-type {
-        case address {
-          type inet:ipv6-address;
+        case declined-address {
+          leaf address {
+            type inet:ipv6-address;
+          }
         }
-        case prefix {
-          type inet:ipv6-prefix;
+        case declined-prefix {
+          leaf prefix {
+            type inet:ipv6-prefix;
+          }
         }
       }
     }

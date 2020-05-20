@@ -376,7 +376,7 @@ module ietf-dhcpv6-options-rfc8415 {
       reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf info-refresh-time {
-        type dhcpv6-common:timer-value-seconds32;
+        type dhcpv6-common:timer-seconds32;
         description "Time duration relative to the current time,
           expressed in units of seconds.";
       }
@@ -389,7 +389,7 @@ module ietf-dhcpv6-options-rfc8415 {
       reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf sol-max-rt-value {
-        type dhcpv6-common:timer-value-seconds32;
+        type dhcpv6-common:timer-seconds32;
         description "sol max rt value";
       }
     }
@@ -401,7 +401,7 @@ module ietf-dhcpv6-options-rfc8415 {
       reference "RFC8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6)";
       leaf inf-max-rt-value {
-        type dhcpv6-common:timer-value-seconds32;
+        type dhcpv6-common:timer-seconds32;
         description "inf max rt value";
       }
     }

@@ -3,9 +3,6 @@ module ietf-dhcpv6-common {
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common";
   prefix "dhcpv6-common";
 
-  import ietf-inet-types {
-    prefix inet;
-  }
   import ietf-yang-types {
     prefix yang;
   }
