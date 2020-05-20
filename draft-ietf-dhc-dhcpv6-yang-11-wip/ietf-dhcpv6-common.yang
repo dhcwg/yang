@@ -51,7 +51,7 @@ module ietf-dhcpv6-common {
     description "Threshold value in percent";
   }
 
-  typedef timer-value-seconds32 {
+  typedef timer-seconds32 {
     type uint32 {
       range "1..4294967295";
     }

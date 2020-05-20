@@ -8,7 +8,8 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-dhc-dhcpv6-yang-11" ipr="trust200902" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-dhc-dhcpv6-yang-11"
+  ipr="trust200902" submissionType="IETF" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 Configuration</title>
@@ -39,11 +40,11 @@
         <email>lh.sunlinh@gmail.com</email>
       </address>
     </author>
-    <author fullname="Ian Farrer" initials="I.F." surname="Farrer">
+    <author fullname="Ian Farrer" initials="I.F" surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
       <address>
         <postal>
-          <street>TAI, Landgrabenweg 151</street>
+          <street>CTO-ATI, Landgrabenweg 151</street>
           <city>Bonn</city>
           <region>NRW</region>
           <code>53227</code>
@@ -52,7 +53,7 @@
         <email>ian.farrer@telekom.de</email>
       </address>
     </author>
-    <author fullname="Sladjana Zechlin" initials="S.Z." surname="Zechlin">
+    <author fullname="Sladjana Zechlin" initials="S.Z" surname="Zechlin">
       <organization>Deutsche Telekom AG</organization>
       <address>
         <postal>
@@ -89,12 +90,12 @@
         <email>godfryd@isc.org</email>
       </address>
     </author>
-    <date year="2020"/>
+    <date year="2019"/>
     <workgroup>DHC Working Group</workgroup>
     <abstract>
-      <t>This document describes several YANG data modules for the 
-        configuration and management of DHCPv6 servers, relays, and clients.
-      </t>
+      <t>This document describes several YANG data modules
+        for the configuration and management of DHCPv6
+        servers, relays, and clients.</t>
     </abstract>
     <note>
       <name>Requirements Language</name>
@@ -111,19 +112,19 @@
       <t>DHCPv6 <xref target="RFC8415"/> is widely used for supplying
         configuration and other relevant parameters to clients in IPv6 networks.
         This document defines DHCPv6 YANG modules for the configuration
-        and management of DHCPv6 servers, relays and clients. Separate 
-        'element' modules for each of these.
+        and management of DHCPv6 servers, relays and clients. This document
+        defines separate 'element' modules for each of these.
       </t>
       <t>Additionally, a 'common' module contains typedefs and
         groupings used by the element modules. A further module contains an
         initial set of DHCPv6 option definitions.
       </t>
       <t>It is worth noting that as DHCPv6 is itself a client configuration
-        protocol, it is not the intention of this document to describe a 
-        replacement for the allocation of DHCPv6 assigned addressing and 
-        parameters by using NETCONF/YANG.  The DHCPv6 client module is 
-        intended for the configuration and monitoring of the DHCPv6 client 
-        function and does not play a part in the normal DHCPv6 message flow.
+        protocol, it is not the intention of this document to replace the
+        allocation of DHCPv6 assigned addressing and parameters using
+        NETCONF/YANG.  The DHCPv6 client model is intended for the
+        configuration and monitoring of the DHCPv6 client function and does
+        not affect the normal DHCPv6 message flow.
       </t>
       <section>
         <name>Scope</name>
@@ -131,11 +132,11 @@
         base protocol specification. In addition to this, a large number of
         addition specifications have also been published, extending
         DHCPv6 element functionality and adding new options. The YANG
-        modules contained in this document do not attempt to capture all of these
-        extensions and additions, rather to model the DHCPv6 functions and
+        modules contained in this document do not attempt to capture all of
+        these extensions and additions, rather to model the DHCPv6 functions and
         options covered in <xref target="RFC8415"/>. A focus has also been
         given on the extensibility of the modules so that it is easy to
-        augment in additional functionality as required by a particular
+        augment additional functionality as required by a particular
         implementation or deployment scenario.
         </t>
       </section>
@@ -153,22 +154,22 @@
         <xref target="vendor-specific-configuration-example"/> contains
         an example YANG module for the configuration of implementation specific
         functions, illustrating how this functionality can be augmented into
-        the main ietf-dhcpv6-server.yang module.
+        the main "ietf-dhcpv6-server.yang" module.
         </t>
         <t>In DHCPv6 the concept of 'class selection' for messages received
         by the server is common. This is the identification and classification 
         of messages based on a number of parameters so that the correct
         provisioning information can be supplied. For example, allocating
-        a prefix from the correct pool, or supplying a set
-        of options relevant for a specific vendor's client implementation.
-        During the development of this document, research has been carried out
-        into a number of vendor's class selection implementations and the
-        findings were that while this function is common to all, the method for
-        implementing this differs greatly. Therefore, configuration of the class
+        a prefix from the correct pool, or supplying a set of options relevant
+        for a specific vendor's client implementation. During the development of
+        this document, research has been carried out into a number of vendor's
+        class selection mechanism implementations. The findings were that while
+        this function is common to all, the methods of configuration and 
+        implementation differ greatly. Therefore, configuration of the class
         selection function has been omitted from the DHCPv6 server module
-        to allow implementors to define their own suitable YANG module.
+        to allow implementors to define their own YANG module.
         <xref target="class-selector-example"/> provides an
-        example of this, to demonstrate how this is can be integrated with
+        example, demonstrating how this is can be integrated with
         the main "ietf-dhcpv6-server.yang" module.
         </t>
         <section>
@@ -208,15 +209,15 @@
         <t>The tree diagram in <xref target="server-structure"/> provides an
           overview of the DHCPv6 server module. The tree also includes
           the augmentations of the relevant option definitions from
-          <xref target="option-module"/> and the common functions module
-          <xref target="common-module"/>.
+          <xref target="option-model"/> and the common functions module
+          <xref target="common-model"/>.
         </t>
 
         <figure anchor="server-structure">
-          <name>DHCPv6 Server Data Module Structure</name>
+          <name>DHCPv6 Server Data Model Structure</name>
             <xi:include href="ietf-dhcpv6-server.yang.tree.xml"/>
         </figure>
-        <t>Descriptions of important nodes:</t>
+        <t>Description of important nodes:</t>
         <ul spacing="normal">
           <li>dhcpv6-node-type: The different functional DHCPv6 elements each
             have their relevant identities.</li>
@@ -239,26 +240,25 @@
             additional implementation specific YANG nodes for the configuration
             of the device to be augmented. See
             <xref target="vendor-specific-configuration-example"/> for an
-            example module.
+            example of this.
           </li>
           <li>option-sets: The server can be configured with
             multiple option-sets. These are groups of DHCPv6 options with
-            common parameters which will be supplied to clients on request.
-            The 'option-set-id' field is used to reference an option-set
-            elsewhere in the server's configuration.
+            common parameters which will be supplied to the intended clients.
+            The 'option-set-id' field is the key field which is referenced
+            by the relevant address or prefix pool configuration.
           </li>
-          <li>option-set: Holds configration parameters for DHCPv6 options.
+          <li>option-set: Holds definitions for DHCPv6 options themselves.
             The initial set of definitions are contained in the module
             'ietf-dhcpv6-options-rfc8415.yang' and are augmented into the 
-            server module at this point. Other DHCPv6 options can be
-            augmented here as required.
+            server module at this point.
           </li>
           <li>class-selector: This is provided as a location for
             additional implementation specific YANG nodes for vendor specific
             class selector nodes to be augmented. See
             <xref target="class-selector-example"/> for an example of this.
           </li>
-          <li>network-ranges: This module uses a hierarchical model
+          <li>network-ranges: This model uses a hierarchical model
             for the allocation of addresses and prefixes. At the top level
             'network-ranges' holds global configuration parameters. Under
             this, a list of 'network-ranges' can be defined. Inside
@@ -266,20 +266,23 @@
             and 'prefix-pools' (for IA_PD allocation) are defined. Finally
             within the pools, specific host-reservations are held.
           </li>
-           <li>prefix-pools: Defines pools to be used for prefix
+           <li>prefix-pools: Defines prefix pools to be used for prefix
             delegation to clients. As prefix delegation is not
             supported by all DHCPv6 server implementations, it is enabled
             by a feature statement.</li>
         </ul>
         <t>Information about notifications:</t>
         <ul spacing="normal">
-          <li>address/prefix-pool-utilization-threshold-exceeded: Raised when 
-            number of leased addresses or prefixes exceeds the configurated
-            usage threshold. 
+          <li>address/pd-pool-running-out: Raised when the address/prefix pool
+            is going to run out. A threshold for the utilization ratio of the pool
+            (max-address-count/max-pd-space utilization) has been defined in
+            the server features so that it will notify the administrator when the
+            utilization ratio reaches the threshold, and such threshold is a
+            settable parameter.
           </li>
-          <li>invalid-client-detected: Raised when the server detects an
-            invalid client. A description of the error that has generated the
-            notification can be included.
+          <li>invalid-client-detected: Raised when the server has found a client
+            which can be regarded as a potential attacker. A description
+            may also be included.
           </li>
           <li>decline-received: Raised when a DHCPv6 Decline message is received
             from a client.
@@ -295,16 +298,16 @@
         <t>The tree diagram in <xref target="relay-structure"/> provides an
           overview of the DHCPv6 relay module. The tree also includes
           the augmentations of the relevant option definitions from
-          <xref target="option-module"/> and the common functions module
-          <xref target="common-module"/>.
+          <xref target="option-model"/> and the common functions module
+          <xref target="common-model"/>.
         </t>
 
         <figure anchor="relay-structure">
-          <name>DHCPv6 Relay Data Module Structure</name>
+          <name>DHCPv6 Relay Data Model Structure</name>
             <xi:include href="ietf-dhcpv6-relay.yang.tree.xml"/>
         </figure>
 
-        <t>Descriptions of important nodes:</t>
+        <t>Description of important nodes:</t>
         <ul spacing="normal">
           <li>dhcpv6-node-type: The different functional DHCPv6 elements each
             have their relevant identities.</li>
@@ -318,12 +321,13 @@
           <li>destination-addresses: Defines a list of IPv6 addresses that
             client messages will be relayed to. May include unicast or
             multicast addresses.</li>
-          <li>link-address: Configures the value that the relay will put 
-            into the link-address field of Relay-Forward messages.</li>
+          <li>link-address: Allows the configuration of the value that
+            the relay will put into the link-address field of
+            Relay-Forward messages.</li>
           <li>prefix-delegation: As prefix delegation is not
             supported by all DHCPv6 relay implementations, it is enabled
             by this feature statement where required.</li>
-          <li>pd-leases: Contains read-only nodes for holding information
+          <li>pd-leases: Contains read only nodes for holding information
             about active delegated prefix leases.
           </li>
           <li>relay-options: As with the Server module, DHCPv6 options
@@ -343,16 +347,16 @@
         <t>The tree diagram in <xref target="client-structure"/> provides an
           overview of the DHCPv6 client module. The tree also includes
           the augmentations of the relevant option definitions from
-          <xref target="option-module"/> and the common functions module
-          <xref target="common-module"/>.
+          <xref target="option-model"/> and the common functions module
+          <xref target="common-model"/>.
         </t>
 
         <figure anchor="client-structure">
-          <name>DHCPv6 Client Data Module Structure</name>
+          <name>DHCPv6 Client Data Model Structure</name>
            <xi:include href="ietf-dhcpv6-client.yang.tree.xml"/>
         </figure>
 
-        <t>Descriptions of important nodes:</t>
+        <t>Description of important nodes:</t>
         <ul spacing="normal">
           <li>dhcpv6-node-type: The different functional DHCPv6 elements each
             have their relevant identities.</li>
@@ -390,38 +394,41 @@
           <li>retransmission-failed: Raised when the retransmission mechanism
             defined in <xref target="RFC8415"/> is failed.
           </li>
+          <li>failed-status-turn-up: Raised when the client receives a message
+            includes an unsuccessful Status Code option.
+          </li>
         </ul>
       </section>
     </section>
-    <section anchor="yang-module">
-      <name>DHCPv6 YANG Modules</name>
-      <section anchor="server-module">
-        <name>DHCPv6 Server YANG Module</name>
+    <section anchor="yang-model">
+      <name>DHCPv6 YANG Model</name>
+      <section anchor="server-model">
+        <name>DHCPv6 Server YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC8343"/>.</t>
         <xi:include href="ietf-dhcpv6-server.yang.xml"/>
       </section>
-      <section anchor="relay-module">
-        <name>DHCPv6 Relay YANG Module</name>
+      <section anchor="relay-model">
+        <name>DHCPv6 Relay YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC8343"/>.
         </t>
         <xi:include href="ietf-dhcpv6-relay.yang.xml"/>
       </section>
-      <section anchor="client-module">
-        <name>DHCPv6 Client YANG Module</name>
+      <section anchor="client-model">
+        <name>DHCPv6 Client YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
         <xref target="RFC8343"/>.</t>
         <xi:include href="ietf-dhcpv6-client.yang.xml"/>
       </section>
-      <section anchor="option-module">
-        <name>DHCPv6 RFC8415 Options YANG Module</name>
+      <section anchor="option-model">
+        <name>DHCPv6 RFC8415 Options YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.
         </t>
         <xi:include href="ietf-dhcpv6-options-rfc8415.yang.xml"/>
       </section>
-      <section anchor="common-module">
-        <name>DHCPv6 Common YANG Module</name>
+      <section anchor="common-model">
+        <name>DHCPv6 Common YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.</t>
         <xi:include href="ietf-dhcpv6-common.yang.xml"/>
       </section>
@@ -545,11 +552,10 @@ The following individuals contributed to this effort:
       </references>
     </references>
       <section anchor="example-dhcp-options-extension">
-      <name>Example of Augementing Additional DHCPv6 Option Definitions</name>
-      <t>The following section provides a example of how the DHCPv6 option 
-       definitions can be extended for additional options. It is expected that 
-       additional specficication documents will be published in the future 
-       for this.
+      <name>Example of Adding New DHCPv6 Option Definitions</name>
+      <t>The following section provides a example of how the DHCPv6 option definitions can be
+       extended for additional option. It is expected that additional specficication documents
+       will be published in the future for this.
       </t>
 
        <t>The example YANG models OPTION_SIP_SERVER_D (21) and OPTION_SIP_SERVER_D (21) defined
@@ -588,12 +594,12 @@ The following individuals contributed to this effort:
       <section anchor="vendor-specific-configuration-example">
       <name>Example Vendor Specific Server Configuration Module</name>
       <t>
-      This section shows how to extend the server YANG module defined in this 
-      document with vendor specific configuration nodes, e.g., configuring 
-      access to a lease storage database.</t>
+      This section shows how to extend the server YANG module defined in this document
+      for vendor specific configuration nodes, e.g., configuring a database
+      for storing leases.</t>
 
-      <t>The example module defines additional server attributes such as name 
-        and description. Storage for leases is configured using a
+      <t>The example module defines additional server attributes such as name and
+        description. Storage for leases is configured using a
         lease-storage container. It allows storing leases in one of
         three options: memory (memfile), MySQL and PosgreSQL. For each case, the
         necessary configuration parameters are provided.</t>
@@ -609,12 +615,12 @@ The following individuals contributed to this effort:
         <name>Example definition of class selector configuration</name>
         <t>
         The module "example-dhcpv6-class-selector" provides an example of
-        how vendor specific class selection configuration can be modeled
-        and integrated with the "ietf-dhcpv6-server" module defined in this
+        how vendor specific class selector configuration can be modeled
+        and integrated with the ietf-dhcpv6-server module defined in this
         document.</t>
 
         <t>The example module defines "client-class-names" with associated
-        matching rules. A client can be classified based on "client-id",
+        matching rules. A client can be classified based on "client id",
         "interface-id" (ingress inteface of the client's messages),
         packets source or destination address, relay link address,
         relay link interface-id and more. Actually there is endless methods

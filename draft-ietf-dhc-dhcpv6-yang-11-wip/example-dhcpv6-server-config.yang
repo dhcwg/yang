@@ -66,6 +66,11 @@ module example-dhcpv6-server-config {
         description "List of IPv6 address(es) that the server will listen
           for incomming messages on.";
       }
+      leaf ipv6-listen-port {
+        type uint16;
+        default 547;
+        descrtiption "UDP port that the server will listen on.";
+      }
       leaf-list interfaces-config {
         type if:interface-ref;
         description "A leaf list to denote which one or more

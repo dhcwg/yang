@@ -114,20 +114,20 @@ module ietf-dhcpv6-server {
         network-range.";
     }
     leaf valid-lifetime {
-      type dhcpv6-common:timer-value-seconds32;
+      type dhcpv6-common:timer-seconds32;
       description "Valid lifetime for the Identity Association 
         (IA).";
     }
     leaf renew-time {
-      type dhcpv6-common:timer-value-seconds32;
+      type dhcpv6-common:timer-seconds32;
       description "Renew (T1) time.";
     }
     leaf rebind-time {
-      type dhcpv6-common:timer-value-seconds32;
+      type dhcpv6-common:timer-seconds32;
       description "Rebind (T2) time.";
     }
     leaf preferred-lifetime {
-      type dhcpv6-common:timer-value-seconds32;
+      type dhcpv6-common:timer-seconds32;
       description "Preferred lifetime for the Identity Association 
         (IA).";
     }
@@ -179,26 +179,26 @@ module ietf-dhcpv6-server {
         leaf preferred-lifetime {
           description "The preferred lifetime expressed in 
             seconds.";
-          type dhcpv6-common:timer-value-seconds32;
+          type dhcpv6-common:timer-seconds32;
         }
         leaf valid-lifetime {
           description "The valid lifetime for the leased prefix
             expressed in seconds.";
-          type dhcpv6-common:timer-value-seconds32;
+          type dhcpv6-common:timer-seconds32;
         }
         leaf lease-t1 {
           description "The time interval after which the client
             should contact the server from which the addresses
             in the IA_NA were obtained to extend the lifetimes
             of the addresses assigned to the IA_PD.";
-          type dhcpv6-common:timer-value-seconds32;
+          type dhcpv6-common:timer-seconds32;
         }
         leaf lease-t2 {
           description "The time interval after which the client
             should contact any available server to extend
             the lifetimes of the addresses assigned to the 
             IA_PD.";
-          type dhcpv6-common:timer-value-seconds32;
+          type dhcpv6-common:timer-seconds32;
         }
       }
     }
