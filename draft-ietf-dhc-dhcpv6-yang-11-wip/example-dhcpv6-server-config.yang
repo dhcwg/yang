@@ -6,15 +6,11 @@ module example-dhcpv6-server-config {
   import ietf-inet-types {
     prefix inet;
   }
-  import ietf-yang-types {
-    prefix yang;
-  }
+
   import ietf-interfaces {
     prefix if;
   }
-  import ietf-dhcpv6-common {
-    prefix dhcpv6-common;
-  }
+
   import ietf-dhcpv6-server {
     prefix dhcpv6-server;
   }
@@ -51,8 +47,8 @@ module example-dhcpv6-server-config {
     description "Parameters necessary for the configuration of a 
       DHCPv6 server";
     container serv-attributes {
-      description
-        "Contains basic attributes necessary for running a DHCPv6 server.";
+      description "Contains basic attributes necessary for running a 
+        DHCPv6 server.";
       leaf name {
         type string;
         description "Name of the DHCPv6 server.";
@@ -61,18 +57,43 @@ module example-dhcpv6-server-config {
         type string;
         description "Description of the DHCPv6 server.";
       }
-      leaf-list ipv6-listen-addresses {
-        type inet:ipv6-address;
-        description "List of IPv6 address(es) that the server will listen
-          for incomming messages on.";
-      }
       leaf ipv6-listen-port {
         type uint16;
         default 547;
-        descrtiption "UDP port that the server will listen on.";
+        description "UDP port that the server will listen on.";
+      }
+      choice listening-interfaces {
+        default all-interfaces;
+        description "Configures which interface or addresses the server
+          will listen for incomming messages on.";
+        case all-interfaces {
+          container all-interfaces {
+          presence true;
+          description "Configures the server to listen for 
+            incomming messages on all IPv6 addresses (unicats and
+            multicast) on all of its network interfaces.";
+          }
+        }
+        case interface-list {
+          leaf-list interfaces {
+            type if:interface-ref;
+            description "List of interfaces that the server will
+              listen for incomming messages on. Messages addressed
+              to any valid IPv6 address (unicast and multicast) will
+              be received.";
+          }
+        }
+        case address-list {
+          leaf-list address-list {
+            type inet:ipv6-address;
+            description "List of IPv6 address(es) that the server will
+              listen for incomming messages on.";
+          }
+        }
       }
       leaf-list interfaces-config {
-        type if:interface-ref;
+        type if:interface-ref; 
+        default "if:interfaces/if:interface/if:name";
         description "A leaf list to denote which one or more
           interfaces the server should listen on.";
       }
@@ -102,87 +123,97 @@ module example-dhcpv6-server-config {
               type string;
               description "Name of the database.";
             }
-            choice host {
-              case hostname { 
-                type yang:domain-name;
-                default "localhost";
-                description "If the database is located on a different
-                  system to the DHCPv6 server, the domain name can be
-                  specified.";
+            choice mysql-host {
+              case mysql-server-hostname { 
+                leaf mysql-hostname {
+                  type inet:domain-name;
+                  default "localhost";
+                  description "If the database is located on a 
+                    different system to the DHCPv6 server, the domain 
+                    name can be specified.";
+                }
               }
-              case address {
-                type inet:ip-address;
-                default "::";
-                description "Configure the location of the database 
-                  using an IP (v6 or v6) literal address";
+              case mysql-server-address {
+                leaf mysql-address {
+                  type inet:ip-address;
+                  default "::";
+                  description "Configure the location of the database 
+                    using an IP (v6 or v6) literal address";
+                }
               }
             }
-            leaf username {
+            leaf mysql-username {
               type string;
-              description "User name of the account under which
-                the server will access the database.";
+              description "User name of the account under which the
+                server will access the database.";
             }
-            leaf password {
+            leaf mysql-password {
               type string;
               description "Password of the account under which
                 the server will access the database.";
             }
-            leaf port {
-              type uint16;
+            leaf mysql-port {
+              type inet:port-number;
+              default 5432;
               description "If the database is located on a different
                 system, the port number may be specified.";
             }
-            leaf lfc-interval {
+            leaf mysql-lfc-interval {
               type uint64;
               description "Specifies the interval in seconds,
                 at which the server will perform a lease file cleanup
                 (LFC).";
             }
-            leaf connect-timeout {
+            leaf mysql-connect-timeout {
               type uint64;
-              description "Defines the timeout interval for connecting to 
-                the database. A longer interval can be specified if the 
-                database is remote.";
+              description "Defines the timeout interval for connecting
+                to the database. A longer interval can be specified if 
+                the database is remote.";
             }
           }
           case postgresql {
-            choice host {
-              case hostname {
-                type yang:domain-name;
-                default "localhost";
-                description "If the database is located on a different
-                  system to the DHCPv6 server, the domain name can be
-                  specified.";
+            choice postgresql-host {
+              case postgresql-server-hostname {
+                leaf postgresql-hostname {
+                  type inet:domain-name;
+                  default "localhost";
+                  description "If the database is located on a 
+                    different system to the DHCPv6 server, the domain 
+                    name can be specified.";
+                }
               }
-              case address {
-                type inet:ip-address;
-                default "::";
-                description "Configure the location of the database
-                  using an IP (v6 or v6) literal address";
+              case postgresql-server-address {
+                leaf postgresql-address {
+                  type inet:ip-address;
+                  default "::";
+                  description "Configure the location of the database
+                    using an IP (v6 or v6) literal address";
+                }
               }
             }
-            leaf username {
+            leaf postgresql-username {
               type string;
               description "User name of the account under which
                 the server will access the database";
             }
-            leaf password {
+            leaf postgresql-password {
               type string;
               description "Password of the account under which
                 the server will access the database";
             }
-            leaf port {
-              type uint16;
+            leaf postgresql-port {
+              type inet:port-number;
+              default 5432;
               description "If the database is located on a different
                 system, the port number may be specified";
             }
-            leaf lfc-interval {
+            leaf postgresql-lfc-interval {
               type uint64;
-             description "Specifies the interval in seconds,
-               at which the server will perform a lease file cleanup
-               (LFC)";
+              description "Specifies the interval in seconds,
+                at which the server will perform a lease file cleanup
+                (LFC)";
             }
-            leaf connect-timeout {
+            leaf postgresql-connect-timeout {
               type uint64;
               description "Defines the timeout interval for connecting to 
                 the database. A longer interval can be specified if the 
@@ -191,9 +222,8 @@ module example-dhcpv6-server-config {
           }
         }
       }
-      uses dhcpv6-common:vendor-infor;
     }
- }
+  }
 
   /*
    * Augmentations
