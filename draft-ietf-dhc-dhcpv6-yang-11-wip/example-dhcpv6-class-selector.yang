@@ -201,7 +201,7 @@ module example-dhcpv6-class-selector {
    * Augmentations 
    */
 
-  augment "/dhcpv6-server:config/dhcpv6-server:class-selector" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector" {
     container client-classes {
       list class {
         description "List of the client class identifiers applicable
@@ -212,26 +212,26 @@ module example-dhcpv6-class-selector {
     }
   }
 
-  augment "/dhcpv6-server:config/dhcpv6-server:network-ranges/dhcpv6-server:network-range" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range" {
     leaf-list client-class {
       type leafref {
-        path "/dhcpv6-server:config/dhcpv6-server:class-selector/client-classes/class/client-class-name";
+        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector/client-classes/class/client-class-name";
       }
     }
   }
 
-  augment "/dhcpv6-server:config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:address-pools/dhcpv6-server:address-pool" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:address-pools/dhcpv6-server:address-pool" {
     leaf-list client-class {
       type leafref {
-        path "/dhcpv6-server:config/dhcpv6-server:class-selector/client-classes/class/client-class-name";
+        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector/client-classes/class/client-class-name";
       }
     }
   }
 
-  augment "/dhcpv6-server:config/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:pd-pools/dhcpv6-server:pd-pool" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:prefix-pools/dhcpv6-server:prefix-pool" {
     leaf-list client-class {
       type leafref {
-        path "/dhcpv6-server:config/dhcpv6-server:class-selector/client-classes/class/client-class-name";
+        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector/client-classes/class/client-class-name";
       }
     }
   }
