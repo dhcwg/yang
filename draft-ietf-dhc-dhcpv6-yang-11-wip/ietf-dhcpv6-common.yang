@@ -66,14 +66,14 @@ module ietf-dhcpv6-common {
    */
 
   grouping duid {
-    description "Each server and client has only one DUID (DHCP Unique 
-      Identifier). The DUID here identifies a unique DHCPv6 server for 
-      clients.  DUID consists of a two-octet type field and an arbitrary
-      length (no more than 128 bytes) content field.  Currently there 
-      are four defined types of DUIDs in RFC8415 and RFC6355 
-      - DUID-LLT, DUID-EN, DUID-LL and DUID-UUID.  DUID-unstructured 
-      represents DUIDs which do not follow any of the defined 
-      formats.";
+    description "Each server and client has only one DUID (DHCP 
+      Unique Identifier). The DUID here identifies a unique 
+      DHCPv6 server for clients.  DUID consists of a two-octet 
+      type field and an arbitrary length (no more than 128 bytes) 
+      content field.  Currently there are four defined types of 
+      DUIDs in RFC8415 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL 
+      and DUID-UUID.  DUID-unstructured represents DUIDs which 
+      do not follow any of the defined formats.";
     reference "RFC8415: Section 11 and RFC6355: Section 4";
     leaf type-code {
       type uint16;
@@ -93,9 +93,9 @@ module ietf-dhcpv6-common {
         }
         leaf duid-llt-time {
           type yang:timeticks;
-          description "The time that the DUID is generated represented 
-            in seconds since midnight (UTC), January 1, 2000, modulo 
-            2^32.";
+          description "The time that the DUID is generated 
+            represented in seconds since midnight (UTC), 
+            January 1, 2000, modulo 2^32.";
         }
         leaf duid-llt-link-layer-address {
           type yang:mac-address;

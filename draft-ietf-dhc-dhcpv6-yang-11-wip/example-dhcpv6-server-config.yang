@@ -23,10 +23,11 @@ module example-dhcpv6-server-config {
     sladjana.zechlin@telekom.de
     hezihao9512@gmail.com";
 
-  description "This YANG module defines components for the configuration
-    and mangagement of vendor/implementation specific DHCPv6 server 
-    functioniality. As this functionality varies greatly between 
-    different implementations, the module provided as an example only.";
+  description "This YANG module defines components for the 
+    configuration and mangagement of vendor/implementation specific 
+    DHCPv6 server functioniality. As this functionality varies 
+    greatly between different implementations, the module 
+    provided as an example only.";
 
   revision 2020-01-10 {
     description "Version update for draft -11 publication and
@@ -64,8 +65,8 @@ module example-dhcpv6-server-config {
       }
       choice listening-interfaces {
         default all-interfaces;
-        description "Configures which interface or addresses the server
-          will listen for incomming messages on.";
+        description "Configures which interface or addresses the 
+          server will listen for incomming messages on.";
         case all-interfaces {
           container all-interfaces {
           presence true;
@@ -86,8 +87,8 @@ module example-dhcpv6-server-config {
         case address-list {
           leaf-list address-list {
             type inet:ipv6-address;
-            description "List of IPv6 address(es) that the server will
-              listen for incomming messages on.";
+            description "List of IPv6 address(es) that the server 
+              will listen for incomming messages on.";
           }
         }
       }
@@ -129,16 +130,17 @@ module example-dhcpv6-server-config {
                   type inet:domain-name;
                   default "localhost";
                   description "If the database is located on a 
-                    different system to the DHCPv6 server, the domain 
-                    name can be specified.";
+                    different system to the DHCPv6 server, the 
+                      domain name can be specified.";
                 }
               }
               case mysql-server-address {
                 leaf mysql-address {
                   type inet:ip-address;
                   default "::";
-                  description "Configure the location of the database 
-                    using an IP (v6 or v6) literal address";
+                  description "Configure the location of the 
+                    database using an IP (v6 or v6) literal 
+                    address";
                 }
               }
             }
@@ -166,9 +168,9 @@ module example-dhcpv6-server-config {
             }
             leaf mysql-connect-timeout {
               type uint64;
-              description "Defines the timeout interval for connecting
-                to the database. A longer interval can be specified if 
-                the database is remote.";
+              description "Defines the timeout interval for 
+                connecting to the database. A longer interval can 
+                be specified if the database is remote.";
             }
           }
           case postgresql {
@@ -178,8 +180,8 @@ module example-dhcpv6-server-config {
                   type inet:domain-name;
                   default "localhost";
                   description "If the database is located on a 
-                    different system to the DHCPv6 server, the domain 
-                    name can be specified.";
+                    different system to the DHCPv6 server, the 
+                    domain name can be specified.";
                 }
               }
               case postgresql-server-address {
@@ -215,9 +217,9 @@ module example-dhcpv6-server-config {
             }
             leaf postgresql-connect-timeout {
               type uint64;
-              description "Defines the timeout interval for connecting to 
-                the database. A longer interval can be specified if the 
-                database is remote.";
+              description "Defines the timeout interval for 
+                connecting to the database. A longer interval can 
+                be specified if the database is remote.";
             }
           }
         }
