@@ -2,12 +2,10 @@ YANGER?=../yanger/bin/yanger
 PYANG=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
 
-#SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-19-9-19.v2v3
-#SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-8-10-19
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-04-11-19
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-11-wip/draft-ietf-dhc-dhcpv6-yang-11-if-13-05-20
 
-MODELS_DIR:=draft-ietf-dhc-dhcpv6-yang-10-wip
+MODELS_DIR:=draft-ietf-dhc-dhcpv6-yang-11-wip
 
 
 all: text html
@@ -26,7 +24,7 @@ MODULES+=ietf-dhcpv6-relay.yang
 $(foreach mod_file,$(MODULES),$(eval $(call file_to_tree,$(MODELS_DIR)/$(mod_file))))
 
 
-define file_to_xml =
+define tree_to_xml =
 $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
@@ -34,8 +32,21 @@ $(1).xml: $(1)
 	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
-FULL_INCLUDES+=$(1).xml
+TREEINCLUDES+=$(1).xml
 endef
+
+
+define yang_to_xml =
+$(1).xml: $(1)
+	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
+	echo '<artwork align="center">' >> $$@
+	echo '<![CDATA[<CODE BEGINS> file $(inc_yang_file) \n' >> $$@
+	cat $$< |fold -w 69 >> $$@
+	echo '<CODE ENDS>]]>' >> $$@
+	echo '</artwork>' >> $$@
+YANGINCLUDES+=$(1).xml
+endef
+
 
 INCLUDES=
 INCLUDES+=ietf-dhcpv6-client.yang
@@ -46,21 +57,27 @@ INCLUDES+=ietf-dhcpv6-common.yang
 INCLUDES+=example-dhcpv6-class-selector.yang
 INCLUDES+=example-dhcpv6-server-config.yang
 INCLUDES+=example-dhcpv6-options-rfc3319.yang
-INCLUDES+=ietf-dhcpv6-server.yang.tree
-INCLUDES+=ietf-dhcpv6-relay.yang.tree
-INCLUDES+=ietf-dhcpv6-client.yang.tree
 
-FULL_INCLUDES=
-$(foreach inc_file,$(INCLUDES),$(eval $(call file_to_xml,$(MODELS_DIR)/$(inc_file))))
+INCLUDETREE=
+INCLUDETREE+=ietf-dhcpv6-server.yang.tree
+INCLUDETREE+=ietf-dhcpv6-relay.yang.tree
+INCLUDETREE+=ietf-dhcpv6-client.yang.tree
+
+TREEINCLUDES=
+$(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
+
+
+YANGINCLUDES=
+$(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
 
 
 text: $(SPEC_NAME).txt
-$(SPEC_NAME).txt: $(SPEC_NAME).xml $(FULL_INCLUDES)
+$(SPEC_NAME).txt: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 	$(XML2RFC) -n -N --text --v3 $<
 
 html: $(SPEC_NAME).html
-$(SPEC_NAME).html: $(SPEC_NAME).xml $(FULL_INCLUDES)
+$(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
 
 clean:
-	rm -f $(FULL_INCLUDES) draft-ietf-dhc-dhcpv6-yang-10-wip/*html draft-ietf-dhc-dhcpv6-yang-10-wip/*txt $(MODELS_DIR)/*tree
+	rm -f $(FULL_INCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree
