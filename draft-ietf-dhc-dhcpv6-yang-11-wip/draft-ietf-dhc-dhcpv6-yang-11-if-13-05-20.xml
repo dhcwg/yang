@@ -426,12 +426,87 @@
         <xi:include href="ietf-dhcpv6-common.yang.xml"/>
       </section>
     </section>
+
     <section anchor="security">
-      <name>Security Considerations (TBD)</name>
-      <t>TBD</t>
+      <name>Security Considerations</name>
+        <t>The YANG modules defined in this document are designed to be
+          accessed via network management protocols such as NETCONF 
+          <xref target="RFC6241"/> or RESTCONF <xref target="RFC8040"/>.
+          The lowest NETCONF layer is the secure transport layer, and 
+          the mandatory-to-implement secure transport is Secure Shell 
+          (SSH) <xref target="RFC6242"/>.  The lowest RESTCONF layer 
+          is HTTPS, and the mandatory-to-implement secure transport 
+          is TLS <xref target="RFC8446"/>.</t>
+
+        <t>The Network Configuration Access Control Model (NACM) 
+          <xref target="RFC8341"/> provides the means to restrict 
+          access for particular NETCONF or RESTCONF users to a 
+          preconfigured subset of all available NETCONF or RESTCONF 
+          protocol operations and content.</t>
+
+        <t>All data nodes defined in the YANG modules which can be 
+          created, modified, and deleted (i.e., config true, which 
+          is the default) are considered sensitive.  Write operations 
+          (e.g., edit-config) to these data nodes without proper 
+          protection can have a negative effect on network operations. 
+        </t>
+
+        <t>An attacker who is able to access the DHCPv6 server can 
+          undertake various attacks, such as:</t>
+
+        <ul spacing="normal">
+          <li>Denial of service attacks, based on reconfiguring 
+            messages to a rogue DHCPv6 server.
+          </li>
+          <li>Various attacks based on reconfiguring the contents
+            of DHCPv6 options. E.g., changing the address of a
+            the DNS server supplied in a DHCP option to point
+            to a rogue server.
+          </li>
+        </ul>
+
+        <t>An attacker who is able to access the DHCPv6 relay can 
+          undertake various attacks, such as:</t>
+
+        <ul spacing="normal">
+          <li>Reconfiguring the relay's destination address to send
+            messages to a rogue DHCPv6 server.
+          </li>
+          <li>Deleting information about a client's delegated 
+            prefix, causing a denial of service attack as traffic 
+            will no longer be routed to the client.
+          </li>
+        </ul>
+
+        <t>Some of the readable data nodes in this YANG module may 
+          be considered sensitive or vulnerable in some network 
+          environments.  It is thus important to control read access 
+          (e.g., via get, get-config, or notification) to these data 
+          nodes.  These subtrees and data nodes can be misused to 
+          track the activity of a host:</t>
+
+        <ul spacing="normal">
+          <li>Reconfiguring the relay's destination address to send
+            messages to a rogue DHCPv6 server.
+          </li>
+          <li>Information the server holds about clients with active 
+            leases: (dhcpv6-server/network-ranges/network-range/
+              address-pools/address-pool/active-leases)
+          </li>
+          <li>Information the relay holds about clients with active 
+            leases: (dhcpv6-relay/relay-if/prefix-delegation/)
+          </li>
+        </ul>
+
+      <t>Security considerations related to DHCPv6 are discussed in 
+      <xref target="RFC8415"/>.</t>
+
+      <t>Security considerations given in [RFC7950] are also applicable here.
+      </t>
     </section>
+
     <section anchor="iana">
-      <name>IANA Considerations (TBD)</name>
+      <name>IANA Considerations</name>
       <t>This document registers the following YANG modules in the "YANG
    Module Names" registry <xref target="RFC6020"/>.</t>
       <dl newline="false" spacing="compact" indent="16">
@@ -531,12 +606,17 @@ The following individuals contributed to this effort:
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6355.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6242.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6991.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8040.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8340.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8342.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8415.xml"/>
       </references>
       <references>
