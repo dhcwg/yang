@@ -214,7 +214,7 @@
 
         <figure anchor="server-structure">
           <name>DHCPv6 Server Data Module Structure</name>
-            <xi:include href="ietf-dhcpv6-server.yang.tree.xml"/>
+            <xi:include href="ietf-dhcpv6-server.yang.tree.clean.xml"/>
         </figure>
         <t>Descriptions of important nodes:</t>
         <ul spacing="normal">
@@ -301,7 +301,7 @@
 
         <figure anchor="relay-structure">
           <name>DHCPv6 Relay Data Module Structure</name>
-            <xi:include href="ietf-dhcpv6-relay.yang.tree.xml"/>
+            <xi:include href="ietf-dhcpv6-relay.yang.tree.clean.xml"/>
         </figure>
 
         <t>Descriptions of important nodes:</t>
@@ -349,7 +349,7 @@
 
         <figure anchor="client-structure">
           <name>DHCPv6 Client Data Module Structure</name>
-           <xi:include href="ietf-dhcpv6-client.yang.tree.xml"/>
+           <xi:include href="ietf-dhcpv6-client.yang.tree.clean.xml"/>
         </figure>
 
         <t>Descriptions of important nodes:</t>

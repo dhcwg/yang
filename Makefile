@@ -1,6 +1,7 @@
 YANGER?=../yanger/bin/yanger
 PYANG=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
+SED=/bin/sed
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
 SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-11-wip/draft-ietf-dhc-dhcpv6-yang-11-if-13-05-20
@@ -12,16 +13,26 @@ all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-#	$(YANGER) -t expand -f tree -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang |fold -w 69 > $$@
 	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang |fold -w 67 > $$@
 endef
-
 
 MODULES=
 MODULES+=ietf-dhcpv6-server.yang
 MODULES+=ietf-dhcpv6-client.yang
 MODULES+=ietf-dhcpv6-relay.yang
 $(foreach mod_file,$(MODULES),$(eval $(call file_to_tree,$(MODELS_DIR)/$(mod_file))))
+
+
+define clean_tree =
+$(1).clean: $(1)
+	$(SED) '/module: ietf-dhcpv6-options-rfc8415/Q' $$< > $$@
+endef
+
+CLEANMODULES=
+CLEANMODULES+=ietf-dhcpv6-server.yang.tree
+CLEANMODULES+=ietf-dhcpv6-client.yang.tree
+CLEANMODULES+=ietf-dhcpv6-relay.yang.tree
+$(foreach clean_mod_file,$(CLEANMODULES),$(eval $(call clean_tree,$(MODELS_DIR)/$(clean_mod_file))))
 
 
 define tree_to_xml =
@@ -35,6 +46,15 @@ $(1).xml: $(1)
 TREEINCLUDES+=$(1).xml
 endef
 
+INCLUDETREE=
+INCLUDETREE+=ietf-dhcpv6-server.yang.tree.clean
+INCLUDETREE+=ietf-dhcpv6-relay.yang.tree.clean
+INCLUDETREE+=ietf-dhcpv6-client.yang.tree.clean
+
+TREEINCLUDES=
+$(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
+
+
 
 define yang_to_xml =
 $(1).xml: $(1)
@@ -47,7 +67,6 @@ $(1).xml: $(1)
 YANGINCLUDES+=$(1).xml
 endef
 
-
 INCLUDES=
 INCLUDES+=ietf-dhcpv6-client.yang
 INCLUDES+=ietf-dhcpv6-server.yang
@@ -58,15 +77,6 @@ INCLUDES+=example-dhcpv6-class-selector.yang
 INCLUDES+=example-dhcpv6-server-config.yang
 INCLUDES+=example-dhcpv6-options-rfc3319.yang
 
-INCLUDETREE=
-INCLUDETREE+=ietf-dhcpv6-server.yang.tree
-INCLUDETREE+=ietf-dhcpv6-relay.yang.tree
-INCLUDETREE+=ietf-dhcpv6-client.yang.tree
-
-TREEINCLUDES=
-$(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
-
-
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
 
@@ -76,8 +86,9 @@ $(SPEC_NAME).txt: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 	$(XML2RFC) -n -N --text --v3 $<
 
 html: $(SPEC_NAME).html
-$(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES)
+$(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
 
 clean:
-	rm -f $(FULL_INCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree
+	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
+
