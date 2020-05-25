@@ -28,9 +28,10 @@ module example-dhcpv6-class-selector {
     hezihao9512@gmail.com";
 
   description "This YANG module defines components for the definition
-    and configuration of the client class selector function for a DHCPv6
-    server.  As this functionality varies greatly between different 
-    implementations, the module provided as an example only.";
+    and configuration of the client class selector function for a 
+    DHCPv6 server.  As this functionality varies greatly between 
+    different implementations, the module provided as an example 
+    only.";
 
   revision 2020-01-10 {
     description "Version update for draft -11 publication and
