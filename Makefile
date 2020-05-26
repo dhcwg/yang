@@ -40,6 +40,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
+	#./rfcfold -i $$<  -o $$@
 	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
@@ -61,6 +62,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[<CODE BEGINS> file $(inc_yang_file) \n' >> $$@
+	#./rfcfold -i $$<  -o $$@
 	cat $$< |fold -w 69 >> $$@
 	echo '<CODE ENDS>]]>' >> $$@
 	echo '</artwork>' >> $$@
