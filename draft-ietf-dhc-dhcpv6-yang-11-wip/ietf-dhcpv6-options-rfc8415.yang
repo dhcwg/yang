@@ -115,7 +115,6 @@ module ietf-dhcpv6-options-rfc8415 {
         description "List of options that the client is requesting,
           identified by option code";
         type uint16; 
-        }
       }
     }
   }

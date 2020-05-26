@@ -20,7 +20,7 @@
           <street/>
           <city>Beijing</city>
           <code>100084</code>
-          <country>P.R.China</country>
+          <country>P.R. China</country>
         </postal>
         <phone>+86-10-6260-3059</phone>
         <email>cuiyong@tsinghua.edu.cn</email>
@@ -33,7 +33,7 @@
           <street/>
           <city>Beijing</city>
           <code>100084</code>
-          <country>P.R.China</country>
+          <country>P.R. China</country>
         </postal>
         <phone>+86-10-6278-5822</phone>
         <email>lh.sunlinh@gmail.com</email>
@@ -45,7 +45,6 @@
         <postal>
           <street>TAI, Landgrabenweg 151</street>
           <city>Bonn</city>
-          <region>NRW</region>
           <code>53227</code>
           <country>Germany</country>
         </postal>
@@ -58,7 +57,6 @@
         <postal>
           <street>CTO-IPT, Landgrabenweg 151</street>
           <city>Bonn</city>
-          <region>NRW</region>
           <code>53227</code>
           <country>Germany</country>
         </postal>
@@ -72,7 +70,7 @@
           <street/>
           <city>Beijing</city>
           <code>100084</code>
-          <country>P.R.China</country>
+          <country>P.R. China</country>
         </postal>
         <phone>+86-10-6278-5822</phone>
         <email>hezihao9512@gmail.com</email>
@@ -574,7 +572,7 @@
   Hao Wang
   Tsinghua University
   Beijing 100084
-  P.R.China
+  P.R. China
   Phone: +86-10-6278-5822
   Email: wangh13@mails.tsinghua.edu.cn
 
