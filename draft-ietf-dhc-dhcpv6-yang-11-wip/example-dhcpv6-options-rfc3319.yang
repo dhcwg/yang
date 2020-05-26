@@ -19,7 +19,7 @@ module example-dhcpv6-options-rfc3319 {
   description "This YANG module contains DHCPv6 options defined
     in RFC3319 that can be used by DHCPv6 servers.";
 
-  revision 2020-01-10 {
+  revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";

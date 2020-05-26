@@ -18,7 +18,7 @@ module ietf-dhcpv6-common {
   description "This YANG module defines common components 
     used for the configuration and management of DHCPv6.";
 
-  revision 2020-01-10 {
+  revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";

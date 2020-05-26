@@ -36,7 +36,7 @@ module ietf-dhcpv6-options-rfc8415 {
     in RFC8415 that can be used by DHCPv6 clients, relays
     and servers.";
 
-  revision 2020-01-10 {
+  revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";

@@ -46,7 +46,7 @@ module ietf-dhcpv6-client {
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
 
-  revision 2020-01-10 {
+  revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";
