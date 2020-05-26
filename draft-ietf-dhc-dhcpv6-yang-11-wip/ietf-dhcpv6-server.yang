@@ -145,7 +145,6 @@ module ietf-dhcpv6-server {
       description "Client DUID.";
       type binary;
     }
-    description "Client's IAID.";
     leaf iaid {
       type uint32;
       mandatory true;
@@ -512,6 +511,7 @@ module ietf-dhcpv6-server {
   notification prefix-pool-utilization-threshold-exceeded {
     description "Notification sent when the prefix pool 
       utilization exceeds the configured threshold.";
+    if-feature prefix-delegation;
     leaf pool-id {
       type leafref {
         path "/dhcpv6-server/network-ranges/network-range/prefix-pools/prefix-pool/pool-id";
