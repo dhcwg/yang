@@ -139,68 +139,50 @@ module ietf-dhcpv6-server {
   }
 
   grouping lease-information {
-    leaf total-count {
-      type uint64;
-      mandatory true;
-      description "The total number of addresses or prefixes in 
-        the pool.";
+    description "Binding information for each client that has 
+      been allocated an IPv6 address or prefix.";
+    leaf client-duid {
+      description "Client DUID.";
+      type binary;
     }
-    leaf allocated-count {
-      type uint64;
+    description "Client's IAID.";
+    leaf iaid {
+      type uint32;
       mandatory true;
-      description "The number of addresses or prefixes in the pool 
-        that are currently allocated.";
+      description "Client's IAID";
     }
-    list binding-info {
-      key client-duid;
-      description "Binding information for each client that has 
-        been allocated an IPv6 address or prefix.";
-      leaf client-duid {
-        description "Client DUID.";
-        type binary;
-      }
-      list iaid {
-        key iaid;
-        description "Client's IAID.";
-        leaf iaid {
-          type uint32;
-          mandatory true;
-          description "Client's IAID";
-        }
-        leaf allocation-time {
-          description "Time and date that the lease was made.";
-          type yang:date-and-time;
-        }
-        leaf last-renew-rebind {
-          description "Time of the last successful renew or 
-            rebind.";
-          type yang:date-and-time;
-        }
-        leaf preferred-lifetime {
-          description "The preferred lifetime expressed in 
-            seconds.";
-          type dhcpv6-common:timer-seconds32;
-        }
-        leaf valid-lifetime {
-          description "The valid lifetime for the leased prefix
-            expressed in seconds.";
-          type dhcpv6-common:timer-seconds32;
-        }
-        leaf lease-t1 {
-          description "The time interval after which the client
-            should contact the server from which the addresses
-            in the IA_NA were obtained to extend the lifetimes
-            of the addresses assigned to the IA_PD.";
-          type dhcpv6-common:timer-seconds32;
-        }
-        leaf lease-t2 {
-          description "The time interval after which the client
-            should contact any available server to extend
-            the lifetimes of the addresses assigned to the 
-            IA_PD.";
-          type dhcpv6-common:timer-seconds32;
-        }
-      }
+    leaf allocation-time {
+      description "Time and date that the lease was made.";
+      type yang:date-and-time;
+    }
+    leaf last-renew-rebind {
+      description "Time of the last successful renew or 
+        rebind.";
+      type yang:date-and-time;
+    }
+    leaf preferred-lifetime {
+      description "The preferred lifetime expressed in 
+        seconds.";
+      type dhcpv6-common:timer-seconds32;
+    }
+    leaf valid-lifetime {
+      description "The valid lifetime for the leased prefix
+        expressed in seconds.";
+      type dhcpv6-common:timer-seconds32;
+    }
+    leaf lease-t1 {
+      description "The time interval after which the client
+        should contact the server from which the addresses
+        in the IA_NA were obtained to extend the lifetimes
+        of the addresses assigned to the IA_PD.";
+      type dhcpv6-common:timer-seconds32;
+    }
+    leaf lease-t2 {
+      description "The time interval after which the client
+        should contact any available server to extend
+        the lifetimes of the addresses assigned to the 
+        IA_PD.";
+      type dhcpv6-common:timer-seconds32;
     }
   }
 
@@ -387,15 +369,29 @@ module ietf-dhcpv6-server {
                 uses resource-config;
               }
             }
-            list active-leases {
+            container active-leases {
               description "Holds state related to active client 
                 leases.";
               config false;
-              key leased-address;
-              leaf leased-address {
-                type inet:ipv6-address;
+                  leaf total-count {
+              type uint64;
+              mandatory true;
+              description "The total number of addresses in the
+                pool.";
               }
-              uses lease-information;
+              leaf allocated-count {
+                type uint64;
+                mandatory true;
+                description "The number of addresses or prefixes in the pool 
+                  that are currently allocated.";
+              }
+              list active-lease {
+                key leased-address;
+                leaf leased-address {
+                  type inet:ipv6-address;
+                }
+                uses lease-information;
+              }
             }
           }
         }
@@ -451,15 +447,29 @@ module ietf-dhcpv6-server {
               }
               uses resource-config;
             }
-            list active-leases {
+            container active-leases {
               description "Holds state related to for active client 
                 prefix leases.";
               config false;
-              key leased-prefix;
-              leaf leased-prefix {
-                type inet:ipv6-prefix;
+              leaf total-count {
+                type uint64;
+                mandatory true;
+                description "The total number of prefixes in 
+                  the pool.";
               }
-              uses lease-information;
+              leaf allocated-count {
+                type uint64;
+                mandatory true;
+                description "The number of prefixes in the pool 
+                  that are currently allocated.";
+              }
+              list active-lease {
+                key leased-prefix;
+                leaf leased-prefix {
+                  type inet:ipv6-prefix;
+                }
+                uses lease-information;
+              }
             }
           }
         }
