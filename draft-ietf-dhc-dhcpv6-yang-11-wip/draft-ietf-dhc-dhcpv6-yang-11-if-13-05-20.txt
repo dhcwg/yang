@@ -491,13 +491,13 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
         |  +--ro max-address-count          uint64
         |  +--ro allocated-address-count    uint64
         +---n prefix-pool-utilization-threshold-exceeded
+        |       {prefix-delegation}?
         |  +--ro pool-id                     leafref
         |  +--ro max-pd-space-utilization    leafref
         |  +--ro pd-space-utilization?       uint64
         +---n invalid-client-detected
         |  +--ro duid?          binary
         |  +--ro description?   string
-        +---n decline-received
 
 
 
@@ -506,6 +506,7 @@ Cui, et al.             Expires 27 November 2020                [Page 9]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
+        +---n decline-received
         |  +--ro duid?                 binary
         |  +--ro declined-resources* []
         |     +--ro (resource-type)?
@@ -549,7 +550,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       which will be supplied to clients on request.  The 'option-set-id'
       field is used to reference an option-set elsewhere in the server's
       configuration.
-
 
 
 
@@ -1109,11 +1109,11 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "Client DUID.";
          type binary;
        }
-       description "Client's IAID.";
        leaf iaid {
          type uint32;
          mandatory true;
          description "Client's IAID";
+       }
 
 
 
@@ -1122,7 +1122,6 @@ Cui, et al.             Expires 27 November 2020               [Page 20]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-       }
        leaf allocation-time {
          description "Time and date that the lease was made.";
          type yang:date-and-time;
@@ -1170,6 +1169,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          type uint32;
          description "Number of Advertise (2) messages sent.";
        }
+       leaf request-count {
 
 
 
@@ -1178,7 +1178,6 @@ Cui, et al.             Expires 27 November 2020               [Page 21]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-       leaf request-count {
          config "false";
          type uint32;
          description "Number of Request (3) messages received.";
@@ -1226,6 +1225,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      /*
+      * Data Nodes
 
 
 
@@ -1234,7 +1234,6 @@ Cui, et al.             Expires 27 November 2020               [Page 22]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-      * Data Nodes
       */
 
      container dhcpv6-server {
@@ -1282,6 +1281,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        }
 
        container network-ranges {
+         description "This model is based on an address and parameter
 
 
 
@@ -1290,7 +1290,6 @@ Cui, et al.             Expires 27 November 2020               [Page 23]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-         description "This model is based on an address and parameter
            allocation hierarchy.  The top level is 'global' - which
            is defined as the container for all network-ranges. Under
            this are the individual network-ranges.";
@@ -1338,6 +1337,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                  description "Start IPv6 address for the pool.";
                }
                leaf end-address {
+                 type inet:ipv6-address-no-zone;
 
 
 
@@ -1346,7 +1346,6 @@ Cui, et al.             Expires 27 November 2020               [Page 24]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-                 type inet:ipv6-address-no-zone;
                  mandatory true;
                  description "End IPv6 address for the pool.";
                }
@@ -1394,6 +1393,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                    key leased-address;
                    leaf leased-address {
                      type inet:ipv6-address;
+                   }
 
 
 
@@ -1402,7 +1402,6 @@ Cui, et al.             Expires 27 November 2020               [Page 25]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-                   }
                    uses lease-information;
                  }
                }
@@ -1450,6 +1449,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                      description "Client DUID for the reservation.";
                    }
                    leaf reserved-prefix {
+                     type inet:ipv6-prefix;
 
 
 
@@ -1458,7 +1458,6 @@ Cui, et al.             Expires 27 November 2020               [Page 26]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-                     type inet:ipv6-prefix;
                      description "Reserved IPv6 prefix";
                    }
                    leaf reserved-prefix-len {
@@ -1506,6 +1505,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      notification address-pool-utilization-threshold-exceeded {
        description "Notification sent when the address pool
          utilization exceeds the configured threshold.";
+       leaf pool-id {
 
 
 
@@ -1514,7 +1514,6 @@ Cui, et al.             Expires 27 November 2020               [Page 27]
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
-       leaf pool-id {
          type leafref {
            path "/dhcpv6-server/network-ranges/network-range/address-poo
    ls/address-pool/pool-id";
@@ -1542,6 +1541,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      notification prefix-pool-utilization-threshold-exceeded {
        description "Notification sent when the prefix pool
          utilization exceeds the configured threshold.";
+       if-feature prefix-delegation;
        leaf pool-id {
          type leafref {
            path "/dhcpv6-server/network-ranges/network-range/prefix-pool
