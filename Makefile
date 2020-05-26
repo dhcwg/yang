@@ -13,7 +13,7 @@ all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang $(MODELS_DIR)/example-dhcpv6-options-rfc3319.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang |fold -w 67 > $$@
 endef
 
 MODULES=
