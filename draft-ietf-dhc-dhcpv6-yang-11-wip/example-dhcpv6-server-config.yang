@@ -24,8 +24,8 @@ module example-dhcpv6-server-config {
     hezihao9512@gmail.com";
 
   description "This YANG module defines components for the 
-    configuration and mangagement of vendor/implementation specific 
-    DHCPv6 server functioniality. As this functionality varies 
+    configuration and management of vendor/implementation specific 
+    DHCPv6 server functionality. As this functionality varies 
     greatly between different implementations, the module 
     provided as an example only.";
 
@@ -66,12 +66,12 @@ module example-dhcpv6-server-config {
       choice listening-interfaces {
         default all-interfaces;
         description "Configures which interface or addresses the 
-          server will listen for incomming messages on.";
+          server will listen for incoming messages on.";
         case all-interfaces {
           container all-interfaces {
           presence true;
           description "Configures the server to listen for 
-            incomming messages on all IPv6 addresses (unicats and
+            incoming messages on all IPv6 addresses (unicats and
             multicast) on all of its network interfaces.";
           }
         }
@@ -79,7 +79,7 @@ module example-dhcpv6-server-config {
           leaf-list interfaces {
             type if:interface-ref;
             description "List of interfaces that the server will
-              listen for incomming messages on. Messages addressed
+              listen for incoming messages on. Messages addressed
               to any valid IPv6 address (unicast and multicast) will
               be received.";
           }
@@ -88,7 +88,7 @@ module example-dhcpv6-server-config {
           leaf-list address-list {
             type inet:ipv6-address;
             description "List of IPv6 address(es) that the server 
-              will listen for incomming messages on.";
+              will listen for incoming messages on.";
           }
         }
       }
@@ -99,7 +99,7 @@ module example-dhcpv6-server-config {
           interfaces the server should listen on.";
       }
       container lease-storage {
-        description "Configures how the server wil stores leases.";
+        description "Configures how the server will stores leases.";
         choice storage-type {
           description "The type storage that will be used for lease 
             information.";

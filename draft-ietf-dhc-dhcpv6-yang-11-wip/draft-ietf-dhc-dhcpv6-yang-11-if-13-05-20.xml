@@ -128,15 +128,15 @@
       <section>
         <name>Scope</name>
         <t><xref target="RFC8415"/> describes the current version of the DHCPv6
-        base protocol specification. In addition to this, a large number of
-        addition specifications have also been published, extending
-        DHCPv6 element functionality and adding new options. The YANG
-        modules contained in this document do not attempt to capture all of these
-        extensions and additions, rather to model the DHCPv6 functions and
-        options covered in <xref target="RFC8415"/>. A focus has also been
-        given on the extensibility of the modules so that it is easy to
-        augment in additional functionality as required by a particular
-        implementation or deployment scenario.
+        base protocol specification. A large number of additional specifications 
+        have also been published, extending DHCPv6 element functionality and 
+        adding new options. The YANG modules contained in this document do 
+        not attempt to capture all of these extensions and additions, rather 
+        to model the DHCPv6 functions and options covered in 
+        <xref target="RFC8415"/>. A focus has also been given on the 
+        extensibility of the modules so that it is easy to augment in additional 
+        functionality as required by a particular implementation or deployment 
+        scenario.
         </t>
       </section>
       <section>
@@ -568,8 +568,9 @@
     </section>
     <section anchor="contributors">
       <name>Contributors</name>
+        <t>The following individuals contributed to this effort:</t>
       <artwork><![CDATA[
-The following individuals contributed to this effort:
+
   Hao Wang
   Tsinghua University
   Beijing 100084
@@ -577,8 +578,6 @@ The following individuals contributed to this effort:
   Phone: +86-10-6278-5822
   Email: wangh13@mails.tsinghua.edu.cn
 
-]]></artwork>
-      <artwork><![CDATA[
   Ted Lemon
   Nomium, Inc
   950 Charter St.
@@ -586,8 +585,6 @@ The following individuals contributed to this effort:
   USA
   Email: Ted.Lemon@nomium.com
 
-]]></artwork>
-      <artwork><![CDATA[
   Bernie Volz
   Cisco Systems, Inc.
   1414 Massachusetts Ave
@@ -625,7 +622,7 @@ The following individuals contributed to this effort:
       </references>
     </references>
       <section anchor="example-dhcp-options-extension">
-      <name>Example of Augementing Additional DHCPv6 Option Definitions</name>
+      <name>Example of Augmenting Additional DHCPv6 Option Definitions</name>
       <t>The following section provides a example of how the DHCPv6 option 
        definitions can be extended for additional options. It is expected that 
        additional specficication documents will be published in the future 
@@ -647,7 +644,7 @@ The following individuals contributed to this effort:
             the DHCPv6 option is defined.
           </li>
           <li>The remaining fields match the fields in the DHCP option. They are in
-            the same order as defined in the DHCP option. Whereever possilbe,
+            the same order as defined in the DHCP option. Where-ever possible,
             the format that is defined for the DHCP field should be matched by
             the relevant YANG type.
           </li>
@@ -678,7 +675,7 @@ The following individuals contributed to this effort:
         three options: memory (memfile), MySQL and PosgreSQL. For each case, the
         necessary configuration parameters are provided.</t>
 
-        <t>At the end there is an augment statment which adds the vendor specific
+        <t>At the end there is an augment statement which adds the vendor specific
         configuration defined in "dhcpv6-server-config:config" under
         "/dhcpv6-server:config/dhcpv6-server:vendor-config" mountpoint.
         </t>
@@ -695,16 +692,16 @@ The following individuals contributed to this effort:
 
         <t>The example module defines "client-class-names" with associated
         matching rules. A client can be classified based on "client-id",
-        "interface-id" (ingress inteface of the client's messages),
+        "interface-id" (ingress interface of the client's messages),
         packets source or destination address, relay link address,
         relay link interface-id and more. Actually there is endless methods
         for classifying clients. So this standard does not try to
-        provide full specificiation for class selection, it only shows
+        provide full specification for class selection, it only shows
         an example how it can be defined.</t>
 
         <t>At the end of the example augment statements are used to add the
-        defind class selector rules into the overall DHCPv6 addressing
-        heirarchy. This is done in two main parts:</t>
+        defined class selector rules into the overall DHCPv6 addressing
+        hierarchy. This is done in two main parts:</t>
 
       <ul spacing="normal">
           <li>The augmented class-selector configuration in the main

@@ -80,7 +80,7 @@ module ietf-dhcpv6-relay {
   }
 
   /*
-   * Indenties
+   * Indentities
    */
 
   identity relay {
@@ -202,7 +202,8 @@ module ietf-dhcpv6-relay {
       config "false";
       type uint32;
       description
-        "Number of messages of unknown type that have been received.";
+        "Number of messages of unknown type that have been 
+           received.";
     }
     leaf unknown-message-sent-count {
       config "false";
@@ -214,7 +215,8 @@ module ietf-dhcpv6-relay {
       config "false";
       type uint32;
       description
-        "Number of messages that have been discarded for any reason.";
+        "Number of messages that have been discarded for any 
+           reason.";
     }
   }
 

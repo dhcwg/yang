@@ -312,7 +312,7 @@ module ietf-dhcpv6-server {
     }
 
     container network-ranges {
-      description "This model is based on an address and paramet 
+      description "This model is based on an address and parameter 
         allocation hierarchy.  The top level is 'global' - which 
         is defined as the container for all network-ranges. Under 
         this are the individual network-ranges.";

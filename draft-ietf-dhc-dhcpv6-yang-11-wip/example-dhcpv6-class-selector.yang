@@ -49,7 +49,7 @@ module example-dhcpv6-class-selector {
    */
 
   grouping client-class-id {
-    description "Defintions of client message classification for
+    description "Definitions of client message classification for
       authorization and assignment purposes.";
     leaf client-class-name {
       type string;

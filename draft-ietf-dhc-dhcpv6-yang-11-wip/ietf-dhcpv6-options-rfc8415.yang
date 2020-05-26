@@ -81,14 +81,14 @@ module ietf-dhcpv6-options-rfc8415 {
       (DHCPv6)";
     leaf IPv6-address {
       type inet:ipv6-address;
-      description "An IPv6 address.  A client MUST NOT form
-        an iplicit prefix with a length other than 128
-        for this address.";
+      description "An IPv6 address. A client MUST NOT form an 
+        implicit prefix with a length other than 128 for this 
+        address.";
     }
     leaf preferred-lifetime {
       type uint32;
-      description "The preferred lifetime for the address
-        in the option, expressed in units of seconds.";
+      description "The preferred lifetime for the address in the 
+        option, expressed in units of seconds.";
     }
     leaf valid-lifetime {
       type uint32;
@@ -96,7 +96,7 @@ module ietf-dhcpv6-options-rfc8415 {
         in the option, expressed in units of seconds.";
     }
     container iaaddr-options {
-      description "Definitions for DHCPv6 options that can be be sent
+      description "Definitions for DHCPv6 options that can be sent
         by the client are augmented to this location from other YANG
         modules as required.";
     }
@@ -114,9 +114,7 @@ module ietf-dhcpv6-options-rfc8415 {
       leaf-list oro-option {
         description "List of options that the client is requesting,
           identified by option code";
-        type uint16 {
-          range "17 | 21..24 | 27..36 | 39..42 | 49..52 | 54..60 |
-            62..65 | 69..78";
+        type uint16; 
         }
       }
     }
@@ -129,8 +127,8 @@ module ietf-dhcpv6-options-rfc8415 {
         IPv6 (DHCPv6)";
       leaf pref-value {
         type uint8;
-        description "The preference value for the server
-          in this message. A 1-octet unsigned integer.";
+        description "The preference value for the server in this 
+          message. A 1-octet unsigned integer.";
       }
     }
   }
@@ -142,8 +140,8 @@ module ietf-dhcpv6-options-rfc8415 {
         for IPv6 (DHCPv6)";
       leaf protocol {
         type uint8;
-        description "The authentication protocol used
-          in this Authentication option.";
+        description "The authentication protocol used in this 
+          Authentication option.";
       }
       leaf algorithm {
         type uint8;
@@ -195,8 +193,8 @@ module ietf-dhcpv6-options-rfc8415 {
       }
       leaf status-message {
         type string;
-        description "A UTF-8 encoded text string suitable
-          for display to an end user. MUST NOT be null-terminated.";
+        description "A UTF-8 encoded text string suitable for 
+          display to an end user. MUST NOT be null-terminated.";
       }
     }
   }
@@ -251,8 +249,8 @@ module ietf-dhcpv6-options-rfc8415 {
         }
         list vendor-class {
           key vendor-class-datum-id;
-          description "The vendor classes of which the client
-            is a member.";
+          description "The vendor classes of which the client is 
+            a member.";
           leaf vendor-class-datum-id {
             type uint8;
             description "Vendor class datum ID";
@@ -318,8 +316,8 @@ module ietf-dhcpv6-options-rfc8415 {
     container reconfigure-message-option {
       description "OPTION_RECONF_MSG (19) Reconfigure Message
         Option.";
-      reference "RFC8415: Dynamic Host Configuration Protocol
-        for IPv6 (DHCPv6)";
+      reference "RFC8415: Dynamic Host Configuration Protocol for 
+        IPv6 (DHCPv6)";
       leaf msg-type {
         type uint8;
         description "5 for Renew message, 6 for Rebind message,
@@ -332,8 +330,8 @@ module ietf-dhcpv6-options-rfc8415 {
     container reconfigure-accept-option {
       presence "Enable sending of this option";
       description "OPTION_RECONF_ACCEPT (20)  Rapid Commit Option.
-        A client uses the Reconfigure Accept option to announce
-        to the server whether the client is willing to accept
+        A client uses the Reconfigure Accept option to announce to 
+        the server whether the client is willing to accept
         Reconfigure messages, and a server uses this option to tell
         the client whether or not to accept Reconfigure messages.
         In the absence of this option, the default behavior is that
@@ -350,22 +348,22 @@ module ietf-dhcpv6-options-rfc8415 {
       (DHCPv6)";
     leaf preferred-lifetime {
       type uint32;
-      description "The preferred lifetime for the prefix
-        in the option, expressed in units of seconds.";
+      description "The preferred lifetime for the prefix in the 
+        option, expressed in units of seconds.";
     }
     leaf valid-lifetime {
       type uint32;
-      description "The preferred lifetime for the prefix
-        in the option, expressed in units of seconds.";
+      description "The preferred lifetime for the prefix in the 
+        option, expressed in units of seconds.";
     }
     leaf IPv6-prefix {
       type inet:ipv6-prefix;
       description "The IPv6 prefix delegated to the client.";
     }
     container iaprefix-options {
-      description "Definitions for DHCPv6 options that can be
-        sent by the client are augmented to this location from other
-        YANG modules as required.";
+      description "Definitions for DHCPv6 options that can be sent 
+        by the client are augmented to this location from other YANG 
+        modules as required.";
     }
   }
 

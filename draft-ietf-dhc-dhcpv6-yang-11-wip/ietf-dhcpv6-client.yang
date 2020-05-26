@@ -30,7 +30,7 @@ module ietf-dhcpv6-client {
     godfryd@isc.org";
 
   description 
-    "This YANG module defines componenets necesarry for the 
+    "This YANG module defines components necessary for the 
     configuration and management of DHCPv6 clients.
 
     Copyright (c) 2018 IETF Trust and the persons identified as
@@ -190,7 +190,7 @@ module ietf-dhcpv6-client {
           description "A unique identifier for this IA_NA.";
         }
         container ia-na-options {
-          description "An augmenation point for additional options
+          description "An augmentation point for additional options
             that the client will send in the IA_NA-options field
             of OPTION_IA_NA.";
         }
@@ -373,7 +373,7 @@ module ietf-dhcpv6-client {
 
   notification retransmission-failed {
     description "Notification sent when the retransmission mechanism
-      defined in [RFC8415] is unsucessful.";
+      defined in [RFC8415] is unsuccessful.";
     leaf failure-type {
       type enumeration {
         enum "MRC-exceeded" {
@@ -394,7 +394,7 @@ module ietf-dhcpv6-client {
     leaf status-code {
       type uint16;
       mandatory true;
-      description "Unsuccessful status code recevied by a client.";
+      description "Unsuccessful status code received by a client.";
     }
     leaf server-duid {
       description "DUID of the server sending the unsuccessful
