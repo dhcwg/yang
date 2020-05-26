@@ -5,14 +5,14 @@
 DHC Working Group                                                 Y. Cui
 Internet-Draft                                                    L. Sun
 Intended status: Standards Track                     Tsinghua University
-Expires: 26 November 2020                                    I.F. Farrer
+Expires: 27 November 2020                                    I.F. Farrer
                                                             S.Z. Zechlin
                                                      Deutsche Telekom AG
                                                                    Z. He
                                                      Tsinghua University
                                                          M.N. Nowikowski
                                              Internet Systems Consortium
-                                                             25 May 2020
+                                                             26 May 2020
 
 
                 YANG Data Model for DHCPv6 Configuration
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 November 2020.
+   This Internet-Draft will expire on 27 November 2020.
 
 
 
 
 
 
-Cui, et al.             Expires 26 November 2020                [Page 1]
+Cui, et al.             Expires 27 November 2020                [Page 1]
 
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
@@ -80,26 +80,26 @@ Table of Contents
        1.2.1.  DHCPv6 Option Definitions . . . . . . . . . . . . . .   4
      1.3.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   4
    2.  DHCPv6 Tree Diagrams  . . . . . . . . . . . . . . . . . . . .   4
-     2.1.  DHCPv6 Server Tree Diagram  . . . . . . . . . . . . . . .   4
+     2.1.  DHCPv6 Server Tree Diagram  . . . . . . . . . . . . . . .   5
      2.2.  DHCPv6 Relay Tree Diagram . . . . . . . . . . . . . . . .  11
-     2.3.  DHCPv6 Client Tree Diagram  . . . . . . . . . . . . . . .  13
+     2.3.  DHCPv6 Client Tree Diagram  . . . . . . . . . . . . . . .  14
    3.  DHCPv6 YANG Modules . . . . . . . . . . . . . . . . . . . . .  17
      3.1.  DHCPv6 Server YANG Module . . . . . . . . . . . . . . . .  17
      3.2.  DHCPv6 Relay YANG Module  . . . . . . . . . . . . . . . .  29
      3.3.  DHCPv6 Client YANG Module . . . . . . . . . . . . . . . .  36
-     3.4.  DHCPv6 RFC8415 Options YANG Module  . . . . . . . . . . .  45
+     3.4.  DHCPv6 RFC8415 Options YANG Module  . . . . . . . . . . .  46
      3.5.  DHCPv6 Common YANG Module . . . . . . . . . . . . . . . .  55
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  59
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  60
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  60
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  61
    7.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  61
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  61
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  61
      8.2.  Informative References  . . . . . . . . . . . . . . . . .  63
-   Appendix A.  Example of Augementing Additional DHCPv6 Option
+   Appendix A.  Example of Augmenting Additional DHCPv6 Option
            Definitions . . . . . . . . . . . . . . . . . . . . . . .  63
    Appendix B.  Example Vendor Specific Server Configuration
-           Module  . . . . . . . . . . . . . . . . . . . . . . . . .  65
+           Module  . . . . . . . . . . . . . . . . . . . . . . . . .  66
    Appendix C.  Example definition of class selector
            configuration . . . . . . . . . . . . . . . . . . . . . .  71
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  77
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Cui, et al.             Expires 26 November 2020                [Page 2]
+Cui, et al.             Expires 27 November 2020                [Page 2]
 
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
@@ -136,14 +136,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 1.1.  Scope
 
    [RFC8415] describes the current version of the DHCPv6 base protocol
-   specification.  In addition to this, a large number of addition
-   specifications have also been published, extending DHCPv6 element
-   functionality and adding new options.  The YANG modules contained in
-   this document do not attempt to capture all of these extensions and
-   additions, rather to model the DHCPv6 functions and options covered
-   in [RFC8415].  A focus has also been given on the extensibility of
-   the modules so that it is easy to augment in additional functionality
-   as required by a particular implementation or deployment scenario.
+   specification.  A large number of additional specifications have also
+   been published, extending DHCPv6 element functionality and adding new
+   options.  The YANG modules contained in this document do not attempt
+   to capture all of these extensions and additions, rather to model the
+   DHCPv6 functions and options covered in [RFC8415].  A focus has also
+   been given on the extensibility of the modules so that it is easy to
+   augment in additional functionality as required by a particular
+   implementation or deployment scenario.
 
 1.2.  Extensibility of the DHCPv6 Server YANG Module
 
@@ -160,16 +160,18 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    illustrating how this functionality can be augmented into the main
    ietf-dhcpv6-server.yang module.
 
-   In DHCPv6 the concept of 'class selection' for messages received by
-   the server is common.  This is the identification and classification
 
 
 
-Cui, et al.             Expires 26 November 2020                [Page 3]
+
+
+Cui, et al.             Expires 27 November 2020                [Page 3]
 
 Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
+   In DHCPv6 the concept of 'class selection' for messages received by
+   the server is common.  This is the identification and classification
    of messages based on a number of parameters so that the correct
    provisioning information can be supplied.  For example, allocating a
    prefix from the correct pool, or supplying a set of options relevant
@@ -211,20 +213,25 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 2.  DHCPv6 Tree Diagrams
 
+
+
+
+
+
+
+
+
+Cui, et al.             Expires 27 November 2020                [Page 4]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
 2.1.  DHCPv6 Server Tree Diagram
 
    The tree diagram in Figure 1 provides an overview of the DHCPv6
    server module.  The tree also includes the augmentations of the
    relevant option definitions from Section 3.4 and the common functions
    module Section 3.5.
-
-
-
-
-Cui, et al.             Expires 26 November 2020                [Page 4]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
     module: ietf-dhcpv6-server
       +--rw dhcpv6-node-type?   identityref
@@ -267,6 +274,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          |     |  +--rw rfc8415:pref-value?   uint8
          |     +--rw rfc8415:auth-option
          |     |  +--rw rfc8415:protocol?           uint8
+
+
+
+Cui, et al.             Expires 27 November 2020                [Page 5]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          |     |  +--rw rfc8415:algorithm?          uint8
          |     |  +--rw rfc8415:rdm?                uint8
          |     |  +--rw rfc8415:replay-detection?   uint64
@@ -274,14 +289,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          |     +--rw rfc8415:server-unicast-option
          |     |  +--rw rfc8415:server-address?   inet:ipv6-address
          |     +--rw rfc8415:status-code-option
-
-
-
-Cui, et al.             Expires 26 November 2020                [Page 5]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          |     |  +--rw rfc8415:status-code?      uint16
          |     |  +--rw rfc8415:status-message?   string
          |     +--rw rfc8415:rapid-commit-option!
@@ -323,6 +330,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  +--rw network-description    string
             |  +--rw network-prefix         inet:ipv6-prefix
             |  +--rw option-set-id*         leafref
+
+
+
+Cui, et al.             Expires 27 November 2020                [Page 6]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
             |  +--rw valid-lifetime?
             |  |       dhcpv6-common:timer-seconds32
             |  +--rw renew-time?
@@ -330,14 +345,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  +--rw rebind-time?
             |  |       dhcpv6-common:timer-seconds32
             |  +--rw preferred-lifetime?
-
-
-
-Cui, et al.             Expires 26 November 2020                [Page 6]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             |  |       dhcpv6-common:timer-seconds32
             |  +--rw rapid-commit?          boolean
             |  +--rw address-pools
@@ -379,6 +386,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  |        +--ro leased-address     inet:ipv6-address
             |  |        +--ro total-count        uint64
             |  |        +--ro allocated-count    uint64
+
+
+
+Cui, et al.             Expires 27 November 2020                [Page 7]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
             |  |        +--ro binding-info* [client-duid]
             |  |           +--ro client-duid    binary
             |  |           +--ro iaid* [iaid]
@@ -386,14 +401,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  |              +--ro allocation-time?
             |  |              |       yang:date-and-time
             |  |              +--ro last-renew-rebind?
-
-
-
-Cui, et al.             Expires 26 November 2020                [Page 7]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             |  |              |       yang:date-and-time
             |  |              +--ro preferred-lifetime?
             |  |              |       dhcpv6-common:timer-seconds32
@@ -435,6 +442,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |        |  +--rw rebind-time?
             |        |  |       dhcpv6-common:timer-seconds32
             |        |  +--rw preferred-lifetime?
+
+
+
+Cui, et al.             Expires 27 November 2020                [Page 8]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
             |        |  |       dhcpv6-common:timer-seconds32
             |        |  +--rw rapid-commit?         boolean
             |        +--ro active-leases* [leased-prefix]
@@ -442,14 +457,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |           +--ro total-count        uint64
             |           +--ro allocated-count    uint64
             |           +--ro binding-info* [client-duid]
-
-
-
-Cui, et al.             Expires 26 November 2020                [Page 8]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             |              +--ro client-duid    binary
             |              +--ro iaid* [iaid]
             |                 +--ro iaid                  uint32
@@ -491,6 +498,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
         |  +--ro duid?          binary
         |  +--ro description?   string
         +---n decline-received
+
+
+
+Cui, et al.             Expires 27 November 2020                [Page 9]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
         |  +--ro duid?                 binary
         |  +--ro declined-resources* []
         |     +--ro (resource-type)?
@@ -498,14 +513,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
         |        |  +--ro address?   inet:ipv6-address
         |        +--:(declined-prefix)
         |           +--ro prefix?    inet:ipv6-prefix
-
-
-
-Cui, et al.             Expires 26 November 2020                [Page 9]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
         +---n non-success-code-sent
            +--ro status-code    uint16
            +--ro duid?          binary
@@ -543,6 +550,18 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       field is used to reference an option-set elsewhere in the server's
       configuration.
 
+
+
+
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 10]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    *  option-set: Holds configration parameters for DHCPv6 options.  The
       initial set of definitions are contained in the module 'ietf-
       dhcpv6-options-rfc8415.yang' and are augmented into the server
@@ -553,14 +572,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       implementation specific YANG nodes for vendor specific class
       selector nodes to be augmented.  See Appendix C for an example of
       this.
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 10]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
    *  network-ranges: This module uses a hierarchical model for the
       allocation of addresses and prefixes.  At the top level 'network-
@@ -597,6 +608,16 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    option definitions from Section 3.4 and the common functions module
    Section 3.5.
 
+
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 11]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        module: ietf-dhcpv6-relay
          +--rw dhcpv6-node-type?   identityref
          +--rw dhcpv6-relay
@@ -610,14 +631,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  |  +--rw rfc8415:auth-option
             |  |  |  +--rw rfc8415:protocol?           uint8
             |  |  |  +--rw rfc8415:algorithm?          uint8
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 11]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             |  |  |  +--rw rfc8415:rdm?                uint8
             |  |  |  +--rw rfc8415:replay-detection?   uint64
             |  |  |  +--rw rfc8415:auth-information?   string
@@ -654,6 +667,13 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             +--ro relay-forward-unknown-received-count?   uint32
             +--ro discarded-message-count?                uint32
 
+
+
+Cui, et al.             Expires 27 November 2020               [Page 12]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          notifications:
            +---n relay-event
               +--ro topology-change
@@ -664,15 +684,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                 Figure 2: DHCPv6 Relay Data Module Structure
 
    Descriptions of important nodes:
-
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 12]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
    *  dhcpv6-node-type: The different functional DHCPv6 elements each
       have their relevant identities.
@@ -707,6 +718,18 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    *  topology-changed: Raised when the topology of the relay agent is
       changed, e.g. a client facing interface is reconfigured.
 
+
+
+
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 13]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
 2.3.  DHCPv6 Client Tree Diagram
 
    The tree diagram in Figure 3 provides an overview of the DHCPv6
@@ -722,14 +745,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |       if:interface-ref
             +--rw type-code?                           uint16
             +--rw (duid-type)?
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 13]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             |  +--:(duid-llt)
             |  |  +--rw duid-llt-hardware-type?        uint16
             |  |  +--rw duid-llt-time?                 yang:timeticks
@@ -763,6 +778,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  |  +--rw rfc8415:vendor-class-option-instances*
             |  |          [enterprise-number]
             |  |     +--rw rfc8415:enterprise-number    uint32
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 14]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
             |  |     +--rw rfc8415:vendor-class*
             |  |             [vendor-class-datum-id]
             |  |        +--rw rfc8415:vendor-class-datum-id    uint8
@@ -778,14 +801,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  |        +--rw rfc8415:sub-option-data?   string
             |  +--rw rfc8415:reconfigure-accept-option!
             +--rw ia-na* [iaid]
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 14]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             |  +--rw iaid             uint32
             |  +--rw ia-na-options
             |  +--ro lease-state
@@ -819,6 +834,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             |  +--ro lease-state
             |     +--ro ia-pd-prefix?         inet:ipv6-prefix
             |     +--ro preferred-lifetime?
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 15]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
             |     |       dhcpv6-common:timer-seconds32
             |     +--ro valid-lifetime?
             |     |       dhcpv6-common:timer-seconds32
@@ -834,14 +857,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
             +--ro request-count?                       uint32
             +--ro confirm-count?                       uint32
             +--ro renew-count?                         uint32
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 15]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
             +--ro rebind-count?                        uint32
             +--ro reply-count?                         uint32
             +--rw release-count?                       uint32
@@ -875,6 +890,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    *  dhcpv6-node-type: The different functional DHCPv6 elements each
       have their relevant identities.
 
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 16]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    *  dhcpv6-client: This container holds the client's DHCPv6 specific
       configuration.
 
@@ -890,14 +913,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       of DUIDs in [RFC8415]: DUID-LLT, DUID-EN, DUID-LL, and DUID-UUID.
       DUID-Unknown is used for arbitrary DUID formats which do not
       follow any of these defined types. 'active-duid' is a read-only
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 16]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
       field that the client's current DUID can be retrieved from.  The
       DUID definitions are imported from the 'ietf-dhcpv6-common.yang'
       module.  DUID is configured under the 'client-if' to allow a
@@ -931,6 +946,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      import ietf-inet-types {
        prefix inet;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 17]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      }
 
      import ietf-yang-types {
@@ -946,14 +969,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        "cuiyong@tsinghua.edu.cn
        lh.sunlinh@gmail.com
        ian.farrer@telekom.de
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 17]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        sladjana.zechlin@telekom.de
        hezihao9512@gmail.com
        godfryd@isc.org";
@@ -987,6 +1002,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      revision 2018-09-04 {
        description "";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 18]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
      }
 
@@ -1002,14 +1025,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      revision 2017-11-24 {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 18]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        description "First version of the separated server specific
          YANG model.";
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
@@ -1044,6 +1059,13 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       * Groupings
       */
 
+
+
+Cui, et al.             Expires 27 November 2020               [Page 19]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      grouping resource-config {
        description "Nodes that are reused at multiple levels in the
          DHCPv6 server's addressing hierarchy.";
@@ -1058,14 +1080,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        leaf valid-lifetime {
          type dhcpv6-common:timer-seconds32;
          description "Valid lifetime for the Identity Association
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 19]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
            (IA).";
        }
        leaf renew-time {
@@ -1100,6 +1114,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          mandatory true;
          description "The number of addresses or prefixes in the pool
            that are currently allocated.";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 20]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        }
        list binding-info {
          key client-duid;
@@ -1114,14 +1136,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            description "Client's IAID.";
            leaf iaid {
              type uint32;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 20]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
              mandatory true;
              description "Client's IAID";
            }
@@ -1156,6 +1170,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                should contact any available server to extend
                the lifetimes of the addresses assigned to the
                IA_PD.";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 21]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              type dhcpv6-common:timer-seconds32;
            }
          }
@@ -1170,14 +1192,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "Number of Solicit (1) messages received.";
        }
        leaf advertise-count {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 21]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          config "false";
          type uint32;
          description "Number of Advertise (2) messages sent.";
@@ -1212,6 +1226,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "Number of Release (8) messages received.";
        }
        leaf decline-count {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 22]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          config "false";
          type uint32;
          description "Number of Decline (9) messages received.";
@@ -1226,14 +1248,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          type uint32;
          description "Number of Information-request (11) messages
            received.";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 22]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        }
      }
 
@@ -1268,6 +1282,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            }
            leaf description {
              type string;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 23]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              description "An optional field for storing additional
                information relevant to the option set.";
            }
@@ -1282,19 +1304,11 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            greatly between different implementations such that they
            are not possible to include in this module. This container
            provides a location for server implementors to augment
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 23]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
            their own class-selector YANG.";
        }
 
        container network-ranges {
-         description "This model is based on an address and paramet
+         description "This model is based on an address and parameter
            allocation hierarchy.  The top level is 'global' - which
            is defined as the container for all network-ranges. Under
            this are the individual network-ranges.";
@@ -1324,6 +1338,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                address pools.";
              list address-pool {
                key pool-id;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 24]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                description "List of address pools for allocation to
                  clients, distinguished by 'pool-id'.";
                leaf pool-id {
@@ -1338,14 +1360,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                }
                leaf start-address {
                  type inet:ipv6-address-no-zone;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 24]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
                  mandatory true;
                  description "Start IPv6 address for the pool.";
                }
@@ -1380,6 +1394,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                list active-leases {
                  description "Holds state related to active client
                    leases.";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 25]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                  config false;
                  key leased-address;
                  leaf leased-address {
@@ -1394,14 +1416,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                prefix pools.";
              if-feature prefix-delegation;
              list prefix-pool {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 25]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
                key pool-id;
                description "List of prefix pools for allocation to
                  clients, distinguished by 'pool-id'.";
@@ -1436,6 +1450,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                    key reserved-prefix;
                    leaf client-duid {
                      type binary;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 26]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                      description "Client DUID for the reservation.";
                    }
                    leaf reserved-prefix {
@@ -1450,14 +1472,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                  uses resource-config;
                }
                list active-leases {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 26]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
                  description "Holds state related to for active client
                    prefix leases.";
                  config false;
@@ -1492,6 +1506,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          mandatory true;
          description "Count of the total addresses in the pool.";
        }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 27]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        leaf max-address-count {
          type uint64;
          mandatory true;
@@ -1505,14 +1527,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "Count of allocated addresses in the pool.";
        }
      }
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 27]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      notification prefix-pool-utilization-threshold-exceeded {
        description "Notification sent when the prefix pool
@@ -1548,6 +1562,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        leaf description {
          type string;
          description "Description of the event (e.g. and error code or
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 28]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
            log message).";
        }
      }
@@ -1562,14 +1584,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        list declined-resources {
          description "List of declined addresses and/or prefixes.";
          choice resource-type {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 28]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
            case declined-address {
              leaf address {
                type inet:ipv6-address;
@@ -1604,6 +1618,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
    This module imports typedefs from [RFC6991], [RFC8343].
 
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 29]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    <CODE BEGINS> file ietf-dhcpv6-relay.yang
 
    module ietf-dhcpv6-relay {
@@ -1618,13 +1640,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      import ietf-yang-types {
        prefix yang;
      }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 29]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      import ietf-dhcpv6-common {
        prefix dhcpv6-common;
@@ -1659,6 +1674,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        Relating to IETF Documents
        (http://trustee.ietf.org/license-info).
 
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 30]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        This version of this YANG module is part of RFC 8513; see
        the RFC itself for full legal notices.";
 
@@ -1674,14 +1697,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      revision 2018-03-04 {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 30]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        description "Resolved most issues on the DHC official
          github";
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
@@ -1703,7 +1718,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      /*
-      * Indenties
+      * Indentities
       */
 
      identity relay {
@@ -1715,6 +1730,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        description "Type for a DHCPv6 relay.";
        type identityref {
          base "dhcpv6-relay:relay";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 31]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        }
      }
 
@@ -1730,13 +1753,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      /*
       * Groupings
       */
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 31]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      grouping pd-lease-state {
        description "State data for the relay.";
@@ -1770,6 +1786,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      grouping message-statistics {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 32]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        description "Contains counters for the different DHCPv6
          message types.";
        leaf solicit-received-count {
@@ -1786,14 +1810,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          config "false";
          type uint32;
          description "Number of Request (3) messages received.";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 32]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        }
        leaf confirm-received-count {
          config "false";
@@ -1826,6 +1842,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "Number of Decline (9) messages sent.";
        }
        leaf reconfigure-sent-count {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 33]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          config "false";
          type uint32;
          description "Number of Reconfigure (10) messages sent.";
@@ -1840,16 +1864,8 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          config "false";
          type uint32;
          description
-           "Number of messages of unknown type that have been received."
-   ;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 33]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
+           "Number of messages of unknown type that have been
+              received.";
        }
        leaf unknown-message-sent-count {
          config "false";
@@ -1861,8 +1877,8 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          config "false";
          type uint32;
          description
-           "Number of messages that have been discarded for any reason."
-   ;
+           "Number of messages that have been discarded for any
+              reason.";
        }
      }
 
@@ -1882,6 +1898,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          type uint32;
          description "Number of Relay-reply (13) messages received.";
        }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 34]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        leaf relay-forward-unknown-sent-count {
          config "false";
          type uint32;
@@ -1898,14 +1922,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          config "false";
          type uint32;
          description "Number of messages that have been discarded
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 34]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
            for any reason.";
        }
      }
@@ -1938,6 +1954,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            }
          }
          container relay-options {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 35]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
            description "Definitions for DHCPv6 options that can be sent
              by the relay are augmented to this location from other YANG
              modules as required.";
@@ -1953,14 +1977,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        }
        uses global-statistics;
      }
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 35]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      /*
       * Notifications
@@ -1992,6 +2008,16 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
    This module imports typedefs from [RFC6991], [RFC8343].
 
+
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 36]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    <CODE BEGINS> file ietf-dhcpv6-client.yang
 
    module ietf-dhcpv6-client {
@@ -2011,13 +2037,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        prefix dhcpv6-common;
      }
 
-
-
-Cui, et al.             Expires 26 November 2020               [Page 36]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
      import ietf-interfaces {
        prefix if;
      }
@@ -2033,7 +2052,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        godfryd@isc.org";
 
      description
-       "This YANG module defines componenets necesarry for the
+       "This YANG module defines components necessary for the
        configuration and management of DHCPv6 clients.
 
        Copyright (c) 2018 IETF Trust and the persons identified as
@@ -2047,6 +2066,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        (http://trustee.ietf.org/license-info).
 
        This version of this YANG module is part of RFC 8513; see
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 37]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        the RFC itself for full legal notices.";
 
      revision 2020-01-10 {
@@ -2066,14 +2093,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      revision 2018-03-04 {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 37]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        description "Resolved most issues on the DHC official github";
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
      }
@@ -2103,6 +2122,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        type identityref {
          base "dhcpv6-client:client";
        }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 38]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      }
 
 
@@ -2122,14 +2149,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          type uint32;
          description "Number of Advertise (2) messages received.";
        }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 38]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        leaf request-count {
          config "false";
          type uint32;
@@ -2159,6 +2178,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          type uint32;
          description "Number of Release (8) messages sent.";
        }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 39]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        leaf decline-count {
          config "false";
          type uint32;
@@ -2178,14 +2205,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      /*
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 39]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
       * Data Nodes
       */
 
@@ -2215,9 +2234,17 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            leaf iaid {
              type uint32;
              description "A unique identifier for this IA_NA.";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 40]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
            }
            container ia-na-options {
-             description "An augmenation point for additional options
+             description "An augmentation point for additional options
                that the client will send in the IA_NA-options field
                of OPTION_IA_NA.";
            }
@@ -2234,14 +2261,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                type dhcpv6-common:timer-seconds32;
              }
              leaf valid-lifetime {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 40]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
                description "The valid lifetime for the leased address
                  expressed in units of seconds.";
                type dhcpv6-common:timer-seconds32;
@@ -2271,6 +2290,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              }
              leaf server-duid {
                description "DUID of the leasing server.";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 41]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                type binary;
              }
            }
@@ -2290,14 +2317,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                of OPTION_IA_TA.";
            }
            container lease-state {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 41]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
              config "false";
              description "Information about an active IA_TA lease.";
              leaf ia-ta-address {
@@ -2327,6 +2346,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              leaf server-duid {
                description "DUID of the leasing server.";
                type binary;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 42]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              }
            }
          }
@@ -2346,14 +2373,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            }
            container lease-state {
              config "false";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 42]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
              description "Information about an active IA_PD delegated
                prefix.";
              leaf ia-pd-prefix {
@@ -2383,6 +2402,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                  the lifetimes of the addresses assigned to the IA_PD.";
                type dhcpv6-common:timer-seconds32;
              }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 43]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              leaf allocation-time {
                description "Time and date that the prefix was first
                  leased.";
@@ -2402,13 +2429,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          uses message-statistics;
        }
      }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 43]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      /*
       * Notifications
@@ -2431,13 +2451,21 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      notification retransmission-failed {
        description "Notification sent when the retransmission mechanism
-         defined in [RFC8415] is unsucessful.";
+         defined in [RFC8415] is unsuccessful.";
        leaf failure-type {
          type enumeration {
            enum "MRC-exceeded" {
              description "Maximum retransmission count exceeded.";
            }
            enum "MRD-exceeded" {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 44]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              description "Maximum retransmission duration exceeded.";
            }
          }
@@ -2452,20 +2480,12 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        leaf status-code {
          type uint16;
          mandatory true;
-         description "Unsuccessful status code recevied by a client.";
+         description "Unsuccessful status code received by a client.";
        }
        leaf server-duid {
          description "DUID of the server sending the unsuccessful
            error code.";
          mandatory true;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 44]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          type binary;
        }
      }
@@ -2494,6 +2514,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "Reference to the IA_TA lease.";
          type leafref {
            path "/dhcpv6-client/client-if/ia-ta/iaid";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 45]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          }
        }
        leaf lease-ia-pd {
@@ -2509,18 +2537,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 3.4.  DHCPv6 RFC8415 Options YANG Module
 
    This module imports typedefs from [RFC6991].
-
-
-
-
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 45]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
    <CODE BEGINS> file ietf-dhcpv6-options-rfc8415.yang
 
@@ -2554,6 +2570,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        "cuiyong@tsinghua.edu.cn
        wangh13@mails.tsinghua.edu.cn
        lh.sunlinh@gmail.com
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 46]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        ian.farrer@telekom.de
        sladjana.zechlin@telekom.de
        hezihao9512@gmail.com";
@@ -2570,14 +2594,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      revision 2019-06-07 {
        description "Major reworking to only contain RFC8415 options.
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 46]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          if-feature for each option removed. Removed groupings
          of features by device or combination of devices. Added ";
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
@@ -2610,35 +2626,35 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       */
 
      grouping option-iaaddr-option {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 47]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        description "OPTION_IAADDR (5) IA Address Option.";
        reference "RFC8415: Dynamic Host Configuration Protocol for IPv6
          (DHCPv6)";
        leaf IPv6-address {
          type inet:ipv6-address;
-         description "An IPv6 address.  A client MUST NOT form
-           an iplicit prefix with a length other than 128
-           for this address.";
+         description "An IPv6 address. A client MUST NOT form an
+           implicit prefix with a length other than 128 for this
+           address.";
        }
        leaf preferred-lifetime {
          type uint32;
-         description "The preferred lifetime for the address
-           in the option, expressed in units of seconds.";
+         description "The preferred lifetime for the address in the
+           option, expressed in units of seconds.";
        }
        leaf valid-lifetime {
          type uint32;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 47]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          description "The preferred lifetime for the address
            in the option, expressed in units of seconds.";
        }
        container iaaddr-options {
-         description "Definitions for DHCPv6 options that can be be sent
+         description "Definitions for DHCPv6 options that can be sent
            by the client are augmented to this location from other YANG
            modules as required.";
        }
@@ -2656,10 +2672,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          leaf-list oro-option {
            description "List of options that the client is requesting,
              identified by option code";
-           type uint16 {
-             range "17 | 21..24 | 27..36 | 39..42 | 49..52 | 54..60 |
-               62..65 | 69..78";
-           }
+           type uint16;
          }
        }
      }
@@ -2669,10 +2682,18 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "OPTION_PREFERENCE (7) Preference Option";
          reference "RFC8415: Dynamic Host Configuration Protocol for
            IPv6 (DHCPv6)";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 48]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          leaf pref-value {
            type uint8;
-           description "The preference value for the server
-             in this message. A 1-octet unsigned integer.";
+           description "The preference value for the server in this
+             message. A 1-octet unsigned integer.";
          }
        }
      }
@@ -2682,18 +2703,10 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          description "OPTION_AUTH (11) Authentication Option";
          reference "RFC8415: Dynamic Host Configuration Protocol
            for IPv6 (DHCPv6)";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 48]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          leaf protocol {
            type uint8;
-           description "The authentication protocol used
-             in this Authentication option.";
+           description "The authentication protocol used in this
+             Authentication option.";
          }
          leaf algorithm {
            type uint8;
@@ -2725,6 +2738,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            IPv6 (DHCPv6)";
          leaf server-address {
            type inet:ipv6-address;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 49]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
            description "The 128-bit address to which the client
              should send messages delivered using unicast.";
          }
@@ -2738,14 +2759,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            for IPv6 (DHCPv6)";
          leaf status-code {
            type uint16;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 49]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
            description "The numeric code for the status encoded
              in this option. See the Status Codes registry at
              <https://www.iana.org/assignments/dhcpv6-parameters>
@@ -2753,8 +2766,8 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          }
          leaf status-message {
            type string;
-           description "A UTF-8 encoded text string suitable
-             for display to an end user. MUST NOT be null-terminated.";
+           description "A UTF-8 encoded text string suitable for
+             display to an end user. MUST NOT be null-terminated.";
          }
        }
      }
@@ -2781,6 +2794,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              is a member.";
            leaf user-class-datum-id {
              type uint8;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 50]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              description "User class datum ID";
            }
            leaf user-class-datum {
@@ -2794,14 +2815,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      grouping vendor-class-option-group {
        container vendor-class-option {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 50]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
          description "OPTION_VENDOR_CLASS (16) Vendor Class Option";
          reference "RFC8415: Dynamic Host Configuration Protocol
            for IPv6 (DHCPv6)";
@@ -2817,8 +2830,8 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            }
            list vendor-class {
              key vendor-class-datum-id;
-             description "The vendor classes of which the client
-               is a member.";
+             description "The vendor classes of which the client is
+               a member.";
              leaf vendor-class-datum-id {
                type uint8;
                description "Vendor class datum ID";
@@ -2837,6 +2850,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        container vendor-specific-information-option {
          description "OPTION_VENDOR_OPTS (17) Vendor-specific
            Information Option";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 51]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          reference "RFC8415: Dynamic Host Configuration Protocol
            for IPv6 (DHCPv6)";
          list vendor-specific-information-option-instances {
@@ -2850,14 +2871,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                as maintained by IANA.";
            }
            list vendor-option-data {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 51]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
              key sub-option-code;
              description "Vendor options, interpreted by vendor-specific
                client/server functions.";
@@ -2892,8 +2905,16 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        container reconfigure-message-option {
          description "OPTION_RECONF_MSG (19) Reconfigure Message
            Option.";
-         reference "RFC8415: Dynamic Host Configuration Protocol
-           for IPv6 (DHCPv6)";
+         reference "RFC8415: Dynamic Host Configuration Protocol for
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 52]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
+           IPv6 (DHCPv6)";
          leaf msg-type {
            type uint8;
            description "5 for Renew message, 6 for Rebind message,
@@ -2906,16 +2927,8 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        container reconfigure-accept-option {
          presence "Enable sending of this option";
          description "OPTION_RECONF_ACCEPT (20)  Rapid Commit Option.
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 52]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
-           A client uses the Reconfigure Accept option to announce
-           to the server whether the client is willing to accept
+           A client uses the Reconfigure Accept option to announce to
+           the server whether the client is willing to accept
            Reconfigure messages, and a server uses this option to tell
            the client whether or not to accept Reconfigure messages.
            In the absence of this option, the default behavior is that
@@ -2932,23 +2945,31 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          (DHCPv6)";
        leaf preferred-lifetime {
          type uint32;
-         description "The preferred lifetime for the prefix
-           in the option, expressed in units of seconds.";
+         description "The preferred lifetime for the prefix in the
+           option, expressed in units of seconds.";
        }
        leaf valid-lifetime {
          type uint32;
-         description "The preferred lifetime for the prefix
-           in the option, expressed in units of seconds.";
+         description "The preferred lifetime for the prefix in the
+           option, expressed in units of seconds.";
        }
        leaf IPv6-prefix {
          type inet:ipv6-prefix;
          description "The IPv6 prefix delegated to the client.";
        }
        container iaprefix-options {
-         description "Definitions for DHCPv6 options that can be
-           sent by the client are augmented to this location from other
-           YANG modules as required.";
+         description "Definitions for DHCPv6 options that can be sent
+           by the client are augmented to this location from other YANG
+           modules as required.";
        }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 53]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      }
 
      grouping info-refresh-time-option-group {
@@ -2962,14 +2983,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            description "Time duration relative to the current time,
              expressed in units of seconds.";
          }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 53]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        }
      }
 
@@ -3005,6 +3018,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    pv6-server:option-set" {
        when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:serv
    er'";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 54]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        uses preference-option-group;
        uses auth-option-group;
        uses server-unicast-option-group;
@@ -3018,14 +3039,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        uses inf-max-rt-option-group;
      }
      augment "/dhcpv6-relay:dhcpv6-relay/dhcpv6-relay:relay-if/dhcpv6-re
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 54]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
    lay:relay-options" {
        when "../../../dhcpv6-relay:dhcpv6-node-type='dhcpv6-relay:relay'
    ";
@@ -3061,6 +3074,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      import ietf-yang-types {
        prefix yang;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 55]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      }
 
      organization "DHC WG";
@@ -3073,14 +3094,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
      description "This YANG module defines common components
        used for the configuration and management of DHCPv6.";
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 55]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      revision 2020-01-10 {
        description "Version update for draft -11 publication and
@@ -3117,6 +3130,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          range "1..4294967295";
        }
        units "seconds";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 56]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        description
          "Timer value type, in seconds (32-bit range).";
      }
@@ -3130,14 +3151,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       */
 
      grouping duid {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 56]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        description "Each server and client has only one DUID (DHCP
          Unique Identifier). The DUID here identifies a unique
          DHCPv6 server for clients.  DUID consists of a two-octet
@@ -3173,6 +3186,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              type yang:mac-address;
              description "Link-layer address as described in RFC2464.";
            }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 57]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          }
          case duid-en {
            description "DUID Assigned by Vendor Based on Enterprise
@@ -3186,14 +3207,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            leaf duid-en-identifier {
              type string;
              description "Indentifier, unique to the device.";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 57]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
            }
          }
          case duid-ll {
@@ -3229,6 +3242,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              description "The bits to be used as the identifier.";
            }
          }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 58]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
        }
        leaf active-duid {
          config "false";
@@ -3238,17 +3259,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
    }
    <CODE ENDS>
-
-
-
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 58]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
 4.  Security Considerations
 
@@ -3286,6 +3296,16 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    *  Reconfiguring the relay's destination address to send messages to
       a rogue DHCPv6 server.
 
+
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 59]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    *  Deleting information about a client's delegated prefix, causing a
       denial of service attack as traffic will no longer be routed to
       the client.
@@ -3298,13 +3318,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
    *  Reconfiguring the relay's destination address to send messages to
       a rogue DHCPv6 server.
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 59]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
    *  Information the server holds about clients with active leases:
       (dhcpv6-server/network-ranges/network-range/ address-pools/
@@ -3342,6 +3355,13 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    prefix:         dhcpv6
    reference:      TBD
 
+
+
+Cui, et al.             Expires 27 November 2020               [Page 60]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    name:           ietf-dhcpv6
    namespace:    
                    urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-
@@ -3355,20 +3375,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    Tomek Mrugalski, Marcin Siodelski, Bernie Volz and Bing Liu for their
    valuable comments and contributions to this work.
 
-
-
-Cui, et al.             Expires 26 November 2020               [Page 60]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
 7.  Contributors
 
    The following individuals contributed to this effort:
+
      Hao Wang
      Tsinghua University
      Beijing 100084
-     P.R.China
+     P.R. China
      Phone: +86-10-6278-5822
      Email: wangh13@mails.tsinghua.edu.cn
 
@@ -3395,6 +3409,15 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 61]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    [RFC6355]  Narten, T. and J. Johnson, "Definition of the UUID-Based
               DHCPv6 Unique Identifier (DUID-UUID)", RFC 6355,
               DOI 10.17487/RFC6355, August 2011,
@@ -3409,14 +3432,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
               and A. Bierman, Ed., "Network Configuration Protocol
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/info/rfc6241>.
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 61]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
    [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
@@ -3452,6 +3467,13 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
               <https://www.rfc-editor.org/info/rfc8342>.
 
+
+
+Cui, et al.             Expires 27 November 2020               [Page 62]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    [RFC8343]  Bjorklund, M., "A YANG Data Model for Interface
               Management", RFC 8343, DOI 10.17487/RFC8343, March 2018,
               <https://www.rfc-editor.org/info/rfc8343>.
@@ -3466,14 +3488,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
               RFC 8415, DOI 10.17487/RFC8415, November 2018,
               <https://www.rfc-editor.org/info/rfc8415>.
 
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 62]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
 8.2.  Informative References
 
    [RFC3319]  Schulzrinne, H. and B. Volz, "Dynamic Host Configuration
@@ -3481,7 +3495,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
               (SIP) Servers", RFC 3319, DOI 10.17487/RFC3319, July 2003,
               <https://www.rfc-editor.org/info/rfc3319>.
 
-Appendix A.  Example of Augementing Additional DHCPv6 Option Definitions
+Appendix A.  Example of Augmenting Additional DHCPv6 Option Definitions
 
    The following section provides a example of how the DHCPv6 option
    definitions can be extended for additional options.  It is expected
@@ -3504,9 +3518,17 @@ Appendix A.  Example of Augementing Additional DHCPv6 Option Definitions
       the DHCPv6 option is defined.
 
    *  The remaining fields match the fields in the DHCP option.  They
-      are in the same order as defined in the DHCP option.  Whereever
-      possilbe, the format that is defined for the DHCP field should be
+      are in the same order as defined in the DHCP option.  Where-ever
+      possible, the format that is defined for the DHCP field should be
       matched by the relevant YANG type.
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 63]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
 
    *  Fields which can have multiple entries or instances are defined
       using list or leaf-list nodes.
@@ -3522,14 +3544,6 @@ Appendix A.  Example of Augementing Additional DHCPv6 Option Definitions
    module example-dhcpv6-options-rfc3319 {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:example-dhcpv6-options-rfc33
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 63]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
    19";
      prefix "rfc3319";
 
@@ -3564,6 +3578,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       * Groupings
       */
 
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 64]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      grouping sip-server-domain-name-list-option-group {
        container sip-server-domain-name-list-option {
          description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name
@@ -3577,14 +3599,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          }
        }
      }
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 64]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      grouping sip-server-address-list-option-group {
        container sip-server-address-list-option {
@@ -3620,6 +3634,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        uses sip-server-address-list-option-group;
      }
    }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 65]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    <CODE ENDS>
 
 Appendix B.  Example Vendor Specific Server Configuration Module
@@ -3634,15 +3656,7 @@ Appendix B.  Example Vendor Specific Server Configuration Module
    memory (memfile), MySQL and PosgreSQL.  For each case, the necessary
    configuration parameters are provided.
 
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 65]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
-   At the end there is an augment statment which adds the vendor
+   At the end there is an augment statement which adds the vendor
    specific configuration defined in "dhcpv6-server-config:config" under
    "/dhcpv6-server:config/dhcpv6-server:vendor-config" mountpoint.
 
@@ -3675,8 +3689,16 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        hezihao9512@gmail.com";
 
      description "This YANG module defines components for the
-       configuration and mangagement of vendor/implementation specific
-       DHCPv6 server functioniality. As this functionality varies
+       configuration and management of vendor/implementation specific
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 66]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
+       DHCPv6 server functionality. As this functionality varies
        greatly between different implementations, the module
        provided as an example only.";
 
@@ -3690,13 +3712,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        description "";
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
      }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 66]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      /*
       * Groupings
@@ -3724,20 +3739,28 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          choice listening-interfaces {
            default all-interfaces;
            description "Configures which interface or addresses the
-             server will listen for incomming messages on.";
+             server will listen for incoming messages on.";
            case all-interfaces {
              container all-interfaces {
              presence true;
              description "Configures the server to listen for
-               incomming messages on all IPv6 addresses (unicats and
+               incoming messages on all IPv6 addresses (unicats and
                multicast) on all of its network interfaces.";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 67]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              }
            }
            case interface-list {
              leaf-list interfaces {
                type if:interface-ref;
                description "List of interfaces that the server will
-                 listen for incomming messages on. Messages addressed
+                 listen for incoming messages on. Messages addressed
                  to any valid IPv6 address (unicast and multicast) will
                  be received.";
              }
@@ -3746,15 +3769,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              leaf-list address-list {
                type inet:ipv6-address;
                description "List of IPv6 address(es) that the server
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 67]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
-                 will listen for incomming messages on.";
+                 will listen for incoming messages on.";
              }
            }
          }
@@ -3765,7 +3780,7 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              interfaces the server should listen on.";
          }
          container lease-storage {
-           description "Configures how the server wil stores leases.";
+           description "Configures how the server will stores leases.";
            choice storage-type {
              description "The type storage that will be used for lease
                information.";
@@ -3787,6 +3802,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              }
              case mysql {
                leaf mysql-name {
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 68]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                  type string;
                  description "Name of the database.";
                }
@@ -3802,14 +3825,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                  }
                  case mysql-server-address {
                    leaf mysql-address {
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 68]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
                      type inet:ip-address;
                      default "::";
                      description "Configure the location of the
@@ -3843,6 +3858,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                leaf mysql-connect-timeout {
                  type uint64;
                  description "Defines the timeout interval for
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 69]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                    connecting to the database. A longer interval can
                    be specified if the database is remote.";
                }
@@ -3858,14 +3881,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                        domain name can be specified.";
                    }
                  }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 69]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
                  case postgresql-server-address {
                    leaf postgresql-address {
                      type inet:ip-address;
@@ -3899,6 +3914,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                }
                leaf postgresql-connect-timeout {
                  type uint64;
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 70]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
                  description "Defines the timeout interval for
                    connecting to the database. A longer interval can
                    be specified if the database is remote.";
@@ -3914,14 +3937,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       */
 
      augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:vendor-config"
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 70]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
    {
        uses dhcpv6-server-config:config;
      }
@@ -3937,16 +3952,16 @@ Appendix C.  Example definition of class selector configuration
 
    The example module defines "client-class-names" with associated
    matching rules.  A client can be classified based on "client-id",
-   "interface-id" (ingress inteface of the client's messages), packets
+   "interface-id" (ingress interface of the client's messages), packets
    source or destination address, relay link address, relay link
    interface-id and more.  Actually there is endless methods for
    classifying clients.  So this standard does not try to provide full
-   specificiation for class selection, it only shows an example how it
+   specification for class selection, it only shows an example how it
    can be defined.
 
    At the end of the example augment statements are used to add the
-   defind class selector rules into the overall DHCPv6 addressing
-   heirarchy.  This is done in two main parts:
+   defined class selector rules into the overall DHCPv6 addressing
+   hierarchy.  This is done in two main parts:
 
    *  The augmented class-selector configuration in the main DHCPv6
       Server configuration.
@@ -3954,6 +3969,14 @@ Appendix C.  Example definition of class selector configuration
    *  client-class leafrefs augmented to "network-range", "address-pool"
       and "pd-pool", pointing to the "client-class-name" that is
       required.
+
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 71]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
 
    The mechanism is as follows: class is associated to client based on
    rules and then client is allowed to get address(es)/prefix(es) from
@@ -3970,13 +3993,6 @@ Appendix C.  Example definition of class selector configuration
      import ietf-inet-types {
        prefix inet;
      }
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 71]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
 
      import ietf-interfaces {
        prefix if;
@@ -4010,6 +4026,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
        reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";
      }
 
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 72]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
      revision 2019-06-13 {
        description "";
        reference "I-D: draft-ietf-dhc-dhcpv6-yang";
@@ -4020,20 +4044,12 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
       */
 
      grouping client-class-id {
-       description "Defintions of client message classification for
+       description "Definitions of client message classification for
          authorization and assignment purposes.";
        leaf client-class-name {
          type string;
          description "Unique Identifier for client class identification
            list entries.";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 72]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
        }
        choice id-type {
          description "Definitions for different client identifier
@@ -4066,6 +4082,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              type inet:ipv6-address;
            }
          }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 73]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          case packet-destination-address-id {
            description "Client class selection based on the destination
              address of the DHCPv6 message.";
@@ -4082,14 +4106,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            leaf relay-link-address {
              description "Prefix of the link-address field in the relay
                agent message header.";
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 73]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
              mandatory true;
              type inet:ipv6-prefix;
            }
@@ -4122,6 +4138,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
              type string;
            }
          }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 74]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          case vendor-class-present-id {
            description "Client class selection based on the presence of
              OPTION_VENDOR_CLASS(16) in the received message.";
@@ -4138,14 +4162,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
            leaf vendor-class-option-enterprise-number {
              description "Value of the enterprise-number field.";
              mandatory true;
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 74]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
              type uint32;
            }
          }
@@ -4178,6 +4194,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
                mandatory true;
                type uint32;
              }
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 75]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
              leaf remote-id {
                description "Remote-ID data to match.";
                mandatory true;
@@ -4194,14 +4218,6 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
      }
 
      /*
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 75]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
       * Augmentations
       */
 
@@ -4234,6 +4250,14 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
          type leafref {
            path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-select
    or/client-classes/class/client-class-name";
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 76]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
          }
        }
      }
@@ -4251,18 +4275,13 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
    }
    <CODE ENDS>
 
-
-
-Cui, et al.             Expires 26 November 2020               [Page 76]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
 Authors' Addresses
 
    Yong Cui
    Tsinghua University
    Beijing
+   100084
+   P.R. China
 
    Phone: +86-10-6260-3059
    Email: cuiyong@tsinghua.edu.cn
@@ -4271,6 +4290,8 @@ Authors' Addresses
    Linhui Sun
    Tsinghua University
    Beijing
+   100084
+   P.R. China
 
    Phone: +86-10-6278-5822
    Email: lh.sunlinh@gmail.com
@@ -4285,6 +4306,14 @@ Authors' Addresses
    Email: ian.farrer@telekom.de
 
 
+
+
+
+Cui, et al.             Expires 27 November 2020               [Page 77]
+
+Internet-Draft              DHCPv6 YANG Model                   May 2020
+
+
    Sladjana Zechlin
    Deutsche Telekom AG
    CTO-IPT, Landgrabenweg 151
@@ -4297,6 +4326,8 @@ Authors' Addresses
    Zihao He
    Tsinghua University
    Beijing
+   100084
+   P.R. China
 
    Phone: +86-10-6278-5822
    Email: hezihao9512@gmail.com
@@ -4305,15 +4336,6 @@ Authors' Addresses
    Michal Nowikowski
    Internet Systems Consortium
    Gdansk
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 77]
-
-Internet-Draft              DHCPv6 YANG Model                   May 2020
-
-
    Poland
 
    Email: godfryd@isc.org
@@ -4343,26 +4365,4 @@ Internet-Draft              DHCPv6 YANG Model                   May 2020
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cui, et al.             Expires 26 November 2020               [Page 78]
+Cui, et al.             Expires 27 November 2020               [Page 78]
