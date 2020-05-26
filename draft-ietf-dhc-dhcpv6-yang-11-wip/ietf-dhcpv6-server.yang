@@ -381,8 +381,8 @@ module ietf-dhcpv6-server {
               leaf allocated-count {
                 type uint64;
                 mandatory true;
-                description "The number of addresses or prefixes in the pool 
-                  that are currently allocated.";
+                description "The number of addresses or prefixes 
+                  in the pool that are currently allocated.";
               }
               list active-lease {
                 key leased-address;
