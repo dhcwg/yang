@@ -26,19 +26,17 @@ module ietf-dhcpv6-options-rfc4280 {
   /*
    * Groupings
    */
+
   grouping bcms-server-d-option-group {
     container bcmcs-server-d {
-      if-feature bcmcs-server-d-op;
-      presence "Enable this option";
-      description "OPTION_BCMCS_SERVER_D (33) Broadcast and Multicast Service
-        Controller Domain Name List Option for DHCPv6";
-      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) Options for
-        Broadcast and Multicast Control Servers";
+      description "OPTION_BCMCS_SERVER_D (33) Broadcast and Multicast 
+        Service Controller Domain Name List Option for DHCPv6";
+      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) 
+        Options for Broadcast and Multicast Control Servers";
       list bcmcs-control-server-domain-names {
         leaf bcmcs-control-server-domain-name {
           description "Domain name of BCMCS control server.";
-          type string;
-          mandatory true;
+          type inet:domain-name;
         }
       }
     }
@@ -46,17 +44,14 @@ module ietf-dhcpv6-options-rfc4280 {
 
   grouping bcms-server-a-option-group {
     container bcmcs-server-a {
-      if-feature bcmcs-server-a-op;
-      presence "Enable this option";
-      description "OPTION_BCMCS_SERVER_A (34) Broadcast and Multicast Service
-        Controller IPv6 Address Option for DHCPv6";
-      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) Options for
-        Broadcast and Multicast Control Servers";
+      description "OPTION_BCMCS_SERVER_A (34) Broadcast and Multicast 
+        Service Controller IPv6 Address Option for DHCPv6";
+      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) 
+        Options for Broadcast and Multicast Control Servers";
       list bcmcs-control-server-addressess {
         leaf bcmcs-control-server-address {
           description "IPv6 address of BCMCS control server.";
           type inet:ipv6-address;
-          mandatory true;
         }
       }
     }
@@ -64,6 +59,7 @@ module ietf-dhcpv6-options-rfc4280 {
 
   augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
-    uses xxxx-option-group;
+    uses bcms-server-d-option-group;
+    uses bcms-server-a-option-group;
   }
 }
