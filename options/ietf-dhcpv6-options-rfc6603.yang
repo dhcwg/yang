@@ -30,10 +30,10 @@ module ietf-dhcpv6-options-rfc6603 {
   grouping pd-exclude-option-group {
     container pd-exclude {
       description "OPTION_PD_EXCLUDE (67) PD Exclude Option.";
-      reference "RFC6603: Prefix Exclude Option for DHCPv6-based 
+      reference "RFC6603: Prefix Exclude Option for DHCPv6-based
         Prefix Delegation";
       leaf ipv6-subnet {
-        description "The IPv6 Subnet ID and prefix-len that the 
+        description "The IPv6 Subnet ID and prefix-len that the
           delegating router includes in the OPTION_PD_EXCLUDE
           option that is excluded from the delegated prefix set.";
         type inet:ipv6-prefix;

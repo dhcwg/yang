@@ -49,7 +49,7 @@ module ietf-dhcpv6-options-rfc7598 {
                 Rule only and MUST NOT be used for forwarding.";
             }
             enum "FMR" {
-              description "Indicates that the rule is a Forward 
+              description "Indicates that the rule is a Forward
                 Mapping Rule.";
             }
           }
@@ -58,15 +58,15 @@ module ietf-dhcpv6-options-rfc7598 {
         leaf ipv4-prefix {
           type inet:ipv4-prefix;
           mandatory true;
-          description "IPv4 prefix used to represent both the 
-            'prefix4-len' and 'ipv4-prefix' fields defined in 
+          description "IPv4 prefix used to represent both the
+            'prefix4-len' and 'ipv4-prefix' fields defined in
             RFC7598 Section 4.1.";
         }
         leaf ipv6-prefix {
           type inet:ipv6-prefix;
           mandatory true;
-          description "IPv6 prefix used to represent both the 
-            'prefix6-len' and 'ipv6-prefix' fields defined in 
+          description "IPv6 prefix used to represent both the
+            'prefix6-len' and 'ipv6-prefix' fields defined in
             RFC7598 Section 4.1.";
         }
       }
@@ -119,7 +119,7 @@ module ietf-dhcpv6-options-rfc7598 {
       leaf ipv4-addr {
         type inet:ipv4-address;
         mandatory true;
-        description "Used to specify the full or shared IPv4 address 
+        description "Used to specify the full or shared IPv4 address
           of the CE.";
       }
       leaf bind-ipv6-prefix {
@@ -135,7 +135,7 @@ module ietf-dhcpv6-options-rfc7598 {
 
   grouping option-s46-portparams-group {
     container s46-portparams-option {
-      description "OPTION_S46_PORTPARAMS (93) S46 Port Parameters 
+      description "OPTION_S46_PORTPARAMS (93) S46 Port Parameters
         Option.";
       reference "RFC9598: DHCPv6 Options for Configuration of
         Softwire Address and Port-Mapped Clients";

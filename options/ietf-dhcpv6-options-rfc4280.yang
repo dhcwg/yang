@@ -29,11 +29,12 @@ module ietf-dhcpv6-options-rfc4280 {
 
   grouping bcms-server-d-option-group {
     container bcmcs-server-d {
-      description "OPTION_BCMCS_SERVER_D (33) Broadcast and Multicast 
+      description "OPTION_BCMCS_SERVER_D (33) Broadcast and Multicast
         Service Controller Domain Name List Option for DHCPv6";
-      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) 
+      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP)
         Options for Broadcast and Multicast Control Servers";
       list bcmcs-control-server-domain-names {
+        key bcmcs-control-server-domain-name;
         leaf bcmcs-control-server-domain-name {
           description "Domain name of BCMCS control server.";
           type inet:domain-name;
@@ -44,11 +45,12 @@ module ietf-dhcpv6-options-rfc4280 {
 
   grouping bcms-server-a-option-group {
     container bcmcs-server-a {
-      description "OPTION_BCMCS_SERVER_A (34) Broadcast and Multicast 
+      description "OPTION_BCMCS_SERVER_A (34) Broadcast and Multicast
         Service Controller IPv6 Address Option for DHCPv6";
-      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP) 
+      reference "RFC4280: Dynamic Host Configuration Protocol (DHCP)
         Options for Broadcast and Multicast Control Servers";
       list bcmcs-control-server-addressess {
+        key bcmcs-control-server-address;
         leaf bcmcs-control-server-address {
           description "IPv6 address of BCMCS control server.";
           type inet:ipv6-address;

@@ -81,13 +81,13 @@ module ietf-dhcpv6-options-rfc8415 {
       (DHCPv6)";
     leaf IPv6-address {
       type inet:ipv6-address;
-      description "An IPv6 address. A client MUST NOT form an 
-        implicit prefix with a length other than 128 for this 
+      description "An IPv6 address. A client MUST NOT form an
+        implicit prefix with a length other than 128 for this
         address.";
     }
     leaf preferred-lifetime {
       type uint32;
-      description "The preferred lifetime for the address in the 
+      description "The preferred lifetime for the address in the
         option, expressed in units of seconds.";
     }
     leaf valid-lifetime {
@@ -126,7 +126,7 @@ module ietf-dhcpv6-options-rfc8415 {
         IPv6 (DHCPv6)";
       leaf pref-value {
         type uint8;
-        description "The preference value for the server in this 
+        description "The preference value for the server in this
           message. A 1-octet unsigned integer.";
       }
     }
@@ -139,7 +139,7 @@ module ietf-dhcpv6-options-rfc8415 {
         for IPv6 (DHCPv6)";
       leaf protocol {
         type uint8;
-        description "The authentication protocol used in this 
+        description "The authentication protocol used in this
           Authentication option.";
       }
       leaf algorithm {
@@ -192,7 +192,7 @@ module ietf-dhcpv6-options-rfc8415 {
       }
       leaf status-message {
         type string;
-        description "A UTF-8 encoded text string suitable for 
+        description "A UTF-8 encoded text string suitable for
           display to an end user. MUST NOT be null-terminated.";
       }
     }
@@ -347,12 +347,12 @@ module ietf-dhcpv6-options-rfc8415 {
       (DHCPv6)";
     leaf preferred-lifetime {
       type uint32;
-      description "The preferred lifetime for the prefix in the 
+      description "The preferred lifetime for the prefix in the
         option, expressed in units of seconds.";
     }
     leaf valid-lifetime {
       type uint32;
-      description "The preferred lifetime for the prefix in the 
+      description "The preferred lifetime for the prefix in the
         option, expressed in units of seconds.";
     }
     leaf IPv6-prefix {
@@ -360,8 +360,8 @@ module ietf-dhcpv6-options-rfc8415 {
       description "The IPv6 prefix delegated to the client.";
     }
     container iaprefix-options {
-      description "Definitions for DHCPv6 options that can be sent 
-        by the client are augmented to this location from other YANG 
+      description "Definitions for DHCPv6 options that can be sent
+        by the client are augmented to this location from other YANG
         modules as required.";
     }
   }
