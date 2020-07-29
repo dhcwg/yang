@@ -3,345 +3,438 @@ module ietf-dhcpv6-client {
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client";
   prefix "dhcpv6-client";
 
-  import ietf-dhcpv6-options {
-    prefix dhcpv6-options;
+  import ietf-inet-types {
+    prefix inet;
   }
-  import ietf-dhcpv6-types {
-    prefix dhcpv6-types;
+
+  import ietf-yang-types {
+    prefix yang;
   }
+
+  import ietf-dhcpv6-common {
+    prefix dhcpv6-common;
+  }
+
   import ietf-interfaces {
     prefix if;
   }
 
   organization "DHC WG";
-  contact 
-   "cuiyong@tsinghua.edu.cn
+  contact
+    "cuiyong@tsinghua.edu.cn
     wangh13@mails.tsinghua.edu.cn
     lh.sunlinh@gmail.com
     ian.farrer@telekom.de
     sladjana.zechlin@telekom.de
-    hezihao9512@gmail.com  ";
+    hezihao9512@gmail.com
+    godfryd@isc.org";
 
-  description "This model defines a YANG data model that can be
-    used to configure and manage a DHCPv6 client.";
-    
+  description 
+    "This YANG module defines components necessary for the 
+    configuration and management of DHCPv6 clients.
+
+    Copyright (c) 2018 IETF Trust and the persons identified as
+    authors of the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and subject
+    to the license terms contained in, the Simplified BSD License
+    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    Relating to IETF Documents
+    (http://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC 8513; see
+    the RFC itself for full legal notices.";
+
+  revision 2020-05-26 {
+    description "Version update for draft -11 publication and
+      to align revisions across the different modules.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";
+  }
+
+  revision 2019-09-20 {
+    description "";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-10";
+  }
+
   revision 2018-09-04 {
     description "";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
   revision 2018-03-04 {
-    description "Resolved most issues on the DHC official
-    github";
+    description "Resolved most issues on the DHC official github";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
   revision 2017-12-22 {
-    description "Resolve most issues on Ian's github.";
+    description "Resolve most issues on Ian's Github.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
-  
+
   revision 2017-11-24 {
-      description "First version of the separated client specific
-        YANG model.";
-      reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+    description "First version of the separated client specific
+      YANG model.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
+
+  /*
+   * Identities
+   */
+
+  identity client {
+    base "dhcpv6-common:dhcpv6-node";
+    description "DHCPv6 client identity.";
+  }
+
+  leaf dhcpv6-node-type {
+    description "Type for a DHCPv6 client.";
+    type identityref {
+      base "dhcpv6-client:client";
+    }
+  }
+
+
+  /*
+   * Groupings
+   */
   
+  grouping message-statistics {
+    description "Counters for DHCPv6 messages.";
+    leaf solicit-count {
+      config "false";
+      type uint32;
+      description "Number of Solicit (1) messages sent.";
+    }
+    leaf advertise-count {
+      config "false";
+      type uint32;
+      description "Number of Advertise (2) messages received.";
+    }
+    leaf request-count {
+      config "false";
+      type uint32;
+      description "Number of Request (3) messages sent.";
+    }
+    leaf confirm-count {
+      config "false";
+      type uint32;
+      description "Number of Confirm (4) messages sent.";
+    }
+    leaf renew-count {
+      config "false";
+      type uint32;
+      description "Number of Renew (5) messages sent.";
+    }
+    leaf rebind-count {
+      config "false";
+      type uint32;
+      description "Number of Rebind (6) messages sent.";
+    }
+    leaf reply-count {
+      config "false";
+      type uint32;
+      description "Number of Reply (7) messages received.";
+    }
+    leaf release-count {
+      type uint32;
+      description "Number of Release (8) messages sent.";
+    }
+    leaf decline-count {
+      config "false";
+      type uint32;
+      description "Number of Decline (9) messages sent.";
+    }
+    leaf reconfigure-count {
+      config "false";
+      type uint32;
+      description "Number of Reconfigure (10) messages received.";
+    }
+    leaf information-request-count {
+      config "false";
+      type uint32;
+      description "Number of Information-request (11) messages
+        sent.";
+    }
+  }
+
   /*
    * Data Nodes
    */
 
-  container client {
-    presence "Enables the client";
-    description "dhcpv6 client portion";
-    
-    container client-config {
-      description "configuration tree of client";
-      container duid {
-        description "Sets the DUID";
-        uses dhcpv6-types:duid;
+  container dhcpv6-client {
+    description "DHCPv6 client configuration and state.";
+    list client-if {
+      key if-name;
+      description "The list of interfaces that the client will be
+        requesting DHCPv6 configuration for.";
+      leaf if-name {
+        type if:interface-ref;
+        mandatory true;
+        description "Reference to the interface entry that
+          the requested configuration is relevant to.";
       }
-      list client-if {
-        key if-name;
-        description "A client may have several interfaces, it is more reasonable to 
-          configure and manage parameters on the interface-level. The list defines 
-          specific client interfaces and their data. Different interfaces are 
-          distinguished by the key which is a configurable string value.";
-        leaf if-name {
-          type if:interface-ref;
-          mandatory true;
-          description "interface name";
-        }
-
-        leaf cli-id {
+      uses dhcpv6-common:duid;
+      container client-configured-options {
+        description "Definitions for DHCPv6 options that can be be
+          sent by the client are augmented to this location from
+          other YANG modules as required.";
+      }
+      list ia-na {
+        key iaid;
+        description "Configuration relevant for an IA_NA.";
+        reference "RFC8415: Dynamic Host Configuration Protocol
+          for IPv6 (DHCPv6).";
+        leaf iaid {
           type uint32;
-          mandatory true;
-          description "client id";
+          description "A unique identifier for this IA_NA.";
         }
-
-        /*
-        leaf description {
-          type string;
-          description "description of the client interface";
+        container ia-na-options {
+          description "An augmentation point for additional options
+            that the client will send in the IA_NA-options field
+            of OPTION_IA_NA.";
         }
-        */
-
-        leaf pd-function {
-          type boolean;
-          mandatory true;
-          description "Whether the client can act as a requesting router
-            to request prefixes using prefix delegation ([RFC3633]).";
-        }
-        leaf rapid-commit {
-          type boolean;
-          mandatory true;
-          description "'1' indicates a client can initiate a Solicit-Reply message 
-            exchange by adding a Rapid Commit option in Solicit message. '0' means 
-            the client is not allowed to add a Rapid Commit option to request 
-            addresses in a two-message exchange pattern.";
-        }
-
-        /*
-        container mo-tab {
-          description "The management tab label indicates the operation mode of the 
-            DHCPv6 client. 
-            'm'=1 and 'o'=1 indicate the client will use DHCPv6 to  obtain all the configuration 
-            data. 
-            'm'=1 and 'o'=0 are a meaningless combination. 
-            'm'=0 and 'o'=1 indicate the client will use stateless DHCPv6 to obtain configuration 
-            data apart from addresses/prefixes data.
-            'm'=0 and 'o'=0 represent the client will not use DHCPv6 but use SLAAC to 
-            achieve configuration.";
-            
-            // if - not sure about the intended use here as it seems
-            // to be redfining what will be received in the PIO. Is
-            // the intention to be whether they PIO options will be
-            // obeyed as received or overridden?
-          leaf m-tab {
-            type boolean;
-            mandatory true;
-            description "m tab";
+        container lease-state {
+          config "false";
+          description "Information about the active IA_NA lease.";
+          leaf ia-na-address {
+            description "Address that is currently leased.";
+            type inet:ipv6-address;
           }
-          leaf o-tab {
-            type boolean;
-            mandatory true;
-            description "o tab";
+          leaf preferred-lifetime {
+            description "The preferred lifetime for the leased
+              address expressed in units of seconds.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf valid-lifetime {
+            description "The valid lifetime for the leased address
+              expressed in units of seconds.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf lease-t1 {
+            description "The time interval after which the client
+              should contact the server from which the addresses
+              in the IA_NA were obtained to extend the lifetimes
+              of the addresses assigned to the IA_NA.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf lease-t2 {
+            description "The time interval after which the client
+              should contact any available server to extend
+              the lifetimes of the addresses assigned to the IA_NA.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf allocation-time {
+            description "Time and date that the address was first
+              leased.";
+            type yang:date-and-time;
+          }
+          leaf last-renew-rebind {
+            description "Time of the last successful renew or rebind
+              of the leased address.";
+            type yang:date-and-time;
+          }
+          leaf server-duid {
+            description "DUID of the leasing server.";
+            type binary;
           }
         }
-        */
-
-        container client-configured-options {
-          description "client configured options";
-          uses dhcpv6-options:client-option-definitions;
-        }
-      }  
-    }
-    
-    container client-state {
-      config "false";
-      description "state tree of client";
-      container if-other-paras {
-        description "A client can obtain extra configuration 
-          data other than address and prefix information through
-          DHCPv6. This container describes such data the client 
-          was configured. The potential configuration data may
-          include DNS server addresses, SIP server domain names, etc.";
-        uses dhcpv6-options:server-option-definitions;
       }
-     container packet-stats {
-        config "false";
-        description "A container records
-          all the packet status information
-          of a specific interface.";
-        leaf solicit-count {
-          type uint32;
-          mandatory true;
-          description "solicit counter";
+      list ia-ta {
+        key iaid;
+        description "Configuration relevant for an IA_TA.";
+        reference "RFC8415: Dynamic Host Configuration Protocol for
+          IPv6 (DHCPv6).";
+          leaf iaid {
+            type uint32;
+            description "The unique identifier for this IA_TA.";
+          }
+        container ia-ta-options {
+          description "An augmenation point for additional options
+            that the client will send in the IA_TA-options field
+            of OPTION_IA_TA.";
         }
-        leaf request-count {
-          type uint32;
-          mandatory true;
-          description "request counter";
-        }
-        leaf renew-count {
-          type uint32;
-          mandatory true;
-          description "renew counter";
-        }
-        leaf rebind-count {
-          type uint32;
-          mandatory true;
-          description "rebind counter";
-        }
-        leaf decline-count {
-          type uint32;
-          mandatory true;
-          description "decline counter";
-        }
-        leaf release-count {
-          type uint32;
-          mandatory true;
-          description "release counter";
-        }
-        leaf info-req-count {
-          type uint32;
-          mandatory true;
-          description "information request counter";
-        }
-        leaf advertise-count {
-          type uint32;
-          mandatory true;
-          description "advertise counter";
-        }
-        leaf confirm-count {
-          type uint32;
-          mandatory true;
-          description "confirm counter";
-        }
-        leaf reply-count {
-          type uint32;
-          mandatory true;
-          description "reply counter";
-        }
-        leaf reconfigure-count {
-          type uint32;
-          mandatory true;
-          description "recofigure counter";
+        container lease-state {
+          config "false";
+          description "Information about an active IA_TA lease.";
+          leaf ia-ta-address {
+            description "Address that is currently leased.";
+            type inet:ipv6-address;
+          }
+          leaf preferred-lifetime {
+            description "The preferred lifetime for the leased
+              address expressed in units of seconds.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf valid-lifetime {
+            description "The valid lifetime for the leased address
+              expressed in units of seconds.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf allocation-time {
+            description "Time and date that the address was first
+              leased.";
+            type yang:date-and-time;
+          }
+          leaf last-renew-rebind {
+            description "Time of the last successful renew or rebind
+              of the address.";
+            type yang:date-and-time;
+          }
+          leaf server-duid {
+            description "DUID of the leasing server.";
+            type binary;
+          }
         }
       }
+      list ia-pd {
+        key iaid;
+        reference "RFC8415: Dynamic Host Configuration Protocol for
+          IPv6 (DHCPv6).";
+        description "Configuration relevant for an IA_PD.";
+        leaf iaid {
+          type uint32;
+          description "The unique identifier for this IA_PD.";
+        }
+        container ia-pd-options {
+          description "An augmenation point for additional options
+            that the client will send in the IA_PD-options field
+            of OPTION_IA_TA.";
+        }
+        container lease-state {
+          config "false";
+          description "Information about an active IA_PD delegated
+            prefix.";
+          leaf ia-pd-prefix {
+            description "Delegated prefix that is currently leased.";
+            type inet:ipv6-prefix;
+          }
+          leaf preferred-lifetime {
+            description "The preferred lifetime for the leased prefix
+              expressed in units of seconds.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf valid-lifetime {
+            description "The valid lifetime for the leased prefix
+              expressed in units of seconds.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf lease-t1 {
+            description "The time interval after which the client
+              should contact the server from which the addresses
+              in the IA_NA were obtained to extend the lifetimes
+              of the addresses assigned to the IA_PD.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf lease-t2 {
+            description "The time interval after which the client
+              should contact any available server to extend
+              the lifetimes of the addresses assigned to the IA_PD.";
+            type dhcpv6-common:timer-seconds32;
+          }
+          leaf allocation-time {
+            description "Time and date that the prefix was first
+              leased.";
+            type yang:date-and-time;
+          }
+          leaf last-renew-rebind {
+            description "Time of the last successful renew or rebind
+              of the delegated prefix.";
+            type yang:date-and-time;
+          }
+          leaf server-duid {
+            description "DUID of the delegating server.";
+            type binary;
+          }
+        }
+      }
+      uses message-statistics;
     }
-
   }
 
   /*
    * Notifications
    */
 
-  notification notifications {
-    description "dhcpv6 client notification module";
-    container dhcpv6-client-event {
-      description "dhcpv6 client event";
+  notification invalid-ia-detected {
+    description "Notification sent when the identity association
+      of the client can be proved to be invalid. Possible conditions
+      include a duplicate or otherwise illegal address.";
+    leaf iaid {
+      type uint32;
+      mandatory true;
+      description "IAID";
+    }
+    leaf description {
+      type string;
+      description "Description of the event.";
+    }
+  }
 
-      container ia-lease-event {
-        description "raised when the client was allocated 
-          a new IA from the server or it renew/rebind/release
-          its current IA";
-        leaf event-type {
-          type enumeration {
-            enum "allocation" {
-              description "allocate";
-            }
-            enum "rebind" {
-              description "rebind";
-            }
-            enum "renew" {
-              description "renew";
-            }
-            enum "release" {
-              description "release";
-            }
-          }
-          mandatory true;
-          description "event type";
+  notification retransmission-failed {
+    description "Notification sent when the retransmission mechanism
+      defined in [RFC8415] is unsuccessful.";
+    leaf failure-type {
+      type enumeration {
+        enum "MRC-exceeded" {
+          description "Maximum retransmission count exceeded.";
         }
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-types:duid;
-        }
-        leaf iaid {
-          type uint32;
-          mandatory true;
-          description "IAID";
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf description {
-          type string;
-          description "description of event";
+        enum "MRD-exceeded" {
+          description "Maximum retransmission duration exceeded.";
         }
       }
+      mandatory true;
+      description "Description of the failure.";
+    }
+  }
 
-      container invalid-ia-detected {
-        description "raised when the identity association of the 
-          client can be proved to be invalid.  Possible condition 
-          includes duplicated address, illegal address, etc.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-types:duid;
-        }
-        leaf cli-duid {
-          type uint32;
-          mandatory true;
-          description "duid of client";
-        }
-        leaf iaid {
-          type uint32;
-          mandatory true;
-          description "IAID";
-        }
-        leaf serv-name {
-          type string;
-          description "server name";
-        }
-        leaf description {
-          type string;
-          description "description of the event";
-        }
+  notification unsuccessful-status-code {
+    description "Notification sent when the client receives a message
+      that includes an unsuccessful Status Code option.";
+    leaf status-code {
+      type uint16;
+      mandatory true;
+      description "Unsuccessful status code received by a client.";
+    }
+    leaf server-duid {
+      description "DUID of the server sending the unsuccessful
+        error code.";
+      mandatory true;
+      type binary;
+    }
+  }
+
+  notification server-duid-changed {
+    description "Notification sent when the client receives a lease
+      from a server with different DUID to the one currently stored
+      by the client.";
+    leaf new-server-duid {
+      description "DUID of the new server.";
+      mandatory true;
+      type binary;
+    }
+    leaf previous-server-duid {
+      description "DUID of the previous server.";
+      mandatory true;
+      type binary;
+    }
+    leaf lease-ia-na {
+      description "Reference to the IA_NA lease.";
+      type leafref {
+        path "/dhcpv6-client/client-if/ia-na/iaid";
       }
-
-      container retransmission-failed {
-        description "raised when the retransmission mechanism defined 
-          in [RFC3315] is failed.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-types:duid;
-        }
-        leaf description {
-          type enumeration {
-            enum "MRC failed" {
-              description "MRC failed";
-            }
-            enum "MRD failed" {
-              description "MRD failed";
-            }
-          }
-          mandatory true;
-          description "description of failure";
-        }
+    }
+    leaf lease-ia-ta {
+      description "Reference to the IA_TA lease.";
+      type leafref {
+        path "/dhcpv6-client/client-if/ia-ta/iaid";
       }
-
-      container failed-status-turn-up {
-        description "raised when the client receives a message includes 
-          an unsuccessful Status Code option.";
-        container duid {
-          description "Sets the DUID";
-          uses dhcpv6-types:duid;
-        }
-        leaf status-code {
-          type enumeration {
-            enum "1" {
-              description "UnspecFail";
-            }
-            enum "2" {
-              description "NoAddrAvail";
-            }
-            enum "3" {
-              description "NoBinding";
-            }
-            enum "4" {
-              description "NotOnLink";
-            }
-            enum "5" {
-              description "UseMulticast";
-            }
-          }
-          mandatory true;
-          description "employed status code";
-        }
+    }
+    leaf lease-ia-pd {
+      description "Reference to the IA_PD lease.";
+      type leafref {
+        path "/dhcpv6-client/client-if/ia-pd/iaid";
       }
-
     }
   }
 }

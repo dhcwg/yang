@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='utf-8'?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+<!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-dhc-dhcpv6-yang-11" ipr="trust200902" version="3">
+  <!-- xml2rfc v2v3 conversion 2.30.0 -->
+  <front>
+    <title abbrev="DHCPv6 YANG Model">YANG Data Modules for DHCPv6 
+      Option Configuration</title>
+    <seriesInfo name="Internet-Draft" value="draft-if-dhc-dhcpv6-options-yang"/>
+   <author fullname="Ian Farrer" initials="I.F." surname="Farrer">
+      <organization>Deutsche Telekom AG</organization>
+      <address>
+        <postal>
+          <street>TAI, Landgrabenweg 151</street>
+          <city>Bonn</city>
+          <code>53227</code>
+          <country>Germany</country>
+        </postal>
+        <email>ian.farrer@telekom.de</email>
+      </address>
+    </author>
+   <date year="2020"/>
+    <workgroup>DHC Working Group</workgroup>
+    <abstract>
+      <t>[draft-ietf-dhc-dhcpv6-yang] defines YANG modules for the 
+        configuration and management of DHCPv6 elements. It also 
+        contains YANG modules for the set of DHCPv6 options that are
+        defined in [RFC8415]. his document YANG extends the YANG modules defined in 
+        [draft-ietf-dhc-dhcpv6-yang] providing additional modules
+        for the configuration of DHCPv6 options. The options are 
+        grouped into individual modules based on the RFC
+      </t>
+    </abstract>
+    <note>
+      <name>Requirements Language</name>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+       "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+       "OPTIONAL" in this document are to be interpreted as described in
+       BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and
+       only when, they appear in all capitals, as shown here.</t>
+    </note>
+  </front>
+  <middle>
+    <section anchor="introduction">
+      <name>Introduction</name>
+      <t>DHCPv6 <xref target="RFC8415"/> is widely used for supplying
+        configuration and other relevant parameters to clients in IPv6 networks.
+        <xref target="draft-ieft-dhcpv6-yang"/> defines modules for
+        the configuration and management of DHCPv6 servers, relays,
+        and clients. It also defines YANG modules for the configuration
+        of the relevant set of DHCPv6 options which are defined in
+        <xref target="RFC8415"/>. This document provides YANG modules
+        for the configuration of addition DHCPv6 YANG options.
+     </t>
+     <t>The procedure for creating the YANG modules is defined in
+       Appendix A. of <xref target="draft-ieft-dhcpv6-yang"/> and has
+       been followed here. The DHCPv6 options are grouped by the 
+       Standards Track document in which they are defined (one module
+       per document). In cases where more than one DHCP option is 
+       defined in a single Standards Track document, theses will be
+       represented by individual YANG group per option.
+     </t>
+    <section anchor="terminology">
+        <name>Terminology</name>
+        <t>The reader should be familiar with the YANG data modelling language
+        defined in <xref target="RFC7950"/>.</t>
+        <t>The YANG modules in this document adopt the Network Management
+        Datastore Architecture (NMDA) <xref target="RFC8342"/>.  The meanings of
+        the symbols used in tree diagrams are defined in
+        <xref target="RFC8340"/>.</t>
+        <t>The reader should be familiar with the terms defined in DHCPv6
+          <xref target="RFC8415"/> and other relevant documents.</t>
+      </section>
+    </section>
+    <section anchor="tree-diagrams">
+      <name>DHCPv6 Tree Diagrams</name>
+      <section anchor="dhcpv6-server-tree">
+        <name>DHCPv6 Server Tree Diagram</name>
+        <t>The tree diagram in <xref target="server-structure"/> provides an
+          overview of the DHCPv6 server module. The tree also includes
+          the augmentations of the relevant option definitions from
+          <xref target="option-module"/> and the common functions module
+          <xref target="common-module"/>.
+        </t>
+
+        <figure anchor="server-structure">
+          <name>DHCPv6 Server Data Module Structure</name>
+            <xi:include href="ietf-dhcpv6-server.yang.tree.clean.xml"/>
+        </figure>
+        <t>Descriptions of important nodes:</t>
+        <ul spacing="normal">
+          <li>dhcpv6-node-type: The different functional DHCPv6 elements each
+            have their relevant identities.</li>
+       </ul>
+        <t>Information about notifications:</t>
+        <ul spacing="normal">
+          <li>address/prefix-pool-utilization-threshold-exceeded: Raised when 
+            number of leased addresses or prefixes exceeds the configurated
+            usage threshold. 
+          </li>
+          <li>invalid-client-detected: Raised when the server detects an
+            invalid client. A description of the error that has generated the
+            notification can be included.
+          </li>
+          <li>decline-received: Raised when a DHCPv6 Decline message is received
+            from a client.
+          </li>
+          <li>non-success-code-sent: Raised when a status message is raised
+            for an error.
+          </li>
+        </ul>
+      </section>
+   </section>
+
+    <section anchor="yang-modules">
+      <name>YANG Modules for DHCPv6 Options</name>
+      <section anchor="rfc3319-module">
+        <name>RFC3319 - DHCPv6 Options 21 and 22 YANG Modules</name>
+        <t>This module imports typedefs from <xref target="RFC6991"/>,
+        <xref target="RFC8343"/>.</t>
+        <xi:include href="ietf-dhcpv6-options-rfc3319.yang.xml"/>
+      </section>
+      <section anchor="rfc3646-module">
+        <name>RFC3646 - DHCPv6 Options 23 and 24 YANG Modules</name>
+        <t>This module imports typedefs from <xref target="RFC6991"/>,
+        <xref target="RFC8343"/>.</t>
+        <xi:include href="ietf-dhcpv6-options-rfc3646.yang.xml"/>
+      </section>
+      <section anchor="rfc3898-module">
+        <name>RFC3898 - DHCPv6 Options 27, 28, 29 and 30 YANG Modules</name>
+        <t>This module imports typedefs from <xref target="RFC6991"/>,
+        <xref target="RFC8343"/>.</t>
+        <xi:include href="ietf-dhcpv6-options-rfc3898.yang.xml"/>
+      </section>
+ 
+ </section>
+
+    <section anchor="security">
+      <name>Security Considerations</name>
+        <t>The YANG modules defined in this document are designed to be
+          accessed via network management protocols such as NETCONF 
+          <xref target="RFC6241"/> or RESTCONF <xref target="RFC8040"/>.
+          The lowest NETCONF layer is the secure transport layer, and 
+          the mandatory-to-implement secure transport is Secure Shell 
+          (SSH) <xref target="RFC6242"/>.  The lowest RESTCONF layer 
+          is HTTPS, and the mandatory-to-implement secure transport 
+          is TLS <xref target="RFC8446"/>.</t>
+
+        <t>The Network Configuration Access Control Model (NACM) 
+          <xref target="RFC8341"/> provides the means to restrict 
+          access for particular NETCONF or RESTCONF users to a 
+          preconfigured subset of all available NETCONF or RESTCONF 
+          protocol operations and content.</t>
+
+        <t>All data nodes defined in the YANG modules which can be 
+          created, modified, and deleted (i.e., config true, which 
+          is the default) are considered sensitive.  Write operations 
+          (e.g., edit-config) to these data nodes without proper 
+          protection can have a negative effect on network operations. 
+        </t>
+
+        <t>An attacker who is able to access the DHCPv6 server can 
+          undertake various attacks, such as:</t>
+
+        <ul spacing="normal">
+          <li>Denial of service attacks, based on reconfiguring 
+            messages to a rogue DHCPv6 server.
+          </li>
+          <li>Various attacks based on reconfiguring the contents
+            of DHCPv6 options. E.g., changing the address of a
+            the DNS server supplied in a DHCP option to point
+            to a rogue server.
+          </li>
+        </ul>
+
+        <t>An attacker who is able to access the DHCPv6 relay can 
+          undertake various attacks, such as:</t>
+
+        <ul spacing="normal">
+          <li>Reconfiguring the relay's destination address to send
+            messages to a rogue DHCPv6 server.
+          </li>
+          <li>Deleting information about a client's delegated 
+            prefix, causing a denial of service attack as traffic 
+            will no longer be routed to the client.
+          </li>
+        </ul>
+
+        <t>Some of the readable data nodes in this YANG module may 
+          be considered sensitive or vulnerable in some network 
+          environments.  It is thus important to control read access 
+          (e.g., via get, get-config, or notification) to these data 
+          nodes.  These subtrees and data nodes can be misused to 
+          track the activity of a host:</t>
+
+        <ul spacing="normal">
+          <li>Reconfiguring the relay's destination address to send
+            messages to a rogue DHCPv6 server.
+          </li>
+          <li>Information the server holds about clients with active 
+            leases: (dhcpv6-server/network-ranges/network-range/
+              address-pools/address-pool/active-leases)
+          </li>
+          <li>Information the relay holds about clients with active 
+            leases: (dhcpv6-relay/relay-if/prefix-delegation/)
+          </li>
+        </ul>
+
+      <t>Security considerations related to DHCPv6 are discussed in 
+      <xref target="RFC8415"/>.</t>
+
+      <t>Security considerations given in [RFC7950] are also applicable here.
+      </t>
+    </section>
+
+    <section anchor="iana">
+      <name>IANA Considerations</name>
+      <t>This document registers the following YANG modules in the "YANG
+   Module Names" registry <xref target="RFC6020"/>.</t>
+     <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3319</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6</dd>
+        <dt>reference:</dt>
+        <dd>TBD</dd>
+      </dl>
+      <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3646</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6</dd>
+        <dt>reference:</dt>
+        <dd>TBD</dd>
+      </dl>
+       <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3898</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6</dd>
+        <dt>reference:</dt>
+        <dd>TBD</dd>
+      </dl>
+        <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4075</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6</dd>
+        <dt>reference:</dt>
+        <dd>TBD</dd>
+      </dl>
+      <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4704</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6</dd>
+        <dt>reference:</dt>
+        <dd>TBD</dd>
+      </dl>
+      <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4833</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6</dd>
+        <dt>reference:</dt>
+        <dd>TBD</dd>
+      </dl>
+ </section>
+    <section anchor="acknowledgments">
+      <name>Acknowledgments</name>
+      <t>The authors would like to thank Qi Sun, Lishan Li, Sladjana Zoric,
+        Tomek Mrugalski, Marcin Siodelski, Bernie Volz and Bing Liu for
+        their valuable comments and contributions to this work.</t>
+    </section>
+    <section anchor="contributors">
+      <name>Contributors</name>
+        <t>The following individuals contributed to this effort:</t>
+      <artwork><![CDATA[
+  Bernie Volz
+  Cisco Systems, Inc.
+  1414 Massachusetts Ave
+  Boxborough, MA 01719
+  USA
+  Email: volz@cisco.com
+
+]]></artwork>
+    </section>
+  </middle>
+  <back>
+    <references>
+      <name>References</name>
+      <references>
+        <name>Normative References</name>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6355.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6242.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6991.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8040.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8340.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8342.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8415.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3319.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3646.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3898.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4075.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4704.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4280.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4833.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5908.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7341.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7598.xml"/>
+      </references>
+      <references>
+        <name>Informative References</name>
+      </references>
+    </references>
+  </back>
+</rfc>
+
