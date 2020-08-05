@@ -37,7 +37,6 @@ module ietf-dhcpv6-options-rfc7598 {
         description "s46 rule.";
         leaf rule-id {
           type uint8;
-          mandatory true;
           description "Rule identifier.";
         }
         leaf rule-type {
@@ -53,18 +52,15 @@ module ietf-dhcpv6-options-rfc7598 {
                 Mapping Rule.";
             }
           }
-          mandatory true;
         }
         leaf ipv4-prefix {
           type inet:ipv4-prefix;
-          mandatory true;
           description "IPv4 prefix used to represent both the
             'prefix4-len' and 'ipv4-prefix' fields defined in
             RFC7598 Section 4.1.";
         }
         leaf ipv6-prefix {
           type inet:ipv6-prefix;
-          mandatory true;
           description "IPv6 prefix used to represent both the
             'prefix6-len' and 'ipv6-prefix' fields defined in
             RFC7598 Section 4.1.";
@@ -83,12 +79,10 @@ module ietf-dhcpv6-options-rfc7598 {
         description "List of border relay addresses.";
         leaf br-id {
           type uint8;
-          mandatory true;
           description "Border relay list entry identifier.";
         }
         leaf br-ipv6-addr {
           type inet:ipv6-address;
-          mandatory true;
           description "Border relay IPv6 address.";
         }
       }
@@ -102,7 +96,6 @@ module ietf-dhcpv6-options-rfc7598 {
         Softwire Address and Port-Mapped Clients";
       leaf dmr-ipv6-prefix {
         type inet:ipv6-prefix;
-        mandatory true;
         description "IPv6 prefix used to represent both the
           'dmr-prefix6-len' and 'dmr-ipv6-prefix' fields defined in
           RFC7598 Section 4.3."; 
@@ -118,13 +111,11 @@ module ietf-dhcpv6-options-rfc7598 {
         Softwire Address and Port-Mapped Clients";
       leaf ipv4-addr {
         type inet:ipv4-address;
-        mandatory true;
         description "Used to specify the full or shared IPv4 address
           of the CE.";
       }
       leaf bind-ipv6-prefix {
         type inet:ipv6-address;
-        mandatory true;
         description "IPv6 prefix used to represent both the
           'bind-prefix6-len' and 'bind-ipv6-prefix' fields defined in
           RFC7598 Section 4.4.";
@@ -143,17 +134,14 @@ module ietf-dhcpv6-options-rfc7598 {
         description "port parameter";
         leaf offset {
           type uint8;
-          mandatory true;
           description "offset in a port set";
         }
         leaf psid-len {
           type uint8;
-          mandatory true;
           description "length of a psid";
         }
         leaf psid {
           type uint16;
-          mandatory true;
           description "psid value";
         }
       }
