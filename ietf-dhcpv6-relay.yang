@@ -84,14 +84,14 @@ module ietf-dhcpv6-relay {
    */
 
   identity relay {
-    base "dhcpv6-common:dhcpv6-node";
     description "DHCPv6 relay agent identity.";
+    base "dhcpv6-common:dhcpv6-node";
   }
 
   leaf dhcpv6-node-type {
     description "Type for a DHCPv6 relay.";
     type identityref {
-      base "dhcpv6-relay:relay";
+      base "dhcpv6-common:dhcpv6-node";
     }
   }
 

@@ -90,7 +90,7 @@ module ietf-dhcpv6-client {
   leaf dhcpv6-node-type {
     description "Type for a DHCPv6 client.";
     type identityref {
-      base "dhcpv6-client:client";
+      base "dhcpv6-common:dhcpv6-node";
     }
   }
 

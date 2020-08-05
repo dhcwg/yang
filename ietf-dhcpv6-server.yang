@@ -78,14 +78,14 @@ module ietf-dhcpv6-server {
    */
 
   identity server {
-    base "dhcpv6-common:dhcpv6-node";
     description "DHCPv6 server identity.";
+    base "dhcpv6-common:dhcpv6-node";
   }
 
   leaf dhcpv6-node-type {
     description "Type for a DHCPv6 server.";
     type identityref {
-      base "dhcpv6-server:server";
+      base "dhcpv6-common:dhcpv6-node";
     }
   }
 
