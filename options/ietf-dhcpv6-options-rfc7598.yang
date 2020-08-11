@@ -66,6 +66,7 @@ module ietf-dhcpv6-options-rfc7598 {
             RFC7598 Section 4.1.";
         }
       }
+      uses option-s46-portparams-group;
     }
   }
 
@@ -163,7 +164,6 @@ module ietf-dhcpv6-options-rfc7598 {
       container s46-cont-mape-option {
         uses s46-rule-option-group;
         uses s46-br-option-group;
-        uses option-s46-portparams-group;
       }
     }
   }
@@ -176,7 +176,6 @@ module ietf-dhcpv6-options-rfc7598 {
         Softwire Address and Port-Mapped Clients";
       uses s46-rule-option-group;
       uses s46-dmr-option-group;
-      uses option-s46-portparams-group;
     }
   }
 
@@ -188,7 +187,6 @@ module ietf-dhcpv6-options-rfc7598 {
         Softwire Address and Port-Mapped Clients";
       uses s46-v4-v6-binding-option-group;
       uses s46-br-option-group;
-      uses option-s46-portparams-group;
     }
   }
 
