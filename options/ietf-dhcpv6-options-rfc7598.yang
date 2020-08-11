@@ -115,7 +115,7 @@ module ietf-dhcpv6-options-rfc7598 {
           of the CE.";
       }
       leaf bind-ipv6-prefix {
-        type inet:ipv6-address;
+        type inet:ipv6-prefix;
         description "IPv6 prefix used to represent both the
           'bind-prefix6-len' and 'bind-ipv6-prefix' fields defined in
           RFC7598 Section 4.4.";
