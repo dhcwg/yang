@@ -328,7 +328,8 @@ module ietf-dhcpv6-options-rfc8415 {
   grouping reconfigure-accept-option-group {
     container reconfigure-accept-option {
       presence "Enable sending of this option";
-      description "OPTION_RECONF_ACCEPT (20)  Rapid Commit Option.
+      description "OPTION_RECONF_ACCEPT (20)  Reconfigure Accept 
+        Option.
         A client uses the Reconfigure Accept option to announce to 
         the server whether the client is willing to accept
         Reconfigure messages, and a server uses this option to tell
