@@ -65,8 +65,8 @@ module ietf-dhcpv6-options-rfc7598 {
             'prefix6-len' and 'ipv6-prefix' fields defined in
             RFC7598 Section 4.1.";
         }
+        uses option-s46-portparams-group;
       }
-      uses option-s46-portparams-group;
     }
   }
 
