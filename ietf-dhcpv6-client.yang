@@ -137,6 +137,7 @@ module ietf-dhcpv6-client {
       description "Number of Reply (7) messages received.";
     }
     leaf release-count {
+      config "false";
       type uint32;
       description "Number of Release (8) messages sent.";
     }

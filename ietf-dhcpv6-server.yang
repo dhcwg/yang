@@ -223,6 +223,7 @@ module ietf-dhcpv6-server {
       description "Number of Reply (7) messages sent.";
     }
     leaf release-count {
+      config "false";
       type uint32;
       description "Number of Release (8) messages received.";
     }
