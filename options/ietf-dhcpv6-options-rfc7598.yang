@@ -125,7 +125,7 @@ module ietf-dhcpv6-options-rfc7598 {
     }
   }
 
-  grouping option-s46-portparams-group {
+  grouping option-s46-portparams-option-group {
     container s46-portparams-option {
       description "OPTION_S46_PORTPARAMS (93) S46 Port Parameters
         Option.";
@@ -149,7 +149,7 @@ module ietf-dhcpv6-options-rfc7598 {
     }
   }
 
-  grouping option-s46-cont-mape-group {
+  grouping option-s46-cont-mape-option-group {
     list s46-cont-mape-option-instances {
       description "OPTION_S46_CONT_MAPE (94) S46 MAP-E Container
           Option. RFC7598 allows for multiple instances of this
@@ -168,7 +168,7 @@ module ietf-dhcpv6-options-rfc7598 {
     }
   }
 
-  grouping option-s46-cont-mapt-group {
+  grouping option-s46-cont-mapt-option-group {
     container s46-cont-mapt-option {
       description "OPTION_S46_CONT_MAPT (95) S46 MAP-T Container
         Option.";
@@ -179,7 +179,7 @@ module ietf-dhcpv6-options-rfc7598 {
     }
   }
 
-  grouping option-s46-cont-lw-group {
+  grouping option-s46-cont-lw-option-group {
     container s46-cont-lw-option {
       description "OPTION_S46_CONT_LW (96) S46 Lightweight 4 over 6
         Container Option.";
@@ -193,8 +193,8 @@ module ietf-dhcpv6-options-rfc7598 {
   augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
     uses s46-br-option-group;
-    uses option-s46-cont-mape-group;
-    uses option-s46-cont-mapt-group;
-    uses option-s46-cont-lw-group; 
+    uses option-s46-cont-mape-option-group;
+    uses option-s46-cont-mapt-option-group;
+    uses option-s46-cont-lw-option-group; 
   }
 }
