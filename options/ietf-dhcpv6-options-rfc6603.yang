@@ -37,7 +37,6 @@ module ietf-dhcpv6-options-rfc6603 {
           delegating router includes in the OPTION_PD_EXCLUDE
           option that is excluded from the delegated prefix set.";
         type inet:ipv6-prefix;
-        mandatory true;
       }
     }
   }
