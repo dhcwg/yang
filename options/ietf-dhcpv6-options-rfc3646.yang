@@ -37,12 +37,10 @@ module ietf-dhcpv6-options-rfc3646 {
         description "List of DNS server addresses.";
         leaf dns-serv-id {
           type uint8;
-          mandatory true;
           description "DNS server list entry ID.";
         }
         leaf dns-serv-addr {
           type inet:ipv6-address;
-          mandatory true;
           description "DNS server address.";
         }
       }
@@ -59,12 +57,10 @@ module ietf-dhcpv6-options-rfc3646 {
         description "List of DNS search domains.";
         leaf domain-searchlist-id {
           type uint8;
-          mandatory true;
           description "Domain seachlist entry ID.";
         }
         leaf domain-search-list-entry {
           type string;
-          mandatory true;
           description "Domain search list entry.";
         }
       }

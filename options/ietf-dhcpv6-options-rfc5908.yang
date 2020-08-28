@@ -43,7 +43,6 @@ module ietf-dhcpv6-options-rfc5908 {
           description "List of NTP server locationi suboptions.";
           leaf ntp-serv-id {
             type uint8;
-            mandatory true;
             description "NTP server list element identifier.";
           }
           choice ntp-time-source-suboption {

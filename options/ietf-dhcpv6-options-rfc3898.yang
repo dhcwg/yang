@@ -38,12 +38,10 @@ module ietf-dhcpv6-options-rfc3898 {
         description "nis server info";
         leaf nis-serv-id {
           type uint8;
-          mandatory true;
           description "nis server id";
         }
         leaf nis-serv-addr {
           type inet:ipv6-address;
-          mandatory true;
           description "nis server addr";
         }
       }
@@ -61,12 +59,10 @@ module ietf-dhcpv6-options-rfc3898 {
         description "NIS+ server information.";
         leaf nis-plus-serv-id {
           type uint8;
-          mandatory true;
           description "NISP+ server list entry identifier.";
         }
         leaf nis-plus-serv-addr {
           type inet:ipv6-address;
-          mandatory true;
           description "NISP+ server address.";
         }
       }

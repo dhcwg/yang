@@ -34,17 +34,14 @@ module ietf-dhcpv6-options-rfc4704 {
         (DHCPv6) Client Fully Qualified Domain Name (FQDN) Option";
       leaf server-initiate-update {
         type boolean;
-        mandatory true;
         description "server initiate";
       }
       leaf client-initiate-update {
         type boolean;
-        mandatory true;
         description "client initiate";
       }
       leaf modify-name-from-cli {
         type boolean;
-        mandatory true;
         description "modify by client";
       }
     }

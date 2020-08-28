@@ -33,7 +33,6 @@ module ietf-dhcpv6-options-rfc4833 {
       reference "RFC4833: Timezone Options for DHCP";
       leaf tz-posix {
         type string;
-        mandatory true;
         description "TZ Posix IEEE 1003.1 String";
       }
     }
@@ -45,7 +44,6 @@ module ietf-dhcpv6-options-rfc4833 {
       reference "RFC4833: Timezone Options for DHCP";
       leaf tz-database {
         type string;
-        mandatory true;
         description "Reference to the TZ Database";
       }
     }

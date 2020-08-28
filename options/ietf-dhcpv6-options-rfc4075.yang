@@ -38,12 +38,10 @@ module ietf-dhcpv6-options-rfc4075 {
         description "List of SNTP server addresses.";
         leaf sntp-serv-id {
           type uint8;
-          mandatory true;
           description "SNTP server id";
         }
         leaf sntp-serv-addr {
           type inet:ipv6-address;
-          mandatory true;
           description "SNTP server address.";
         }
       }
