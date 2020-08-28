@@ -52,7 +52,6 @@ module ietf-dhcpv6-options-rfc4776 {
           ASCII letters, e.g., DE or US.  (Civic addresses always
           contain country designations, suggesting the use of a
           fixed-format field to save space.)";
-        mandatory true;
         type string {
           length "2";
         }
