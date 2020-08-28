@@ -121,7 +121,7 @@ module ietf-dhcpv6-options-rfc7598 {
           'bind-prefix6-len' and 'bind-ipv6-prefix' fields defined in
           RFC7598 Section 4.4.";
       }
-      uses option-s46-portparams-options-group;
+      uses option-s46-portparams-option-group;
     }
   }
 
