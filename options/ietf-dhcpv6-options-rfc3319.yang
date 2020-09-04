@@ -33,17 +33,9 @@ module ietf-dhcpv6-options-rfc3319 {
       reference "RFC3319: Dynamic Host Configuration Protocol
         (DHCPv6) Options for Session Initiation Protocol (SIP)
         Servers";
-      list sip-server {
-        key sip-serv-id;
-        description "sip server info";
-        leaf sip-serv-id {
-          type uint8;
-          description "sip server id";
-        }
-        leaf sip-serv-domain-name {
-          type inet:domain-name;
-          description "sip server domain name";
-        }
+      leaf sip-serv-domain-name {
+        type inet:domain-name;
+        description "sip server domain name";
       }
     }
   }
