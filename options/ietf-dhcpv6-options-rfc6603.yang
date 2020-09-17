@@ -29,6 +29,7 @@ module ietf-dhcpv6-options-rfc6603 {
 
   grouping pd-exclude-option-group {
     container pd-exclude {
+      if-feature dhcpv6-server:prefix-delegation;
       description "OPTION_PD_EXCLUDE (67) PD Exclude Option.";
       reference "RFC6603: Prefix Exclude Option for DHCPv6-based
         Prefix Delegation";
@@ -41,8 +42,8 @@ module ietf-dhcpv6-options-rfc6603 {
     }
   }
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
-    when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:prefix-pools/dhcpv6-server:prefix-pool" {
+    when "../../../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
     uses pd-exclude-option-group;
   }
 }
