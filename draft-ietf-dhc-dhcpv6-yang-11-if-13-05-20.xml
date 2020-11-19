@@ -90,6 +90,7 @@
     <date year="2020"/>
     <workgroup>DHC Working Group</workgroup>
     <abstract>
+      <t>FIX THE APPENDIX STUFF ON OTHER OPTION LOCATIONS</t>
       <t>This document describes several YANG data modules for the 
         configuration and management of DHCPv6 servers, relays, and clients.
       </t>
@@ -627,8 +628,9 @@
        for this.
       </t>
 
-       <t>The example YANG models OPTION_SIP_SERVER_D (21) and OPTION_SIP_SERVER_D (21) defined
-        in <xref target="RFC3319"/>. The overall structure is as follows:</t>
+       <t>The example YANG models OPTION_SIP_SERVER_D (21) and 
+        OPTION_SIP_SERVER_D (21) defined in <xref target="RFC3319"/>. 
+        The overall structure is as follows:</t>
       <ul spacing="normal">
           <li>A separate grouping is used for each option.
           </li>
@@ -658,6 +660,9 @@
         </t>
 
               <xi:include href="example-dhcpv6-options-rfc3319.yang.xml"/>
+        <t>In some cases, options only have very specific applicability
+          and are only able to appear inside other options. In this
+          case, enumerating</t>
       </section>
 
       <section anchor="vendor-specific-configuration-example">
