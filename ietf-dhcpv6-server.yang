@@ -303,12 +303,12 @@ module ietf-dhcpv6-server {
         key network-range-id;
         description "Network-ranges are identified by the
           'network-range-id' key.";
-        leaf network-range-id {
+        leaf id {
           type uint32;
           mandatory true;
           description "Equivalent to subnet ID.";
         }
-        leaf network-description {
+        leaf description {
           type string;
           mandatory true;
           description "Description for the network range.";
@@ -583,4 +583,16 @@ module ietf-dhcpv6-server {
       type binary;
     }
   }
+
+  /*
+   * Notifications
+   */
+  rpc delete-address-lease {
+   input {
+     leaf delete-address {
+        type inet:ipv6-address 
 }
+}
+}
+
+

@@ -1,6 +1,6 @@
 module ietf-dhcpv6-options-rfc8415 {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-8415";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-8415-client";
   prefix "rfc8415-cli";
 
   import ietf-inet-types {
