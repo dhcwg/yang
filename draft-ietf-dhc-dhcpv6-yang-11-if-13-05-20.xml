@@ -90,8 +90,7 @@
     <date year="2020"/>
     <workgroup>DHC Working Group</workgroup>
     <abstract>
-      <t>FIX THE APPENDIX STUFF ON OTHER OPTION LOCATIONS</t>
-      <t>This document describes several YANG data modules for the 
+      <t>This document describes YANG data modules for the 
         configuration and management of DHCPv6 servers, relays, and clients.
       </t>
     </abstract>
@@ -109,13 +108,15 @@
       <name>Introduction</name>
       <t>DHCPv6 <xref target="RFC8415"/> is widely used for supplying
         configuration and other relevant parameters to clients in IPv6 networks.
-        This document defines DHCPv6 YANG modules for the configuration
+        This document defines YANG modules for the configuration
         and management of DHCPv6 servers, relays and clients. Separate 
-        'element' modules for each of these.
+        'element' modules are defined for each of these. There is an
+        additional module per-element defining DHCP opttions which are
+        relevant for that element (taken from the options defined
+        in <xref target="RFC8415"/>.
       </t>
       <t>Additionally, a 'common' module contains typedefs and
-        groupings used by the element modules. A further module contains an
-        initial set of DHCPv6 option definitions.
+        groupings used by all of the element modules.
       </t>
       <t>It is worth noting that as DHCPv6 is itself a client configuration
         protocol, it is not the intention of this document to describe a 
@@ -176,15 +177,25 @@
         A large number of DHCPv6 options have been created in addition to
         those defined in <xref target="RFC8415"/>. As implementations differ
         widely in which DHCPv6 options that they support, the following
-        approach has been taken to defining options: Only the relevant set
-        of DHCPv6 options defined in <xref target="RFC8415"/> are included
-        in this document. Further options definitions can be added by
+        approach has been taken to defining options: Only the DHCPv6 
+        options defined in <xref target="RFC8415"/> are included
+        in this document. Of these, only the options that require 
+        operator configuration are modelled. E.g. OPTION_IA_NA (3) is
+        created by the DHCP server when requested by the client. The
+        contents of the fields in the option are based on a number
+        of input configuration parameters which the server will 
+        apply when it receives the request (e.g., the T1/T2 timers
+        that are relevant for the pool of addresses). As a result, 
+        there are no fields that are directly configurable in the 
+        option, so it is not modelled.
+        </t>
+        <t>Further options definitions can be added by
         additional YANG modules via augmentation into the relevant element
         modules from this document.
         <xref target="example-dhcp-options-extension"/> contains an
         example module showing how the DHCPv6 option definitions can be
-        extended in this manner and provides guidance on writing YANG 
-        modules for DHCPv6 options.
+        extended in this manner. Some guidance on how to write YANG 
+        modules for additional DHCPv6 options is also provided.
         </t>
       </section>
       </section>
@@ -207,7 +218,7 @@
         <t>The tree diagram in <xref target="server-structure"/> provides an
           overview of the DHCPv6 server module. The tree also includes
           the augmentations of the relevant option definitions from
-          <xref target="option-module"/> and the common functions module
+          <xref target="server-option-module"/> and the common functions module
           <xref target="common-module"/>.
         </t>
 
@@ -294,7 +305,7 @@
         <t>The tree diagram in <xref target="relay-structure"/> provides an
           overview of the DHCPv6 relay module. The tree also includes
           the augmentations of the relevant option definitions from
-          <xref target="option-module"/> and the common functions module
+          <xref target="relay-option-module"/> and the common functions module
           <xref target="common-module"/>.
         </t>
 
@@ -342,7 +353,7 @@
         <t>The tree diagram in <xref target="client-structure"/> provides an
           overview of the DHCPv6 client module. The tree also includes
           the augmentations of the relevant option definitions from
-          <xref target="option-module"/> and the common functions module
+          <xref target="client-option-module"/> and the common functions module
           <xref target="common-module"/>.
         </t>
 
@@ -413,13 +424,25 @@
         <xref target="RFC8343"/>.</t>
         <xi:include href="ietf-dhcpv6-client.yang.xml"/>
       </section>
-      <section anchor="option-module">
-        <name>DHCPv6 RFC8415 Options YANG Module</name>
+      <section anchor="server-option-module">
+        <name>RFC8415 Server Options YANG Module</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.
         </t>
-        <xi:include href="ietf-dhcpv6-options-rfc8415.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-options-rfc8415-server.yang.xml"/>
       </section>
-      <section anchor="common-module">
+       <section anchor="relay-option-module">
+        <name>RFC8415 Relay Options YANG Module</name>
+        <t>This module imports typedefs from <xref target="RFC6991"/>.
+        </t>
+        <xi:include href="ietf-dhcpv6-options-rfc8415-server.yang.xml"/>
+      </section>
+        <section anchor="client-option-module">
+        <name>RFC8415 Client Options YANG Module</name>
+        <t>This module imports typedefs from <xref target="RFC6991"/>.
+        </t>
+        <xi:include href="ietf-dhcpv6-options-rfc8415-client.yang.xml"/>
+      </section>
+     <section anchor="common-module">
         <name>DHCPv6 Common YANG Module</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.</t>
         <xi:include href="ietf-dhcpv6-common.yang.xml"/>
