@@ -4,16 +4,18 @@ XML2RFC?=../venv/bin/xml2rfc
 SED=/bin/sed
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-11-wip/draft-ietf-dhc-dhcpv6-yang-11-if-13-05-20
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-11-if-13-05-20
 
-MODELS_DIR:=draft-ietf-dhc-dhcpv6-yang-11-wip
+MODELS_DIR:=.
 
 
 all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-client.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-relay.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-server.yang |fold -w 67 > $$@
 endef
 
 MODULES=
