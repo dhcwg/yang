@@ -628,8 +628,8 @@
        for this.
       </t>
 
-       <t>The example YANG models OPTION_SIP_SERVER_D (21) and 
-        OPTION_SIP_SERVER_D (21) defined in <xref target="RFC3319"/>. 
+       <t>The example defines YANG models for OPTION_SIP_SERVER_D (21) 
+        and OPTION_SIP_SERVER_D (22) defined in <xref target="RFC3319"/>. 
         The overall structure is as follows:</t>
       <ul spacing="normal">
           <li>A separate grouping is used for each option.
@@ -659,10 +659,23 @@
           than one element type, then an augment statement for each element is used.
         </t>
 
-              <xi:include href="example-dhcpv6-options-rfc3319.yang.xml"/>
-        <t>In some cases, options only have very specific applicability
-          and are only able to appear inside other options. In this
-          case, enumerating</t>
+              <xi:include href="example-dhcpv6-options-rfc3319-server.yang.xml"/>
+        <t>The correct location to augment the new option definition(s)
+          will vary according to the specific rules defined for the 
+          use of that specific option. E.g. for options which will
+          be augmented into the ietf-dhcpv6-server module, in many
+          cases, these will be augmented to "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set"
+          so that they can be defined within option sets. However,
+          there are some options which are only applicable for 
+          specific deployment scenarios and in these cases it may be
+          more logicial to augment the option group to a location 
+          relevant for the option.</t>
+        <t>One example for this could be OPTION_PD_EXCLUDE (67). This
+          option is only relevant in combination with a delegated 
+          prefix which contains a specific prefix. In this case, the
+          following location for the augmentation may be more suitable:
+          "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:prefix-pools/dhcpv6-server:prefix-pool"
+        </t>
       </section>
 
       <section anchor="vendor-specific-configuration-example">
