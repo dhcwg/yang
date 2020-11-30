@@ -373,11 +373,11 @@ module ietf-dhcpv6-server {
               description "Holds state related to active client 
                 leases.";
               config false;
-                  leaf total-count {
-              type uint64;
-              mandatory true;
-              description "The total number of addresses in the
-                pool.";
+              leaf total-count {
+                type uint64;
+                mandatory true;
+                description "The total number of addresses in the
+                  pool.";
               }
               leaf allocated-count {
                 type uint64;
@@ -585,14 +585,49 @@ module ietf-dhcpv6-server {
   }
 
   /*
-   * Notifications
+   * RPCs
    */
+
   rpc delete-address-lease {
-   input {
-     leaf delete-address {
-        type inet:ipv6-address 
-}
-}
+    description "Deletes a client's active address lease from the 
+      server's lease database. Note, this will not cause the address
+      to be revoked from the client, and the lease may be refreshed
+      or renewed by the client.";
+    input {
+      leaf lease-address-to-delete {
+        type inet:ipv6-address;
+          mandatory true;
+        description "IPv6 address of an active lease that will be 
+          deleted from the server.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the server.";
+      }
+    }
+  }
+  rpc delete-prefix-lease {
+    description "Deletes a client's active prefix lease from the 
+      server's lease database. Note, this will not cause the prefix
+      to be revoked from the client, and the lease may be refreshed
+      or renewed by the client.";
+    input {
+      leaf lease-prefix-to-delete {
+        type inet:ipv6-prefix;
+          mandatory true;
+        description "IPv6 prefix of an active lease that will be 
+          deleted from the server.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the server.";
+      }
+    }
+  }
 }
 
 

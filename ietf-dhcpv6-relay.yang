@@ -323,4 +323,61 @@ module ietf-dhcpv6-relay {
       }
     }
   }
+
+  /*
+   * RPCs
+   */
+
+  rpc clear-prefix-entry {
+    description "Clears an entry for an active delegated prefix
+      from the relay.";
+    input {
+      leaf lease-prefix {
+        type inet:ipv6-prefix;
+        mandatory true;
+        description "IPv6 prefix of an active lease entry that will be
+          deleted from the relay.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the relay.";
+      }
+    }
+  }
+  rpc clear-client-prefixes {
+    description "Clears all active prefix entries for a single client.";
+    input {
+      leaf client-duid {
+        type binary;
+        mandatory true;
+        description "DUID of the client .";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the relay.";
+      }
+    }
+  }
+  rpc clear-interface-prefixes {
+    description "Clears all delegated prefix bindings from an interface
+      on the relay.";
+    input {
+      leaf interface {
+        type if:interface-ref;
+        mandatory true;
+        description "Reference to the relay interface that will have
+          all active prefix delegation bindings deleted.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the relay.";
+      }
+    }
+  }
 }
