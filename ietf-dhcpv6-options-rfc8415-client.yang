@@ -33,8 +33,13 @@ module ietf-dhcpv6-options-rfc8415 {
   description "This YANG module contains DHCPv6 options defined
     in RFC8415 that can be used by DHCPv6 clients.";
 
+  revision 2020-12-01 {
+    description "Version update for draft -12 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
+  }
+
   revision 2020-11-19 {
-    description "Sepated into a client specific set of options.";
+    description "Separated into a client specific set of options.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
   }
 

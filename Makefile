@@ -4,7 +4,7 @@ XML2RFC?=../venv/bin/xml2rfc
 SED=/bin/sed
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-11-if-13-05-20
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-12
 
 MODELS_DIR:=.
 

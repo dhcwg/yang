@@ -29,6 +29,11 @@ module example-dhcpv6-server-config {
     greatly between different implementations, the module 
     provided as an example only.";
 
+  revision 2020-12-01 {
+    description "Version update for draft -12 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
+  }
+
   revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";

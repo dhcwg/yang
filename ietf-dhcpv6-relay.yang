@@ -61,6 +61,11 @@ module ietf-dhcpv6-relay {
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
 
+  revision 2020-12-01 {
+    description "Version update for draft -12 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
+  }
+
   revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
@@ -94,7 +99,7 @@ module ietf-dhcpv6-relay {
   }
 
   /*
-   * Indentities
+   * Identities
    */
 
   identity relay {
@@ -380,8 +385,8 @@ module ietf-dhcpv6-relay {
   }
   rpc clear-interface-prefixes {
     nacm:default-deny-all;
-    description "Clears all delegated prefix bindings from an interface
-      on the relay.";
+    description "Clears all delegated prefix bindings from an 
+      interface on the relay.";
     input {
       leaf interface {
         type if:interface-ref;

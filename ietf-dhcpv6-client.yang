@@ -54,6 +54,11 @@ module ietf-dhcpv6-client {
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
 
+  revision 2020-12-01 {
+    description "Version update for draft -12 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
+  }
+
   revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
@@ -259,7 +264,7 @@ module ietf-dhcpv6-client {
             description "The unique identifier for this IA_TA.";
           }
         container ia-ta-options {
-          description "An augmenation point for additional options
+          description "An augmentation point for additional options
             that the client will send in the IA_TA-options field
             of OPTION_IA_TA.";
         }
@@ -306,7 +311,7 @@ module ietf-dhcpv6-client {
           description "The unique identifier for this IA_PD.";
         }
         container ia-pd-options {
-          description "An augmenation point for additional options
+          description "An augmentation point for additional options
             that the client will send in the IA_PD-options field
             of OPTION_IA_TA.";
         }

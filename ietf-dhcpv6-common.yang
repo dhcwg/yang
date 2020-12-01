@@ -20,6 +20,11 @@ module ietf-dhcpv6-common {
   description "This YANG module defines common components 
     used for the configuration and management of DHCPv6.";
 
+  revision 2020-12-01 {
+    description "Version update for draft -12 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
+  }
+
   revision 2020-05-26 {
     description "Version update for draft -11 publication and
       to align revisions across the different modules.";
@@ -115,7 +120,7 @@ module ietf-dhcpv6-common {
         }
         leaf duid-en-identifier {
           type string;
-          description "Indentifier, unique to the device.";
+          description "Identifier, unique to the device.";
         }
       }
       case duid-ll {
@@ -134,7 +139,7 @@ module ietf-dhcpv6-common {
       case duid-uuid {
         description "DUID Based on Universally Unique Identifier
           (Type 4 - DUID-UUID).";
-        reference "RFC6335 Defination of the UUID-Based Unique
+        reference "RFC6335 Definition of the UUID-Based Unique
           Identifier";
         leaf uuid {
           type yang:uuid;
