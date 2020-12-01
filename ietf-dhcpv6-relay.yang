@@ -5,18 +5,32 @@ module ietf-dhcpv6-relay {
 
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-yang-types {
     prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
+    reference
+      "To be updated on publication";
   }
 
   import ietf-interfaces {
     prefix if;
+    reference
+      "RFC 8343: A YANG Data Model for Interface Management";
+  }
+
+  import ietf-netconf-acm {
+    prefix nacm;
+    reference
+      "RFC 8341: Network Configuration Access Control Model";
   }
 
   organization
@@ -329,6 +343,7 @@ module ietf-dhcpv6-relay {
    */
 
   rpc clear-prefix-entry {
+    nacm:default-deny-all;
     description "Clears an entry for an active delegated prefix
       from the relay.";
     input {
@@ -347,6 +362,7 @@ module ietf-dhcpv6-relay {
     }
   }
   rpc clear-client-prefixes {
+    nacm:default-deny-all;
     description "Clears all active prefix entries for a single client.";
     input {
       leaf client-duid {
@@ -363,6 +379,7 @@ module ietf-dhcpv6-relay {
     }
   }
   rpc clear-interface-prefixes {
+    nacm:default-deny-all;
     description "Clears all delegated prefix bindings from an interface
       on the relay.";
     input {
