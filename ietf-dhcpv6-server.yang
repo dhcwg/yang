@@ -5,14 +5,26 @@ module ietf-dhcpv6-server {
 
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-yang-types {
     prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
+    reference
+      "To be updated on publication";
+  }
+
+  import ietf-netconf-acm {
+    prefix nacm;
+    reference
+      "RFC 8341: Network Configuration Access Control Model";
   }
 
   organization "DHC WG";
@@ -589,6 +601,7 @@ module ietf-dhcpv6-server {
    */
 
   rpc delete-address-lease {
+    nacm:default-deny-all;
     description "Deletes a client's active address lease from the 
       server's lease database. Note, this will not cause the address
       to be revoked from the client, and the lease may be refreshed
@@ -609,6 +622,7 @@ module ietf-dhcpv6-server {
     }
   }
   rpc delete-prefix-lease {
+    nacm:default-deny-all;
     description "Deletes a client's active prefix lease from the 
       server's lease database. Note, this will not cause the prefix
       to be revoked from the client, and the lease may be refreshed

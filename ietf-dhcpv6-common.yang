@@ -5,6 +5,8 @@ module ietf-dhcpv6-common {
 
   import ietf-yang-types {
     prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
 
   organization "DHC WG";

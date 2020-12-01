@@ -5,14 +5,20 @@ module ietf-dhcpv6-options-rfc8415 {
 
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
+    reference
+      "To be updated on publication";
   }
 
   import ietf-dhcpv6-server {
     prefix dhcpv6-server;
+    reference
+      "To be updated on publication";
   }
 
   organization "DHC WG";
