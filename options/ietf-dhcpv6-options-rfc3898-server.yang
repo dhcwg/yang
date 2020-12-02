@@ -1,7 +1,7 @@
 module ietf-dhcpv6-options-rfc3898 {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3898";
-  prefix "rfc3898";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3898-server";
+  prefix "rfc3898-srv";
 
   import ietf-inet-types {
     prefix inet;
@@ -16,7 +16,7 @@ module ietf-dhcpv6-options-rfc3898 {
     "ian.farrer@telekom.de";
 
   description "This YANG module contains DHCPv6 options defined
-    in RFC3319 that can be used by DHCPv6 servers.";
+    in RFC3898 that can be used by DHCPv6 servers.";
 
   revision 2020-02-21 {
     description "Initial version.";
@@ -52,7 +52,7 @@ module ietf-dhcpv6-options-rfc3898 {
     container nis-plus-config-option {
       description "OPTION_NISP_SERVERS (28): Network Information Service V2
         (NIS+) Servers Option.";
-      reference "RFC3989: Network Information Service (NIS) Configuration
+      reference "RFC3898: Network Information Service (NIS) Configuration
         Options for Dynamic Host Configuration Protocol for IPv6 (DHCPv6)";
       list nis-plus-server {
         key nis-plus-serv-id;
@@ -73,7 +73,7 @@ module ietf-dhcpv6-options-rfc3898 {
     container nis-domain-name-option {
       description "OPTION_NIS_DOMAIN_NAME (29) Network Information
         Service (NIS) Domain Name Option";
-      reference "RFC3989: Network Information Service (NIS)
+      reference "RFC3898: Network Information Service (NIS)
         Configuration Options for Dynamic Host Configuration Protocol
         for IPv6 (DHCPv6)";
       leaf nis-domain-name {
@@ -89,7 +89,7 @@ module ietf-dhcpv6-options-rfc3898 {
     container nis-plus-domain-name-option {
       description "OPTION_NISP_DOMAIN_NAME (30) Network Information
         Service V2 (NIS+) Domain Name Option";
-      reference "RFC3989: Network Information Service (NIS)
+      reference "RFC3898: Network Information Service (NIS)
         Configuration Options for Dynamic Host Configuration Protocol
         for IPv6 (DHCPv6)";
       leaf nis-plus-domain-name {

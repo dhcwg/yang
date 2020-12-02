@@ -1,7 +1,7 @@
 module ietf-dhcpv6-options-rfc6603 {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc6603";
-  prefix "rfc6603";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc6603-server";
+  prefix "rfc6603-srv";
 
   import ietf-inet-types {
     prefix inet;

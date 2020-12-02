@@ -1,7 +1,7 @@
 module ietf-dhcpv6-options-rfc4280 {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4280";
-  prefix "rfc4280";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4280-server";
+  prefix "rfc4280-srv";
 
   import ietf-inet-types {
     prefix inet;

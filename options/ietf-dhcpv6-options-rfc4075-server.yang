@@ -1,7 +1,7 @@
 module ietf-dhcpv6-options-rfc4075 {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4075";
-  prefix "rfc4075";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4075-server";
+  prefix "rfc4075-srv";
 
   import ietf-inet-types {
     prefix inet;
