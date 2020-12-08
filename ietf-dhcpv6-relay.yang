@@ -1,475 +1,404 @@
 module ietf-dhcpv6-relay {
-	yang-version 1.1;
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay";
   prefix "dhcpv6-relay";
 
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
-  import ietf-dhcpv6-options {
-    prefix dhcpv6-options;
+
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
-  import ietf-dhcpv6-types {
-    prefix dhcpv6-types;
+
+  import ietf-dhcpv6-common {
+    prefix dhcpv6-common;
+    reference
+      "To be updated on publication";
   }
+
   import ietf-interfaces {
     prefix if;
+    reference
+      "RFC 8343: A YANG Data Model for Interface Management";
   }
 
-  organization 
-  	"IETF DHC (Dynamic Host Configuration) Working group";
+  import ietf-netconf-acm {
+    prefix nacm;
+    reference
+      "RFC 8341: Network Configuration Access Control Model";
+  }
+
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working group";
 
   contact
-  	"cuiyong@tsinghua.edu.cn
-     lh.sunlinh@gmail.com
-     ian.farrer@telekom.de
-     sladjana.zechlin@telekom.de
-     hezihao9512@gmail.com";
+    "cuiyong@tsinghua.edu.cn
+    lh.sunlinh@gmail.com
+    ian.farrer@telekom.de
+    sladjana.zechlin@telekom.de
+    hezihao9512@gmail.com
+    godfryd@isc.org";
 
-  description 
-  	"This model defines a YANG data model that can be
-     used to configure and manage a DHCPv6 relay.";
+  description
+    "This YANG module defines components necessary for the 
+    configuration and management of DHCPv6 relays.
 
-  revision 2018-09-04 {
+    Copyright (c) 2018 IETF Trust and the persons identified as
+    authors of the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and subject
+    to the license terms contained in, the Simplified BSD License
+    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    Relating to IETF Documents
+    (http://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC 8513; see
+    the RFC itself for full legal notices.";
+
+  revision 2020-12-01 {
+    description "Version update for draft -12 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
+  }
+
+  revision 2020-05-26 {
+    description "Version update for draft -11 publication and
+      to align revisions across the different modules.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";
+  }
+
+  revision 2019-09-20 {
     description "";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-10";
   }
 
   revision 2018-03-04 {
     description "Resolved most issues on the DHC official
-    github";
+      github";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
   revision 2017-12-22 {
-	  description
-	  	"Resolve most issues on Ian's github.";
-	  reference
-	  	"I-D: draft-ietf-dhc-dhcpv6-yang";
-  }
-  
-  revision 2017-11-24 {
-    description 
-    	"First version of the separated relay specific
-       YANG model.";
+    description
+      "Resolve most issues on Ians Github.";
     reference
-    	"I-D: draft-ietf-dhc-dhcpv6-yang";
+      "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2017-11-24 {
+    description
+      "First version of the separated relay specific
+      YANG model.";
+    reference
+      "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  /*
+   * Identities
+   */
+
+  identity relay {
+    description "DHCPv6 relay agent identity.";
+    base "dhcpv6-common:dhcpv6-node";
+  }
+
+  leaf dhcpv6-node-type {
+    description "Type for a DHCPv6 relay.";
+    type identityref {
+      base "dhcpv6-common:dhcpv6-node";
+    }
+  }
+
+  /*
+   * Features
+   */
+
+  feature prefix-delegation {
+    description "Enable if the relay functions as a delegating router
+      for DHCPv6 prefix delegation.";
+  }
+
+  /*
+   * Groupings
+   */
+
+  grouping pd-lease-state {
+    description "State data for the relay.";
+    list pd-leases {
+      config false;
+      key ia-pd-prefix;
+      description "Information about an active IA_PD prefix
+        delegation.";
+     leaf ia-pd-prefix {
+        description "Prefix that is delegated.";
+        type inet:ipv6-prefix;
+      }
+      leaf last-renew {
+        description "Time of the last successful refresh or renew
+          of the delegated prefix.";
+        type yang:date-and-time;
+      }
+      leaf client-peer-address {
+        description "Peer-address of the client.";
+        type inet:ipv6-address;
+      }
+      leaf client-duid {
+        description "DUID of the leasing client.";
+        type binary;
+      }
+      leaf server-duid {
+        description "DUID of the delegating server.";
+        type binary;
+      }
+    }
+  }
+
+  grouping message-statistics {
+    description "Contains counters for the different DHCPv6 
+      message types.";
+    leaf solicit-received-count {
+      config "false";
+      type uint32;
+      description "Number of Solicit (1) messages received.";
+    }
+    leaf advertise-sent-count {
+      config "false";
+      type uint32;
+      description "Number of Advertise (2) messages sent.";
+    }
+    leaf request-received-count {
+      config "false";
+      type uint32;
+      description "Number of Request (3) messages received.";
+    }
+    leaf confirm-received-count {
+      config "false";
+      type uint32;
+      description "Number of Confirm (4) messages received.";
+    }
+    leaf renew-received-count {
+      config "false";
+      type uint32;
+      description "Number of Renew (5) messages received.";
+    }
+    leaf rebind-received-count {
+      config "false";
+      type uint32;
+      description "Number of Rebind (6) messages received.";
+    }
+    leaf reply-sent-count {
+      config "false";
+      type uint32;
+      description "Number of Reply (7) messages received.";
+    }
+    leaf release-received-count {
+      config "false";
+      type uint32;
+      description "Number of Release (8) messages sent.";
+    }
+    leaf decline-received-count {
+      config "false";
+      type uint32;
+      description "Number of Decline (9) messages sent.";
+    }
+    leaf reconfigure-sent-count {
+      config "false";
+      type uint32;
+      description "Number of Reconfigure (10) messages sent.";
+    }
+    leaf information-request-received-count {
+      config "false";
+      type uint32;
+      description "Number of Information-request (11) messages
+        received.";
+    }
+    leaf unknown-message-received-count {
+      config "false";
+      type uint32;
+      description
+        "Number of messages of unknown type that have been 
+           received.";
+    }
+    leaf unknown-message-sent-count {
+      config "false";
+      type uint32;
+      description
+        "Number of messages of unknown type that have been sent.";
+    }
+    leaf discarded-message-count {
+      config "false";
+      type uint32;
+      description
+        "Number of messages that have been discarded for any 
+           reason.";
+    }
+  }
+
+  grouping global-statistics {
+    leaf relay-forward-sent-count {
+      config "false";
+      type uint32;
+      description "Number of Relay-forward (12) messages sent.";
+    }
+    leaf relay-forward-received-count {
+      config "false";
+      type uint32;
+      description "Number of Relay-forward (12) messages received.";
+    }
+    leaf relay-reply-received-count {
+      config "false";
+      type uint32;
+      description "Number of Relay-reply (13) messages received.";
+    }
+    leaf relay-forward-unknown-sent-count {
+      config "false";
+      type uint32;
+      description "Number of Relay-forward (12) messages containing
+        a message of unknown type sent.";
+    }
+    leaf relay-forward-unknown-received-count {
+      config "false";
+      type uint32;
+      description "Number of Relay-forward (12) messages containing
+        a message of unknown type received.";
+    }
+    leaf discarded-message-count {
+      config "false";
+      type uint32;
+      description "Number of messages that have been discarded
+        for any reason.";
+    }
   }
 
   /*
    * Data Nodes
    */
 
-  container relay {
-  	presence
-  		"Enables the relay";
+  container dhcpv6-relay {
     description
-    	"DHCPv6 relay portion";
-    
-    container relay-config {
-    	description
-    		"This container contains the configuration data
-        of the relay.";
-      container relay-attributes {
-        description
-	        "A container describes some basic attributes of the relay 
-	         agent including some relay agent specific options data that
-	         need to be configured previously. 
-	         Such options include Remote-Id option and Subscriber-Id 
-	         option.";
-        leaf name {
-          type string;
-          description 
-          	"Relay agent name";
-        }
-        leaf description {
-          type string;
-          description 
-          	"Textual description of the relay agent";
-        }
-        leaf-list dest-addrs {
-          type inet:ipv6-address;
-          description 
-          	"Each DHCPv6 relay agent may be configured with a list
-          	 of destination addresses. 
-          	 This node defines such a list of IPv6 addresses that 
-          	 may include unicast addresses, multicast addresses or 
-          	 other addresses.";
-        }
-        list subscribers {
-          key subscriber;
-          description 
-          	"Subscribers";
-          leaf subscriber {
-            type uint8;
-            mandatory true;
-            description 
-            	"Subscriber";
-          }
-          leaf subscriber-id {
-            type string;
-            mandatory true;
-            description 
-            	"Subscriber id";
-          }
-        }
-        list remote-host {
-          key ent-num;
-          description 
-          	"Remote host";
-          leaf ent-num {
-            type uint32;
-            mandatory true;
-            description 
-            	"Enterprise number";
-          }
-          leaf remote-id {
-            type string;
-            mandatory true;
-            description 
-            	"Remote id";
-          }
-        }
-        uses dhcpv6-types:vendor-infor;
+      "This container contains the configuration data nodes for 
+      the relay.";
+    list relay-if {
+      key if-name;
+      leaf if-name {
+        type if:interface-ref;
       }
-
-      container rsoo-option-sets {
-      	description
-      	 "DHCPv6 relay agent could provide some information that would
-      	  be useful to DHCPv6 client. 
-      	  Since relay agent cannot provide options directly to the 
-      	  client, RSOO-enabled options are defined to propose options
-      	  for the server to send to the client.
-      	  This container models such RSOO-enabled options.";
-      	reference 
-      		"RFC6422";
-        list option-set {
-          key option-set-id;
-          description
-		        "This list under the 'rsoo-option-sets' container is similar
-		         to the that defined in server module. 
-		         It allows the relay to implement several sets of RSOO-enabled
-		         options for different interfaces. 
-		         The list only includes the EAP Re-authentication Protocol 
-		         (ERP) Local Domain Name DHCPv6 Option defined in RFC6440, 
-		         since it is the only one RSOO-enabled options accepted by 
-		         IANA so far.";
-          leaf option-set-id {
-            type uint32;
-            description "Option sed id";
-          }
-          uses dhcpv6-options:relay-supplied-option-definitions;
+      leaf-list destination-addresses {
+        type inet:ipv6-address;
+        description "Each DHCPv6 relay agent may be configured with
+          a list of destination addresses for relayed messages.
+          The list may include unicast addresses, multicast addresses
+          or other valid addresses.";
+      }
+      leaf link-address {
+        description "An address that may be used by the server
+          to identify the link on which the client is located.";
+        type binary {
+          length "0..16";
         }
       }
-
-      list relay-if {
-        // if - This should reference an entry in ietf-interfaces
-        key if-name;
-        description 
-        "A relay agent may have several interfaces, we should provide
-         a way to configure and manage parameters on the interface-level. 
-         A list that describes specific interfaces and their corresponding 
-         parameters is employed to fulfil the configfuration. Here we use 
-         a string called 'if-name' as the key of list.";
-        leaf if-name {
-          type if:interface-ref;
-          mandatory true;
-          description 
-          	"Interface name";
-        }
-        leaf interface-id {
-          type string;
-          description 
-          	"Interface id";
-        }
-
-        /*
-        leaf enable {
-          type boolean;
-          mandatory true;
-          description "whether this interface is enabled";
-        }
-        */
-
-        leaf ipv6-address {
-          type inet:ipv6-address;
-          description
-            "IPv6 address for this interface";
-        }
-
-        leaf rsoo-option-set-id {
-          type leafref {
-            path "/relay/relay-config/rsoo-option-sets/option-set/option-set-id";
-          }
-          description "Configured Relay Supplied Option set";
-        }
-        
-        list next-entity {
-          key dest-addr;
-          description 
-	          "This node defines a list that is used to describe the
-	           next hop entity of this relay distinguished by their
-	           addresses.";
-          leaf dest-addr {
-            type inet:ipv6-address;
-            mandatory true;
-            description 
-            	"Destination addr";
-          }
-          leaf available {
-            type boolean;
-            mandatory true;
-            description 
-            	"Whether the next entity is available or not";
-          }
-          leaf multicast {
-            type boolean;
-            mandatory true;
-            description 
-            	"Whether the address is multicast or not";
-          }
-          leaf server {
-            type boolean;
-            mandatory true;
-            description 
-            	"Whether the next entity is a server";
-          }
-        }
-      }         	
+      container relay-options {
+        description "Definitions for DHCPv6 options that can be sent
+          by the relay are augmented to this location from other YANG
+          modules as required.";
+      }
+      uses message-statistics;
+      container prefix-delegation {
+        description "Controls and holds state information for prefix
+          delegation.";
+        presence "Enables prefix delegation for this interface.";
+        if-feature prefix-delegation;
+        uses pd-lease-state;
+      }
     }
-      
-      
-  	container relay-state {
-  		config "false";
-  		description 
-  			"State data of relay";
-  		list relay-if {
-  			key if-name;
-  			description
-        "A relay agent may have several interfaces, we should provide
-         a way to configure and manage parameters on the interface-level. 
-         A list that describes specific interfaces and their corresponding 
-         parameters is employed to fulfil the configfuration. Here we use 
-         a string called 'if-name' as the key of list.";			
-  			leaf if-name{
-  				type string;
-  				mandatory true;
-  				description 
-  					"Interface name";
-  			}
-        list pd-route {
-          // if - need to look at if/how we model these. If they are
-          // going to be modelled, then they should be ro state
-          // entries (we're not trying to configure routes here)
-          key pd-route-id;
-          description "pd route";
-          leaf pd-route-id {
-            type uint8;
-            mandatory true;
-            description 
-            	"PD route id";
-          }
-          leaf requesting-router-id {
-            type uint32;
-            mandatory true;
-            description 
-            	"Requesting router id";
-          }
-          leaf delegating-router-id {
-            type uint32;
-            mandatory true;
-            description 
-            	"Delegating router id";
-          }
-          leaf next-router {
-            type inet:ipv6-address;
-            mandatory true;
-            description 
-            	"Next router";
-          }
-          leaf last-router {
-            type inet:ipv6-address;
-            mandatory true;
-            description 
-            	"Previous router";
-          }
-        }
-  			list next-entity {
-  				key dest-addr;
-  				description "This node defines a list that is used to 
-  					describe the next hop entity of this relay agent. 
-  					Different entities are distinguished by their 
-  					addresses.";
-  				leaf dest-addr {
-  					type inet:ipv6-address;
-  					mandatory true;
-  					description "destination addr";
-          }
-  				container packet-stats {
-  					description "packet statistics";
-  					leaf solicit-rvd-count {
-              type uint32;
-              mandatory true;
-              description "solicit received counter";
-            }
-            leaf request-rvd-count {
-              type uint32;
-              mandatory true;
-              description "request received counter";
-            }
-            leaf renew-rvd-count {
-              type uint32;
-              mandatory true;
-              description "renew received counter";
-            }
-            leaf rebind-rvd-count {
-              type uint32;
-              mandatory true;
-              description "rebind recevied counter";
-            }
-            leaf decline-rvd-count {
-              type uint32;
-              mandatory true;
-              description "decline received counter";
-            }
-            leaf release-rvd-count {
-              type uint32;
-              mandatory true;
-              description "release received counter";
-            }
-            leaf info-req-rvd-count {
-              type uint32;
-              mandatory true;
-              description "information request counter";
-            }
-            leaf relay-for-rvd-count {
-              type uint32;
-              mandatory true;
-              description "relay forward received counter";
-            }
-            leaf relay-rep-rvd-count {
-              type uint32;
-              mandatory true;
-              description "relay reply received counter";
-            }
-            leaf packet-to-cli-count {
-              type uint32;
-              mandatory true;
-              description "packet to client counter";
-            }
-            leaf adver-sent-count {
-              type uint32;
-              mandatory true;
-              description "advertisement sent counter";
-            }
-            leaf confirm-sent-count {
-              type uint32;
-              mandatory true;
-              description "confirm sent counter";
-            }
-            leaf reply-sent-count {
-              type uint32;
-              mandatory true;
-              description "reply sent counter";
-            }
-            leaf reconfig-sent-count {
-              type uint32;
-              mandatory true;
-              description "reconfigure sent counter";
-            }
-            leaf relay-for-sent-count {
-              type uint32;
-              mandatory true;
-              description "relay forward sent counter";
-            }
-            leaf relay-rep-sent-count {
-              type uint32;
-              mandatory true;
-              description "relay reply sent counter";
-            }
-  				}
-  			}
-  		}		
-      container relay-stats {
-        config "false";
-        description 
-        	"Relay statistics";
-        leaf cli-packet-rvd-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Client packet received counter";
-        }
-        leaf relay-for-rvd-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Relay forward received counter";
-        }
-        leaf relay-rep-rvd-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Relay reply recevied counter";
-        }
-        leaf packet-to-cli-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Packet to client counter";
-        }
-        leaf relay-for-sent-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Relay forward sent counter";
-        }
-        leaf relay-rep-sent-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Relay reply sent counter";
-        }
-        leaf discarded-packet-count {
-          type uint32;
-          mandatory true;
-          description 
-          	"Discarded packet counter";
-        }
-      }
-  	}
+    uses global-statistics;
   }
 
   /*
    * Notifications
    */
 
-  notification notifications {
-    description "DHCPv6 relay notification module";
-    container dhcpv6-relay-event {
-      description 
-      	"DHCPv6 relay event";
-      container topo-changed {
-        description 
-        "Raised when the topology of the relay agent is changed.";
-        leaf relay-if-name {
-          type string;
-          mandatory true;
-          description 
-          	"Relay interface name";
+  notification relay-event {
+    description
+      "DHCPv6 relay event notifications.";
+    container topology-change {
+      description "Raised if the entry for and interface with DHCPv6
+        related configuration or state is removed from 
+        if:interface-refs.";
+      leaf relay-if-name {
+        description "Name of the interface that has been removed.";
+        type leafref {
+          path "/dhcpv6-relay/relay-if/if-name";
         }
-        leaf first-hop {
-          type boolean;
-          mandatory true;
-          description 
-          	"First hop";
-        }
-        leaf last-entity-addr {
-          type inet:ipv6-address;
-          mandatory true;
-          description 
-          	"Last entity address";
-        }
+      }
+      leaf last-ipv6-addr {
+        type inet:ipv6-address;
+        description "Last IPv6 address configured on the interface.";
+      }
+    }
+  }
+
+  /*
+   * RPCs
+   */
+
+  rpc clear-prefix-entry {
+    nacm:default-deny-all;
+    description "Clears an entry for an active delegated prefix
+      from the relay.";
+    input {
+      leaf lease-prefix {
+        type inet:ipv6-prefix;
+        mandatory true;
+        description "IPv6 prefix of an active lease entry that will be
+          deleted from the relay.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the relay.";
+      }
+    }
+  }
+  rpc clear-client-prefixes {
+    nacm:default-deny-all;
+    description "Clears all active prefix entries for a single client.";
+    input {
+      leaf client-duid {
+        type binary;
+        mandatory true;
+        description "DUID of the client .";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the relay.";
+      }
+    }
+  }
+  rpc clear-interface-prefixes {
+    nacm:default-deny-all;
+    description "Clears all delegated prefix bindings from an 
+      interface on the relay.";
+    input {
+      leaf interface {
+        type if:interface-ref;
+        mandatory true;
+        description "Reference to the relay interface that will have
+          all active prefix delegation bindings deleted.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description "Response message from the relay.";
       }
     }
   }
