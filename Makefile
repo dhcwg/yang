@@ -4,7 +4,7 @@ XML2RFC?=../venv/bin/xml2rfc
 SED=/bin/sed
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-12
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-13
 
 MODELS_DIR:=.
 
@@ -63,7 +63,7 @@ define yang_to_xml =
 $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
-	echo '<![CDATA[<CODE BEGINS> file $(inc_yang_file) \n' >> $$@
+	echo '<![CDATA[<CODE BEGINS> file "$(inc_yang_file)" \n' >> $$@
 	#./rfcfold -i $$<  -o $$@
 	cat $$< |fold -w 69 >> $$@
 	echo '<CODE ENDS>]]>' >> $$@
@@ -98,3 +98,4 @@ $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 clean:
 	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
 
+#xml complete file can be created with 'xml2rfc --exp draft-ietf-dhc-dhcpv6-yang-XX.xml
