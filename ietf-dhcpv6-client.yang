@@ -107,7 +107,6 @@ module ietf-dhcpv6-client {
     description "Type for a DHCPv6 client.";
   }
 
-
   /*
    * Groupings
    */
