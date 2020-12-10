@@ -510,7 +510,8 @@ module ietf-dhcpv6-server {
       utilization exceeds the configured threshold.";
     leaf pool-id {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/address-pools/address-pool/pool-id";
+        path "/dhcpv6-server/network-ranges/network-range/" +
+          "address-pools/address-pool/pool-id";
       }
       description "Leafref to the address pool which the notification
         is being generated for.";
@@ -540,14 +541,16 @@ module ietf-dhcpv6-server {
       utilization exceeds the configured threshold.";
     leaf pool-id {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/prefix-pools/prefix-pool/pool-id";
+        path "/dhcpv6-server/network-ranges/network-range/" + 
+          "prefix-pools/prefix-pool/pool-id";
       }
       mandatory true;
       description "Unique identifier for the pool.";
     }
     leaf max-pd-space-utilization {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/prefix-pools/prefix-pool/max-pd-space-utilization";
+        path "/dhcpv6-server/network-ranges/network-range/" +
+          "prefix-pools/prefix-pool/max-pd-space-utilization";
       }
       mandatory true;
       description "PD space utilization threshold.";
@@ -660,5 +663,3 @@ module ietf-dhcpv6-server {
     }
   }
 }
-
-
