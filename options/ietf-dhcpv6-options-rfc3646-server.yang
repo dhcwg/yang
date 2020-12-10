@@ -1,4 +1,4 @@
-module ietf-dhcpv6-options-rfc3646 {
+module ietf-dhcpv6-options-rfc3646-server {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc3646-server";
   prefix "rfc3646-srv";
@@ -28,10 +28,13 @@ module ietf-dhcpv6-options-rfc3646 {
    */
 
   grouping dns-servers-option-group {
+    description "OPTION_DNS_SERVERS (23) DNS recursive Name Server 
+      option";
+    reference "RFC3646: DNS Configuration options for Dynamic Host 
+      Configuration Protocol for IPv6 (DHCPv6)";
     container dns-servers-option {
-      description "OPTION_DNS_SERVERS (23) DNS recursive Name Server option";
-      reference "RFC3646: DNS Configuration options for Dynamic Host 
-        Configuration Protocol for IPv6 (DHCPv6)";
+      description "OPTION_DNS_SERVERS (23) DNS recursive Name Server
+        option container.";
       list dns-server {
         key dns-serv-id;
         description "List of DNS server addresses.";
@@ -48,11 +51,13 @@ module ietf-dhcpv6-options-rfc3646 {
   }
 
   grouping domain-searchlist-option-group {
+    description "OPTION_DOMAIN_LIST (24) Domain Search List Option";
+    reference "RFC3646: DNS Configuration options for Dynamic
+      Host Configuration Protocol for IPv6 (DHCPv6)";
     container domain-searchlist-option {
-      description "OPTION_DOMAIN_LIST (24) Domain Search List Option";
-      reference "RFC3646: DNS Configuration options for Dynamic
-        Host Configuration Protocol for IPv6 (DHCPv6)";
-      list domain-searchlist {
+      description "OPTION_DOMAIN_LIST (24) Domain Search List Option
+        container.";
+     list domain-searchlist {
         key domain-searchlist-id;
         description "List of DNS search domains.";
         leaf domain-searchlist-id {
@@ -67,8 +72,10 @@ module ietf-dhcpv6-options-rfc3646 {
     }
   }
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
-    when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" + 
+    "dhcpv6-server:option-set" {
+    when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:" + 
+      "server'";
     uses dns-servers-option-group; 
     uses domain-searchlist-option-group;
   }
