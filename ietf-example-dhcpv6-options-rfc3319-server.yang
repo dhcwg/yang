@@ -104,8 +104,10 @@ module ietf-example-dhcpv6-options-rfc3319-server {
    * Augmentations
    */
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
-    when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" + 
+    "dhcpv6-server:option-set" {
+    when "../../../dhcpv6-server:dhcpv6-node-type=" + 
+      "'dhcpv6-server:server'";
     description "Augment the option definition groupings to the server
       module.";
     uses sip-server-domain-name-list-option-group;
