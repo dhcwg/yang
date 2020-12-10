@@ -1,10 +1,12 @@
 YANGER?=../yanger/bin/yanger
 PYANG=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
+RFCFOLD?=../venv/bin/rfcfold
 SED=/bin/sed
+INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-12
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-13
 
 MODELS_DIR:=.
 
@@ -13,9 +15,9 @@ all: text html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-client.yang |fold -w 67 > $$@
-	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-relay.yang |fold -w 67 > $$@
-	$(PYANG) -f tree --tree-line-length 65 -p $(MODELS_DIR) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-server.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-client.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-relay.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-server.yang |fold -w 67 > $$@
 endef
 
 MODULES=
@@ -42,7 +44,6 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
-	#./rfcfold -i $$<  -o $$@
 	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
@@ -58,13 +59,11 @@ TREEINCLUDES=
 $(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
 
 
-
 define yang_to_xml =
 $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
-	echo '<![CDATA[<CODE BEGINS> file $(inc_yang_file) \n' >> $$@
-	#./rfcfold -i $$<  -o $$@
+	echo '<![CDATA[<CODE BEGINS> file "$(inc_yang_file)" \n' >> $$@
 	cat $$< |fold -w 69 >> $$@
 	echo '<CODE ENDS>]]>' >> $$@
 	echo '</artwork>' >> $$@
@@ -79,9 +78,9 @@ INCLUDES+=ietf-dhcpv6-options-rfc8415-client.yang
 INCLUDES+=ietf-dhcpv6-options-rfc8415-relay.yang
 INCLUDES+=ietf-dhcpv6-options-rfc8415-server.yang
 INCLUDES+=ietf-dhcpv6-common.yang
-INCLUDES+=example-dhcpv6-class-selector.yang
-INCLUDES+=example-dhcpv6-server-config.yang
-INCLUDES+=example-dhcpv6-options-rfc3319-server.yang
+INCLUDES+=ietf-example-dhcpv6-class-selector.yang
+INCLUDES+=ietf-example-dhcpv6-server-config.yang
+INCLUDES+=ietf-example-dhcpv6-options-rfc3319-server.yang
 
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
@@ -98,3 +97,4 @@ $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 clean:
 	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
 
+#xml complete file can be created with 'xml2rfc --exp draft-ietf-dhc-dhcpv6-yang-XX.xml
