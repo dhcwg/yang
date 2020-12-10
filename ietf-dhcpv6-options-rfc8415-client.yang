@@ -253,8 +253,10 @@ module ietf-dhcpv6-options-rfc8415-client {
    * Augmentations
    */
 
-  augment "/dhcpv6-client:dhcpv6-client/dhcpv6-client:client-if/dhcpv6-client:client-configured-options" {
-    when "../../../dhcpv6-client:dhcpv6-node-type='dhcpv6-client:client'";
+  augment "/dhcpv6-client:dhcpv6-client/dhcpv6-client:client-if/" +
+    "dhcpv6-client:client-configured-options" {
+    when "../../../dhcpv6-client:dhcpv6-node-type=" + 
+      "'dhcpv6-client:client'";
     description "Augment the option definition groupings to the 
       client module.";
     uses option-request-option-group;
