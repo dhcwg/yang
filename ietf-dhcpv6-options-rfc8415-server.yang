@@ -307,8 +307,10 @@ module ietf-dhcpv6-options-rfc8415-server {
    * Augmentations
    */
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/dhcpv6-server:option-set" {
-    when "../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" +
+    "dhcpv6-server:option-set" {
+    when "../../../dhcpv6-server:dhcpv6-node-type=" + 
+      "'dhcpv6-server:server'";
     description "Augment the option definition groupings to the
       relay module.";
     uses preference-option-group;
