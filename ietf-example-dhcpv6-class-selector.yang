@@ -236,34 +236,42 @@ module ietf-example-dhcpv6-class-selector {
     }
   }
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/" +
+   "dhcpv6-server:network-range" {
     description "Augment class selector functions to the DHCPv6 server
       network-ranges.";
     leaf-list client-class {
       type leafref {
-        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector/client-classes/class/client-class-name";
+        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:" +
+          "class-selector/client-classes/class/client-class-name";
       }
       description "Leafrefs to client classes.";
     }
   }
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:address-pools/dhcpv6-server:address-pool" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/" +
+    "dhcpv6-server:network-range/dhcpv6-server:address-pools/" +
+    "dhcpv6-server:address-pool" {
     description "Augment class selector functions to the DHCPv6 server
       address-pools.";
     leaf-list client-class {
       type leafref {
-        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector/client-classes/class/client-class-name";
+        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:" + 
+          "class-selector/client-classes/class/client-class-name";
       }
       description "Leafrefs to client classes.";
     }
   }
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:prefix-pools/dhcpv6-server:prefix-pool" {
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/" + 
+    "dhcpv6-server:network-range/dhcpv6-server:prefix-pools/" + 
+    "dhcpv6-server:prefix-pool" {
     description "Augment class selector functions to the DHCPv6 server
       prefix-pools.";
     leaf-list client-class {
       type leafref {
-        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:class-selector/client-classes/class/client-class-name";
+        path "/dhcpv6-server:dhcpv6-server/dhcpv6-server:" + 
+          "class-selector/client-classes/class/client-class-name";
       }
       description "Leafrefs to client classes.";
     }
