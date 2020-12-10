@@ -94,7 +94,7 @@ module ietf-example-dhcpv6-server-config {
           container all-interfaces {
           presence true;
           description "Configures the server to listen for 
-            incoming messages on all IPv6 addresses (unicats and
+            incoming messages on all IPv6 addresses (unicast and
             multicast) on all of its network interfaces.";
           }
         }
