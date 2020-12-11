@@ -122,12 +122,12 @@ module ietf-dhcpv6-server {
     leaf total-address-count {
       type uint64;
       mandatory true;
-      description "count of total addresses in the pool";
+      description "Count of total addresses in the pool";
     }
     leaf allocated-address-count {
       type uint64;
       mandatory true;
-      description "count of allocated addresses in the pool";
+      description "Count of allocated addresses in the pool";
     }
     list binding-info {
       key client-duid;
@@ -362,32 +362,32 @@ module ietf-dhcpv6-server {
               description "Configuration for host reservations
                 in the address pool.";
               list host-reservation {
-                key reserved-addr;
+                key reserved-address;
                 leaf client-duid {
                   type binary;
                   description "Client DUID.";
                 }
-                leaf reserved-addr {
+                leaf address {
                   type inet:ipv6-address;
-                  description "reserved addr";
+                  description "Reserved address";
                 }
                 list prefix-reservation {
-                  key reserv-prefix-id;
-                  description "reserved prefix reservation";
-                  leaf reserv-prefix-id {
+                  key prefix-id;
+                  description "Reserved prefix";
+                  leaf prefix-id {
                     type uint32;
                     mandatory true;
-                    description "reserved prefix id";
+                    description "Prefix id";
                   }
-                  leaf reserv-prefix {
+                  leaf prefix {
                     type inet:ipv6-prefix;
                     mandatory true;
-                    description "reserved prefix";
+                    description "Prefix";
                   }
-                  leaf reserv-prefix-len {
+                  leaf prefix-len {
                     type uint8;
                     mandatory true;
-                    description "reserved prefix length";
+                    description "Prefix length";
                   }
                 }
                 uses resource-config;
@@ -440,20 +440,20 @@ module ietf-dhcpv6-server {
                 in the prefix pool.";
               list prefix-reservation {
                 description "reserved prefix reservation";
-                key reserved-prefix;
+                key prefix;
                 leaf client-duid {
                   type binary;
                   description "Client DUID.";
                 }
-                leaf reserved-prefix {
+                leaf prefix {
                   type inet:ipv6-prefix;
                   mandatory true;
-                  description "reserved prefix";
+                  description "Prefix";
                 }
-                leaf reserv-prefix-len {
+                leaf prefix-len {
                   type uint8;
                   mandatory true;
-                  description "reserved prefix length";
+                  description "Prefix length";
                 }
               }
               uses resource-config;

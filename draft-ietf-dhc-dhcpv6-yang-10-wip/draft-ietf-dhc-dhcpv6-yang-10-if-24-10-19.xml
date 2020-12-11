@@ -177,10 +177,10 @@
         A large number of DHCPv6 options have been created in addition to
         those defined in <xref target="RFC8415"/>. As implementations differ
         widely in which DHCPv6 options that they support, the following
-        approach has been taken to defining options: Only the relevant set
+        approach has been taken to defining options: only the relevant set
         of DHCPv6 options defined in <xref target="RFC8415"/> are included
         in this document. Further options definitions can be added by
-        additional YANG modules via augmentation into the relevant elemant modules from this
+        additional YANG modules via augmentation into the relevant element modules from this
         document. <xref target="example-dhcp-options-extension"/> contains an
         example module showing how the DHCPv6 option definitions can be
         extended in this manner.
@@ -207,7 +207,7 @@
           overview of the DHCPv6 server module. The tree also includes
           the augmentions of the relevant option definitions from
           <xref target="option-model"/> and the common functions module
-          <xref target="type-model"/>.
+          <xref target="common-model"/>.
         </t>
 
         <figure anchor="server-structure">
@@ -294,7 +294,7 @@
           overview of the DHCPv6 relay module. The tree also includes
           the augmentions of the relevant option definitions from
           <xref target="option-model"/> and the common functions module
-          <xref target="type-model"/>.
+          <xref target="common-model"/>.
         </t>
 
         <figure anchor="relay-structure">
@@ -343,7 +343,7 @@
           overview of the DHCPv6 client module. The tree also includes
           the augmentions of the relevant option definitions from
           <xref target="option-model"/> and the common functions module
-          <xref target="type-model"/>.
+          <xref target="common-model"/>.
         </t>
 
         <figure anchor="client-structure">
@@ -424,7 +424,7 @@
         </t>
         <xi:include href="ietf-dhcpv6-options-rfc8415.yang.xml"/>
       </section>
-      <section anchor="type-model">
+      <section anchor="common-model">
         <name>DHCPv6 Common YANG Model</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.</t>
         <xi:include href="ietf-dhcpv6-common.yang.xml"/>
@@ -591,7 +591,7 @@ The following individuals contributed to this effort:
       <section anchor="vendor-specific-configuration-example">
       <name>Example Vendor Specific Server Configuration Module</name>
       <t>
-      This appendix shows how to extend YANG modules defined in this document for
+      This section shows how to extend YANG modules defined in this document for
       specific, vendor implementation of DHCP solution. It presents how to define
       a vendor specific configuration of DHCPv6 such as configuring a database
       for storing leases.</t>
