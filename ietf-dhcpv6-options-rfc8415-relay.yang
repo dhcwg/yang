@@ -1,6 +1,7 @@
 module ietf-dhcpv6-options-rfc8415-relay {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc8415-relay";
+  namespace "urn:ietf:params:xml:ns:yang:" + 
+    "ietf-dhcpv6-options-rfc8415-relay";
   prefix "rfc8415-rly";
 
   import ietf-dhcpv6-relay {
