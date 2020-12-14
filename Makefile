@@ -6,7 +6,7 @@ SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 
 #SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-13
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-14
 
 MODELS_DIR:=.
 
