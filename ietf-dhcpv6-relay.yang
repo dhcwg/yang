@@ -48,7 +48,7 @@ module ietf-dhcpv6-relay {
     "This YANG module defines components necessary for the 
     configuration and management of DHCPv6 relays.
 
-    Copyright (c) 2018 IETF Trust and the persons identified as
+    Copyright (c) 2020 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
