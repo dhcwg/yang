@@ -33,6 +33,11 @@ module ietf-example-dhcpv6-options-rfc3319-server {
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
 
+  revision 2020-12-22 {
+    description "Version update for draft -13 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-15";
+  }
+
   revision 2020-12-10 {
     description "Version update for draft -13 publication.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-13";

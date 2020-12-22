@@ -54,6 +54,11 @@ module ietf-dhcpv6-options-rfc8415-server {
     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
     they appear in all capitals, as shown here.";
 
+  revision 2020-12-22 {
+    description "Version update for draft -13 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-15";
+  }
+
   revision 2020-12-10 {
     description "Version update for draft -13 publication.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-13";
