@@ -477,7 +477,7 @@
         <name>RFC8415 Relay Options YANG Module</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>.
         </t>
-        <xi:include href="ietf-dhcpv6-options-rfc8415-server.yang.xml"/>
+        <xi:include href="ietf-dhcpv6-options-rfc8415-relay.yang.xml"/>
       </section>
       <section anchor="client-options-module">
         <name>RFC8415 Client Options YANG Module</name>
