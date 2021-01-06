@@ -61,7 +61,7 @@ module ietf-dhcpv6-relay {
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
 
-  revision 2020-10-22 {
+  revision 2020-12-22 {
     description "Version update for draft -13 publication.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-15";
   }
@@ -368,8 +368,8 @@ module ietf-dhcpv6-relay {
       leaf lease-prefix {
         type inet:ipv6-prefix;
         mandatory true;
-        description "IPv6 prefix of an active lease entry that will be
-          deleted from the relay.";
+        description "IPv6 prefix of an active lease entry that will 
+          be deleted from the relay.";
       }
     }
     output {
@@ -381,7 +381,8 @@ module ietf-dhcpv6-relay {
   }
   rpc clear-client-prefixes {
     nacm:default-deny-all;
-    description "Clears all active prefix entries for a single client.";
+    description "Clears all active prefix entries for a single 
+      client.";
     input {
       leaf client-duid {
         type binary;
