@@ -106,7 +106,8 @@ module ietf-dhcpv6-options-rfc8415-relay {
     reference "RFC8415: Dynamic Host Configuration Protocol
         for IPv6 (DHCPv6)";   
     container auth-option {
-      description "OPTION_AUTH (11) Authentication Option container.";
+      description "OPTION_AUTH (11) Authentication Option 
+        container.";
       leaf protocol {
         type uint8;
         description "The authentication protocol used in this
@@ -177,8 +178,10 @@ module ietf-dhcpv6-options-rfc8415-relay {
    * Augmentations
    */
 
-  augment "/dhcpv6-relay:dhcpv6-relay/dhcpv6-relay:relay-if/dhcpv6-relay:relay-options" {
-    when "../../../dhcpv6-relay:dhcpv6-node-type='dhcpv6-relay:relay'";
+  augment "/dhcpv6-relay:dhcpv6-relay/dhcpv6-relay:relay-if/" + 
+    "dhcpv6-relay:relay-options" {
+    when "../../../dhcpv6-relay:dhcpv6-node-type=" + 
+      "'dhcpv6-relay:relay'";
     description "Augment the option definition groupings to the
       relay module.";
     uses auth-option-group;
