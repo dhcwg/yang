@@ -118,7 +118,8 @@ module ietf-dhcpv6-options-rfc8415-server {
     reference "RFC8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6)";
    container preference-option {
-     description "OPTION_PREFERENCE (7) Preference Option container.";
+     description "OPTION_PREFERENCE (7) Preference Option 
+       container.";
      leaf pref-value {
         type uint8;
         description "The preference value for the server in this
@@ -221,11 +222,11 @@ module ietf-dhcpv6-options-rfc8415-server {
         key enterprise-number;
         description "The vendor specific information option allows
           for multiple instances in a single message. Each list entry
-            defines the contents of an instance of the option.";
+          defines the contents of an instance of the option.";
         leaf enterprise-number {
           type uint32;
           description "The vendor's registered Enterprise Number,
-                      as maintained by IANA.";
+            as maintained by IANA.";
         }
         list vendor-option-data {
           key sub-option-code;
@@ -255,7 +256,7 @@ module ietf-dhcpv6-options-rfc8415-server {
       leaf msg-type {
         type uint8;
         description "5 for Renew message, 6 for Rebind message,
-                    11 for Information-request message.";
+          11 for Information-request message.";
       }
     }
   }
@@ -264,12 +265,12 @@ module ietf-dhcpv6-options-rfc8415-server {
     description "OPTION_RECONF_ACCEPT (20)  Reconfigure Accept 
       Option.
       A client uses the Reconfigure Accept option to announce to 
-      the server whether the client is willing to accept
-      Reconfigure messages, and a server uses this option to tell
-      the client whether or not to accept Reconfigure messages.
-      In the absence of this option, the default behavior is that
-      the client is unwilling to accept Reconfigure messages.
-      The presence node is used to enable the option.";
+      the server whether the client is willing to accept Reconfigure 
+      messages, and a server uses this option to tell the client 
+      whether or not to accept Reconfigure messages.  In the absence 
+      of this option, the default behavior is that the client is 
+      unwilling to accept Reconfigure messages.  The presence node 
+      is used to enable the option.";
     reference "RFC8415: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6)";
     container reconfigure-accept-option {
@@ -300,7 +301,8 @@ module ietf-dhcpv6-options-rfc8415-server {
     reference "RFC8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6)";
    container sol-max-rt-option {
-      description "OPTION_SOL_MAX_RT (82) sol max rt option container.";
+      description "OPTION_SOL_MAX_RT (82) sol max rt option 
+        container.";
       leaf sol-max-rt-value {
         type dhcpv6-common:timer-seconds32;
         description "sol max rt value";
@@ -313,7 +315,8 @@ module ietf-dhcpv6-options-rfc8415-server {
     reference "RFC8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6)";   
     container inf-max-rt-option {
-      description "OPTION_INF_MAX_RT (83) inf max rt option container.";
+      description "OPTION_INF_MAX_RT (83) inf max rt option 
+        container.";
       leaf inf-max-rt-value {
         type dhcpv6-common:timer-seconds32;
         description "inf max rt value";
