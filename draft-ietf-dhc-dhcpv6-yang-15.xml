@@ -583,73 +583,73 @@
         Module Names" registry <xref target="RFC6020"/>.</t>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-common</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>dhcpv6-common</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-server</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>dhcpv6-server</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-client</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>dhcpv6-client</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-relay</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>dhcpv6-relay</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-options-rfc8415-server</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc8415-server</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>rfc8415-srv</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-options-rfc8415-relay</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc8415-relay</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>rfc8415-rly</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6</dd>
+        <dd>ietf-dhcpv6-options-rfc8415-client</dd>
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc8415-client</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6</dd>
+        <dd>rfc8415-rly</dd>
         <dt>reference:</dt>
-        <dd>TBD</dd>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
     </section>
     <section anchor="acknowledgments">
