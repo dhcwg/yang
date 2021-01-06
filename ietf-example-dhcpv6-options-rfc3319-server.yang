@@ -70,8 +70,8 @@ module ietf-example-dhcpv6-options-rfc3319-server {
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-domain-name-list-option {
-     description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List
-       container.";
+     description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name 
+       List container.";
      list sip-server {
         key sip-serv-id;
         description "sip server info";
@@ -119,8 +119,8 @@ module ietf-example-dhcpv6-options-rfc3319-server {
     "dhcpv6-server:option-set" {
     when "../../../dhcpv6-server:dhcpv6-node-type=" + 
       "'dhcpv6-server:server'";
-    description "Augment the option definition groupings to the server
-      module.";
+    description "Augment the option definition groupings to the 
+      server module.";
     uses sip-server-domain-name-list-option-group;
     uses sip-server-address-list-option-group;
   }
