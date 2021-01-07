@@ -36,16 +36,16 @@ module ietf-dhcpv6-options-rfc8415-relay {
     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
     for full legal notices.
   
-  revision 2021-01-06 {
-    description "Version update for draft -16 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-16";
-  }
-
     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
     'MAY', and 'OPTIONAL' in this document are to be interpreted as
     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
     they appear in all capitals, as shown here.";
+
+  revision 2021-01-06 {
+    description "Version update for draft -16 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-16";
+  }
 
   revision 2020-12-22 {
     description "Version update for draft -13 publication.";
