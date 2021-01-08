@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-15" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-16" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-15"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-16"/>
     <author fullname="Yong Cui" initials="Y." surname="Cui">
       <organization>Tsinghua University</organization>
       <address>
@@ -42,7 +42,7 @@
         <email>lh.sunlinh@gmail.com</email>
       </address>
     </author>
-    <author fullname="Ian Farrer" initials="I.F." surname="Farrer">
+    <author fullname="Ian Farrer" initials="I." surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
       <address>
         <postal>
@@ -79,7 +79,7 @@
         <email>hezihao9512@gmail.com</email>
       </address>
     </author>
-    <author fullname="Michal Nowikowski" initials="M.N." surname="Nowikowski">
+    <author fullname="Michal Nowikowski" initials="M." surname="Nowikowski">
       <organization>Internet Systems Consortium</organization>
       <address>
         <postal>
@@ -90,7 +90,7 @@
         <email>godfryd@isc.org</email>
       </address>
     </author>
-    <date year="2020"/>
+    <date year="2021"/>
     <workgroup>DHC Working Group</workgroup>
     <abstract>
       <t>This document describes YANG data modules for the configuration 
