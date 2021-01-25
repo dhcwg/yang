@@ -60,6 +60,11 @@ module ietf-dhcpv6-relay {
 
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
+
+  revision 2021-01-25 {
+    description "Version update for draft -17 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-17";
+  }
   
   revision 2021-01-06 {
     description "Version update for draft -16 publication.";
@@ -299,6 +304,11 @@ module ietf-dhcpv6-relay {
     description
       "This container contains the configuration data nodes for 
       the relay.";
+    leaf enabled {
+      description "Globally enables the DHCP relay funtion.";
+      type boolean;
+      default true;
+    }
     list relay-if {
       key if-name;
       description "List of interfaces configured for DHCPv6 
@@ -306,6 +316,12 @@ module ietf-dhcpv6-relay {
       leaf if-name {
         type if:interface-ref;
         description "interface-ref to the relay interface.";
+      }
+      leaf enabled {
+        description "Enables the DHCP relay function for this
+          interface.";
+        type boolean;
+        default true;
       }
       leaf-list destination-addresses {
         type inet:ipv6-address;

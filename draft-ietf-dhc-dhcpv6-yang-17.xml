@@ -241,8 +241,8 @@
         </figure>
         <t>Descriptions of important nodes:</t>
         <ul spacing="normal">
-          <li>dhcpv6-node-type: The different functional DHCPv6 elements 
-            each have their relevant identities.</li>
+          <li>enabled: Enables/disables the function of the server.
+          </li> 
           <li>dhcpv6-server: This container holds the server's DHCPv6
             specific configuration.</li>
           <li>server-duid: Each server must have a DUID (DHCP Unique
@@ -337,8 +337,8 @@
 
         <t>Descriptions of important nodes:</t>
         <ul spacing="normal">
-          <li>dhcpv6-node-type: The different functional DHCPv6 elements 
-            each have their relevant identities.</li>
+          <li>enabled: Globally enables/disables all DHCPv6 relay 
+            functions.</li> 
           <li>dhcpv6-relay: This container holds the relay's DHCPv6
             specific configuration.</li>
           <li>relay-if: As a relay may have multiple client-facing
@@ -346,7 +346,9 @@
             is the key and is an interface-ref to the applicable 
             interface defined by the 'ietf-interfaces' YANG module.
           </li>
-          <li>destination-addresses: Defines a list of IPv6 addresses 
+           <li>enabled: Enables/disables all DHCPv6 relay 
+             function for the specific interface.</li>          
+           <li>destination-addresses: Defines a list of IPv6 addresses 
             that client messages will be relayed to. May include unicast 
             or multicast addresses.</li>
           <li>link-address: Configures the value that the relay will put 
@@ -399,9 +401,8 @@
 
         <t>Descriptions of important nodes:</t>
         <ul spacing="normal">
-          <li>dhcpv6-node-type: The different functional DHCPv6 elements 
-            each have their relevant identities.
-          </li>
+          <li>enabled: Globally enables/disables all DHCPv6 client 
+            functions.</li> 
           <li>dhcpv6-client: This container holds the client's DHCPv6
             specific configuration.</li>
           <li>client-if: As a client may have multiple interfaces 
@@ -410,6 +411,8 @@
             the applicable interface defined by the 'ietf-interfaces' 
             YANG module.
           </li>
+          <li>enabled: Enables/disables all DHCPv6 client 
+             function for the specific interface.</li>          
           <li>client-duid: Each DHCP client must have a DUID (DHCP 
             Unique Identifier) to identify itself to clients. A DUID 
             consists of a two-octet type field and an arbitrary length 

@@ -10,7 +10,7 @@ SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-17
 MODELS_DIR:=.
 
 
-all: text html
+all: text #html
 
 #define file_to_tree =
 #$(1).tree: $(1)
@@ -18,6 +18,11 @@ all: text html
 #$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-relay.yang |fold -w 67 > $$@
 #$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-server.yang |fold -w 67 > $$@
 #endef
+
+define file_to_tree =
+$(1).tree: $(1)
+	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$<  > $$@
+endef
 
 MODULES=
 MODULES+=ietf-dhcpv6-server.yang
