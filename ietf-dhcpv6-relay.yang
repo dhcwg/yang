@@ -114,22 +114,6 @@ module ietf-dhcpv6-relay {
   }
 
   /*
-   * Identities
-   */
-
-  identity relay {
-    base "dhcpv6-common:dhcpv6-node";
-    description "DHCPv6 relay agent identity.";
-  }
-
-  leaf dhcpv6-node-type {
-    type identityref {
-      base "dhcpv6-common:dhcpv6-node";
-    }
-    description "Type for a DHCPv6 relay.";
-  }
-
-  /*
    * Features
    */
 
@@ -290,6 +274,22 @@ module ietf-dhcpv6-relay {
         for any reason.";
     }
   }
+  
+  grouping interface-id-option-group {
+    description "OPTION_INTERFACE_ID (18) Interface-Id Option.";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+        IPv6 (DHCPv6)";
+    container interface-id-option {
+     description "OPTION_INTERFACE_ID (18) Interface-Id Option
+       container.";
+     leaf interface-id {
+        type string;
+        description "An opaque value of arbitrary length generated
+          by the relay agent to identify one of the relay agent's
+          interfaces.";
+      }
+    }
+  }
 
   /*
    * Data Nodes
@@ -325,6 +325,9 @@ module ietf-dhcpv6-relay {
         description "Definitions for DHCPv6 options that can be sent
           by the relay are augmented to this location from other YANG
           modules as required.";
+        uses dhcpv6-common:auth-option-group;
+        uses dhcpv6-common:status-code-option-group;
+        uses interface-id-option-group;
       }
       uses message-statistics;
       container prefix-delegation {
