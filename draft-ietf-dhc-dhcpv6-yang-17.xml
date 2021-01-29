@@ -114,11 +114,7 @@
         networks. This document defines YANG modules for the 
         configuration and management of DHCPv6 servers, relays and 
         clients. Separate 'element' modules are defined for each of 
-        these. There is an additional module per-element defining DHCP 
-        options which are relevant for that element (taken from the 
-        options defined in <xref target="RFC8415"/>).
-      </t>
-      <t>Additionally, a 'common' module contains typedefs and
+        these. Additionally, a 'common' module contains typedefs and
         groupings used by all of the element modules.
       </t>
       <t>It is worth noting that as DHCPv6 is itself a client 
@@ -162,7 +158,7 @@
           functionality can be augmented into the main 
           'ietf-dhcpv6-server.yang' module.
         </t>
-        <t>In DHCPv6 the concept of 'class selection' for messages 
+        <t>In DHCPv6, the concept of 'class selection' for messages 
           received by the server is common. This is the identification 
           and classification of messages based on a number of parameters 
           so that the correct provisioning information can be supplied. 
@@ -270,10 +266,11 @@
             option-set elsewhere in the server's configuration.
           </li>
           <li>option-set: Holds configuration parameters for DHCPv6 
-            options.  The initial set of definitions are contained in 
-            the module 'ietf-dhcpv6-options-rfc8415-server.yang' and are 
-            augmented into the server module at this point. Other DHCPv6 
-            option modules can be augmented here as required.
+            options.  The initial set of applicable option definitions
+            are defined here and additional options that are also
+            relevant to the relay and/or client are imported from
+            the 'ietf-dhcpv6-common' module. Where needed, other DHCPv6 
+            option modules can be augmented as they are defined.
           </li>
           <li>class-selector: This is provided as a location for
             additional implementation specific YANG nodes for vendor 
@@ -281,7 +278,7 @@
             <xref target="class-selector-example"/> for an example of 
             this.
           </li>
-          <li>network-ranges: This module uses a hierarchical model
+          <li>network-ranges: A hierarchical model is used
             for the allocation of addresses and prefixes. At the top 
             level 'network-ranges' holds global configuration 
             parameters. Under this, a list of 'network-ranges' can be 
@@ -360,8 +357,13 @@
           <li>pd-leases: Contains read-only nodes for holding 
             information about active delegated prefix leases.
           </li>
-          <li>relay-options: As with the Server module, DHCPv6 options
-            that can be sent by the relay are augmented here.
+          <li>relay-options: Holds configuration parameters for DHCPv6
+            options which can be sent by the relay.  The initial set of 
+            applicable option definitions are defined here and 
+            additional options that are also relevant to the server
+            and/or client are imported from the 'ietf-dhcpv6-common' 
+            module. Where needed, other DHCPv6 option modules can be 
+            augmented as they are defined.
           </li>
         </ul>
         <t>Information about notifications:</t>
@@ -414,22 +416,32 @@
           <li>enabled: Enables/disables all DHCPv6 client 
              function for the specific interface.</li>          
           <li>client-duid: Each DHCP client must have a DUID (DHCP 
-            Unique Identifier) to identify itself to clients. A DUID 
-            consists of a two-octet type field and an arbitrary length 
-            (of no more than 128-bytes) content field. Currently there 
-            are four defined types of DUIDs in <xref target="RFC8415"/>:
-            DUID-LLT, DUID-EN, DUID-LL, and DUID-UUID. DUID-Unknown is 
-            used for arbitrary DUID formats which do not follow any of 
-            these defined types. 'active-duid' is a read-only field that 
-            the client's current DUID can be retrieved from. The DUID 
-            definitions are imported from the 'ietf-dhcpv6-common.yang' 
-            module. DUID is configured under the 'client-if' to allow a 
+            Unique Identifier) to identify itself to servers and 
+            relays. A DUID consists of a two-octet type field and an 
+            arbitrary length (of no more than 128-bytes) content field. 
+            Currently there are four defined types of DUIDs in 
+            <xref target="RFC8415"/>: DUID-LLT, DUID-EN, DUID-LL, and 
+            DUID-UUID. DUID-Unknown is used for arbitrary DUID formats 
+            which do not follow any of these defined types. 
+            'active-duid' is a read-only field that the client's 
+            current DUID can be retrieved from. The DUID definitions 
+            are imported from the 'ietf-dhcpv6-common.yang' module. 
+            DUID is configured under the 'client-if' to allow a 
             client to have different DUIDs for each interface if 
             required.
           </li>
+          <li>client-configured-options: Holds configuration parameters 
+            for DHCPv6 options which can be sent by the client.  The 
+            initial set of applicable option definitions are defined 
+            here and additional options that are also relevant to the 
+            relay and/or server are imported from the 
+            'ietf-dhcpv6-common' module. Where needed, other DHCPv6 
+            option modules can be augmented as they are defined.
+          </li>
           <li>ia-na, ia-ta, ia-pd: Contains configuration nodes relevant
-            for requesting one or more of each of the lease types. Also
-            contains read only nodes related to active leases.
+            for requesting one or more of each of the lease types. 
+            Read-only nodes related to the active lease are also
+            located here.
           </li>
         </ul>
         <t>Information about notifications:</t>
@@ -532,15 +544,12 @@
 
       <t>Some of the readable data nodes in this YANG module may 
         be considered sensitive or vulnerable in some network 
-        environments.  It is thus important to control read access 
-        (e.g., via get, get-config, or notification) to these data 
-        nodes.  These subtrees and data nodes can be misused to 
-        track the activity of a host:</t>
+        environments.  Therefore, it is important to control read 
+        access (e.g., only permitting get, get-config, or 
+        notifications) to these data nodes.  These subtrees and
+        data nodes can be misused to track the activity of a host:</t>
 
       <ul spacing="normal">
-        <li>Re-configuring the relay's destination address to send
-          messages to a rogue DHCPv6 server.
-        </li>
         <li>Information the server holds about clients with active 
           leases: (dhcpv6-server/network-ranges/network-range/
           address-pools/address-pool/active-leases)
@@ -606,7 +615,7 @@
     <section anchor="acknowledgments">
       <name>Acknowledgments</name>
       <t>The authors would like to thank Qi Sun, Lishan Li, Sladjana Zoric,
-        Tomek Mrugalski, Marcin Siodelski, and Bing Liu for
+        Tomek Mrugalski, Marcin Siodelski, Bing Liu, and Tom Petch for
         their valuable comments and contributions to this work.</t>
     </section>
     <section anchor="contributors">
@@ -670,14 +679,17 @@
       <t>The following section provides a example of how the DHCPv6 
         option definitions can be extended to include additional 
         options. It is expected that additional specification documents 
-        will be published in the future for this.
+        will be published for this in the future.
       </t>
 
       <t>The example defines YANG models for OPTION_SIP_SERVER_D (21) 
         and OPTION_SIP_SERVER_D (22) defined in <xref target="RFC3319"/>. 
-        The overall structure is as follows:</t>
+        The module is constructed as follows:</t>
       <ul spacing="normal">
-        <li>A separate grouping is used for each option.
+        <li>The module is named using a meaningful, shortened version of the 
+          document which specifies the DHCP option format.
+        </li>
+        <li>A separate grouping is used to define each option.
         </li>
         <li>The name of the option is taken from the registered IANA 
           name for the option, with an '-option' suffix added.
@@ -744,7 +756,7 @@
 
       <t>At the end there is an augment statement which adds the vendor 
         specific configuration defined in "dhcpv6-server-config:config" 
-        under '/dhcpv6-server:config/dhcpv6-server:vendor-config' 
+        under the "/dhcpv6-server:config/dhcpv6-server:vendor-config"
         mount point.
       </t>
       <xi:include href="ietf-example-dhcpv6-server-config.yang.xml"/>
