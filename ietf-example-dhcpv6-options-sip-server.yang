@@ -1,8 +1,8 @@
-module ietf-example-dhcpv6-options-rfc3319-server {
+module ietf-example-dhcpv6-options-sip-server {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:" + 
-    "ietf-example-dhcpv6-options-rfc3319-server";
-  prefix "rfc3319-srv";
+    "ietf-example-dhcpv6-options-sip-server";
+  prefix "sip-srv";
 
   import ietf-inet-types {
     prefix inet;
@@ -32,6 +32,11 @@ module ietf-example-dhcpv6-options-rfc3319-server {
 
     This version of this YANG module is part of RFC 8513; see
     the RFC itself for full legal notices.";
+
+  revision 2021-01-29 {
+    description "Version update for draft -17 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-17";
+  }
   
   revision 2021-01-06 {
     description "Version update for draft -16 publication.";
@@ -79,14 +84,14 @@ module ietf-example-dhcpv6-options-rfc3319-server {
        List container.";
      list sip-server {
         key sip-serv-id;
-        description "sip server info";
+        description "SIP server information.";
         leaf sip-serv-id {
           type uint8;
-          description "sip server id";
+          description "SIP server list identifier identifier.";
         }
         leaf sip-serv-domain-name {
           type inet:domain-name;
-          description "sip server domain name";
+          description "SIP server domain name.";
         }
       }
     }
@@ -103,14 +108,14 @@ module ietf-example-dhcpv6-options-rfc3319-server {
         List container.";
      list sip-server {
         key sip-serv-id;
-        description "sip server info";
+        description "SIP server information.";
         leaf sip-serv-id {
           type uint8;
-          description "sip server id";
+          description "SIP server list entry identifier.";
         }
         leaf sip-serv-addr {
           type inet:ipv6-address;
-          description "sip server addr";
+          description "SIP server IPv6 address.";
         }
       }
     }
@@ -122,8 +127,6 @@ module ietf-example-dhcpv6-options-rfc3319-server {
 
   augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" + 
     "dhcpv6-server:option-set" {
-    when "../../../dhcpv6-server:dhcpv6-node-type=" + 
-      "'dhcpv6-server:server'";
     description "Augment the option definition groupings to the 
       server module.";
     uses sip-server-domain-name-list-option-group;

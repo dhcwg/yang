@@ -5,19 +5,23 @@ RFCFOLD?=../venv/bin/rfcfold
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 
-#SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-10-wip/draft-ietf-dhc-dhcpv6-yang-10-if-24-10-19
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-16
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-17
 
 MODELS_DIR:=.
 
 
-all: text html
+all: text #html
+
+#define file_to_tree =
+#$(1).tree: $(1)
+#$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-client.yang |fold -w 67 > $$@
+#$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-relay.yang |fold -w 67 > $$@
+#$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-server.yang |fold -w 67 > $$@
+#endef
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-client.yang |fold -w 67 > $$@
-	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-relay.yang |fold -w 67 > $$@
-	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$< $(MODELS_DIR)/ietf-dhcpv6-options-rfc8415-server.yang |fold -w 67 > $$@
+	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$<  > $$@
 endef
 
 MODULES=
@@ -74,13 +78,10 @@ INCLUDES=
 INCLUDES+=ietf-dhcpv6-client.yang
 INCLUDES+=ietf-dhcpv6-server.yang
 INCLUDES+=ietf-dhcpv6-relay.yang
-INCLUDES+=ietf-dhcpv6-options-rfc8415-client.yang
-INCLUDES+=ietf-dhcpv6-options-rfc8415-relay.yang
-INCLUDES+=ietf-dhcpv6-options-rfc8415-server.yang
 INCLUDES+=ietf-dhcpv6-common.yang
 INCLUDES+=ietf-example-dhcpv6-class-selector.yang
 INCLUDES+=ietf-example-dhcpv6-server-config.yang
-INCLUDES+=ietf-example-dhcpv6-options-rfc3319-server.yang
+INCLUDES+=ietf-example-dhcpv6-options-sip-server.yang
 
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
