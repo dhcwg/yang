@@ -260,7 +260,7 @@ module ietf-dhcpv6-client {
   container dhcpv6-client {
     description "DHCPv6 client configuration and state.";
     leaf enabled {
-      description "Globally enables the DHCP client funtion.";
+      description "Globally enables the DHCP client function.";
       type boolean;
       default true;
     }

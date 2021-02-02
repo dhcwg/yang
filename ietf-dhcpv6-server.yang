@@ -363,7 +363,7 @@ module ietf-dhcpv6-server {
   container dhcpv6-server {
     description "Configuration nodes for the DHCPv6 server.";
     leaf enabled {
-      description "Enables the DHCP server funtion.";
+      description "Enables the DHCP server function.";
       type boolean;
       default true;
     }

@@ -305,7 +305,7 @@ module ietf-dhcpv6-relay {
       "This container contains the configuration data nodes for 
       the relay.";
     leaf enabled {
-      description "Globally enables the DHCP relay funtion.";
+      description "Globally enables the DHCP relay function.";
       type boolean;
       default true;
     }
