@@ -154,7 +154,7 @@ module ietf-dhcpv6-server {
     }
     leaf rapid-commit {
       type boolean;
-      description "A value of 1 specifies that the pool supports
+      description "When set to 'true', Specifies that the pool supports 
         client-server exchanges involving two messages.";
     }
   }
@@ -314,7 +314,7 @@ module ietf-dhcpv6-server {
 
   grouping info-refresh-time-option-group {
     description "OPTION_INFORMATION_REFRESH_TIME (32)
-      Information Refresh Time option.";
+      Information Refresh Time Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6)";
     container info-refresh-time-option {
@@ -329,7 +329,7 @@ module ietf-dhcpv6-server {
   }
 
   grouping sol-max-rt-option-group {
-    description "OPTION_SOL_MAX_RT (82) sol max rt option.";
+    description "OPTION_SOL_MAX_RT (82) sol max rt Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6)";
    container sol-max-rt-option {
@@ -343,7 +343,7 @@ module ietf-dhcpv6-server {
   }
 
   grouping inf-max-rt-option-group {
-    description "OPTION_INF_MAX_RT (83) inf max rt option.";
+    description "OPTION_INF_MAX_RT (83) inf max rt Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6)";
     container inf-max-rt-option {
@@ -363,9 +363,9 @@ module ietf-dhcpv6-server {
   container dhcpv6-server {
     description "Configuration nodes for the DHCPv6 server.";
     leaf enabled {
-      description "Enables the DHCP server function.";
       type boolean;
       default true;
+      description "Enables the DHCP server function.";
     }
     container server-duid {
       description "DUID of the server.";

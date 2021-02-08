@@ -305,9 +305,9 @@ module ietf-dhcpv6-relay {
       "This container contains the configuration data nodes for 
       the relay.";
     leaf enabled {
-      description "Globally enables the DHCP relay function.";
       type boolean;
       default true;
+      description "Globally enables the DHCP relay function.";
     }
     list relay-if {
       key if-name;
@@ -318,10 +318,10 @@ module ietf-dhcpv6-relay {
         description "interface-ref to the relay interface.";
       }
       leaf enabled {
-        description "Enables the DHCP relay function for this
-          interface.";
         type boolean;
         default true;
+        description "Enables the DHCP relay function for this
+          interface.";
       }
       leaf-list destination-addresses {
         type inet:ipv6-address;

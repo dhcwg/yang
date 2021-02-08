@@ -260,9 +260,9 @@ module ietf-dhcpv6-client {
   container dhcpv6-client {
     description "DHCPv6 client configuration and state.";
     leaf enabled {
-      description "Globally enables the DHCP client function.";
       type boolean;
       default true;
+      description "Globally enables the DHCP client function.";
     }
     list client-if {
       key if-name;
@@ -275,10 +275,10 @@ module ietf-dhcpv6-client {
           the requested configuration is relevant to.";
       }
       leaf enabled {
-        description "Enables the DHCP client function for this 
-          interface.";
         type boolean;
         default true;
+        description "Enables the DHCP client function for this 
+          interface.";
       }
       uses dhcpv6-common:duid;
       container client-configured-options {
@@ -486,7 +486,7 @@ module ietf-dhcpv6-client {
 
   notification retransmission-failed {
     description "Notification sent when the retransmission mechanism
-      defined in [RFC8415] is unsuccessful.";
+      defined in RFC8415 is unsuccessful.";
     leaf failure-type {
       type enumeration {
         enum "MRC-exceeded" {
