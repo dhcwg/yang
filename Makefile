@@ -5,7 +5,7 @@ RFCFOLD?=../venv/bin/rfcfold
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-17
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-18
 
 MODELS_DIR:=.
 
@@ -21,13 +21,14 @@ all: text #html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(PYANG) -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$<  > $$@
+	$(PYANG) --ietf -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$<  > $$@
 endef
 
 MODULES=
 MODULES+=ietf-dhcpv6-server.yang
 MODULES+=ietf-dhcpv6-client.yang
 MODULES+=ietf-dhcpv6-relay.yang
+MODULES+=ietf-dhcpv6-common.yang
 $(foreach mod_file,$(MODULES),$(eval $(call file_to_tree,$(MODELS_DIR)/$(mod_file))))
 
 
