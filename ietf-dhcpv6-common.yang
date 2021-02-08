@@ -99,6 +99,53 @@ module ietf-dhcpv6-common {
    * Groupings
    */
 
+  typedef duid-base-type {
+    type string {
+      length "3..130";
+      pattern "(^[0-9a-fA-F]{2})";
+    }
+    description "Base type for DUIDs including a 2 octet DUID
+      type.  ";
+  }
+
+  typedef duid-type-llt {
+    type duid-base-type {
+      pattern '^[01] 
+        + [0-9a-fA-F]{2}
+        + [0-9a-fA-F]{4}
+        + ([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?';
+    }
+    description "DUID type 1, based on Link-layer address ";
+  }
+
+  typedef duid-type-en {
+    type duid-base-type {
+      pattern '^[02] 
+        + [0-9a-fA-F]{4}
+        + ([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?';
+    }
+    description "DUID type 2, based on Link-layer address ";
+  }
+ 
+  typedef duid-type-ll {
+    type duid-base-type {
+      pattern '^[03] 
+        + [0-9a-fA-F]{2}
+        + ([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?';
+    }
+    description "DUID type 3, based on Link-layer address ";
+  }
+
+  typedef duid-test {
+    type union {
+      type duid-type-llt;
+      type duid-type-en;
+      type duid-type-ll;
+    }
+    description "Union of the different DUID types.";
+  }
+    
+
   grouping duid {
     description "Each server and client has only one DUID (DHCP 
       Unique Identifier). The DUID here identifies a unique 
@@ -128,7 +175,7 @@ module ietf-dhcpv6-common {
           type yang:timeticks;
           description "The time that the DUID is generated 
             represented in seconds since midnight (UTC), 
-                        January 1, 2000, modulo 2^32.";
+              January 1, 2000, modulo 2^32.";
         }
         leaf duid-llt-link-layer-address {
           type yang:mac-address;

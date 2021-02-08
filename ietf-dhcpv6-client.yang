@@ -280,7 +280,10 @@ module ietf-dhcpv6-client {
         description "Enables the DHCP client function for this 
           interface.";
       }
-      uses dhcpv6-common:duid;
+      leaf duid {
+        type dhcpv6-common:duid-test;
+        description "Client DUID";
+      }
       container client-configured-options {
         description "Definitions for DHCPv6 options that can be be
           sent by the client are augmented to this location from
