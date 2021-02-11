@@ -40,7 +40,7 @@ module ietf-example-dhcpv6-server-config {
     Relating to IETF Documents
     (http://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC 8513; see
+    This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
   revision 2021-01-29 {
