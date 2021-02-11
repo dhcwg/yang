@@ -9,13 +9,18 @@ module ietf-dhcpv6-common {
       "RFC 6991: Common YANG Data Types";
   }
 
-  organization "DHC WG";
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working Group";
+
   contact
-    "yong@csnet1.cs.tsinghua.edu.cn
-    lh.sunlinh@gmail.com
-    ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de
-    hezihao9512@gmail.com";
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+     WG List:  <mailto:dhcwg@ietf.org>
+     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+     Author:   Linhui Sun <lh.sunlinh@gmail.com>
+     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+     Author:   Zihao He <hezihao9512@gmail.com>
+     Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description "This YANG module defines common components 
     used for the configuration and management of DHCPv6.
@@ -132,9 +137,9 @@ module ietf-dhcpv6-common {
         + '[0-9a-fA-F]{4,}';
     }
     description "DUID type 2, assigned by vendor based on Enterprise
-          Number (DUID-EN). This DUID consists of the 4-octet vendor’s 
-          registered Private Enterprise Number as maintained by IANA 
-          followed by a unique identifier assigned by the vendor. ";
+      Number (DUID-EN). This DUID consists of the 4-octet vendor's 
+      registered Private Enterprise Number as maintained by IANA 
+      followed by a unique identifier assigned by the vendor. ";
     reference "RFC8415: Section 11.3";
   }
  

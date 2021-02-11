@@ -16,13 +16,18 @@ module ietf-example-dhcpv6-server-config {
     prefix dhcpv6-server;
   }
 
-  organization "DHC WG";
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working Group";
+
   contact
-    "cuiyong@tsinghua.edu.cn
-    lh.sunlinh@gmail.com
-    ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de
-    hezihao9512@gmail.com";
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+     WG List:  <mailto:dhcwg@ietf.org>
+     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+     Author:   Linhui Sun <lh.sunlinh@gmail.com>
+     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+     Author:   Zihao He <hezihao9512@gmail.com>
+     Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description "This YANG module defines components for the 
     configuration and management of vendor/implementation specific 

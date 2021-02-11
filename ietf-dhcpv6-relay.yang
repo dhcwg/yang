@@ -34,15 +34,17 @@ module ietf-dhcpv6-relay {
   }
 
   organization
-    "IETF DHC (Dynamic Host Configuration) Working group";
+    "IETF DHC (Dynamic Host Configuration) Working Group";
 
   contact
-    "cuiyong@tsinghua.edu.cn
-    lh.sunlinh@gmail.com
-    ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de
-    hezihao9512@gmail.com
-    godfryd@isc.org";
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+     WG List:  <mailto:dhcwg@ietf.org>
+     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+     Author:   Linhui Sun <lh.sunlinh@gmail.com>
+     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+     Author:   Zihao He <hezihao9512@gmail.com>
+     Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description
     "This YANG module defines components necessary for the 

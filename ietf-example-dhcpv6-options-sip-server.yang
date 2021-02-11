@@ -12,10 +12,18 @@ module ietf-example-dhcpv6-options-sip-server {
     prefix dhcpv6-server;
   }
 
-  organization "DHC WG";
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working Group";
+
   contact
-    "ian.farrer@telekom.de
-    godfryd@isc.org";
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+     WG List:  <mailto:dhcwg@ietf.org>
+     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+     Author:   Linhui Sun <lh.sunlinh@gmail.com>
+     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+     Author:   Zihao He <hezihao9512@gmail.com>
+     Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description "This YANG module contains DHCPv6 options defined
     in RFC3319 that can be used by DHCPv6 servers.
