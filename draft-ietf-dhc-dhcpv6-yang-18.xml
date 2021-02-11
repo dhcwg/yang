@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-17" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-18" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-17"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-18"/>
     <author fullname="Yong Cui" initials="Y." surname="Cui">
       <organization>Tsinghua University</organization>
       <address>
@@ -128,6 +128,10 @@
         of the DHCPv6 client function and does not play a part in the 
         normal DHCPv6 message flow.
       </t>
+      <t>The YANG modules in this document adopt the Network
+        Management Datastore Architecture (NMDA)
+        <xref target="RFC8342"/>.
+      </t>
       <section>
         <name>Scope</name>
         <t><xref target="RFC8415"/> describes the current version of the 
@@ -208,39 +212,39 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Client</th>
-                <th>Relay</th>
                 <th>Server</th>
+                <th>Relay</th>
+                <th>Client</th>
                 <th>Module Name</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>OPTION_ORO (6) Option Request Option</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td align="center">X</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td>ietf-dhcpv6-client.yang</td>
               </tr>
               <tr>
                 <td>OPTION_PREFERENCE (7) Preference Option</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td align="center">X</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
               <tr>
                 <td>OPTION_AUTH (11) Authentication Option</td>
+                <td align="center">X</td>
+                <td align="center">X</td>
                 <td align="center"></td>
-                <td align="center">X</td>
-                <td align="center">X</td>
                 <td>ietf-dhcpv6-common.yang</td>
               </tr>
               <tr>
                 <td>OPTION_UNICAST (12) Server Unicast Option</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td align="center">X</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
               <tr>
@@ -259,16 +263,16 @@
               </tr>
               <tr>
                 <td>OPTION_USER_CLASS (15) User Class Option</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td align="center">X</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td>ietf-dhcpv6-client.yang</td>
               </tr>
               <tr>
                 <td>OPTION_VENDOR_CLASS (16) Vendor Class Option</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td align="center">X</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td>ietf-dhcpv6-client.yang</td>
               </tr>
               <tr>
@@ -289,9 +293,9 @@
               <tr>
                 <td>OPTION_RECONF_MSG (19) Reconfigure Message 
                   Option</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td align="center">X</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
               <tr>
@@ -305,23 +309,23 @@
               <tr>
                 <td>OPTION_INFORMATION _REFRESH_TIME (32)
                   Information Refresh Time Option</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td align="center">X</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
               <tr>
                 <td>OPTION_SOL_MAX_RT (82) sol max rt Option</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td align="center">X</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
               <tr>
                 <td>OPTION_INF_MAX_RT (83) inf max rt Option</td>
-                <td align="center"></td>
-                <td align="center"></td>
                 <td align="center">X</td>
+                <td align="center"></td>
+                <td align="center"></td>
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
             </tbody>
