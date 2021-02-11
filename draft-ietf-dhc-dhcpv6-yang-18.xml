@@ -136,7 +136,7 @@
           DHCPv6 element functionality and adding new options. The YANG 
           modules contained in this document do not attempt to capture 
           all of these extensions and additions, rather to model the 
-          DHCPv6 functions and options covered in 
+          DHCPv6 functions and options covered in
           <xref target="RFC8415"/>. A focus has also been given on the 
           extensibility of the modules so that it is easy to augment 
           in additional functionality as required by a particular 
@@ -377,11 +377,9 @@
             of a two-octet type field and an arbitrary length (of no 
             more than 128-bytes) content field. Currently there are
             four defined types of DUIDs in <xref target="RFC8415"/> and
-            <xref target="RFC6355"/>: DUID-LLT, DUID-EN, DUID-LL, and
-            DUID-UUID. DUID-Unknown is used for arbitrary DUID formats
-            which do not follow any of these defined types. 
-            'active-duid' is a read-only field that the server's current 
-            DUID can be retrieved from. The DUID definitions are 
+            <xref target="RFC6355"/>. The DUID may be configured using
+            the format for one of these types, or using the 
+            'unstructured' format.  The DUID type definitions are 
             imported from the 'ietf-dhcpv6-common.yang' module.
           </li>
           <li>vendor-config: This container is provided as a location 
@@ -546,21 +544,17 @@
           </li>
           <li>enabled: Enables/disables all DHCPv6 client 
              function for the specific interface.</li>          
-          <li>client-duid: Each DHCP client must have a DUID (DHCP 
-            Unique Identifier) to identify itself to servers and 
-            relays. A DUID consists of a two-octet type field and an 
-            arbitrary length (of no more than 128-bytes) content field. 
+          <li>client-duid: Each client must have a DUID (DHCP Unique
+            Identifier) to identify itself to servers and relays. A 
+            DUID consists of a two-octet type field and an arbitrary 
+            length (of no more than 128-bytes) content field. 
             Currently there are four defined types of DUIDs in 
-            <xref target="RFC8415"/>: DUID-LLT, DUID-EN, DUID-LL, and 
-            DUID-UUID. DUID-Unknown is used for arbitrary DUID formats 
-            which do not follow any of these defined types. 
-            'active-duid' is a read-only field that the client's 
-            current DUID can be retrieved from. The DUID definitions 
-            are imported from the 'ietf-dhcpv6-common.yang' module. 
-            DUID is configured under the 'client-if' to allow a 
-            client to have different DUIDs for each interface if 
-            required.
-          </li>
+            <xref target="RFC8415"/> and <xref target="RFC6355"/>. The 
+            DUID may be configured using the format for one of these 
+            types, or using the 'unstructured' format.  The DUID type 
+            definitions are imported from the 'ietf-dhcpv6-common.yang' 
+            module.
+          </li> 
           <li>client-configured-options: Holds configuration parameters 
             for DHCPv6 options which can be sent by the client.  The 
             initial set of applicable option definitions are defined 

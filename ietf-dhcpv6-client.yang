@@ -198,9 +198,9 @@ module ietf-dhcpv6-client {
     reference "RFC8415: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6)";
     container user-class-option {
+      presence "Configures the option";
       description "OPTION_USER_CLASS (15) User Class Option
         container.";
-      presence "Configures the option";
       list user-class-data {
         key user-class-datum-id;
         min-elements 1;
