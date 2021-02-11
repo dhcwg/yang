@@ -694,6 +694,42 @@
 
     <section anchor="iana">
       <name>IANA Considerations</name>
+  
+      <t>This document requests IANA to register the following URIs in the
+        "IETF XML Registry" <xref target="RFC3688"></xref>:</t>
+      <dl newline="false" spacing="compact">
+        <dt>URI:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
+        <dt>Registrant Contact:</dt>
+        <dd>The IESG.</dd>
+        <dt>XML:</dt>
+        <dd>N/A; the requested URI is an XML namespace.</dd>
+      </dl>
+      <dl newline="false" spacing="compact">
+        <dt>URI:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
+        <dt>Registrant Contact:</dt>
+        <dd>The IESG.</dd>
+        <dt>XML:</dt>
+        <dd>N/A; the requested URI is an XML namespace.</dd>
+      </dl>
+      <dl newline="false" spacing="compact">
+        <dt>URI:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
+        <dt>Registrant Contact:</dt>
+        <dd>The IESG.</dd>
+        <dt>XML:</dt>
+        <dd>N/A; the requested URI is an XML namespace.</dd>
+      </dl>
+      <dl newline="false" spacing="compact">
+        <dt>URI:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
+        <dt>Registrant Contact:</dt>
+        <dd>The IESG.</dd>
+        <dt>XML:</dt>
+        <dd>N/A; the requested URI is an XML namespace.</dd>
+      </dl>
+
       <t>This document registers the following YANG modules in the "YANG
         Module Names" registry <xref target="RFC6020"/>.</t>
       <dl newline="false" spacing="compact" indent="16">
@@ -718,9 +754,9 @@
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6-client</dd>
+        <dd>ietf-dhcpv6-relay</dd>
         <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
         <dt>prefix:</dt>
         <dd>dhcpv6-client</dd>
         <dt>reference:</dt>
@@ -728,9 +764,9 @@
       </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
-        <dd>ietf-dhcpv6-relay</dd>
+        <dd>ietf-dhcpv6-client</dd>
         <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
         <dt>prefix:</dt>
         <dd>dhcpv6-relay</dd>
         <dt>reference:</dt>
@@ -778,6 +814,7 @@
       <references>
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6355.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml"/>
