@@ -200,6 +200,7 @@ module ietf-dhcpv6-client {
     container user-class-option {
       description "OPTION_USER_CLASS (15) User Class Option
         container.";
+      presence "Configures the option";
       list user-class-data {
         key user-class-datum-id;
         min-elements 1;
@@ -281,13 +282,14 @@ module ietf-dhcpv6-client {
           interface.";
       }
       leaf duid {
-        type dhcpv6-common:duid-test;
-        description "Client DUID";
+        type dhcpv6-common:duid;
+        description "Client DUID.";
       }
       container client-configured-options {
-        description "Definitions for DHCPv6 options that can be be
-          sent by the client are augmented to this location from
-          other YANG modules as required.";
+        description " Definitions for DHCPv6 options that can be be
+          sent by the client. Additional option definitions can be
+          augmented to this location from other YANG modules as 
+          required.";
         uses option-request-option-group;
         uses dhcpv6-common:status-code-option-group;
         uses dhcpv6-common:rapid-commit-option-group;

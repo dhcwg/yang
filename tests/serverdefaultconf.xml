@@ -1,0 +1,5 @@
+<dhcpv6-server xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server">
+  <enabled>true</enabled>
+  <server-duid>00061a</server-duid>
+</dhcpv6-server>
+

@@ -95,147 +95,101 @@ module ietf-dhcpv6-common {
       "Timer value type, in seconds (32-bit range).";
   }
 
-  /*
-   * Groupings
-   */
-
-  typedef duid-base-type {
+  typedef duid-base {
     type string {
-      length "3..130";
-      pattern "(^[0-9a-fA-F]{2})";
+      length '6..260';
     }
-    description "Base type for DUIDs including a 2 octet DUID
-      type.  ";
-  }
-
-  typedef duid-type-llt {
-    type duid-base-type {
-      pattern '^[01] 
-        + [0-9a-fA-F]{2}
-        + [0-9a-fA-F]{4}
-        + ([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?';
-    }
-    description "DUID type 1, based on Link-layer address ";
-  }
-
-  typedef duid-type-en {
-    type duid-base-type {
-      pattern '^[02] 
-        + [0-9a-fA-F]{4}
-        + ([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?';
-    }
-    description "DUID type 2, based on Link-layer address ";
-  }
- 
-  typedef duid-type-ll {
-    type duid-base-type {
-      pattern '^[03] 
-        + [0-9a-fA-F]{2}
-        + ([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?';
-    }
-    description "DUID type 3, based on Link-layer address ";
-  }
-
-  typedef duid-test {
-    type union {
-      type duid-type-llt;
-      type duid-type-en;
-      type duid-type-ll;
-    }
-    description "Union of the different DUID types.";
-  }
-    
-
-  grouping duid {
-    description "Each server and client has only one DUID (DHCP 
-      Unique Identifier). The DUID here identifies a unique 
-      DHCPv6 server for clients.  DUID consists of a two-octet 
-      type field and an arbitrary length (no more than 128 bytes) 
-      content field.  Currently there are four defined types of 
+    description "Each DHCP server and client has a DUID (DHCP 
+      Unique Identifier). The DUID consists of a two-octet 
+      type field and an arbitrary length (between 1 and 128 bytes) 
+      content field.  Currently, there are four defined types of 
       DUIDs in RFC8415 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
       do not follow any of the defined formats.";
-    reference "RFC8415: Section 11 and RFC6355: Section 4";
-    leaf type-code {
-      type uint16;
-      description "Type code of this DUID.";
-    }
-    choice duid-type {
-      default duid-unstructured;
-      description "Selects the format of the DUID.";
-      case duid-llt {
-        description "DUID Based on Link-layer Address Plus Time
-          (Type 1 - DUID-LLT).";
-        reference "RFC8415 Section 11.2";
-        leaf duid-llt-hardware-type {
-          type uint16;
-          description "Hardware type as assigned by IANA (RFC826).";
-        }
-        leaf duid-llt-time {
-          type yang:timeticks;
-          description "The time that the DUID is generated 
-            represented in seconds since midnight (UTC), 
-              January 1, 2000, modulo 2^32.";
-        }
-        leaf duid-llt-link-layer-address {
-          type yang:mac-address;
-          description "Link-layer address as described in RFC2464.";
-        }
-      }
-      case duid-en {
-        description "DUID Assigned by Vendor Based on Enterprise
-          Number (Type 2 - DUID-EN).";
-        reference "RFC8415 Section 11.3";
-        leaf duid-en-enterprise-number {
-          type uint32;
-          description "Vendor's registered Private Enterprise Number
-            as maintained by IANA.";
-        }
-        leaf duid-en-identifier {
-          type string;
-          description "Identifier, unique to the device.";
-        }
-      }
-      case duid-ll {
-        description "DUID Based on Link-layer Address 
-          (Type 3 - DUID-LL).";
-        reference "RFC8415 Section 11.4";
-        leaf duid-ll-hardware-type {
-          type uint16;
-          description "Hardware type, as assigned by IANA (RFC826).";
-        }
-        leaf duid-ll-link-layer-address {
-          type yang:mac-address;
-          description "Link-layer address, as described in RFC2464";
-        }
-      }
-      case duid-uuid {
-        description "DUID Based on Universally Unique Identifier
-          (Type 4 - DUID-UUID).";
-        reference "RFC6335 Definition of the UUID-Based Unique
-          Identifier";
-        leaf uuid {
-          type yang:uuid;
-          description "A Universally Unique Identifier in the string
-            representation, defined in RFC4122. The canonical
-            representation uses lowercase characters.";
-        }
-      }
-      case duid-unstructured {
-        description "DUID which does not follow any of the other
-          structures, expressed as bytes.";
-        leaf data {
-          type binary;
-          description "The bits to be used as the identifier.";
-        }
-      }
-    }
-    leaf active-duid {
-      type binary;
-      config "false";
-      description "The DUID which is currently in use.";
-    }
+    reference "RFC8415: Section 11 
+      RFC6355: Section 4";
   }
+
+  typedef duid-llt {
+    type duid-base {
+      pattern '^0001'
+        + '[0-9a-fA-F]{12,}';
+    }
+    description "DUID type 1, based on Link-Layer Address Plus Time 
+      (DUID-LLT). Constructed with a 2-byte hardware type assigned
+      by IANA,  4-bytes containing the time the DUID is generated
+      (represented in seconds since midnight (UTC), January 1, 2000, 
+      modulo 2^32), and a link-layer address. The address is encoded 
+      without separator characters.";
+    reference "RFC8415: Section 11.2
+      RFC826:
+      RFC2464: ";
+  }
+
+  typedef duid-en {
+    type duid-base {
+      pattern '^0002'
+        + '[0-9a-fA-F]{4,}';
+    }
+    description "DUID type 2, assigned by vendor based on Enterprise
+          Number (DUID-EN). This DUID consists of the 4-octet vendor’s 
+          registered Private Enterprise Number as maintained by IANA 
+          followed by a unique identifier assigned by the vendor. ";
+    reference "RFC8415: Section 11.3";
+  }
+ 
+  typedef duid-ll {
+    type duid-base {
+      pattern '^0003'
+        + '([0-9a-fA-F]){4,}';
+    }
+    description "DUID type 3, based on Link-Layer Address (DUID-LL).
+      Constructed with a 2-byte hardware type assigned
+      by IANA, and a link-layer address. The address is encoded 
+      without separator characters.";
+    reference "RFC8415: Section 11.4
+      RFC826:";
+  }
+
+  typedef duid-uuid {
+    type duid-base {
+      pattern '^0004'
+        + '[0-9a-fA-F]{32}';
+    }
+    description "DUID type 4, based on Universally Unique Identifier 
+      (DUID-UUID).  This type of DUID consists of 16 octets containing 
+      a 128-bit UUID.";
+    reference "RFC8415: Section 11.5
+      RFC6355: ";
+  }
+
+  typedef duid-unstructured {
+    type duid-base {
+      pattern '^[0-9a-fA-F]{3}'
+        + '[05-9a-fA-F]'
+        + '([0-1a-fA-F])*';
+    }
+    description "Used for DUIDs following any other formats than 
+      DUID types 1-4.";
+    reference "RFC8415: Section 11";
+  }
+
+  typedef duid {
+    type union {
+      type duid-llt;
+      type duid-en;
+      type duid-ll;
+      type duid-uuid;
+      type duid-unstructured;
+    }
+    description "Represents the DUID and is neutral to the DUID 
+     format.";
+    reference "RFC8415: Section 11.";
+  }
+    
+  /*
+   * Groupings
+   */
 
   grouping auth-option-group {
     description "OPTION_AUTH (11) Authentication Option.";

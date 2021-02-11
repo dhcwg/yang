@@ -367,9 +367,9 @@ module ietf-dhcpv6-server {
       default true;
       description "Enables the DHCP server function.";
     }
-    container server-duid {
+    leaf server-duid {
+      type dhcpv6-common:duid;
       description "DUID of the server.";
-      uses dhcpv6-common:duid;
     }
     container vendor-config {
       description "This container provides a location for 
