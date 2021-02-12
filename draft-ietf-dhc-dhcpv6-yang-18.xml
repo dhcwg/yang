@@ -94,7 +94,8 @@
     <workgroup>DHC Working Group</workgroup>
     <abstract>
       <t>This document describes YANG data modules for the configuration 
-        and management of DHCPv6 servers, relays, and clients.
+        and management of DHCPv6 (Dynamic Host Configuration Protocol 
+        for IPv6) servers, relays, and clients.
       </t>
     </abstract>
     <note>
@@ -113,8 +114,9 @@
         configuration and other relevant parameters to clients in IPv6 
         networks. This document defines YANG <xref target="RFC7950"/>
         modules for the configuration and management of DHCPv6 
-        'element' (servers, relays and clients) using the NETCONF 
-        <xref target="RFC6241"/> or RESTCONF <xref target="RFC8040"/>
+        'element' (servers, relays and clients) using the Network
+        Configuration Protocol (NETCONF <xref target="RFC6241"/>) 
+        or RESTCONF <xref target="RFC8040"/>
         protocols.</t>
       <t>Separate modules are defined for each element. Additionally, 
         a 'common' module contains typedefs and groupings used by all 
@@ -204,7 +206,7 @@
             option, so it is not modelled.
           </t>
           <t>The following table shows the DHCPv6 options that are
-            modelled, the element(s) they are used by, and the relevant
+            modelled, the element(s) they are sent by, and the relevant
             YANG module name: 
           </t>   
           <table anchor="option-tab">
@@ -703,14 +705,6 @@
         "IETF XML Registry" <xref target="RFC3688"></xref>:</t>
       <dl newline="false" spacing="compact">
         <dt>URI:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
-        <dt>Registrant Contact:</dt>
-        <dd>The IESG.</dd>
-        <dt>XML:</dt>
-        <dd>N/A; the requested URI is an XML namespace.</dd>
-      </dl>
-      <dl newline="false" spacing="compact">
-        <dt>URI:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
         <dt>Registrant Contact:</dt>
         <dd>The IESG.</dd>
@@ -733,19 +727,17 @@
         <dt>XML:</dt>
         <dd>N/A; the requested URI is an XML namespace.</dd>
       </dl>
-
+      <dl newline="false" spacing="compact">
+        <dt>URI:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
+        <dt>Registrant Contact:</dt>
+        <dd>The IESG.</dd>
+        <dt>XML:</dt>
+        <dd>N/A; the requested URI is an XML namespace.</dd>
+      </dl>
+ 
       <t>This document registers the following YANG modules in the "YANG
         Module Names" registry <xref target="RFC6020"/>.</t>
-      <dl newline="false" spacing="compact" indent="16">
-        <dt>name:</dt>
-        <dd>ietf-dhcpv6-common</dd>
-        <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
-        <dt>prefix:</dt>
-        <dd>dhcpv6-common</dd>
-        <dt>reference:</dt>
-        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
-      </dl>
       <dl newline="false" spacing="compact" indent="16">
         <dt>name:</dt>
         <dd>ietf-dhcpv6-server</dd>
@@ -773,6 +765,16 @@
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
         <dt>prefix:</dt>
         <dd>dhcpv6-relay</dd>
+        <dt>reference:</dt>
+        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
+      </dl>
+      <dl newline="false" spacing="compact" indent="16">
+        <dt>name:</dt>
+        <dd>ietf-dhcpv6-common</dd>
+        <dt>namespace:</dt>
+        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
+        <dt>prefix:</dt>
+        <dd>dhcpv6-common</dd>
         <dt>reference:</dt>
         <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
@@ -853,7 +855,7 @@
         The module is constructed as follows:</t>
       <ul spacing="normal">
         <li>The module is named using a meaningful, shortened version of the 
-          document which specifies the DHCP option format.
+          document name in which the DHCP option format is specified.
         </li>
         <li>A separate grouping is used to define each option.
         </li>
