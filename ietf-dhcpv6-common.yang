@@ -112,8 +112,8 @@ module ietf-dhcpv6-common {
       do not follow any of the defined formats.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11
-      RFC 6355: Definition of the UUID-Based DHCPv6 Unique Identifier 
-      (DUID-UUID), Section 4";
+      RFC 6355: Definition of the UUID-Based DHCPv6 Unique 
+      Identifier (DUID-UUID), Section 4";
   }
 
   typedef duid-llt {
