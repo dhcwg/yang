@@ -121,7 +121,7 @@ module ietf-dhcpv6-server {
   feature prefix-delegation {
     description "Denotes that the server implements DHCPv6 prefix 
       delegation.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 6.2";
   }
 
@@ -144,33 +144,33 @@ module ietf-dhcpv6-server {
       type dhcpv6-common:timer-seconds32;
       description "Valid lifetime for the Identity Association 
         (IA).";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 6";
     }
     leaf renew-time {
       type dhcpv6-common:timer-seconds32;
       description "Renew (T1) time.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC 8415: Dynamic Host Configuration Protocol for 
         IPv6 (DHCPv6), Section 4.2";
     }
     leaf rebind-time {
       type dhcpv6-common:timer-seconds32;
       description "Rebind (T2) time.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for 
+      reference "RFC 8415: Dynamic Host Configuration Protocol for 
         IPv6 (DHCPv6), Section 4.2";
     }
     leaf preferred-lifetime {
       type dhcpv6-common:timer-seconds32;
       description "Preferred lifetime for the Identity Association 
         (IA).";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 6";
     }
     leaf rapid-commit {
       type boolean;
       description "When set to 'true', Specifies that the pool supports 
         client-server exchanges involving two messages.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 5.2";
     }
   }
@@ -181,41 +181,41 @@ module ietf-dhcpv6-server {
     leaf client-duid {
       type binary;
       description "Client DUID.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 11";
     }
     leaf iaid {
       type uint32;
       mandatory true;
       description "Client's IAID";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 12";
     }
     leaf allocation-time {
       type yang:date-and-time;
       description "Time and date that the lease was made.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 18";
     }
     leaf last-renew-rebind {
       type yang:date-and-time;
       description "Time of the last successful renew or 
         rebind.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 18";
     }
     leaf preferred-lifetime {
       type dhcpv6-common:timer-seconds32;
       description "The preferred lifetime expressed in 
         seconds.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 6";
     }
     leaf valid-lifetime {
       type dhcpv6-common:timer-seconds32;
       description "The valid lifetime for the leased prefix
         expressed in seconds.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 6";
     }
     leaf lease-t1 {
@@ -224,7 +224,7 @@ module ietf-dhcpv6-server {
         should contact the server from which the addresses
         in the IA_NA were obtained to extend the lifetimes
         of the addresses assigned to the IA_PD.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 4.2";
     }
     leaf lease-t2 {
@@ -233,7 +233,7 @@ module ietf-dhcpv6-server {
         should contact any available server to extend
         the lifetimes of the addresses assigned to the 
         IA_PD.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 4.2";
     }
   }
@@ -300,7 +300,7 @@ module ietf-dhcpv6-server {
 
   grouping preference-option-group {
     description "OPTION_PREFERENCE (7) Preference Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.8";
    container preference-option {
      description "OPTION_PREFERENCE (7) Preference Option
@@ -315,7 +315,7 @@ module ietf-dhcpv6-server {
 
   grouping server-unicast-option-group {
     description "OPTION_UNICAST (12) Server Unicast Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.12";
     container server-unicast-option {
       description "OPTION_UNICAST (12) Server Unicast Option
@@ -331,7 +331,7 @@ module ietf-dhcpv6-server {
   grouping reconfigure-message-option-group {
     description "OPTION_RECONF_MSG (19) Reconfigure Message
       Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.19";
     container reconfigure-message-option {
       description "OPTION_RECONF_MSG (19) Reconfigure Message
@@ -347,7 +347,7 @@ module ietf-dhcpv6-server {
   grouping info-refresh-time-option-group {
     description "OPTION_INFORMATION_REFRESH_TIME (32)
       Information Refresh Time Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.23";
     container info-refresh-time-option {
       description "OPTION_INFORMATION_REFRESH_TIME (32)
@@ -362,7 +362,7 @@ module ietf-dhcpv6-server {
 
   grouping sol-max-rt-option-group {
     description "OPTION_SOL_MAX_RT (82) sol max rt Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.24";
    container sol-max-rt-option {
       description "OPTION_SOL_MAX_RT (82) sol max rt option
@@ -376,7 +376,7 @@ module ietf-dhcpv6-server {
 
   grouping inf-max-rt-option-group {
     description "OPTION_INF_MAX_RT (83) inf max rt Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.25";
     container inf-max-rt-option {
       description "OPTION_INF_MAX_RT (83) inf max rt option
@@ -394,7 +394,7 @@ module ietf-dhcpv6-server {
 
   container dhcpv6-server {
     description "Configuration nodes for the DHCPv6 server.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for 
+    reference "RFC 8415: Dynamic Host Configuration Protocol for 
       IPv6 (DHCPv6), Section 18.3";
     leaf enabled {
       type boolean;
@@ -404,7 +404,7 @@ module ietf-dhcpv6-server {
     leaf server-duid {
       type dhcpv6-common:duid;
       description "DUID of the server.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 11";
     }
     container vendor-config {
@@ -418,7 +418,7 @@ module ietf-dhcpv6-server {
         such as topological location or client type. The 
         'option-set' list is a set of options and their 
         contents that will be returned to clients.";
-      reference "RFC8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 21";
       list option-set {
         key option-set-id;

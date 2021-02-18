@@ -127,7 +127,7 @@ module ietf-dhcpv6-relay {
   feature prefix-delegation {
     description "Enable if the relay functions as a delegating router
       for DHCPv6 prefix delegation.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 6.2";
   }
 
@@ -286,7 +286,7 @@ module ietf-dhcpv6-relay {
   
   grouping interface-id-option-group {
     description "OPTION_INTERFACE_ID (18) Interface-Id Option.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 21.18";
     container interface-id-option {
      description "OPTION_INTERFACE_ID (18) Interface-Id Option
@@ -308,7 +308,7 @@ module ietf-dhcpv6-relay {
     description
       "This container contains the configuration data nodes for 
       the relay.";
-    reference "RFC8415: Dynamic Host Configuration Protocol for
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 19";
    leaf enabled {
       type boolean;

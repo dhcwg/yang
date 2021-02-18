@@ -26,7 +26,7 @@ module ietf-example-dhcpv6-options-sip-server {
      Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description "This YANG module contains DHCPv6 options defined
-    in RFC3319 that can be used by DHCPv6 servers.
+    in RFC 3319 that can be used by DHCPv6 servers.
 
     Copyright (c) 2021 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -84,7 +84,7 @@ module ietf-example-dhcpv6-options-sip-server {
   grouping sip-server-domain-name-list-option-group {
     description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name
       List";
-    reference "RFC3319: Dynamic Host Configuration Protocol
+    reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-domain-name-list-option {
@@ -108,7 +108,7 @@ module ietf-example-dhcpv6-options-sip-server {
   grouping sip-server-address-list-option-group {
     description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address
       List";
-    reference "RFC3319: Dynamic Host Configuration Protocol
+    reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-address-list-option {
