@@ -16,33 +16,8 @@
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-18"/>
-    <author fullname="Yong Cui" initials="Y." surname="Cui">
-      <organization>Tsinghua University</organization>
-      <address>
-        <postal>
-          <street/>
-          <city>Beijing</city>
-          <code>100084</code>
-          <country>P.R. China</country>
-        </postal>
-        <phone>+86-10-6260-3059</phone>
-        <email>cuiyong@tsinghua.edu.cn</email>
-      </address>
-    </author>
-    <author fullname="Linhui Sun" initials="L." surname="Sun">
-      <organization>Tsinghua University</organization>
-      <address>
-        <postal>
-          <street/>
-          <city>Beijing</city>
-          <code>100084</code>
-          <country>P.R. China</country>
-        </postal>
-        <phone>+86-10-6278-5822</phone>
-        <email>lh.sunlinh@gmail.com</email>
-      </address>
-    </author>
-    <author fullname="Ian Farrer" initials="I." surname="Farrer">
+    <author fullname="Ian Farrer" role="editor" initials="I." 
+        surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
       <address>
         <postal>
@@ -52,42 +27,6 @@
           <country>Germany</country>
         </postal>
         <email>ian.farrer@telekom.de</email>
-      </address>
-    </author>
-    <author fullname="Sladjana Zechlin" initials="S.Z." surname="Zechlin">
-      <organization>Deutsche Telekom AG</organization>
-      <address>
-        <postal>
-          <street>CTO-IPT, Landgrabenweg 151</street>
-          <city>Bonn</city>
-          <code>53227</code>
-          <country>Germany</country>
-        </postal>
-        <email>sladjana.zechlin@telekom.de</email>
-      </address>
-    </author>
-    <author fullname="Zihao He" initials="Z." surname="He">
-      <organization>Tsinghua University</organization>
-      <address>
-        <postal>
-          <street/>
-          <city>Beijing</city>
-          <code>100084</code>
-          <country>P.R. China</country>
-        </postal>
-        <phone>+86-10-6278-5822</phone>
-        <email>hezihao9512@gmail.com</email>
-      </address>
-    </author>
-    <author fullname="Michal Nowikowski" initials="M." surname="Nowikowski">
-      <organization>Internet Systems Consortium</organization>
-      <address>
-        <postal>
-          <street/>
-          <city>Gdansk</city>
-          <country>Poland</country>
-        </postal>
-        <email>godfryd@isc.org</email>
       </address>
     </author>
     <date year="2021"/>
@@ -781,35 +720,47 @@
     </section>
     <section anchor="acknowledgments">
       <name>Acknowledgments</name>
-      <t>The authors would like to thank Qi Sun, Lishan Li, Sladjana Zoric,
-        Tomek Mrugalski, Marcin Siodelski, Bing Liu, and Tom Petch for
-        their valuable comments and contributions to this work.</t>
+      <t>The authors would like to thank Qi Sun, Lishan Li, Hao Wang,
+        Tomek Mrugalski, Marcin Siodelski, Bernie Volz, Ted Lemon, 
+        Bing Liu, and 
+        Tom Petch for their valuable comments and contributions to 
+        this work.</t>
     </section>
     <section anchor="contributors">
       <name>Contributors</name>
-      <t>The following individuals contributed to this effort:</t>
+      <t>The following individuals are co-authors of this document:</t>
       <artwork><![CDATA[
 
-        Hao Wang
+        Yong Cui
         Tsinghua University
-        Beijing 100084
+        Beijing, 100084
         P.R. China
-        Phone: +86-10-6278-5822
-        Email: wangh13@mails.tsinghua.edu.cn
+        Email: cuiyong@tsinghua.edu.cn
 
-        Ted Lemon
-        Nomium, Inc
-        950 Charter St.
-        Redwood City, CA 94043
-        USA
-        Email: Ted.Lemon@nomium.com
+        Linhui Sun
+        Tsinghua University
+        Beijing, 100084
+        P.R. China
+        Email: lh.sunlinh@gmail.com
 
-        Bernie Volz
-        Cisco Systems, Inc.
-        1414 Massachusetts Ave
-        Boxborough, MA 01719
-        USA
-        Email: volz@cisco.com
+        Sladjana Zechlin
+        Deutsche Telekom AG
+        CTO-IPT, Landgrabenweg 151
+        53227, Bonn
+        Germany
+        Email: sladjana.zechlin@telekom.de
+
+        Zihao He
+        Tsinghua University
+        Beijing, 100084
+        P.R. China
+        Email: hezihao9512@gmail.com
+
+        Michal Nowikowski
+        Internet Systems Consortium
+        Gdansk
+        Poland
+        Email: godfryd@isc.org
 
         ]]></artwork>
     </section>
@@ -835,6 +786,28 @@
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8415.xml"/>
+        <reference anchor="IANA-HARDWARE-TYPES"
+          target="https://www.iana.org/assignments/arp-parameters">
+          <front>
+            <title>Hardware Types</title>
+            <author>
+            <organization abbrev="IANA">Internet Assigned Numbers
+              Authority</organization>
+            </author>
+            <date />
+          </front>
+        </reference>
+        <reference anchor="IANA-PEN"
+          target="https://www.iana.org/assignments/enterprise-numbers">
+          <front>
+            <title>Private Enterprise Numbers</title>
+            <author>
+            <organization abbrev="IANA">Internet Assigned Numbers
+              Authority</organization>
+            </author>
+            <date />
+          </front>
+        </reference>
       </references>
       <references>
         <name>Informative References</name>
