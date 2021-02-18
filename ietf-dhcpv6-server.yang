@@ -168,8 +168,8 @@ module ietf-dhcpv6-server {
     }
     leaf rapid-commit {
       type boolean;
-      description "When set to 'true', Specifies that the pool supports 
-        client-server exchanges involving two messages.";
+      description "When set to 'true', Specifies that the pool 
+        supports client-server exchanges involving two messages.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 5.2";
     }

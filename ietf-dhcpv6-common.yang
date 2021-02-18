@@ -169,8 +169,8 @@ module ietf-dhcpv6-common {
         + '[0-9a-fA-F]{32}';
     }
     description "DUID type 4, based on Universally Unique Identifier 
-      (DUID-UUID).  This type of DUID consists of 16 octets containing 
-      a 128-bit UUID.";
+      (DUID-UUID).  This type of DUID consists of 16 octets 
+      containing a 128-bit UUID.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.5
       RFC 6355: Definition of the UUID-Based DHCPv6 Unique Identifier 
