@@ -18,7 +18,7 @@ module ietf-dhcpv6-client {
   import ietf-dhcpv6-common {
     prefix dhcpv6-common;
     reference
-      "To be updated on publication";
+      "RFC XXXX: To be updated on publication";
   }
 
   import ietf-interfaces {
@@ -35,7 +35,7 @@ module ietf-dhcpv6-client {
      WG List:  <mailto:dhcwg@ietf.org>
      Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
      Author:   Linhui Sun <lh.sunlinh@gmail.com>
-     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Editor:   Ian Farrer <ian.farrer@telekom.de>
      Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
      Author:   Zihao He <hezihao9512@gmail.com>
      Author:   Michal Nowikowski <godfryd@isc.org>";
@@ -185,7 +185,7 @@ module ietf-dhcpv6-client {
       the server about options the client wants the server to send
       to the client.";
     reference "RFC8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6)";
+      IPv6 (DHCPv6), Section 21.7";
     container option-request-option {
       description "OPTION_ORO (6) Option Request Option container.";
       leaf-list oro-option {
@@ -199,7 +199,7 @@ module ietf-dhcpv6-client {
   grouping user-class-option-group {
     description "OPTION_USER_CLASS (15) User Class Option";
     reference "RFC8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6)";
+      for IPv6 (DHCPv6), Section 21.15";
     container user-class-option {
       presence "Configures the option";
       description "OPTION_USER_CLASS (15) User Class Option
@@ -225,7 +225,7 @@ module ietf-dhcpv6-client {
   grouping vendor-class-option-group {
     description "OPTION_VENDOR_CLASS (16) Vendor Class Option";
     reference "RFC8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6)";
+      for IPv6 (DHCPv6), Section 21.16";
     container vendor-class-option {
       description "OPTION_VENDOR_CLASS (16) Vendor Class Option
         container.";
@@ -287,6 +287,8 @@ module ietf-dhcpv6-client {
       leaf duid {
         type dhcpv6-common:duid;
         description "Client DUID.";
+        reference "RFC8415: Dynamic Host Configuration Protocol for
+          IPv6 (DHCPv6), Section 11";
       }
       container client-configured-options {
         description " Definitions for DHCPv6 options that can be be
@@ -305,10 +307,12 @@ module ietf-dhcpv6-client {
         key iaid;
         description "Configuration relevant for an IA_NA.";
         reference "RFC8415: Dynamic Host Configuration Protocol
-          for IPv6 (DHCPv6).";
+          for IPv6 (DHCPv6), Section 13.1";
         leaf iaid {
           type uint32;
           description "A unique identifier for this IA_NA.";
+          reference "RFC8415: Dynamic Host Configuration Protocol
+            for IPv6 (DHCPv6), Section 12";
         }
         container ia-na-options {
           description "An augmentation point for additional options
@@ -365,10 +369,12 @@ module ietf-dhcpv6-client {
         key iaid;
         description "Configuration relevant for an IA_TA.";
         reference "RFC8415: Dynamic Host Configuration Protocol for
-          IPv6 (DHCPv6).";
+          IPv6 (DHCPv6), Section 13.2";
           leaf iaid {
             type uint32;
             description "The unique identifier for this IA_TA.";
+            reference "RFC8415: Dynamic Host Configuration Protocol
+              for IPv6 (DHCPv6), Section 12";
           }
         container ia-ta-options {
           description "An augmentation point for additional options
@@ -412,10 +418,12 @@ module ietf-dhcpv6-client {
         key iaid;
         description "Configuration relevant for an IA_PD.";
         reference "RFC8415: Dynamic Host Configuration Protocol for
-          IPv6 (DHCPv6).";
+          IPv6 (DHCPv6), Section 13.3";
         leaf iaid {
           type uint32;
           description "The unique identifier for this IA_PD.";
+          reference "RFC8415: Dynamic Host Configuration Protocol
+            for IPv6 (DHCPv6), Section 12";
         }
         container ia-pd-options {
           description "An augmentation point for additional options
@@ -481,6 +489,8 @@ module ietf-dhcpv6-client {
     description "Notification sent when the identity association
       of the client can be proved to be invalid. Possible conditions
       include a duplicate or otherwise illegal address.";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 18.2.10.1";
     leaf iaid {
       type uint32;
       mandatory true;
@@ -495,6 +505,8 @@ module ietf-dhcpv6-client {
   notification retransmission-failed {
     description "Notification sent when the retransmission mechanism
       defined in RFC8415 is unsuccessful.";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 7.6";
     leaf failure-type {
       type enumeration {
         enum "MRC-exceeded" {
@@ -512,6 +524,8 @@ module ietf-dhcpv6-client {
   notification unsuccessful-status-code {
     description "Notification sent when the client receives a message
       that includes an unsuccessful Status Code option.";
+      reference "RFC8415: Dynamic Host Configuration Protocol for
+          IPv6 (DHCPv6), Section 21.13";
     leaf status-code {
       type uint16;
       mandatory true;
@@ -529,6 +543,8 @@ module ietf-dhcpv6-client {
     description "Notification sent when the client receives a lease
       from a server with different DUID to the one currently stored
       by the client.";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 18.2.10.1";
     leaf new-server-duid {
       type binary;
       mandatory true;

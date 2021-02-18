@@ -5,8 +5,7 @@ module ietf-dhcpv6-common {
 
   import ietf-yang-types {
     prefix yang;
-    reference
-      "RFC 6991: Common YANG Data Types";
+    reference "RFC 6991: Common YANG Data Types";
   }
 
   organization
@@ -17,7 +16,7 @@ module ietf-dhcpv6-common {
      WG List:  <mailto:dhcwg@ietf.org>
      Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
      Author:   Linhui Sun <lh.sunlinh@gmail.com>
-     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Editor:   Ian Farrer <ian.farrer@telekom.de>
      Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
      Author:   Zihao He <hezihao9512@gmail.com>
      Author:   Michal Nowikowski <godfryd@isc.org>";
@@ -86,11 +85,11 @@ module ietf-dhcpv6-common {
       }
       type enumeration {
         enum "disabled" {
-          description "No threshold";
+          description "No threshold.";
         }
       }
     }
-    description "Threshold value in percent";
+    description "Threshold value in percent.";
   }
 
   typedef timer-seconds32 {
@@ -111,8 +110,10 @@ module ietf-dhcpv6-common {
       DUIDs in RFC8415 and RFC6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
       do not follow any of the defined formats.";
-    reference "RFC8415: Section 11 
-      RFC6355: Section 4";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11
+      RFC6355: Definition of the UUID-Based DHCPv6 Unique Identifier 
+      (DUID-UUID), Section 4";
   }
 
   typedef duid-llt {
@@ -126,9 +127,10 @@ module ietf-dhcpv6-common {
       (represented in seconds since midnight (UTC), January 1, 2000, 
       modulo 2^32), and a link-layer address. The address is encoded 
       without separator characters.";
-    reference "RFC8415: Section 11.2
-      RFC826:
-      RFC2464: ";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11.2
+      IANA 'Hardware Types' registry.
+        <https://www.iana.org/assignments/arp-parameters>";
   }
 
   typedef duid-en {
@@ -139,8 +141,11 @@ module ietf-dhcpv6-common {
     description "DUID type 2, assigned by vendor based on Enterprise
       Number (DUID-EN). This DUID consists of the 4-octet vendor's 
       registered Private Enterprise Number as maintained by IANA 
-      followed by a unique identifier assigned by the vendor. ";
-    reference "RFC8415: Section 11.3";
+      followed by a unique identifier assigned by the vendor.";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11.3
+      IANA 'Private Enterprise Numbers' registry.
+        <https://www.iana.org/assignments/enterprise-numbers>";
   }
  
   typedef duid-ll {
@@ -152,8 +157,10 @@ module ietf-dhcpv6-common {
       Constructed with a 2-byte hardware type assigned
       by IANA, and a link-layer address. The address is encoded 
       without separator characters.";
-    reference "RFC8415: Section 11.4
-      RFC826:";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11.4
+      IANA 'Hardware Types' registry.
+        <https://www.iana.org/assignments/arp-parameters>";
   }
 
   typedef duid-uuid {
@@ -164,8 +171,10 @@ module ietf-dhcpv6-common {
     description "DUID type 4, based on Universally Unique Identifier 
       (DUID-UUID).  This type of DUID consists of 16 octets containing 
       a 128-bit UUID.";
-    reference "RFC8415: Section 11.5
-      RFC6355: ";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11.5
+      RFC6355: Definition of the UUID-Based DHCPv6 Unique Identifier 
+      (DUID-UUID)";
   }
 
   typedef duid-unstructured {
@@ -176,7 +185,8 @@ module ietf-dhcpv6-common {
     }
     description "Used for DUIDs following any other formats than 
       DUID types 1-4.";
-    reference "RFC8415: Section 11";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11";
   }
 
   typedef duid {
@@ -187,9 +197,10 @@ module ietf-dhcpv6-common {
       type duid-uuid;
       type duid-unstructured;
     }
-    description "Represents the DUID and is neutral to the DUID 
-     format.";
-    reference "RFC8415: Section 11.";
+    description "Represents the DUID and is neutral to the DUID's
+     construction format.";
+    reference "RFC8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 11";
   }
     
   /*
@@ -199,13 +210,13 @@ module ietf-dhcpv6-common {
   grouping auth-option-group {
     description "OPTION_AUTH (11) Authentication Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol
-        for IPv6 (DHCPv6)";
+      for IPv6 (DHCPv6), Section 21.11";
     container auth-option {
-      description "OPTION_AUTH (11) Authentication Option
+      description "OPTION_AUTH (11) Authentication Option 
         container.";
       leaf protocol {
         type uint8;
-        description "The authentication protocol used in this
+        description "The authentication protocol used by this
           Authentication option.";
       }
       leaf algorithm {
@@ -215,7 +226,7 @@ module ietf-dhcpv6-common {
       }
       leaf rdm {
         type uint8;
-        description "The Replay Detection Method used
+        description "The Replay Detection Method (RDM) used
           in this Authentication option.";
       }
       leaf replay-detection {
@@ -234,7 +245,7 @@ module ietf-dhcpv6-common {
   grouping status-code-option-group {
     description "OPTION_STATUS_CODE (13) Status Code Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6)";
+      for IPv6 (DHCPv6), Section 21.13";
     container status-code-option {
       description "OPTION_STATUS_CODE (13) Status Code Option
         container.";
@@ -256,7 +267,7 @@ module ietf-dhcpv6-common {
   grouping rapid-commit-option-group {
     description "OPTION_RAPID_COMMIT (14) Rapid Commit Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6)";
+      IPv6 (DHCPv6), Section 21.14";
     container rapid-commit-option {
       presence "Enable sending of this option";
       description "OPTION_RAPID_COMMIT (14) Rapid Commit Option
@@ -268,7 +279,7 @@ module ietf-dhcpv6-common {
     description "OPTION_VENDOR_OPTS (17) Vendor-specific
       Information Option.";
     reference "RFC8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6)";
+      for IPv6 (DHCPv6), Section 21.17";
     container vendor-specific-information-option {
       description "OPTION_VENDOR_OPTS (17) Vendor-specific
         Information Option container.";
@@ -276,11 +287,13 @@ module ietf-dhcpv6-common {
         key enterprise-number;
         description "The vendor specific information option allows
           for multiple instances in a single message. Each list entry
-            defines the contents of an instance of the option.";
+          defines the contents of an instance of the option.";
         leaf enterprise-number {
           type uint32;
           description "The vendor's registered Enterprise Number,
-                      as maintained by IANA.";
+            as maintained by IANA.";
+          reference "IANA 'Private Enterprise Numbers' registry.
+            <https://www.iana.org/assignments/enterprise-numbers>";
         }
         list vendor-option-data {
           key sub-option-code;
@@ -310,7 +323,7 @@ module ietf-dhcpv6-common {
       unwilling to accept Reconfigure messages.  The presence node
       is used to enable the option.";
     reference "RFC8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6)";
+      for IPv6 (DHCPv6), Section 21.20";
     container reconfigure-accept-option {
       presence "Enable sending of this option";
       description "OPTION_RECONF_ACCEPT (20)  Reconfigure Accept

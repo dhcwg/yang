@@ -28,7 +28,7 @@ module ietf-example-dhcpv6-class-selector {
      WG List:  <mailto:dhcwg@ietf.org>
      Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
      Author:   Linhui Sun <lh.sunlinh@gmail.com>
-     Author:   Ian Farrer <ian.farrer@telekom.de>
+     Editor:   Ian Farrer <ian.farrer@telekom.de>
      Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
      Author:   Zihao He <hezihao9512@gmail.com>
      Author:   Michal Nowikowski <godfryd@isc.org>";
