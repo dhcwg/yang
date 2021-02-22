@@ -184,7 +184,7 @@ module ietf-dhcpv6-server {
     description "Binding information for each client that has 
       been allocated an IPv6 address or prefix.";
     leaf client-duid {
-      type binary;
+      type dhcpv6-common:duid;
       description "Client DUID.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 11";
@@ -531,7 +531,7 @@ module ietf-dhcpv6-server {
                 key reserved-addr;
                 description "List of host reservations.";
                 leaf client-duid {
-                  type binary;
+                  type dhcpv6-common:duid;
                   description "Client DUID for the reservation.";
                 }
                 leaf reserved-addr {
@@ -607,7 +607,7 @@ module ietf-dhcpv6-server {
                 key reserved-prefix;
                 description "reserved prefix reservation";
                 leaf client-duid {
-                  type binary;
+                  type dhcpv6-common:duid;
                   description "Client DUID for the reservation.";
                 }
                 leaf reserved-prefix {
@@ -718,7 +718,7 @@ module ietf-dhcpv6-server {
     description "Notification sent when the server detects an 
       invalid client.";
     leaf duid {
-      type binary;
+      type dhcpv6-common:duid;
       description "Client DUID.";
     }
     leaf description {
@@ -732,7 +732,7 @@ module ietf-dhcpv6-server {
     description "Notification sent when the server has received a
       Decline (9) message from a client.";
     leaf duid {
-      type binary;
+      type dhcpv6-common:duid;
       description "Client DUID.";
     }
     list declined-resources {
@@ -764,7 +764,7 @@ module ietf-dhcpv6-server {
       description "Status code returned to the client.";
     }
     leaf duid {
-      type binary;
+      type dhcpv6-common:duid;
       description "Client DUID.";
     }
   }

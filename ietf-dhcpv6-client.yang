@@ -365,7 +365,7 @@ module ietf-dhcpv6-client {
               of the leased address.";
           }
           leaf server-duid {
-            type binary;
+            type dhcpv6-common:duid;
             description "DUID of the leasing server.";
           }
         }
@@ -414,7 +414,7 @@ module ietf-dhcpv6-client {
               of the address.";
           }
           leaf server-duid {
-            type binary;
+            type dhcpv6-common:duid;
             description "DUID of the leasing server.";
           }
         }
@@ -477,7 +477,7 @@ module ietf-dhcpv6-client {
               of the delegated prefix.";
           }
           leaf server-duid {
-            type binary;
+            type dhcpv6-common:duid;
             description "DUID of the delegating server.";
           }
         }
@@ -537,7 +537,7 @@ module ietf-dhcpv6-client {
       description "Unsuccessful status code received by a client.";
     }
     leaf server-duid {
-      type binary;
+      type dhcpv6-common:duid;
       mandatory true;
       description "DUID of the server sending the unsuccessful
         error code.";
@@ -551,12 +551,12 @@ module ietf-dhcpv6-client {
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.2.10.1";
     leaf new-server-duid {
-      type binary;
+      type dhcpv6-common:duid;
       mandatory true;
       description "DUID of the new server.";
     }
     leaf previous-server-duid {
-      type binary;
+      type dhcpv6-common:duid;
       mandatory true;
       description "DUID of the previous server.";
     }
