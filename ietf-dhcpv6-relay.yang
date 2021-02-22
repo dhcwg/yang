@@ -161,11 +161,11 @@ module ietf-dhcpv6-relay {
         description "Peer-address of the client.";
       }
       leaf client-duid {
-        type binary;
+        type dhcpv6-common:duid;
         description "DUID of the leasing client.";
       }
       leaf server-duid {
-        type binary;
+        type dhcpv6-common:duid;
         description "DUID of the delegating server.";
       }
     }
@@ -425,7 +425,7 @@ module ietf-dhcpv6-relay {
       Prefix Delegating Relay Requirements, Section 4.4";
    input {
       leaf client-duid {
-        type binary;
+        type dhcpv6-common:duid;
         mandatory true;
         description "DUID of the client .";
       }
