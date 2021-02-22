@@ -3,14 +3,18 @@
 
 modulelist="ietf-dhcpv6-common.yang ietf-dhcpv6-server.yang ietf-dhcpv6-relay.yang ietf-dhcpv6-client.yang ietf-example-dhcpv6-options-sip-server.yang ietf-example-dhcpv6-class-selector.yang ietf-example-dhcpv6-server-config.yang"
 
+DATE=`date +%y-%m-%d`
+
+echo $DATE
+
 if [[ $# -gt 0 ]]
 then
   if [[ $1 = "-i" ]]
   then
-    for f in ${modulelist}; do sed -i '/full legal notices/r rev-2021-01-25text' ${f}; done;
+    for f in ${modulelist}; do sed -i '/full legal notices/r rev-2021-02-22text' ${f}; done;
   fi
 else
-  for f in ${modulelist}; do sed '/full legal notices/r rev-2021-01-25text' ${f}; done;
+  for f in ${modulelist}; do sed '/full legal notices/r rev-2021-02-22text' ${f}; done;
 fi
 
 # Example revision text
