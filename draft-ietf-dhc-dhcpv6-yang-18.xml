@@ -326,6 +326,9 @@
             the format for one of these types, or using the 
             'unstructured' format.  The DUID type definitions are 
             imported from the 'ietf-dhcpv6-common.yang' module.
+            <xref target="IANA-HARDWARE-TYPES"/> and 
+            <xref target="IANA-PEN"/> are referenced for the relevant
+            DUID types.
           </li>
           <li>vendor-config: This container is provided as a location 
             for additional implementation specific YANG nodes for the 
@@ -498,7 +501,9 @@
             DUID may be configured using the format for one of these 
             types, or using the 'unstructured' format.  The DUID type 
             definitions are imported from the 'ietf-dhcpv6-common.yang' 
-            module.
+            module. <xref target="IANA-HARDWARE-TYPES"/> and 
+            <xref target="IANA-PEN"/> are referenced for the relevant
+            DUID types.
           </li> 
           <li>client-configured-options: Holds configuration parameters 
             for DHCPv6 options which can be sent by the client.  The 
