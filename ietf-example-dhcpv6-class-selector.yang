@@ -20,13 +20,18 @@ module ietf-example-dhcpv6-class-selector {
     prefix dhcpv6-server;
   }
 
-  organization "DHC WG";
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working Group";
+
   contact
-    "yong@csnet1.cs.tsinghua.edu.cn
-    lh.sunlinh@gmail.com
-    ian.farrer@telekom.de
-    sladjana.zechlin@telekom.de
-    hezihao9512@gmail.com";
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+     WG List:  <mailto:dhcwg@ietf.org>
+     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+     Author:   Linhui Sun <lh.sunlinh@gmail.com>
+     Editor:   Ian Farrer <ian.farrer@telekom.de>
+     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+     Author:   Zihao He <hezihao9512@gmail.com>
+     Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description "This YANG module defines components for the definition
     and configuration of the client class selector function for a 
@@ -44,8 +49,13 @@ module ietf-example-dhcpv6-class-selector {
     Relating to IETF Documents
     (http://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC 8513; see
+    This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
+
+  revision 2021-02-22 {
+    description "Version update for draft -18 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-18";
+  }
 
   revision 2021-01-29 {
     description "Version update for draft -17 publication.";
@@ -234,7 +244,10 @@ module ietf-example-dhcpv6-class-selector {
       case client-duid-id {
         description "Client class selection based on the value
           of the received client DUID.";
-        uses dhcpv6-common:duid;
+        leaf duid {
+          type dhcpv6-common:duid;
+          description "Client DUID.";
+        }
       }
     }
   }

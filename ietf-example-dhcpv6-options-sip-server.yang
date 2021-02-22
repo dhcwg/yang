@@ -12,13 +12,21 @@ module ietf-example-dhcpv6-options-sip-server {
     prefix dhcpv6-server;
   }
 
-  organization "DHC WG";
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working Group";
+
   contact
-    "ian.farrer@telekom.de
-    godfryd@isc.org";
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+     WG List:  <mailto:dhcwg@ietf.org>
+     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+     Author:   Linhui Sun <lh.sunlinh@gmail.com>
+     Editor:   Ian Farrer <ian.farrer@telekom.de>
+     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+     Author:   Zihao He <hezihao9512@gmail.com>
+     Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description "This YANG module contains DHCPv6 options defined
-    in RFC3319 that can be used by DHCPv6 servers.
+    in RFC 3319 that can be used by DHCPv6 servers.
 
     Copyright (c) 2021 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -30,8 +38,13 @@ module ietf-example-dhcpv6-options-sip-server {
     Relating to IETF Documents
     (http://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC 8513; see
+    This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
+
+  revision 2021-02-22 {
+    description "Version update for draft -18 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-18";
+  }
 
   revision 2021-01-29 {
     description "Version update for draft -17 publication.";
@@ -76,7 +89,7 @@ module ietf-example-dhcpv6-options-sip-server {
   grouping sip-server-domain-name-list-option-group {
     description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name
       List";
-    reference "RFC3319: Dynamic Host Configuration Protocol
+    reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-domain-name-list-option {
@@ -100,7 +113,7 @@ module ietf-example-dhcpv6-options-sip-server {
   grouping sip-server-address-list-option-group {
     description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address
       List";
-    reference "RFC3319: Dynamic Host Configuration Protocol
+    reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-address-list-option {
