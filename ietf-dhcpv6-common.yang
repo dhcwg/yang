@@ -37,6 +37,11 @@ module ietf-dhcpv6-common {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
+  revision 2021-02-22 {
+    description "Version update for draft -18 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-18";
+  }
+
   revision 2021-01-29 {
     description "Version update for draft -17 publication.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang-17";
