@@ -244,7 +244,10 @@ module ietf-example-dhcpv6-class-selector {
       case client-duid-id {
         description "Client class selection based on the value
           of the received client DUID.";
-        uses dhcpv6-common:duid;
+        leaf duid {
+          type dhcpv6-common:duid;
+          description "Client DUID.";
+        }
       }
     }
   }
