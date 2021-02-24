@@ -4,6 +4,7 @@ XML2RFC?=../venv/bin/xml2rfc
 RFCFOLD?=../venv/bin/rfcfold
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
+DATE ?= $(shell date +%F)
 
 SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-18
 
@@ -68,7 +69,7 @@ define yang_to_xml =
 $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
-	echo '<![CDATA[<CODE BEGINS> file "$(inc_yang_file)" \n' >> $$@
+	echo '<![CDATA[<CODE BEGINS> file "$(inc_yang_file:.yang=@$(DATE).yang)" \n' >> $$@
 	cat $$< |fold -w 69 >> $$@
 	echo '<CODE ENDS>]]>' >> $$@
 	echo '</artwork>' >> $$@

@@ -3,9 +3,7 @@
 
 modulelist="ietf-dhcpv6-common.yang ietf-dhcpv6-server.yang ietf-dhcpv6-relay.yang ietf-dhcpv6-client.yang ietf-example-dhcpv6-options-sip-server.yang ietf-example-dhcpv6-class-selector.yang ietf-example-dhcpv6-server-config.yang"
 
-DATE=`date +%y-%m-%d`
-
-echo $DATE
+for f in ${modulelist}; do ../venv/bin/pyang --ietf -p ../ietf/yang/standard/ietf/RFC ${f}; done;
 
 if [[ $# -gt 0 ]]
 then
