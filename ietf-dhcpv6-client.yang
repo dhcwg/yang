@@ -185,7 +185,7 @@ module ietf-dhcpv6-client {
 
   grouping option-request-option-group {
     description "OPTION_ORO (6) Option Request Option. A client
-      MUST include an Option Request option in a Solicit, Request,
+      must include an Option Request option in a Solicit, Request,
       Renew, Rebind, or Information-request message to inform
       the server about options the client wants the server to send
       to the client.";

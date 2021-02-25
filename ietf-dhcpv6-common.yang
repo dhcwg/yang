@@ -3,11 +3,6 @@ module ietf-dhcpv6-common {
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common";
   prefix "dhcpv6-common";
 
-  import ietf-yang-types {
-    prefix yang;
-    reference "RFC 6991: Common YANG Data Types";
-  }
-
   organization
     "IETF DHC (Dynamic Host Configuration) Working Group";
 
@@ -264,7 +259,7 @@ module ietf-dhcpv6-common {
       leaf status-message {
         type string;
         description "A UTF-8 encoded text string suitable for
-          display to an end user. MUST NOT be null-terminated.";
+          display to an end user. Must not  be null-terminated.";
       }
     }
   }

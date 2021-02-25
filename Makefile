@@ -6,7 +6,7 @@ SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 DATE ?= $(shell date +%F)
 
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-18
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-19
 
 MODELS_DIR:=.
 
