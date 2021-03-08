@@ -127,7 +127,7 @@ module ietf-dhcpv6-server {
     description "Denotes that the server implements DHCPv6 prefix 
       delegation.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6), Section 6.2";
+      IPv6 (DHCPv6), Section 6.3";
   }
 
   /*
@@ -176,7 +176,7 @@ module ietf-dhcpv6-server {
       description "When set to 'true', Specifies that the pool 
         supports client-server exchanges involving two messages.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 5.2";
+        IPv6 (DHCPv6), Section 5.1";
     }
   }
 
@@ -477,7 +477,7 @@ module ietf-dhcpv6-server {
         leaf id {
           type uint32;
           mandatory true;
-          description "Equivalent to subnet ID.";
+          description "Unique identifier for the network range.";
         }
         leaf description {
           type string;
