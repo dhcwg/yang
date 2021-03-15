@@ -209,16 +209,16 @@ module ietf-dhcpv6-client {
       presence "Configures the option";
       description "OPTION_USER_CLASS (15) User Class Option
         container.";
-      list user-class-data {
-        key user-class-datum-id;
+      list user-class-data-instances {
+        key user-class-data-id;
         min-elements 1;
         description "The user classes of which the client
           is a member.";
-        leaf user-class-datum-id {
+        leaf user-class-data-id {
           type uint8;
-          description "User class datum ID";
+          description "User class data ID";
         }
-        leaf user-class-datum {
+        leaf user-class-data {
           type string;
           description "Opaque field representing a User Class
             of which the client is a member.";
@@ -321,7 +321,7 @@ module ietf-dhcpv6-client {
         }
         container ia-na-options {
           description "An augmentation point for additional options
-            that the client will send in the IA_NA-options field
+            that the client may send in the IA_NA-options field
             of OPTION_IA_NA.";
         }
         container lease-state {
@@ -383,7 +383,7 @@ module ietf-dhcpv6-client {
           }
         container ia-ta-options {
           description "An augmentation point for additional options
-            that the client will send in the IA_TA-options field
+            that the client may send in the IA_TA-options field
             of OPTION_IA_TA.";
         }
         container lease-state {
@@ -490,16 +490,47 @@ module ietf-dhcpv6-client {
    * Notifications
    */
 
-  notification invalid-ia-detected {
-    description "Notification sent when the identity association
-      of the client can be proved to be invalid. Possible conditions
-      include a duplicate or otherwise illegal address.";
+  notification invalid-ia-address-detected {
+    description "Notification sent when an address received 
+      in an identity association option can be proved to be invalid. 
+      Possible conditions include a duplicate or otherwise illegal 
+      address.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.2.10.1";
     leaf iaid {
       type uint32;
       mandatory true;
       description "IAID";
+    }
+    leaf ia-na-t1-timer {
+      type uint32;
+      description "The value of the T1 time field for non-tempory 
+        address allocations (OPTION_IA_NA).";
+    }
+    leaf ia-na-t2-timer {
+      type uint32;
+      description "The value of the preferred-lifetime field for 
+        non-tempory address allocations (OPTION_IA_NA).";
+    }
+    leaf invalid-address {
+      type inet:ipv6-address;
+      description "The IP address which has been detected to be
+        invalid.";
+    }
+    leaf preferred-lifetime {
+      type uint32;
+      description "The value of the preferred-lifetime field in 
+        OPTION_IAADDR.";
+    }
+    leaf valid-lifetime {
+      type uint32;
+      description "The value of the valid-lifetime field in
+        OPTION_IAADDR.";
+    }
+    leaf ia-options {
+     type binary;
+     description "A copy of the contents of the IAaddr-options 
+       field.";
     }
     leaf description {
       type string;
@@ -547,9 +578,9 @@ module ietf-dhcpv6-client {
   notification server-duid-changed {
     description "Notification sent when the client receives a lease
       from a server with different DUID to the one currently stored
-      by the client.";
+      by the client, e.g. in response to a Rebind message.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6), Section 18.2.10.1";
+      IPv6 (DHCPv6), Section 18.2.5";
     leaf new-server-duid {
       type dhcpv6-common:duid;
       mandatory true;

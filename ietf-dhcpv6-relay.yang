@@ -133,7 +133,7 @@ module ietf-dhcpv6-relay {
     description "Enable if the relay functions as a delegating router
       for DHCPv6 prefix delegation.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 6.2";
+        IPv6 (DHCPv6), Section 6.3";
   }
 
   /*
@@ -342,8 +342,8 @@ module ietf-dhcpv6-relay {
           or other valid addresses.";
       }
       leaf link-address {
-        type binary {
-          length "0..16";
+        type string {
+          pattern '[0-9a-fA-F]{32}';
         }
         description "An address that may be used by the server
           to identify the link on which the client is located.";
@@ -400,8 +400,8 @@ module ietf-dhcpv6-relay {
     nacm:default-deny-all;
     description "Clears an entry for an active delegated prefix
       from the relay.";
-    reference "draft-ietf-dhc-dhcpv6-pd-relay-requirements: DHCPv6 
-      Prefix Delegating Relay Requirements, Section 4.4";
+    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
+      Section 4.4";
     input {
       leaf lease-prefix {
         type inet:ipv6-prefix;
@@ -421,8 +421,8 @@ module ietf-dhcpv6-relay {
     nacm:default-deny-all;
     description "Clears all active prefix entries for a single 
       client.";
-    reference "draft-ietf-dhc-dhcpv6-pd-relay-requirements: DHCPv6 
-      Prefix Delegating Relay Requirements, Section 4.4";
+    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
+      Section 4.4";
    input {
       leaf client-duid {
         type dhcpv6-common:duid;
@@ -441,11 +441,13 @@ module ietf-dhcpv6-relay {
     nacm:default-deny-all;
     description "Clears all delegated prefix bindings from an 
       interface on the relay.";
-    reference "draft-ietf-dhc-dhcpv6-pd-relay-requirements: DHCPv6 
-      Prefix Delegating Relay Requirements, Section 4.4";
+    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
+      Section 4.4";
    input {
       leaf interface {
-        type if:interface-ref;
+        type leafref {
+          path "../../dhcpv6-relay/relay-if/if-name";
+        }
         mandatory true;
         description "Reference to the relay interface that will have
           all active prefix delegation bindings deleted.";

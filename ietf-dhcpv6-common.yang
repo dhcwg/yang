@@ -101,11 +101,11 @@ module ietf-dhcpv6-common {
 
   typedef duid-base {
     type string {
-      length '6..260';
+      pattern '([0-9a-zA-F]{2}){3,130}';
     }
     description "Each DHCP server and client has a DUID (DHCP 
       Unique Identifier). The DUID consists of a two-octet 
-      type field and an arbitrary length (between 1 and 128 bytes) 
+      type field and an arbitrary length (between 1 and 128 octets) 
       content field.  Currently, there are four defined types of 
       DUIDs in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
@@ -210,7 +210,10 @@ module ietf-dhcpv6-common {
   grouping auth-option-group {
     description "OPTION_AUTH (11) Authentication Option.";
     reference "RFC 8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6), Section 21.11";
+      for IPv6 (DHCPv6), Section 21.11
+      IANA 'Dynamic Host Configuration Protocol (DHCP) Authentication 
+      Option Name Spaces' registry.
+      <https://www.iana.org/assignments/auth-namespaces>";
     container auth-option {
       description "OPTION_AUTH (11) Authentication Option 
         container.";
@@ -304,7 +307,9 @@ module ietf-dhcpv6-common {
             description "The code for the sub-option.";
           }
           leaf sub-option-data {
-            type string;
+            type string {
+              pattern '([0-9a-zA-F]{2}){,65535}';
+            }
             description "The data area for the sub-option.";
           }
         }
