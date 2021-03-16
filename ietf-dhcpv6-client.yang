@@ -538,22 +538,57 @@ module ietf-dhcpv6-client {
     }
   }
 
-  notification retransmission-failed {
-    description "Notification sent when the retransmission mechanism
-      defined in RFC 8415 is unsuccessful.";
+  notification transmission-failed {
+    description "Notification sent when the transmission or 
+      retransmission of a message fails."; 
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 7.6";
     leaf failure-type {
       type enumeration {
-        enum "MRC-exceeded" {
-          description "Maximum retransmission count exceeded.";
+        enum "solicit-timeout" {
+          description "Max Solicit timeout value (SOL_MAX_RT) 
+            exceeded.";
         }
-        enum "MRD-exceeded" {
-          description "Maximum retransmission duration exceeded.";
+        enum "request-timeout" {
+          description "Max Request timeout value (REQ_MAX_RT)
+            exceeded.";
+        }
+        enum "request-retries-exceeded" {
+          description "Max Request retry attempts (REC_MAX_RC) 
+            exceeded.";
+        }
+        enum "confirm-duration-exceeded" {
+          description "Max Confirm duration (CNF_MAX_RD) 
+            exceeded.";
+        }
+        enum "renew-timeout" {
+          description "Max Renew timeout value (REN_MAX_RT) 
+            exceeded.";
+        }
+        enum "rebind-timeout" {
+          description "Max Rebind timeout value (REB_MAX_RT) 
+            exceeded.";
+        }
+        enum "info-request-timeout" {
+          description "Max Information-request timeout value 
+            (INF_MAX_RT) exceeded.";
+        }
+        enum "release-retries-exceeded" {
+          description "Max Release retry attempts (REL_MAX_RC) 
+            exceeded.";
+        }
+        enum "decline-retries-exceeded" {
+          description "Max Decline retry attempts (DEC_MAX_RT) 
+            exceeded.";
         }
       }
       mandatory true;
       description "Description of the failure.";
+    }
+    leaf description {
+      type string;
+      description "Information related to the failure, such as 
+        number of retries and timer values.";
     }
   }
 
