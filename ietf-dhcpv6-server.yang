@@ -781,7 +781,11 @@ module ietf-dhcpv6-server {
       or renewed by the client.";
     input {
       leaf lease-address-to-delete {
-        type inet:ipv6-address;
+        type leafref {
+          path "../../dhcpv6-server/network-ranges/network-range" +
+            "/address-pools/address-pool/active-leases/active-lease" +
+            "/leased-address";
+        }
           mandatory true;
         description "IPv6 address of an active lease that will be 
           deleted from the server.";
@@ -802,8 +806,12 @@ module ietf-dhcpv6-server {
       or renewed by the client.";
     input {
       leaf lease-prefix-to-delete {
-        type inet:ipv6-prefix;
-          mandatory true;
+        type leafref {
+          path "../../dhcpv6-server/network-ranges/network-range" +
+            "/prefix-pools/prefix-pool/active-leases/active-lease" +
+            "/leased-prefix";
+        }
+        mandatory true;
         description "IPv6 prefix of an active lease that will be 
           deleted from the server.";
       }
