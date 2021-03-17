@@ -1,0 +1,5 @@
+
+  revision 2021-03-17 {
+    description "Version update for draft -19 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-19";
+  }

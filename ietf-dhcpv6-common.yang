@@ -19,6 +19,13 @@ module ietf-dhcpv6-common {
   description "This YANG module defines common components 
     used for the configuration and management of DHCPv6.
 
+    The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
+    'SHALL NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED',
+    'NOT RECOMMENDED', 'MAY', and 'OPTIONAL' in this document
+    are to be interpreted as described in BCP 14 (RFC 2119)
+    (RFC 8174) when, and only when, they appear in all
+    capitals, as shown here.
+
     Copyright (c) 2021 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
@@ -31,6 +38,11 @@ module ietf-dhcpv6-common {
 
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
+
+  revision 2021-03-17 {
+    description "Version update for draft -19 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-19";
+  }
 
   revision 2021-02-22 {
     description "Version update for draft -18 publication.";
@@ -262,7 +274,7 @@ module ietf-dhcpv6-common {
       leaf status-message {
         type string;
         description "A UTF-8 encoded text string suitable for
-          display to an end user. Must not  be null-terminated.";
+          display to an end user. MUST NOT be null-terminated.";
       }
     }
   }

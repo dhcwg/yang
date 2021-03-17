@@ -12,3 +12,8 @@ pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC iet
 pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-server.yang
 pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-common.yang
 pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-relay.yang
+
+
+pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-example-dhcpv6-server-conf.yang
+pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-example-dhcpv6-opt-sip-serv.yang
+pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-example-dhcpv6-class-select.yang

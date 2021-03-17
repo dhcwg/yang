@@ -1,7 +1,7 @@
-module ietf-example-dhcpv6-class-selector {
+module ietf-example-dhcpv6-class-select {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:" + 
-    "ietf-example-dhcpv6-class-selector";
+    "ietf-example-dhcpv6-class-select";
   prefix "dhcpv6-class-selector";
 
   import ietf-inet-types {
@@ -51,6 +51,11 @@ module ietf-example-dhcpv6-class-selector {
 
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
+
+  revision 2021-03-17 {
+    description "Version update for draft -19 publication.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang-19";
+  }
 
   revision 2021-02-22 {
     description "Version update for draft -18 publication.";
