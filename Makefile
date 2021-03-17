@@ -2,6 +2,7 @@ YANGER?=../yanger/bin/yanger
 PYANG=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
 RFCFOLD?=../venv/bin/rfcfold
+YANGLINT=/usr/local/bin/yanglint
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 DATE ?= $(shell date +%F)

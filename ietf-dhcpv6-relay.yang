@@ -403,13 +403,17 @@ module ietf-dhcpv6-relay {
 
   rpc clear-prefix-entry {
     nacm:default-deny-all;
+    if-feature prefix-delegation;
     description "Clears an entry for an active delegated prefix
       from the relay.";
     reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
       Section 4.4";
     input {
       leaf lease-prefix {
-        type inet:ipv6-prefix;
+        type leafref {
+          path "/dhcpv6-relay/relay-if/prefix-delegation/pd-leases/" +
+          "ia-pd-prefix";
+        }
         mandatory true;
         description "IPv6 prefix of an active lease entry that will 
           be deleted from the relay.";
@@ -424,6 +428,7 @@ module ietf-dhcpv6-relay {
   }
   rpc clear-client-prefixes {
     nacm:default-deny-all;
+    if-feature prefix-delegation;
     description "Clears all active prefix entries for a single 
       client.";
     reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
@@ -444,11 +449,12 @@ module ietf-dhcpv6-relay {
   }
   rpc clear-interface-prefixes {
     nacm:default-deny-all;
+    if-feature prefix-delegation;
     description "Clears all delegated prefix bindings from an 
       interface on the relay.";
     reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
       Section 4.4";
-   input {
+    input {
       leaf interface {
         type leafref {
           path "../../dhcpv6-relay/relay-if/if-name";

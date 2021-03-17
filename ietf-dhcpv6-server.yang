@@ -223,8 +223,8 @@ module ietf-dhcpv6-server {
     }
     leaf valid-lifetime {
       type dhcpv6-common:timer-seconds32;
-      description "The valid lifetime for the leased prefix
-        expressed in seconds.";
+      description "The valid lifetime for the lease expressed 
+        in seconds.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 6";
     }
@@ -852,6 +852,7 @@ module ietf-dhcpv6-server {
   }
   rpc delete-prefix-lease {
     nacm:default-deny-all;
+    if-feature prefix-delegation;
     description "Deletes a client's active prefix lease from the 
       server's lease database. Note, this will not cause the prefix
       to be revoked from the client, and the lease may be refreshed
