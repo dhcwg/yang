@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-18" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-19" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-18"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-19"/>
     <author fullname="Ian Farrer" role="editor" initials="I." 
         surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
@@ -791,6 +791,7 @@
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8415.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8987.xml"/>
         <reference anchor="IANA-HARDWARE-TYPES"
           target="https://www.iana.org/assignments/arp-parameters">
           <front>
@@ -806,6 +807,30 @@
           target="https://www.iana.org/assignments/enterprise-numbers">
           <front>
             <title>Private Enterprise Numbers</title>
+            <author>
+            <organization abbrev="IANA">Internet Assigned Numbers
+              Authority</organization>
+            </author>
+            <date />
+          </front>
+        </reference>
+        <reference anchor="IANA-AUTH"
+          target="https://www.iana.org/assignments/auth-namespaces">
+          <front>
+            <title>Dynamic Host Configuration Protocol (DHCP) 
+              Authentication Option Name Spaces</title>
+            <author>
+            <organization abbrev="IANA">Internet Assigned Numbers
+              Authority</organization>
+            </author>
+            <date />
+          </front>
+        </reference>
+        <reference anchor="IANA-STATUS"
+          target="https://www.iana.org/assignments/dhcpv6-parameters">
+          <front>
+            <title>Dynamic Host Configuration Protocol for IPv6 
+              (DHCPv6) Status Codes</title>
             <author>
             <organization abbrev="IANA">Internet Assigned Numbers
               Authority</organization>
@@ -861,7 +886,7 @@
         DHCP element's module (server, relay and/or client).      
       </t>
 
-      <xi:include href="ietf-example-dhcpv6-options-sip-server.yang.xml"/>
+      <xi:include href="ietf-example-dhcpv6-opt-sip-serv.yang.xml"/>
       <t>The correct location to augment the new option definition(s)
         will vary according to the specific rules defined for the 
         use of that specific option. E.g. for options which will
@@ -905,7 +930,7 @@
         under the "/dhcpv6-server:config/dhcpv6-server:vendor-config"
         mount point.
       </t>
-      <xi:include href="ietf-example-dhcpv6-server-config.yang.xml"/>
+      <xi:include href="ietf-example-dhcpv6-server-conf.yang.xml"/>
     </section>
 
     <section anchor="class-selector-example">
@@ -944,7 +969,7 @@
         address(es)/prefix(es) from given network-range/pool if the 
         class name matches.
       </t>
-      <xi:include href="ietf-example-dhcpv6-class-selector.yang.xml"/>
+      <xi:include href="ietf-example-dhcpv6-class-select.yang.xml"/>
     </section>
   </back>
 </rfc>

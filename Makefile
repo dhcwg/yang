@@ -2,11 +2,12 @@ YANGER?=../yanger/bin/yanger
 PYANG=../venv/bin/pyang
 XML2RFC?=../venv/bin/xml2rfc
 RFCFOLD?=../venv/bin/rfcfold
+YANGLINT=/usr/local/bin/yanglint
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 DATE ?= $(shell date +%F)
 
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-18
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-19
 
 MODELS_DIR:=.
 
@@ -81,9 +82,9 @@ INCLUDES+=ietf-dhcpv6-client.yang
 INCLUDES+=ietf-dhcpv6-server.yang
 INCLUDES+=ietf-dhcpv6-relay.yang
 INCLUDES+=ietf-dhcpv6-common.yang
-INCLUDES+=ietf-example-dhcpv6-class-selector.yang
-INCLUDES+=ietf-example-dhcpv6-server-config.yang
-INCLUDES+=ietf-example-dhcpv6-options-sip-server.yang
+INCLUDES+=ietf-example-dhcpv6-class-select.yang
+INCLUDES+=ietf-example-dhcpv6-server-conf.yang
+INCLUDES+=ietf-example-dhcpv6-opt-sip-serv.yang
 
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))

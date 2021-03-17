@@ -10,6 +10,6 @@
   <client-if>
     <if-name>eth0</if-name>
     <enabled>true</enabled>
-    <duid>00020123abcdabcdabcd</duid>
+    <duid>000201</duid>
  </client-if>
 </dhcpv6-client>

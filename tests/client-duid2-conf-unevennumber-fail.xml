@@ -10,9 +10,6 @@
   <client-if>
     <if-name>eth0</if-name>
     <enabled>true</enabled>
-    <duid>00010002abcdabc</duid>
+    <duid>000201234abcdabcdabcd</duid>
  </client-if>
 </dhcpv6-client>
-
-<!-- yanglint -p ../ietf/yang/standard/ietf/RFC/ -t config -f xml ../ietf/yang/standard/ietf/RFC/iana-if-type.yang ietf-dhcpv6-client.yang tests/clientdefaultconf.xml -->
-
