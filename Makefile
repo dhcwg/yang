@@ -81,9 +81,9 @@ INCLUDES+=ietf-dhcpv6-client.yang
 INCLUDES+=ietf-dhcpv6-server.yang
 INCLUDES+=ietf-dhcpv6-relay.yang
 INCLUDES+=ietf-dhcpv6-common.yang
-INCLUDES+=ietf-example-dhcpv6-class-selector.yang
-INCLUDES+=ietf-example-dhcpv6-server-config.yang
-INCLUDES+=ietf-example-dhcpv6-options-sip-server.yang
+INCLUDES+=ietf-example-dhcpv6-class-select.yang
+INCLUDES+=ietf-example-dhcpv6-server-conf.yang
+INCLUDES+=ietf-example-dhcpv6-opt-sip-serv.yang
 
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))

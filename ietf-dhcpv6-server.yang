@@ -671,6 +671,7 @@ module ietf-dhcpv6-server {
         path "/dhcpv6-server/network-ranges/network-range/" +
           "address-pools/address-pool/pool-id";
       }
+      mandatory true;
       description "Leafref to the address pool that the notification
         is being generated for.";
     }
@@ -680,24 +681,27 @@ module ietf-dhcpv6-server {
       description "Total number of addresses in the pool 
         (end-address minus start-address).";
     }
-    leaf max-address-count {
+    leaf max-allocated-addresses {
       type uint64;
       mandatory true;
-      description "Maximum number of addresses that can be allocated
-        in the pool. This value may be less than count of total
-        addresses.";
+      description "Maximum number of addresses that can be 
+        simultaneously allocated from the pool. This value may be 
+        less than count of total addresses. Calculated as the 
+        max-address-utilization (percentage) of the 
+        total-pool-addresses, rounded up.";
     }
     leaf allocated-address-count {
       type uint64;
       mandatory true;
-      description "Count of allocated addresses in the pool.";
+      description "Number of addresses allocated from the pool.";
     }
   }
 
   notification prefix-pool-utilization-threshold-exceeded {
     if-feature prefix-delegation;
     description "Notification sent when the prefix pool 
-      utilization exceeds the configured threshold.";
+      utilization exceeds the threshold configured in
+      max-pd-space-utilization.";
     leaf pool-id {
       type leafref {
         path "/dhcpv6-server/network-ranges/network-range/" + 
@@ -706,18 +710,25 @@ module ietf-dhcpv6-server {
       mandatory true;
       description "Unique identifier for the pool.";
     }
-    leaf max-pd-space-utilization {
-      type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/" +
-          "prefix-pools/prefix-pool/max-pd-space-utilization";
-      }
-      mandatory true;
-      description "PD space utilization threshold.";
-    }
-    leaf pd-space-utilization {
+    leaf total-pool-prefixes {
       type uint64;
-      description "Current PD space utilization.";
-    } 
+      mandatory true;
+      description "Total number of prefixes in the pool.";
+    }
+    leaf max-allocated-prefixes {
+      type uint64;
+      mandatory true;
+      description "Maximum number of prefixes that can be
+        simultaneously allocated from the pool. This value may be
+        less than count of total prefixes. Calculated as the
+        max-precfix-utilization (percentage) of the
+        total-pool-prefixes, rounded up.";
+    }
+    leaf allocated-prefixes-count {
+      type uint64;
+      mandatory true;
+      description "Number of prefixes allocated from the pool.";
+    }
   }
 
   notification invalid-client-detected {

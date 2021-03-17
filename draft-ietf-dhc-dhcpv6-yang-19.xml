@@ -886,7 +886,7 @@
         DHCP element's module (server, relay and/or client).      
       </t>
 
-      <xi:include href="ietf-example-dhcpv6-options-sip-server.yang.xml"/>
+      <xi:include href="ietf-example-dhcpv6-opt-sip-serv.yang.xml"/>
       <t>The correct location to augment the new option definition(s)
         will vary according to the specific rules defined for the 
         use of that specific option. E.g. for options which will
@@ -930,7 +930,7 @@
         under the "/dhcpv6-server:config/dhcpv6-server:vendor-config"
         mount point.
       </t>
-      <xi:include href="ietf-example-dhcpv6-server-config.yang.xml"/>
+      <xi:include href="ietf-example-dhcpv6-server-conf.yang.xml"/>
     </section>
 
     <section anchor="class-selector-example">
@@ -969,7 +969,7 @@
         address(es)/prefix(es) from given network-range/pool if the 
         class name matches.
       </t>
-      <xi:include href="ietf-example-dhcpv6-class-selector.yang.xml"/>
+      <xi:include href="ietf-example-dhcpv6-class-select.yang.xml"/>
     </section>
   </back>
 </rfc>

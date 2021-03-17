@@ -1,0 +1,15 @@
+<interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+  <interface>
+    <name>eth0</name>
+    <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
+    <enabled>true</enabled>
+  </interface>
+</interfaces>
+<dhcpv6-client xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client">
+  <enabled>true</enabled>
+  <client-if>
+    <if-name>eth0</if-name>
+    <enabled>true</enabled>
+    <duid>0004550e8400e29b11d4a716446655440001AA</duid>
+ </client-if>
+</dhcpv6-client>
