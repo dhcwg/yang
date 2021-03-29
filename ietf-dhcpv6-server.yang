@@ -528,7 +528,8 @@ module ietf-dhcpv6-server {
               description "Maximum amount of the addresses in the 
                 pool which can be simultaneously allocated, 
                 calculated as a percentage of the available 
-                addresses (end-address minus start-address).";
+                addresses (end-address minus start-address plus
+                one).";
             }
             uses resource-config;
             container host-reservations {
@@ -684,7 +685,7 @@ module ietf-dhcpv6-server {
       type uint64;
       mandatory true;
       description "Total number of addresses in the pool 
-        (end-address minus start-address).";
+        (end-address minus start-address plus one).";
     }
     leaf max-allocated-addresses {
       type uint64;
