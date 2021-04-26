@@ -130,7 +130,7 @@ module ietf-dhcpv6-common {
 
   typedef duid-llt {
     type duid-base {
-      pattern '^0001'
+      pattern '0001'
         + '[0-9a-fA-F]{12,}';
     }
     description "DUID type 1, based on Link-Layer Address Plus Time 
@@ -147,7 +147,7 @@ module ietf-dhcpv6-common {
 
   typedef duid-en {
     type duid-base {
-      pattern '^0002'
+      pattern '0002'
         + '[0-9a-fA-F]{4,}';
     }
     description "DUID type 2, assigned by vendor based on Enterprise
@@ -162,7 +162,7 @@ module ietf-dhcpv6-common {
  
   typedef duid-ll {
     type duid-base {
-      pattern '^0003'
+      pattern '0003'
         + '([0-9a-fA-F]){4,}';
     }
     description "DUID type 3, based on Link-Layer Address (DUID-LL).
@@ -177,7 +177,7 @@ module ietf-dhcpv6-common {
 
   typedef duid-uuid {
     type duid-base {
-      pattern '^0004'
+      pattern '0004'
         + '[0-9a-fA-F]{32}';
     }
     description "DUID type 4, based on Universally Unique Identifier 
@@ -191,7 +191,7 @@ module ietf-dhcpv6-common {
 
   typedef duid-unstructured {
     type duid-base {
-      pattern '^[0-9a-fA-F]{3}'
+      pattern '[0-9a-fA-F]{3}'
         + '[05-9a-fA-F]'
         + '([0-1a-fA-F])*';
     }
