@@ -1,0 +1,79 @@
+module ietf-dhcpv6-options-rfc4075 {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-options-rfc4075";
+  prefix "rfc4075";
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import ietf-dhcpv6-server {
+    prefix dhcpv6-server;
+  }
+
+  organization
+    "IETF DHC (Dynamic Host Configuration) Working Group";
+
+  contact
+    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+    WG List:  <mailto:dhcwg@ietf.org>
+    Author:   Ian Farrer <ian.farrer@telekom.de>";
+
+    description "This YANG module contains DHCPv6 options defined
+      in RFC 4075 that can be used by DHCPv6 servers.
+
+      Copyright (c) 2021 IETF Trust and the persons identified as
+      authors of the code.  All rights reserved.
+
+      Redistribution and use in source and binary forms, with or
+      without modification, is permitted pursuant to, and subject
+      to the license terms contained in, the Simplified BSD License
+      set forth in Section 4.c of the IETF Trust's Legal Provisions
+      Relating to IETF Documents
+      (http://trustee.ietf.org/license-info).
+
+      This version of this YANG module is part of RFC XXXX; see
+      the RFC itself for full legal notices.";
+
+  revision 2021-04-27 {
+    description "Initial version.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  revision 2020-02-21 {
+    description "Initial version.";
+    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+  }
+
+  /*
+   * Groupings
+   */
+ 
+  grouping sntp-server-option-group {
+    container sntp-server-option {
+      description "OPTION_SNTP_SERVERS (31) Simple Network Time Protocol
+        (SNTP) Servers Option";
+      reference "RFC4075: Simple Network Time Protocol (SNTP) Configuration
+        Option for DHCPv6";
+      list sntp-server {
+        key sntp-serv-id;
+        description "List of SNTP server addresses.";
+        leaf sntp-serv-id {
+          type uint8;
+          description "SNTP server id";
+        }
+        leaf sntp-serv-addr {
+          type inet:ipv6-address;
+          description "SNTP server address.";
+        }
+      }
+    }
+  }
+
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" + 
+    "dhcpv6-server:option-set" {
+    description "Augment the option definition groupings to the 
+      server module.";
+    uses sntp-server-option-group;
+  }
+}
