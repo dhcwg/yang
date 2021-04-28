@@ -486,7 +486,6 @@ module ietf-dhcpv6-server {
         }
         leaf description {
           type string;
-          mandatory true;
           description "Description for the network range.";
         }
         leaf network-prefix {
