@@ -9,7 +9,7 @@ module ietf-example-dhcpv6-opt-sip-serv {
   }
 
   import ietf-dhcpv6-server {
-    prefix dhcpv6-server;
+    prefix dhc6-srv;
   }
 
   organization
@@ -25,8 +25,9 @@ module ietf-example-dhcpv6-opt-sip-serv {
      Author:   Zihao He <hezihao9512@gmail.com>
      Author:   Michal Nowikowski <godfryd@isc.org>";
 
-  description "This YANG module contains DHCPv6 options defined
-    in RFC 3319 that can be used by DHCPv6 servers.
+  description 
+    "This YANG module contains DHCPv6 options defined in RFC 8415 
+    that can be used by DHCPv6 servers.
 
     Copyright (c) 2021 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -41,49 +42,9 @@ module ietf-example-dhcpv6-opt-sip-serv {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2021-03-17 {
-    description "Version update for draft -19 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-19";
-  }
-
-  revision 2021-02-22 {
-    description "Version update for draft -18 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-18";
-  }
-
-  revision 2021-01-29 {
-    description "Version update for draft -17 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-17";
-  }
-  
-  revision 2021-01-06 {
-    description "Version update for draft -16 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-16";
-  }
-
-  revision 2020-12-22 {
-    description "Version update for draft -13 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-15";
-  }
-
-  revision 2020-12-10 {
-    description "Version update for draft -13 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-13";
-  }
-
-  revision 2020-12-01 {
-    description "Version update for draft -12 publication.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-12";
-  }
-
-  revision 2020-05-26 {
-    description "Version update for draft -11 publication and
-      to align revisions across the different modules.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang-11";
-  }
-
   revision 2019-10-18 {
-    description "Initial version.";
+    description 
+      "Initial version.";
     reference "I-D: draft-ietf-dhc-dhcpv6-yang";
   }
 
@@ -92,48 +53,56 @@ module ietf-example-dhcpv6-opt-sip-serv {
    */
 
   grouping sip-server-domain-name-list-option-group {
-    description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name
-      List";
+    description 
+      "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
     reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-domain-name-list-option {
-     description "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name 
-       List container.";
+     description 
+       "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List 
+       container.";
      list sip-server {
         key sip-serv-id;
-        description "SIP server information.";
+        description 
+          "SIP server information.";
         leaf sip-serv-id {
           type uint8;
-          description "SIP server list identifier identifier.";
+          description 
+            "SIP server list identifier identifier.";
         }
         leaf sip-serv-domain-name {
           type inet:domain-name;
-          description "SIP server domain name.";
+          description 
+            "SIP server domain name.";
         }
       }
     }
   }
 
   grouping sip-server-address-list-option-group {
-    description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address
-      List";
+    description 
+      "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List";
     reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";
     container sip-server-address-list-option {
-      description "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address
-        List container.";
+      description 
+        "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List 
+        container.";
      list sip-server {
         key sip-serv-id;
-        description "SIP server information.";
+        description 
+          "SIP server information.";
         leaf sip-serv-id {
           type uint8;
-          description "SIP server list entry identifier.";
+          description 
+            "SIP server list entry identifier.";
         }
         leaf sip-serv-addr {
           type inet:ipv6-address;
-          description "SIP server IPv6 address.";
+          description 
+            "SIP server IPv6 address.";
         }
       }
     }
@@ -143,10 +112,11 @@ module ietf-example-dhcpv6-opt-sip-serv {
    * Augmentations
    */
 
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" + 
-    "dhcpv6-server:option-set" {
-    description "Augment the option definition groupings to the 
-      server module.";
+  augment "/dhc6-srv:dhcpv6-server/dhc6-srv:option-sets/" + 
+    "dhc6-srv:option-set" {
+    description 
+      "Augment the option definition groupings to the server 
+      module.";
     uses sip-server-domain-name-list-option-group;
     uses sip-server-address-list-option-group;
   }
