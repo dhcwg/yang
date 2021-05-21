@@ -294,7 +294,8 @@ module ietf-dhcpv6-client {
       list ia-na {
         key iaid;
         description 
-          "Configuration relevant for an IA_NA.";
+          "Configuration relevant for an IA_NA (Identity Association
+           for Non-temporary Addresses).";
         reference "RFC 8415: Dynamic Host Configuration Protocol
           for IPv6 (DHCPv6), Section 13.1";
         leaf iaid {
@@ -367,7 +368,8 @@ module ietf-dhcpv6-client {
       list ia-ta {
         key iaid;
         description 
-          "Configuration relevant for an IA_TA.";
+          "Configuration relevant for an IA_TA (Identity Association
+          for Temporary Addresses).";
         reference "RFC 8415: Dynamic Host Configuration Protocol for
           IPv6 (DHCPv6), Section 13.2";
           leaf iaid {
@@ -425,7 +427,8 @@ module ietf-dhcpv6-client {
       list ia-pd {
         key iaid;
         description 
-          "Configuration relevant for an IA_PD.";
+          "Configuration relevant for an IA_PD (Identity Association
+          for Prefix Delegation).";
         reference "RFC 8415: Dynamic Host Configuration Protocol for
           IPv6 (DHCPv6), Section 13.3";
         leaf iaid {

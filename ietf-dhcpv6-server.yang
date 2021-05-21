@@ -342,12 +342,13 @@ module ietf-dhcpv6-server {
 
   grouping sol-max-rt-option-group {
     description 
-      "OPTION_SOL_MAX_RT (82) sol max rt Option.";
+      "OPTION_SOL_MAX_RT (82) SOL_MAX_RT Option (Max Solicit timeout 
+        value).";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.24";
    container sol-max-rt-option {
       description 
-        "OPTION_SOL_MAX_RT (82) sol max rt option container.";
+        "OPTION_SOL_MAX_RT (82) SOL_MAX_RT option container.";
       leaf sol-max-rt-value {
         type dhc6:timer-seconds32;
         description 
@@ -358,7 +359,8 @@ module ietf-dhcpv6-server {
 
   grouping inf-max-rt-option-group {
     description 
-      "OPTION_INF_MAX_RT (83) inf max rt Option.";
+      "OPTION_INF_MAX_RT (83) INF_MAX_RT Option (Max 
+        Information-request timeout value).";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.25";
     container inf-max-rt-option {
