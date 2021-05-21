@@ -109,7 +109,7 @@ module ietf-dhcpv6-relay {
       leaf client-peer-address {
         type inet:ipv6-address;
         description 
-          "Peer-address of the client.";
+          "Peer-address of the leasing client.";
       }
       leaf client-duid {
         type dhc6:duid;
@@ -318,8 +318,8 @@ module ietf-dhcpv6-relay {
         description 
           "Each DHCPv6 relay agent may be configured with a list 
           of destination addresses for relayed messages.
-          The list may include unicast addresses, multicast addresses
-          or other valid addresses.";
+          The list may include unicast addresses, multicast 
+          addresses or other valid addresses.";
       }
       leaf link-address {
         type inet:ipv6-address;
@@ -329,9 +329,9 @@ module ietf-dhcpv6-relay {
      }
       container relay-options {
         description 
-          "Definitions for DHCPv6 options that can be sent by the 
-          relay are augmented to this location from other YANG
-          modules as required.";
+          "Definitions for DHCPv6 options that can be sent 
+          by the relay are augmented to this location from other 
+          YANG modules as required.";
         uses dhc6:auth-option-group;
         uses dhc6:status-code-option-group;
         uses interface-id-option-group;
@@ -391,8 +391,8 @@ module ietf-dhcpv6-relay {
     input {
       leaf lease-prefix {
         type leafref {
-          path "/dhcpv6-relay/relay-if/prefix-delegation/pd-leases/" +
-          "ia-pd-prefix";
+          path "/dhcpv6-relay/relay-if/prefix-delegation" +
+          "/pd-leases/ia-pd-prefix";
         }
         mandatory true;
         description 
@@ -420,7 +420,7 @@ module ietf-dhcpv6-relay {
         type dhc6:duid;
         mandatory true;
         description 
-          "DUID of the client .";
+          "DUID of the client.";
       }
     }
     output {
