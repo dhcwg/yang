@@ -68,9 +68,9 @@ module ietf-dhcpv6-common {
     description 
       "Each DHCP server and client has a DUID (DHCP Unique 
       Identifier). The DUID consists of a two-octet 
-      type field and an arbitrary length (between 1 and 128 octets) 
-      content field.  Currently, there are four defined types of 
-      DUIDs in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
+      type field and an arbitrary length (1-128 octets) content 
+      field.  Currently, there are four defined types of DUIDs
+      in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
       do not follow any of the defined formats.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
@@ -239,7 +239,7 @@ module ietf-dhcpv6-common {
         type string;
         description 
           "A UTF-8 encoded text string suitable for display to an 
-          end user. MUST NOT be null-terminated.";
+          end user. It MUST NOT be null-terminated.";
       }
     }
   }
@@ -269,7 +269,7 @@ module ietf-dhcpv6-common {
       list vendor-specific-information-option-instances {
         key enterprise-number;
         description 
-          "The vendor specific information option allows for 
+          "The vendor-specific information option allows for 
           multiple instances in a single message. Each list entry
           defines the contents of an instance of the option.";
         leaf enterprise-number {
