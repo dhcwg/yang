@@ -255,8 +255,8 @@ module ietf-dhcpv6-client {
     list client-if {
       key if-name;
       description 
-        "The list of interfaces that the client will be
-        requesting DHCPv6 configuration for.";
+        "The list of interfaces for which the client will 
+        be requesting DHCPv6 configuration.";
       leaf if-name {
         type if:interface-ref;
         mandatory true;
@@ -324,13 +324,13 @@ module ietf-dhcpv6-client {
             type dhc6:timer-seconds32;
             description 
               "The preferred lifetime for the leased address 
-              expressed in units of seconds.";
+              expressed in seconds.";
           }
           leaf valid-lifetime {
             type dhc6:timer-seconds32;
             description 
               "The valid lifetime for the leased address expressed 
-              in units of seconds.";
+              in seconds.";
           }
           leaf lease-t1 {
             type dhc6:timer-seconds32;
@@ -398,13 +398,13 @@ module ietf-dhcpv6-client {
             type dhc6:timer-seconds32;
             description 
               "The preferred lifetime for the leased address 
-              expressed in units of seconds.";
+              expressed in seconds.";
           }
           leaf valid-lifetime {
             type dhc6:timer-seconds32;
             description 
               "The valid lifetime for the leased address expressed 
-              in units of seconds.";
+              in seconds.";
           }
           leaf allocation-time {
             type yang:date-and-time;
@@ -425,13 +425,13 @@ module ietf-dhcpv6-client {
         }
       }
       list ia-pd {
-        key iaid;
+        key ia-id;
         description 
           "Configuration relevant for an IA_PD (Identity Association
           for Prefix Delegation).";
         reference "RFC 8415: Dynamic Host Configuration Protocol for
           IPv6 (DHCPv6), Section 13.3";
-        leaf iaid {
+        leaf ia-id {
           type uint32;
           description 
             "The unique identifier for this IA_PD.";
@@ -509,27 +509,27 @@ module ietf-dhcpv6-client {
   notification invalid-ia-address-detected {
     description 
       "Notification sent when an address received 
-      in an identity association option can be proved to be invalid. 
+      in an identity association option is determined invalid. 
       Possible conditions include a duplicate or otherwise illegal 
       address.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.2.10.1";
-    leaf iaid {
+    leaf ia-id {
       type uint32;
       mandatory true;
       description 
-        "IAID";
+        "IA-ID";
     }
     leaf ia-na-t1-timer {
       type uint32;
       description 
-        "The value of the T1 time field for non-tempory 
-        address allocations (OPTION_IA_NA).";
+        "The value of the T1 time field for non-temporary address 
+        allocations (OPTION_IA_NA).";
     }
     leaf ia-na-t2-timer {
       type uint32;
       description 
-        "The value of the preferred-lifetime field for non-tempory 
+        "The value of the preferred-lifetime field for non-temporary 
         address allocations (OPTION_IA_NA).";
     }
     leaf invalid-address {
@@ -556,7 +556,8 @@ module ietf-dhcpv6-client {
     leaf description {
       type string;
       description 
-        "Description of the event.";
+        "Description of the invalid Identity Associtation (IA)
+        destection error.";
     }
   }
 
@@ -644,7 +645,7 @@ module ietf-dhcpv6-client {
     description 
       "Notification sent when the client receives a lease
       from a server with different DUID to the one currently stored
-      by the client, e.g. in response to a Rebind message.";
+      by the client, e.g., in response to a Rebind message.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.2.5";
     leaf new-server-duid {
