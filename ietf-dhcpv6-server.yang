@@ -88,8 +88,8 @@ module ietf-dhcpv6-server {
         path "/dhcpv6-server/option-sets/option-set/option-set-id";
       }
       description 
-      "The ID field of relevant set of DHCPv6 options (option-set) 
-      to be provisioned to clients of this network-range.";
+        "The ID field of relevant set of DHCPv6 options (option-set) 
+        to be provisioned to clients using the network-range.";
     }
     leaf valid-lifetime {
       type dhc6:timer-seconds32;
@@ -448,10 +448,10 @@ module ietf-dhcpv6-server {
         to identify and classify incoming client messages
         so that they can be given the correct configuration.
         The mechanisms used for implementing this function vary
-        greatly between different implementations such that they 
-        are not possible to include in this module. This container
-        provides a location for server implementors to augment
-        their own class-selector YANG.";
+        greatly between different implementations such it is not 
+        possible to include in this module. This container provides 
+        a location for server implementors to augment their own 
+        class-selector YANG.";
     }
 
     container network-ranges {
@@ -508,13 +508,13 @@ module ietf-dhcpv6-server {
               type inet:ipv6-address-no-zone;
               mandatory true;
               description 
-                "Start IPv6 address for the pool.";
+                "Starting IPv6 address for the pool.";
             }
             leaf end-address {
               type inet:ipv6-address-no-zone;
               mandatory true;
               description 
-                "End IPv6 address for the pool.";
+                "Ending IPv6 address for the pool.";
             }
             leaf max-address-utilization {
               type dhc6:threshold;
@@ -646,7 +646,7 @@ module ietf-dhcpv6-server {
             container active-leases {
               config false;
               description 
-                "Holds state related to for active client prefix 
+                "Holds state related to active client prefix 
                 leases.";
               leaf total-count {
                 type uint64;
@@ -752,7 +752,7 @@ module ietf-dhcpv6-server {
         "Maximum number of prefixes that can be simultaneously 
         allocated from the pool. This value may be less than 
         count of total prefixes. Calculated as the
-        max-precfix-utilization (percentage) of the
+        max-prefix-utilization (percentage) of the
         total-pool-prefixes, rounded up.";
     }
     leaf allocated-prefixes-count {
@@ -814,7 +814,7 @@ module ietf-dhcpv6-server {
     leaf description {
       type string;
       description 
-        "Description of the event (e.g. and error code or log 
+        "Description of the event (e.g., and error code or log 
         message).";
     }
   }
@@ -877,17 +877,17 @@ module ietf-dhcpv6-server {
     nacm:default-deny-all;
     description 
       "Deletes a client's active address lease from the 
-      server's lease database. Note, this will not cause the address
+      server's lease database. Note this will not cause the address
       to be revoked from the client, and the lease may be refreshed
       or renewed by the client.";
     input {
       leaf lease-address-to-delete {
         type leafref {
           path "../../dhcpv6-server/network-ranges/network-range" +
-            "/address-pools/address-pool/active-leases/active-lease" +
-            "/leased-address";
+            "/address-pools/address-pool/active-leases" +
+            "/active-lease/leased-address";
         }
-          mandatory true;
+        mandatory true;
         description 
           "IPv6 address of an active lease that will be 
           deleted from the server.";
