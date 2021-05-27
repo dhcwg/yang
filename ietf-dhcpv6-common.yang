@@ -69,7 +69,8 @@ module ietf-dhcpv6-common {
       "Each DHCP server and client has a DUID (DHCP Unique 
       Identifier). The DUID consists of a two-octet 
       type field and an arbitrary length (1-128 octets) content 
-      field.  Currently, there are four defined types of DUIDs
+      field. The duid-base type provides the    
+      Currently, there are four defined types of DUIDs
       in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
       do not follow any of the defined formats.";
@@ -106,7 +107,20 @@ module ietf-dhcpv6-common {
       "DUID type 2, assigned by vendor based on Enterprise
       Number (DUID-EN). This DUID consists of the 4-octet vendor's 
       registered Private Enterprise Number as maintained by IANA 
-      followed by a unique identifier assigned by the vendor.";
+      followed by a unique identifier assigned by the vendor.
+      
+      Taking the example from RFC 8415 Section 11.3 (Figure 6):
+
+      +---+---+---+---+---+---+---+---+
+      | 0 | 2 | 0 | 0 | 0 |  9| 12|192|
+      +---+---+---+---+---+---+---+---+
+      |132|211| 3 | 0 | 9 | 18|
+      +---+---+---+---+---+---+
+
+      This example includes the 2-octet type of 2 and the Enterprise 
+      Number (9), followed by 8 octets of identifier data 
+      (0x0CC084D303000912). The duid-en YANG encoding for this would
+      be '0200090CC084D303000912'";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.3
       IANA 'Private Enterprise Numbers' registry.
@@ -262,11 +276,11 @@ module ietf-dhcpv6-common {
       Option.";
     reference "RFC 8415: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6), Section 21.17";
-    container vendor-specific-information-option {
+    container vendor-specific-information-options {
       description 
         "OPTION_VENDOR_OPTS (17) Vendor-specific Information 
         Option container.";
-      list vendor-specific-information-option-instances {
+      list vendor-specific-information-option-instance {
         key enterprise-number;
         description 
           "The vendor-specific information option allows for 

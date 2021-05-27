@@ -140,7 +140,7 @@ module ietf-dhcpv6-server {
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 11";
     }
-    leaf iaid {
+    leaf ia-id {
       type uint32;
       mandatory true;
       description 

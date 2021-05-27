@@ -7,7 +7,7 @@ SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 DATE ?= $(shell date +%F)
 
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-19
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-20
 
 MODELS_DIR:=.
 
@@ -61,6 +61,9 @@ INCLUDETREE=
 INCLUDETREE+=ietf-dhcpv6-server.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-relay.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-client.yang.tree.clean
+INCLUDETREE+=server-base-ex
+INCLUDETREE+=prefixpool-ex
+INCLUDETREE+=opt-set-ex
 
 TREEINCLUDES=
 $(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
@@ -85,6 +88,7 @@ INCLUDES+=ietf-dhcpv6-common.yang
 INCLUDES+=ietf-example-dhcpv6-class-select.yang
 INCLUDES+=ietf-example-dhcpv6-server-conf.yang
 INCLUDES+=ietf-example-dhcpv6-opt-sip-serv.yang
+
 
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))

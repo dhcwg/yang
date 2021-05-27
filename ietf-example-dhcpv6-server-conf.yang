@@ -33,7 +33,7 @@ module ietf-example-dhcpv6-server-conf {
     "This YANG module defines components for the configuration and 
     management of vendor/implementation specific DHCPv6 server 
     functionality. As this functionality varies greatly between 
-    different implementations, the module provided as an example 
+    different implementations, the module is provided as an example 
     only.
 
     Copyright (c) 2021 IETF Trust and the persons identified as
@@ -101,8 +101,8 @@ module ietf-example-dhcpv6-server-conf {
           leaf-list interfaces {
             type if:interface-ref;
             description 
-              "List of interfaces that the server will listen for 
-              incoming messages on. Messages addressed to any 
+              "List of interfaces on which the server will listen for 
+              incoming messages. Messages addressed to any 
               valid IPv6 address (unicast and multicast) will be 
               received.";
           }
@@ -111,8 +111,8 @@ module ietf-example-dhcpv6-server-conf {
           leaf-list address-list {
             type inet:ipv6-address;
             description 
-              "List of IPv6 address(es) that the server will listen 
-              for incoming messages on.";
+              "List of IPv6 address(es) on which the server will 
+              listen for incoming DHCPv6 messages.";
           }
         }
       }
@@ -120,8 +120,8 @@ module ietf-example-dhcpv6-server-conf {
         type if:interface-ref; 
         default "if:interfaces/if:interface/if:name";
         description 
-          "A leaf list to denote which one or more interfaces the 
-          server should listen on.";
+          "A leaf list of interfaces on which the server should 
+          listen.";
       }
       container lease-storage {
         description 
@@ -133,7 +133,7 @@ module ietf-example-dhcpv6-server-conf {
           case memfile {
             description 
               "Configuration for storing leases information in a 
-              CSV file.";
+              Comma-Separated Value (CSV) file.";
             leaf memfile-name {
               type string;
               description 

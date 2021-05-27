@@ -292,13 +292,13 @@ module ietf-dhcpv6-client {
         uses dhc6:reconfigure-accept-option-group;
       }
       list ia-na {
-        key iaid;
+        key ia-id;
         description 
           "Configuration relevant for an IA_NA (Identity Association
            for Non-temporary Addresses).";
         reference "RFC 8415: Dynamic Host Configuration Protocol
           for IPv6 (DHCPv6), Section 13.1";
-        leaf iaid {
+        leaf ia-id {
           type uint32;
           description 
             "A unique identifier for this IA_NA.";
@@ -366,13 +366,13 @@ module ietf-dhcpv6-client {
         }
       }
       list ia-ta {
-        key iaid;
+        key ia-id;
         description 
           "Configuration relevant for an IA_TA (Identity Association
           for Temporary Addresses).";
         reference "RFC 8415: Dynamic Host Configuration Protocol for
           IPv6 (DHCPv6), Section 13.2";
-          leaf iaid {
+          leaf ia-id {
             type uint32;
             description 
               "The unique identifier for this IA_TA.";
@@ -662,21 +662,21 @@ module ietf-dhcpv6-client {
     }
     leaf lease-ia-na {
       type leafref {
-        path "/dhcpv6-client/client-if/ia-na/iaid";
+        path "/dhcpv6-client/client-if/ia-na/ia-id";
       }
       description 
         "Reference to the IA_NA lease.";
     }
     leaf lease-ia-ta {
       type leafref {
-        path "/dhcpv6-client/client-if/ia-ta/iaid";
+        path "/dhcpv6-client/client-if/ia-ta/ia-id";
       }
       description 
         "Reference to the IA_TA lease.";
     }
     leaf lease-ia-pd {
       type leafref {
-        path "/dhcpv6-client/client-if/ia-pd/iaid";
+        path "/dhcpv6-client/client-if/ia-pd/ia-id";
       }
       description 
         "Reference to the IA_PD lease.";

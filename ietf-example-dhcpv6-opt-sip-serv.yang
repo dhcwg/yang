@@ -54,7 +54,7 @@ module ietf-example-dhcpv6-opt-sip-serv {
 
   grouping sip-server-domain-name-list-option-group {
     description 
-      "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List";
+      "OPTION_SIP_SERVER_D (21) SIP Servers Domain-Name List";
     reference "RFC 3319: Dynamic Host Configuration Protocol
       (DHCPv6) Options for Session Initiation Protocol (SIP)
       Servers";

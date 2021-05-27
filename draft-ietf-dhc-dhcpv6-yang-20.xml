@@ -597,7 +597,7 @@
           messages to a rogue DHCPv6 server.
         </li>
         <li>Various attacks based on re-configuring the contents
-          of DHCPv6 options. E.g., changing the address of a
+          of DHCPv6 options. For example, changing the address of a
           the DNS server supplied in a DHCP option to point
           to a rogue server.
         </li>
@@ -621,12 +621,14 @@
         environments.  Therefore, it is important to control read 
         access (e.g., only permitting get, get-config, or 
         notifications) to these data nodes.  These subtrees and
-        data nodes can be misused to track the activity of a host:</t>
+        data nodes can be misused to track the activity of a host:
+      </t>
 
       <ul spacing="normal">
         <li>Information the server holds about clients with active 
-          leases: (dhcpv6-server/network-ranges/network-range/
-          address-pools/address-pool/active-leases)
+          leases: 
+          (dhcpv6-server/network-ranges/network-range/address-pools/
+          address-pool/active-leases)
         </li>
         <li>Information the relay holds about clients with active 
           leases: (dhcpv6-relay/relay-if/prefix-delegation/)
@@ -726,9 +728,8 @@
       <name>Acknowledgments</name>
       <t>The authors would like to thank Qi Sun, Lishan Li, Hao Wang,
         Tomek Mrugalski, Marcin Siodelski, Bernie Volz, Ted Lemon, 
-        Bing Liu, and 
-        Tom Petch for their valuable comments and contributions to 
-        this work.</t>
+        Bing Liu, Tom Petch, and Acee Lindem for their valuable 
+        comments and contributions to this work.</t>
     </section>
     <section anchor="contributors">
       <name>Contributors</name>
@@ -844,6 +845,51 @@
       </references>
     </references>
 
+    <section anchor="yang-usage-examples">
+      <name>Data Tree Examples</name>
+      <t>This section contains XML examples of data trees for
+        the different DHCPv6 elements.
+      </t>
+      <section>
+        <name>DHCPv6 Server Configuration Example</name>
+        <t>The following example shows a basic configuration for a 
+          server. Here, the server's DUID is configured, a simple
+          option set, containing a </t>
+
+        <t>Please note that </t>
+
+        <figure anchor="server-base-example-confg">
+          <name>Basic Server Configuration Example XML</name>
+          <xi:include href="server-base-ex.xml"/>
+        </figure>
+
+        <t>The following example shows configuring of a network
+          range and pool to be used for prefix delegation to clients.
+        </t>
+        <figure anchor="pd-example-conf">
+          <name>Prefix Delegation Configuration Example XML</name>
+          <xi:include href="prefixpool-ex.xml"/>
+        </figure>
+
+        <t>The next example shows the configuration of a set of 
+          options that may be returned to clients, depending on the 
+          contents of a recieved DHCP request message. The option set 
+          ID is '1', which will referenced by other places in the 
+          configuration (e.g., address pool configuration) as the 
+          available options for clients that request them.</t>
+        <t>The example contains 2 instances of the Vendor
+          Specific Information Option (OPTION_VENDOR_OPTS (17)) to
+          show how options which allow for multiple instances are
+          configured.</t>
+
+        <figure anchor="option-set-example">
+          <name>Option Set Configuration Example XML</name>
+          <xi:include href="opt-set-ex.xml"/>
+        </figure>
+
+      </section>
+    </section>
+
     <section anchor="example-dhcp-options-extension">
       <name>Example of Augmenting Additional DHCPv6 Option Definitions</name>
       <t>The following section provides a example of how the DHCPv6 
@@ -888,14 +934,14 @@
       <xi:include href="ietf-example-dhcpv6-opt-sip-serv.yang.xml"/>
       <t>The correct location to augment the new option definition(s)
         will vary according to the specific rules defined for the 
-        use of that specific option. E.g. for options which will
-        be augmented into the ietf-dhcpv6-server module, in many
-        cases, these will be augmented to:
+        use of that specific option. For example, for options which 
+        will be augmented into the ietf-dhcpv6-server module, in 
+        many cases, these will be augmented to:
      </t>
-      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/\
-        dhcpv6-server:option-set'</t>
+     <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/
+       dhcpv6-server:option-set'</t>
       <t>
-        so that they can be defined within option sets. However,
+        So that they can be defined within option sets. However,
         there are some options which are only applicable for 
         specific deployment scenarios and in these cases it may be
         more logical to augment the option group to a location 
@@ -905,8 +951,8 @@
         prefix which contains a specific prefix. In this case, the
         following location for the augmentation may be more suitable:
       </t>
-      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/\
-        dhcpv6-server:network-range/dhcpv6-server:prefix-pools/\
+      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/
+        dhcpv6-server:network-range/dhcpv6-server:prefix-pools/
         dhcpv6-server:prefix-pool"
       </t>
     </section>
@@ -933,21 +979,21 @@
     </section>
 
     <section anchor="class-selector-example">
-      <name>Example definition of class selector configuration</name>
+      <name>Example definition of class-selector configuration</name>
       <t>
         The module "ietf-example-dhcpv6-class-selector" provides an example 
-        of how vendor specific class selection configuration can be 
+        of how vendor-specific class selection configuration can be 
         modelled and integrated with the "ietf-dhcpv6-server" module 
         defined in this document.</t>
 
       <t>The example module defines "client-class-names" with associated
         matching rules. A client can be classified based on "client-id",
         "interface-id" (ingress interface of the client's messages),
-        packets source or destination address, relay link address,
+        packet's source or destination address, relay link address,
         relay link interface-id and more. Actually, there are endless 
         methods for classifying clients. So this standard does not try 
         to provide full specification for class selection, it only shows
-        an example how it can be defined.</t>
+        an example how it could be defined.</t>
 
       <t>At the end of the example augment statements are used to add 
         the defined class selector rules into the overall DHCPv6 
