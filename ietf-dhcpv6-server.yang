@@ -346,7 +346,7 @@ module ietf-dhcpv6-server {
         value).";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.24";
-   container sol-max-rt-option {
+    container sol-max-rt-option {
       description 
         "OPTION_SOL_MAX_RT (82) SOL_MAX_RT option container.";
       leaf sol-max-rt-value {

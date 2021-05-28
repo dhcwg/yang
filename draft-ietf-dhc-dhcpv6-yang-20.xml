@@ -850,21 +850,40 @@
       <t>This section contains XML examples of data trees for
         the different DHCPv6 elements.
       </t>
-      <section>
+      <section anchor="server-usage-examples">
         <name>DHCPv6 Server Configuration Example</name>
         <t>The following example shows a basic configuration for a 
-          server. Here, the server's DUID is configured, a simple
-          option set, containing a </t>
-
-        <t>Please note that </t>
+          server. The configuration defines:</t>
+        <ul spacing="normal">
+          <li>Enabling the DHCP server function</li>
+          <li>The server's DUID</li>
+          <li>An option set (id=1) with configuration for the 
+            Solicit Max Retry Timeout (SOL_MAX_RT (82)) option.
+          </li>
+          <li>A single network range (2001:db8::/32)</li>
+          <li>A single address pool, with start and end addresses,
+            relevant lease timers and the option-set-id of "1"
+            referencing the option set configured above.</li>
+         </ul>
 
         <figure anchor="server-base-example-confg">
           <name>Basic Server Configuration Example XML</name>
           <xi:include href="server-base-ex.xml"/>
         </figure>
 
-        <t>The following example shows configuring of a network
-          range and pool to be used for prefix delegation to clients.
+        <t>The following example shows a static host reservation
+          within an address pool. The host's lease timers are 
+          configured to be longer than hosts from the pool with
+          dynamically assigned addresses.</t>
+
+        <figure anchor="host-res-example-conf">
+          <name>Host Reservation Configuration Example XML</name>
+          <xi:include href="host-res-ex.xml"/>
+        </figure>
+
+        <t>The following example shows configuration for a network
+          range and pool to be used for delegating prefixses to 
+          clients.
         </t>
         <figure anchor="pd-example-conf">
           <name>Prefix Delegation Configuration Example XML</name>
@@ -886,8 +905,60 @@
           <name>Option Set Configuration Example XML</name>
           <xi:include href="opt-set-ex.xml"/>
         </figure>
-
       </section>
+
+      <section anchor="relay-usage-example">
+        <name>DHCPv6 Relay Configuration Example</name>
+        <t>The following example shows a basic configuration for a 
+          single DHCP relay interface. The configuration 
+          defines:</t>
+        <ul spacing="normal">
+          <li>Enabling the DHCP relay function</li>
+          <li>References the interface that the relay configuration
+            is relevant for via an inteface-ref to the 
+            ietf-interfaces module.</li>
+          <li>Defining two destination addresses that incoming
+            DHCP messages will be relayed to.</li>
+          <li>Configures the link-address value that will be sent
+            in the relay-forward message.</li>
+          <li>Configuring a value for the Interface ID Option 
+            (OPTION_INTERFACE_ID (18)), which will be included
+            in the relay forward message.
+          </li>
+         </ul>
+
+        <figure anchor="relay-base-example-confg">
+          <name>Basic Server Configuration Example XML</name>
+          <xi:include href="relay-base-ex.xml"/>
+        </figure>
+      </section>
+
+      <section anchor="client-usage-example">
+        <name>DHCPv6 Client Configuration Examples</name>
+        <t>The following example shows a basic configuration for a 
+          DHCP client. The configuration 
+          defines:</t>
+        <ul spacing="normal">
+          <li>Enabling the DHCP relay function</li>
+          <li>References the interface that the relay configuration
+            is relevant for via an inteface-ref to the 
+            ietf-interfaces module.</li>
+          <li>Defining two destination addresses that incoming
+            DHCP messages will be relayed to.</li>
+          <li>Configures the link-address value that will be sent
+            in the relay-forward message.</li>
+          <li>Configuring a value for the Interface ID Option 
+            (OPTION_INTERFACE_ID (18)), which will be included
+            in the relay forward message.
+          </li>
+         </ul>
+
+        <figure anchor="relay-base-example-confg">
+          <name>Basic Server Configuration Example XML</name>
+          <xi:include href="relay-base-ex.xml"/>
+        </figure>
+      </section>
+
     </section>
 
     <section anchor="example-dhcp-options-extension">

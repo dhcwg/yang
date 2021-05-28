@@ -177,7 +177,7 @@ module ietf-dhcpv6-client {
       description 
         "OPTION_USER_CLASS (15) User Class Option
         container.";
-      list user-class-data-instances {
+      list user-class-data-instance {
         key user-class-data-id;
         min-elements 1;
         description 
@@ -219,16 +219,16 @@ module ietf-dhcpv6-client {
             "The vendor's registered Enterprise Number as 
             maintained by IANA.";
         }
-        list vendor-class {
-          key vendor-class-datum-id;
+        list vendor-class-data-element {
+          key vendor-class-data-id;
           description 
             "The vendor classes of which the client is a member.";
-          leaf vendor-class-datum-id {
+          leaf vendor-class-data-id {
             type uint8;
             description 
-              "Vendor class datum ID";
+              "Vendor class data ID";
           }
-          leaf vendor-class-datum {
+          leaf vendor-class-data {
             type string;
             description 
               "Opaque field representing a vendor class of which 

@@ -308,12 +308,11 @@ module ietf-dhcpv6-relay {
       }
       leaf enabled {
         type boolean;
-        default true;
         description 
           "Enables the DHCP relay function for this
           interface.";
       }
-      leaf-list destination-addresses {
+      leaf-list destination-address {
         type inet:ipv6-address;
         description 
           "Each DHCPv6 relay agent may be configured with a list 
@@ -326,7 +325,7 @@ module ietf-dhcpv6-relay {
         description 
           "An address that may be used by the server to identify 
           the link on which the client is located.";
-     }
+      }
       container relay-options {
         description 
           "Definitions for DHCPv6 options that can be sent 

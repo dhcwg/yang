@@ -280,7 +280,7 @@ module ietf-dhcpv6-common {
       description 
         "OPTION_VENDOR_OPTS (17) Vendor-specific Information 
         Option container.";
-      list vendor-specific-information-option-instance {
+      list vendor-specific-information-option {
         key enterprise-number;
         description 
           "The vendor-specific information option allows for 

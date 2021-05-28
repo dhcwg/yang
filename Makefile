@@ -62,8 +62,10 @@ INCLUDETREE+=ietf-dhcpv6-server.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-relay.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-client.yang.tree.clean
 INCLUDETREE+=server-base-ex
+INCLUDETREE+=host-res-ex
 INCLUDETREE+=prefixpool-ex
 INCLUDETREE+=opt-set-ex
+INCLUDETREE+=relay-base-ex
 
 TREEINCLUDES=
 $(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
