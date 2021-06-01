@@ -1,7 +1,7 @@
-module ietf-example-dhcpv6-class-select {
+module example-dhcpv6-class-select {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:" + 
-    "ietf-example-dhcpv6-class-select";
+  namespace "https://example.com/ns/" +
+    "example-dhcpv6-class-select";
   prefix "dhc6-class-sel";
 
   import ietf-inet-types {

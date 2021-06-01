@@ -1,7 +1,7 @@
-module ietf-example-dhcpv6-opt-sip-serv {
+module example-dhcpv6-opt-sip-serv {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:" + 
-    "ietf-example-dhcpv6-opt-sip-serv";
+  namespace "https://example.com/ns/" + 
+    "example-dhcpv6-opt-sip-serv";
   prefix "sip-srv";
 
   import ietf-inet-types {

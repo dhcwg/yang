@@ -5,7 +5,7 @@
   <option-sets>
     <option-set>
       <option-set-id>1</option-set-id>
-      <sip-server-domain-name-list-option xmlns="urn:ietf:params:xml:ns:yang:ietf-example-dhcpv6-opt-sip-serv">
+      <sip-server-domain-name-list-option xmlns="https://example.com/ns/ietf-example-dhcpv6-opt-sip-serv">
         <sip-server>
           <sip-serv-id>0</sip-serv-id>
           <sip-serv-domain-name>sip1.example.org</sip-serv-domain-name>

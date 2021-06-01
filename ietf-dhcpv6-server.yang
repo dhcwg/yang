@@ -602,7 +602,9 @@ module ietf-dhcpv6-server {
                 "IPv6 prefix for the pool.";
             }
             leaf client-prefix-length {
-              type uint8;
+              type uint8 {
+                range "1 .. 128";
+              }
               mandatory true;
               description 
                 "Length of the prefixes that will be delegated 

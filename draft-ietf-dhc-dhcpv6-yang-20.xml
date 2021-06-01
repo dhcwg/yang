@@ -62,7 +62,12 @@
         of the element modules.  <xref target="yang-usage-examples"/> 
         provides XML examples for each of the element modules and 
         shows their interaction.
-      </t>     
+      </t>
+      <t>The relay and client modules provide configuration which is
+        applicable device's interfaces. This is done by importing the
+        ietf-interfaces module <xref target="RFC8343"/> and using 
+        interface-refs to the relevant interface(s).
+      </t>
       <t>It is worth noting that as DHCPv6 is itself a client 
         configuration protocol, it is not the intention of this document 
         to provide a replacement for the allocation of DHCPv6 assigned 
@@ -89,7 +94,6 @@
           to add additional functionality as required by a particular 
           implementation or deployment scenario.
         </t>
-
       </section>
       <section>
         <name>Extensibility of the DHCPv6 Server YANG Module</name>
@@ -1020,7 +1024,7 @@
         DHCP element's module (server, relay and/or client).      
       </t>
 
-      <xi:include href="ietf-example-dhcpv6-opt-sip-serv.yang.xml"/>
+      <xi:include href="example-dhcpv6-opt-sip-serv.yang.xml"/>
       <t>The correct location to augment the new option definition(s)
         will vary according to the specific rules defined for the 
         use of that specific option. For example, for options which 
@@ -1064,7 +1068,7 @@
         under the "/dhcpv6-server:config/dhcpv6-server:vendor-config"
         mount point.
       </t>
-      <xi:include href="ietf-example-dhcpv6-server-conf.yang.xml"/>
+      <xi:include href="example-dhcpv6-server-conf.yang.xml"/>
     </section>
 
     <section anchor="class-selector-example">
@@ -1103,7 +1107,7 @@
         address(es)/prefix(es) from given network-range/pool if the 
         class name matches.
       </t>
-      <xi:include href="ietf-example-dhcpv6-class-select.yang.xml"/>
+      <xi:include href="example-dhcpv6-class-select.yang.xml"/>
     </section>
   </back>
 </rfc>
