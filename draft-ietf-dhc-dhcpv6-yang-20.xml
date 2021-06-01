@@ -59,8 +59,10 @@
         protocols.</t>
       <t>Separate modules are defined for each element. Additionally, 
         a 'common' module contains typedefs and groupings used by all 
-        of the element modules.
-      </t>
+        of the element modules.  <xref target="yang-usage-examples"/> 
+        provides XML examples for each of the element modules and 
+        shows their interaction.
+      </t>     
       <t>It is worth noting that as DHCPv6 is itself a client 
         configuration protocol, it is not the intention of this document 
         to provide a replacement for the allocation of DHCPv6 assigned 
@@ -87,6 +89,7 @@
           to add additional functionality as required by a particular 
           implementation or deployment scenario.
         </t>
+
       </section>
       <section>
         <name>Extensibility of the DHCPv6 Server YANG Module</name>
