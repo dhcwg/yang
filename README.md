@@ -11,6 +11,8 @@ $?
 yanglint --strict --verbose -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-relay.yang relay.xml
 yanglint --strict --verbose -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-client.yang client.xml
 
+yanglint --strict --verbose -t config -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-server.yang server-base-ex.xml
+
 Test modules:
 
 pyang --ietf -f tree --tree-line-length 65 -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-client.yang

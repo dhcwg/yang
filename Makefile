@@ -5,6 +5,7 @@ RFCFOLD?=../venv/bin/rfcfold
 YANGLINT=/usr/local/bin/yanglint
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
+XMLPATH=./xml
 DATE ?= $(shell date +%F)
 
 SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-20
@@ -61,11 +62,12 @@ INCLUDETREE=
 INCLUDETREE+=ietf-dhcpv6-server.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-relay.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-client.yang.tree.clean
-INCLUDETREE+=server-base-ex
-INCLUDETREE+=host-res-ex
-INCLUDETREE+=prefixpool-ex
-INCLUDETREE+=opt-set-ex
-INCLUDETREE+=relay-base-ex
+INCLUDETREE+=$(XMLPATH)/server-base-ex
+INCLUDETREE+=$(XMLPATH)/host-res-ex
+INCLUDETREE+=$(XMLPATH)/prefixpool-ex
+INCLUDETREE+=$(XMLPATH)/opt-set-ex
+INCLUDETREE+=$(XMLPATH)/relay-base-ex
+INCLUDETREE+=$(XMLPATH)/client-base-ex
 
 TREEINCLUDES=
 $(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))

@@ -8,15 +8,19 @@
         <vendor-option-data>
           <sub-option-code>01</sub-option-code>
           <sub-option-data>1234abcd</sub-option-data>
+        </vendor-option-data>
+        <vendor-option-data>
           <sub-option-code>02</sub-option-code>
           <sub-option-data>abcd1234</sub-option-data>
         </vendor-option-data>
       </vendor-specific-information-option>
       <vendor-specific-information-option>
-        <enterprise-number>a</enterprise-number>
+        <enterprise-number>10</enterprise-number>
         <vendor-option-data>
           <sub-option-code>01</sub-option-code>
           <sub-option-data>4321dcba</sub-option-data>
+        </vendor-option-data>
+        <vendor-option-data>
           <sub-option-code>02</sub-option-code>
           <sub-option-data>dcba4321</sub-option-data>
         </vendor-option-data>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artwork align="center">
+<![CDATA[
+<interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
+  xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+  <interface>
+    <name>eth0</name>
+    <type>ianaift:ethernetCsmacd</type>
+    <description>DHCPv6 Relay Interface</description>
+    <enabled>true</enabled>
+  </interface>
+</interfaces>
+<dhcpv6-relay xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay">
+  <enabled>true</enabled>
+  <relay-if>
+    <if-name>eth0</if-name>
+    <enabled>true</enabled>
+    <destination-address>2001:db8:2::1</destination-address>
+    <destination-address>2001:db8:2::2</destination-address>
+    <link-address>2001:db8:3::1</link-address>
+    <relay-options>
+      <interface-id-option>
+        <interface-id>EXAMPLE-INTERFACE-ID</interface-id>
+      </interface-id-option>
+    </relay-options>
+  </relay-if>
+</dhcpv6-relay>
+]]>
+</artwork>

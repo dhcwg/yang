@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artwork align="center">
+<![CDATA[
+<address-pools>
+  <address-pool>
+    <pool-id>1</pool-id>
+    <pool-prefix>2001:db8:1:1::/64</pool-prefix>
+    <start-address>2001:db8:1:1::1000</start-address>
+    <end-address>2001:db8:1:1::2000</end-address>
+    <max-address-utilization>50</max-address-utilization>
+    <option-set-id>1</option-set-id>
+    <host-reservations>
+      <host-reservation>
+        <reserved-addr>2001:db8:1:1::1001</reserved-addr>
+        <client-duid>00052001db81</client-duid>
+        <option-set-id>1</option-set-id>
+        <valid-lifetime>604800</valid-lifetime>
+        <renew-time>86400</renew-time>
+        <rebind-time>172800</rebind-time>
+        <preferred-lifetime>345600</preferred-lifetime>
+      </host-reservation>
+    </host-reservations>
+  </address-pool>
+</address-pools>
+]]>
+</artwork>

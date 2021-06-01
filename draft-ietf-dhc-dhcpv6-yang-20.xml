@@ -862,13 +862,13 @@
           </li>
           <li>A single network range (2001:db8::/32)</li>
           <li>A single address pool, with start and end addresses,
-            relevant lease timers and the option-set-id of "1"
+            relevant lease timers and an option-set-id of "1"
             referencing the option set configured above.</li>
          </ul>
 
         <figure anchor="server-base-example-confg">
           <name>Basic Server Configuration Example XML</name>
-          <xi:include href="server-base-ex.xml"/>
+          <xi:include href="xml/server-base-ex.xml"/>
         </figure>
 
         <t>The following example shows a static host reservation
@@ -878,16 +878,21 @@
 
         <figure anchor="host-res-example-conf">
           <name>Host Reservation Configuration Example XML</name>
-          <xi:include href="host-res-ex.xml"/>
+          <xi:include href="xml/host-res-ex.xml"/>
         </figure>
 
         <t>The following example shows configuration for a network
           range and pool to be used for delegating prefixses to 
-          clients.
+          clients. In this example, each client will receive a /56
+          prefix.
+        </t>
+        <t>The 'max-pd-space-utiliation' is set to 80 so that 
+          a 'prefix-pool-utilization-threshold-exceeded' notification 
+          will be raised.
         </t>
         <figure anchor="pd-example-conf">
           <name>Prefix Delegation Configuration Example XML</name>
-          <xi:include href="prefixpool-ex.xml"/>
+          <xi:include href="xml/prefixpool-ex.xml"/>
         </figure>
 
         <t>The next example shows the configuration of a set of 
@@ -903,18 +908,20 @@
 
         <figure anchor="option-set-example">
           <name>Option Set Configuration Example XML</name>
-          <xi:include href="opt-set-ex.xml"/>
+          <xi:include href="xml/opt-set-ex.xml"/>
         </figure>
       </section>
 
       <section anchor="relay-usage-example">
         <name>DHCPv6 Relay Configuration Example</name>
         <t>The following example shows a basic configuration for a 
-          single DHCP relay interface. The configuration 
+          single DHCP relay interface and its interaction with the
+          ietf-interfaces module. The configuration 
           defines:</t>
         <ul spacing="normal">
-          <li>Enabling the DHCP relay function</li>
-          <li>References the interface that the relay configuration
+          <li>Enabling the DHCP relay function globally and for
+            the relevant interface.</li>
+          <li>Referencing the interface that the relay configuration
             is relevant for via an inteface-ref to the 
             ietf-interfaces module.</li>
           <li>Defining two destination addresses that incoming
@@ -928,34 +935,42 @@
          </ul>
 
         <figure anchor="relay-base-example-confg">
-          <name>Basic Server Configuration Example XML</name>
-          <xi:include href="relay-base-ex.xml"/>
+          <name>Basic Relay Configuration Example XML</name>
+          <xi:include href="xml/relay-base-ex.xml"/>
         </figure>
       </section>
 
       <section anchor="client-usage-example">
         <name>DHCPv6 Client Configuration Examples</name>
         <t>The following example shows a basic configuration for a 
-          DHCP client. The configuration 
+          DHCP client and its interaction with the
+          ietf-interfaces module. The configuration 
           defines:</t>
         <ul spacing="normal">
-          <li>Enabling the DHCP relay function</li>
-          <li>References the interface that the relay configuration
+          <li>Enabling the DHCP relay function globally and for 
+            the relevant interface.</li>
+          <li>References the interface that the client configuration
             is relevant for via an inteface-ref to the 
             ietf-interfaces module.</li>
-          <li>Defining two destination addresses that incoming
-            DHCP messages will be relayed to.</li>
-          <li>Configures the link-address value that will be sent
-            in the relay-forward message.</li>
-          <li>Configuring a value for the Interface ID Option 
-            (OPTION_INTERFACE_ID (18)), which will be included
-            in the relay forward message.
+          <li>Sets the client's DUID.</li>
+          <li>Configures a list of option codes that will be 
+            requested by the client in its Option Request Option
+            (OPTION_ORO (5)).</li>
+          <li>Configures a single instance of the Vendor-specific
+            Information Option (OPTION_VENDOR_OPTS (17)) with a 
+            single sub-option data item.
+          </li>
+          <li>Requests a non-temporary IPv6 address (IA_NA) with
+            an identity associtation interface identifier of 00000001.
+          </li>
+          <li>Requests an IPv6 delegated prefix address (IA_PD) with
+            an identity associtation interface identifier of 00000002.
           </li>
          </ul>
 
-        <figure anchor="relay-base-example-confg">
+        <figure anchor="client-base-example-confg">
           <name>Basic Server Configuration Example XML</name>
-          <xi:include href="relay-base-ex.xml"/>
+          <xi:include href="xml/client-base-ex.xml"/>
         </figure>
       </section>
 

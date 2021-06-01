@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artwork align="center">
+<![CDATA[
+<option-sets>
+  <option-set>
+    <option-set-id>1</option-set-id>
+    <description>Example DHCP option set</description>
+    <vendor-specific-information-options>
+      <vendor-specific-information-option>
+        <enterprise-number>9</enterprise-number>
+        <vendor-option-data>
+          <sub-option-code>01</sub-option-code>
+          <sub-option-data>1234abcd</sub-option-data>
+        </vendor-option-data>
+        <vendor-option-data>
+          <sub-option-code>02</sub-option-code>
+          <sub-option-data>abcd1234</sub-option-data>
+        </vendor-option-data>
+      </vendor-specific-information-option>
+      <vendor-specific-information-option>
+        <enterprise-number>10</enterprise-number>
+        <vendor-option-data>
+          <sub-option-code>01</sub-option-code>
+          <sub-option-data>4321dcba</sub-option-data>
+        </vendor-option-data>
+        <vendor-option-data>
+          <sub-option-code>02</sub-option-code>
+          <sub-option-data>dcba4321</sub-option-data>
+        </vendor-option-data>
+      </vendor-specific-information-option>
+    </vendor-specific-information-options>
+    <sol-max-rt-option>
+      <sol-max-rt-value>3600</sol-max-rt-value>
+    </sol-max-rt-option>
+  </option-set>
+</option-sets>
+]]>
+</artwork>

@@ -10,7 +10,7 @@
       <preferred-lifetime>43200</preferred-lifetime>
       <prefix-pool>
         <pool-id>0</pool-id>
-        <option-set-id>0</option-set-id>
+        <option-set-id>1</option-set-id>
         <pool-prefix>2001:db8:1::/48</pool-prefix>
         <client-prefix-length>56</client-prefix-length>
         <max-pd-space-utilization>80</max-pd-space-utilization>

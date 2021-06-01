@@ -63,7 +63,7 @@ module ietf-dhcpv6-common {
 
   typedef duid-base {
     type string {
-      pattern '([0-9a-zA-F]{2}){3,130}';
+      pattern '([0-9a-fA-F]{2}){3,130}';
     }
     description 
       "Each DHCP server and client has a DUID (DHCP Unique 
@@ -162,7 +162,7 @@ module ietf-dhcpv6-common {
     type duid-base {
       pattern '[0-9a-fA-F]{3}'
         + '[05-9a-fA-F]'
-        + '([0-1a-fA-F])*';
+        + '([0-9a-fA-F])*';
     }
     description 
       "Used for DUIDs following any other formats than DUID 
@@ -306,7 +306,7 @@ module ietf-dhcpv6-common {
           }
           leaf sub-option-data {
             type string {
-              pattern '([0-9a-zA-F]{2}){,65535}';
+              pattern '([0-9a-fA-F]{2}){0,}';
             }
             description 
               "The data area for the sub-option.";

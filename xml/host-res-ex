@@ -8,8 +8,8 @@
     <option-set-id>1</option-set-id>
     <host-reservations>
       <host-reservation>
-        <reserved-address>2001:db8:1:1:1001</reserved-address>
-        <client-duid>052001db8</client-duid>
+        <reserved-addr>2001:db8:1:1::1001</reserved-addr>
+        <client-duid>00052001db81</client-duid>
         <option-set-id>1</option-set-id>
         <valid-lifetime>604800</valid-lifetime>
         <renew-time>86400</renew-time>
