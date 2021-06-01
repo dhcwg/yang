@@ -193,11 +193,10 @@ module ietf-dhcpv6-common {
       | 7b6a164d325946539dc540fb539bc430 |
       +----------------------------------+
 
-      Here, an arbritrary 16-octet value is used. The only constraint
+      Here, an arbitrary 16-octet value is used. The only constraint
       placed on this is that the first 2-octects are not 0001-0004
       to avoid collision with the other defined DUID types
       (duid-llt, duid-en, duid-ll, or duid-uuid)."; 
-      ";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11";
   }

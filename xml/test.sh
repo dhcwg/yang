@@ -22,5 +22,5 @@ yanglint --strict --verbose -t config -p ../../ietf/yang/standard/ietf/RFC ../..
 yanglint --strict --verbose -t config -p ../../ietf/yang/standard/ietf/RFC ../../ietf/yang/standard/ietf/RFC/iana-if-type.yang ../../ietf/yang/standard/ietf/RFC/ietf-interfaces.yang ../ietf-dhcpv6-relay.yang relay.xml
 
 # Testing Server XML
-yanglint --strict --verbose -t config -p ../../ietf/yang/standard/ietf/RFC ../../ietf/yang/standard/ietf/RFC/iana-if-type.yang ../../ietf/yang/standard/ietf/RFC/ietf-interfaces.yang ../ietf-example-dhcpv6-opt-sip-serv.yang ../ietf-dhcpv6-server.yang server.xml
+yanglint --strict --verbose -t config -p ../../ietf/yang/standard/ietf/RFC ../../ietf/yang/standard/ietf/RFC/iana-if-type.yang ../../ietf/yang/standard/ietf/RFC/ietf-interfaces.yang ../example-dhcpv6-opt-sip-serv.yang ../ietf-dhcpv6-server.yang server.xml
 

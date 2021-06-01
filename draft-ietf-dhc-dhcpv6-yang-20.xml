@@ -9,7 +9,7 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-19" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-20" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
@@ -889,7 +889,7 @@
         </figure>
 
         <t>The following example shows configuration for a network
-          range and pool to be used for delegating prefixses to 
+          range and pool to be used for delegating prefixes to 
           clients. In this example, each client will receive a /56
           prefix.
         </t>
@@ -904,7 +904,7 @@
 
         <t>The next example shows the configuration of a set of 
           options that may be returned to clients, depending on the 
-          contents of a recieved DHCP request message. The option set 
+          contents of a received DHCP request message. The option set 
           ID is '1', which will referenced by other places in the 
           configuration (e.g., address pool configuration) as the 
           available options for clients that request them.</t>
@@ -968,10 +968,10 @@
             single sub-option data item.
           </li>
           <li>Requests a non-temporary IPv6 address (IA_NA) with
-            an identity associtation interface identifier of 00000001.
+            an identity association interface identifier of 00000001.
           </li>
           <li>Requests an IPv6 delegated prefix address (IA_PD) with
-            an identity associtation interface identifier of 00000002.
+            an identity association interface identifier of 00000002.
           </li>
          </ul>
 

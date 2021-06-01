@@ -556,8 +556,8 @@ module ietf-dhcpv6-client {
     leaf description {
       type string;
       description 
-        "Description of the invalid Identity Associtation (IA)
-        destection error.";
+        "Description of the invalid Identity Association (IA)
+        detection error.";
     }
   }
 
