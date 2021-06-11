@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-19" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-20" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-19"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-20"/>
     <author fullname="Ian Farrer" role="editor" initials="I." 
         surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
@@ -53,21 +53,28 @@
         configuration and other relevant parameters to clients in IPv6 
         networks. This document defines YANG <xref target="RFC7950"/>
         modules for the configuration and management of DHCPv6 
-        'element' (servers, relays and clients) using the Network
+        'element' (servers, relays, and clients) using the Network
         Configuration Protocol (NETCONF <xref target="RFC6241"/>) 
         or RESTCONF <xref target="RFC8040"/>
         protocols.</t>
       <t>Separate modules are defined for each element. Additionally, 
         a 'common' module contains typedefs and groupings used by all 
-        of the element modules.
+        of the element modules.  <xref target="yang-usage-examples"/> 
+        provides XML examples for each of the element modules and 
+        shows their interaction.
+      </t>
+      <t>The relay and client modules provide configuration which is
+        applicable device's interfaces. This is done by importing the
+        ietf-interfaces module <xref target="RFC8343"/> and using 
+        interface-refs to the relevant interface(s).
       </t>
       <t>It is worth noting that as DHCPv6 is itself a client 
         configuration protocol, it is not the intention of this document 
         to provide a replacement for the allocation of DHCPv6 assigned 
         addressing and parameters by using NETCONF/YANG.  The DHCPv6 
         client module is intended for the configuration and monitoring 
-        of the DHCPv6 client function and does not play a part in the 
-        normal DHCPv6 message flow.
+        of the DHCPv6 client function and does not replace DHCPv6 
+        address and parameter configuration.
       </t>
       <t>The YANG modules in this document adopt the Network
         Management Datastore Architecture (NMDA)
@@ -83,26 +90,26 @@
           all of these extensions and additions, rather to model the 
           DHCPv6 functions and options covered in
           <xref target="RFC8415"/>. A focus has also been given on the 
-          extensibility of the modules so that it is easy to augment 
-          in additional functionality as required by a particular 
+          extensibility of the modules so that they are easy to augment 
+          to add additional functionality as required by a particular 
           implementation or deployment scenario.
         </t>
       </section>
       <section>
         <name>Extensibility of the DHCPv6 Server YANG Module</name>
-        <t>The modules in this document only attempt to model DHCPv6 
-          specific behavior and do not cover the configuration and 
-          management of functionality relevant for specific server 
-          implementations. The level of variance between implementations 
-          is too great to attempt to standardize in a way that is useful 
-          without being restrictive.
+        <t>The modules in this document only attempt to model 
+          DHCPv6-specific behavior and do not cover the configuration 
+          and management of functionality relevant for specific server 
+          implementations. The level of variance between 
+          implementations is too great to attempt to standardize them 
+          in a way that is useful without being restrictive.
         </t>
-        <t>However, it is recognized that implementation specific 
+        <t>However, it is recognized that implementation-specific 
           configuration and management is also an essential part of DHCP 
           deployment and operations. To resolve this,
           <xref target="vendor-specific-configuration-example"/> 
           contains an example YANG module for the configuration of 
-          implementation specific functions, illustrating how this 
+          implementation-specific functions, illustrating how this 
           functionality can be augmented into the main 
           'ietf-dhcpv6-server.yang' module.
         </t>
@@ -113,13 +120,12 @@
           For example, allocating a prefix from the correct pool, or 
           supplying a set of options relevant for a specific vendor's 
           client implementation.  During the development of this 
-          document, research has been carried out into a number of 
-          vendor's class selection implementations and the findings were 
-          that while this function is common to all, the method for
-          configuring and implementing this function differs greatly. 
-          Therefore, configuration of the class selection function has 
-          been omitted from the DHCPv6 server module to allow 
-          implementors to define their own suitable YANG module.
+          document, implementations were researched and the findings
+          were that while this function is common to all, the method 
+          for configuring and implementing this function differs 
+          greatly.  Therefore, configuration of the class selection 
+          function has been omitted from the DHCPv6 server module to 
+          allow implementors to define their own suitable YANG modules.
           <xref target="class-selector-example"/> provides an
           example of this, to demonstrate how this is can be 
           integrated with the main 'ietf-dhcpv6-server.yang' module.
@@ -135,21 +141,21 @@
             <xref target="RFC8415"/> are included in this document. 
           </t>
           <t>Of these, only the options that require operator 
-            configuration are modelled. E.g. OPTION_IA_NA (3) is created
-            by the DHCP server when requested by the client. The
-            contents of the fields in the option are based on a number
-            of input configuration parameters which the server will 
-            apply when it receives the request (e.g., the T1/T2 timers
-            that are relevant for the pool of addresses). As a result, 
-            there are no fields that are directly configurable in the 
-            option, so it is not modelled.
+            configuration are modelled. For example, OPTION_IA_NA (3) 
+            is created by the DHCP server when requested by the client. 
+            The contents of the fields in the option are based on a 
+            number of input configuration parameters which the server 
+            will apply when it receives the request (e.g., the T1/T2 
+            timers that are relevant for the pool of addresses). As a 
+            result, there are no fields that are directly configurable 
+            for the option, so it is not modelled.
           </t>
           <t>The following table shows the DHCPv6 options that are
-            modelled, the element(s) they are sent by, and the relevant
+            modeled, the element(s) they are sent by, and the relevant
             YANG module name: 
           </t>   
           <table anchor="option-tab">
-            <name>Modelled DHCPv6 Options</name>
+            <name>Modeled DHCPv6 Options</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -272,7 +278,7 @@
             </tbody>
           </table>
           <t>Further options definitions can be added using additional 
-            YANG modules via augmentation into the relevant element 
+            YANG modules via augmentation of the relevant element 
             modules from this document.
             <xref target="example-dhcp-options-extension"/> contains an
             example module showing how the DHCPv6 option definitions can 
@@ -283,7 +289,7 @@
       </section>
       <section anchor="terminology">
         <name>Terminology</name>
-        <t>The reader should be familiar with the YANG data modelling 
+        <t>The reader should be familiar with the YANG data modeling 
           language defined in <xref target="RFC7950"/>.
         </t>
         <t>The YANG modules in this document adopt the Network 
@@ -320,7 +326,7 @@
           <li>server-duid: Each server must have a DUID (DHCP Unique
             Identifier) to identify itself to clients. A DUID consists 
             of a two-octet type field and an arbitrary length (of no 
-            more than 128-bytes) content field. Currently there are
+            more than 128-octets) content field. Currently there are
             four defined types of DUIDs in <xref target="RFC8415"/> and
             <xref target="RFC6355"/>. The DUID may be configured using
             the format for one of these types, or using the 
@@ -331,7 +337,7 @@
             DUID types.
           </li>
           <li>vendor-config: This container is provided as a location 
-            for additional implementation specific YANG nodes for the 
+            for additional implementation-specific YANG nodes for the 
             configuration of the device to be augmented. See
             <xref target="vendor-specific-configuration-example"/> for 
             an example of such a module.
@@ -357,7 +363,7 @@
           </li>
           <li>network-ranges: A hierarchical model is used
             for the allocation of addresses and prefixes. At the top 
-            level 'network-ranges' holds global configuration 
+            level, 'network-ranges' holds global configuration 
             parameters. Under this, a list of 'network-ranges' can be 
             defined. Inside 'network-rages', 'address-pools' (for IA_NA 
             and IA_TA allocations), and 'prefix-pools' (for IA_PD 
@@ -372,12 +378,12 @@
         <t>Information about notifications:</t>
         <ul spacing="normal">
           <li>address/prefix-pool-utilization-threshold-exceeded: Raised 
-            when number of leased addresses or prefixes exceeds the 
+            when the number of leased addresses or prefixes exceeds the 
             configured usage threshold. 
           </li>
           <li>invalid-client-detected: Raised when the server detects an
-            invalid client. A description of the error that has 
-            generated the notification can be included.
+            invalid client. A description of the error and message
+            type that has generated the notification can be included.
           </li>
           <li>decline-received: Raised when a DHCPv6 Decline message is 
             received from a client.
@@ -413,8 +419,8 @@
         <ul spacing="normal">
           <li>enabled: Globally enables/disables all DHCPv6 relay 
             functions.</li> 
-          <li>dhcpv6-relay: This container holds the relay's DHCPv6
-            specific configuration.</li>
+          <li>dhcpv6-relay: This container holds the relay's 
+            DHCPv6-specific configuration.</li>
           <li>relay-if: As a relay may have multiple client-facing
             interfaces, they are configured in a list. The if-name leaf
             is the key and is an interface-ref to the applicable 
@@ -446,7 +452,7 @@
         <t>Information about notifications:</t>
         <ul spacing="normal">
           <li>topology-changed: Raised when the topology of the relay 
-            agent is changed, e.g. a client facing interface is 
+            agent is changed, e.g., a client facing interface is 
             reconfigured.
           </li>
         </ul>
@@ -469,7 +475,7 @@
         <name>DHCPv6 Client Tree Diagram</name>
         <t>The tree diagram in <xref target="client-structure"/> 
           provides an overview of the DHCPv6 client module. The tree 
-          also includes the common functions module 
+          also includes the common functions module defined in 
           <xref target="common-module"/>.
         </t>
 
@@ -495,7 +501,7 @@
           <li>client-duid: Each client must have a DUID (DHCP Unique
             Identifier) to identify itself to servers and relays. A 
             DUID consists of a two-octet type field and an arbitrary 
-            length (of no more than 128-bytes) content field. 
+            length (1-128 octets) content field. 
             Currently there are four defined types of DUIDs in 
             <xref target="RFC8415"/> and <xref target="RFC6355"/>. The 
             DUID may be configured using the format for one of these 
@@ -515,8 +521,8 @@
           </li>
           <li>ia-na, ia-ta, ia-pd: Contains configuration nodes relevant
             for requesting one or more of each of the lease types. 
-            Read-only nodes related to the active lease are also
-            located here.
+            Read-only nodes related to the active leases for each 
+            type are also located here.
           </li>
         </ul>
         <t>Information about notifications:</t>
@@ -598,7 +604,7 @@
           messages to a rogue DHCPv6 server.
         </li>
         <li>Various attacks based on re-configuring the contents
-          of DHCPv6 options. E.g., changing the address of a
+          of DHCPv6 options. For example, changing the address of a
           the DNS server supplied in a DHCP option to point
           to a rogue server.
         </li>
@@ -622,12 +628,14 @@
         environments.  Therefore, it is important to control read 
         access (e.g., only permitting get, get-config, or 
         notifications) to these data nodes.  These subtrees and
-        data nodes can be misused to track the activity of a host:</t>
+        data nodes can be misused to track the activity of a host:
+      </t>
 
       <ul spacing="normal">
         <li>Information the server holds about clients with active 
-          leases: (dhcpv6-server/network-ranges/network-range/
-          address-pools/address-pool/active-leases)
+          leases: 
+          (dhcpv6-server/network-ranges/network-range/address-pools/
+          address-pool/active-leases)
         </li>
         <li>Information the relay holds about clients with active 
           leases: (dhcpv6-relay/relay-if/prefix-delegation/)
@@ -727,9 +735,8 @@
       <name>Acknowledgments</name>
       <t>The authors would like to thank Qi Sun, Lishan Li, Hao Wang,
         Tomek Mrugalski, Marcin Siodelski, Bernie Volz, Ted Lemon, 
-        Bing Liu, and 
-        Tom Petch for their valuable comments and contributions to 
-        this work.</t>
+        Bing Liu, Tom Petch, and Acee Lindem for their valuable 
+        comments and contributions to this work.</t>
     </section>
     <section anchor="contributors">
       <name>Contributors</name>
@@ -845,6 +852,137 @@
       </references>
     </references>
 
+    <section anchor="yang-usage-examples">
+      <name>Data Tree Examples</name>
+      <t>This section contains XML examples of data trees for
+        the different DHCPv6 elements.
+      </t>
+      <section anchor="server-usage-examples">
+        <name>DHCPv6 Server Configuration Example</name>
+        <t>The following example shows a basic configuration for a 
+          server. The configuration defines:</t>
+        <ul spacing="normal">
+          <li>Enabling the DHCP server function</li>
+          <li>The server's DUID</li>
+          <li>An option set (id=1) with configuration for the 
+            Solicit Max Retry Timeout (SOL_MAX_RT (82)) option.
+          </li>
+          <li>A single network range (2001:db8::/32)</li>
+          <li>A single address pool, with start and end addresses,
+            relevant lease timers and an option-set-id of "1"
+            referencing the option set configured above.</li>
+         </ul>
+
+        <figure anchor="server-base-example-confg">
+          <name>Basic Server Configuration Example XML</name>
+          <xi:include href="xml/server-base-ex.xml"/>
+        </figure>
+
+        <t>The following example shows a static host reservation
+          within an address pool. The host's lease timers are 
+          configured to be longer than hosts from the pool with
+          dynamically assigned addresses.</t>
+
+        <figure anchor="host-res-example-conf">
+          <name>Host Reservation Configuration Example XML</name>
+          <xi:include href="xml/host-res-ex.xml"/>
+        </figure>
+
+        <t>The following example shows configuration for a network
+          range and pool to be used for delegating prefixes to 
+          clients. In this example, each client will receive a /56
+          prefix.
+        </t>
+        <t>The 'max-pd-space-utiliation' is set to 80 so that 
+          a 'prefix-pool-utilization-threshold-exceeded' notification 
+          will be raised.
+        </t>
+        <figure anchor="pd-example-conf">
+          <name>Prefix Delegation Configuration Example XML</name>
+          <xi:include href="xml/prefixpool-ex.xml"/>
+        </figure>
+
+        <t>The next example shows the configuration of a set of 
+          options that may be returned to clients, depending on the 
+          contents of a received DHCP request message. The option set 
+          ID is '1', which will referenced by other places in the 
+          configuration (e.g., address pool configuration) as the 
+          available options for clients that request them.</t>
+        <t>The example contains 2 instances of the Vendor
+          Specific Information Option (OPTION_VENDOR_OPTS (17)) to
+          show how options which allow for multiple instances are
+          configured.</t>
+
+        <figure anchor="option-set-example">
+          <name>Option Set Configuration Example XML</name>
+          <xi:include href="xml/opt-set-ex.xml"/>
+        </figure>
+      </section>
+
+      <section anchor="relay-usage-example">
+        <name>DHCPv6 Relay Configuration Example</name>
+        <t>The following example shows a basic configuration for a 
+          single DHCP relay interface and its interaction with the
+          ietf-interfaces module. The configuration 
+          defines:</t>
+        <ul spacing="normal">
+          <li>Enabling the DHCP relay function globally and for
+            the relevant interface.</li>
+          <li>Referencing the interface that the relay configuration
+            is relevant for via an inteface-ref to the 
+            ietf-interfaces module.</li>
+          <li>Defining two destination addresses that incoming
+            DHCP messages will be relayed to.</li>
+          <li>Configures the link-address value that will be sent
+            in the relay-forward message.</li>
+          <li>Configuring a value for the Interface ID Option 
+            (OPTION_INTERFACE_ID (18)), which will be included
+            in the relay forward message.
+          </li>
+         </ul>
+
+        <figure anchor="relay-base-example-confg">
+          <name>Basic Relay Configuration Example XML</name>
+          <xi:include href="xml/relay-base-ex.xml"/>
+        </figure>
+      </section>
+
+      <section anchor="client-usage-example">
+        <name>DHCPv6 Client Configuration Examples</name>
+        <t>The following example shows a basic configuration for a 
+          DHCP client and its interaction with the
+          ietf-interfaces module. The configuration 
+          defines:</t>
+        <ul spacing="normal">
+          <li>Enabling the DHCP relay function globally and for 
+            the relevant interface.</li>
+          <li>References the interface that the client configuration
+            is relevant for via an inteface-ref to the 
+            ietf-interfaces module.</li>
+          <li>Sets the client's DUID.</li>
+          <li>Configures a list of option codes that will be 
+            requested by the client in its Option Request Option
+            (OPTION_ORO (5)).</li>
+          <li>Configures a single instance of the Vendor-specific
+            Information Option (OPTION_VENDOR_OPTS (17)) with a 
+            single sub-option data item.
+          </li>
+          <li>Requests a non-temporary IPv6 address (IA_NA) with
+            an identity association interface identifier of 00000001.
+          </li>
+          <li>Requests an IPv6 delegated prefix address (IA_PD) with
+            an identity association interface identifier of 00000002.
+          </li>
+         </ul>
+
+        <figure anchor="client-base-example-confg">
+          <name>Basic Server Configuration Example XML</name>
+          <xi:include href="xml/client-base-ex.xml"/>
+        </figure>
+      </section>
+
+    </section>
+
     <section anchor="example-dhcp-options-extension">
       <name>Example of Augmenting Additional DHCPv6 Option Definitions</name>
       <t>The following section provides a example of how the DHCPv6 
@@ -886,17 +1024,17 @@
         DHCP element's module (server, relay and/or client).      
       </t>
 
-      <xi:include href="ietf-example-dhcpv6-opt-sip-serv.yang.xml"/>
+      <xi:include href="example-dhcpv6-opt-sip-serv.yang.xml"/>
       <t>The correct location to augment the new option definition(s)
         will vary according to the specific rules defined for the 
-        use of that specific option. E.g. for options which will
-        be augmented into the ietf-dhcpv6-server module, in many
-        cases, these will be augmented to:
+        use of that specific option. For example, for options which 
+        will be augmented into the ietf-dhcpv6-server module, in 
+        many cases, these will be augmented to:
      </t>
-      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/\
-        dhcpv6-server:option-set'</t>
+     <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/
+       dhcpv6-server:option-set'</t>
       <t>
-        so that they can be defined within option sets. However,
+        So that they can be defined within option sets. However,
         there are some options which are only applicable for 
         specific deployment scenarios and in these cases it may be
         more logical to augment the option group to a location 
@@ -906,8 +1044,8 @@
         prefix which contains a specific prefix. In this case, the
         following location for the augmentation may be more suitable:
       </t>
-      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/\
-        dhcpv6-server:network-range/dhcpv6-server:prefix-pools/\
+      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/
+        dhcpv6-server:network-range/dhcpv6-server:prefix-pools/
         dhcpv6-server:prefix-pool"
       </t>
     </section>
@@ -930,25 +1068,25 @@
         under the "/dhcpv6-server:config/dhcpv6-server:vendor-config"
         mount point.
       </t>
-      <xi:include href="ietf-example-dhcpv6-server-conf.yang.xml"/>
+      <xi:include href="example-dhcpv6-server-conf.yang.xml"/>
     </section>
 
     <section anchor="class-selector-example">
-      <name>Example definition of class selector configuration</name>
+      <name>Example definition of class-selector configuration</name>
       <t>
         The module "ietf-example-dhcpv6-class-selector" provides an example 
-        of how vendor specific class selection configuration can be 
+        of how vendor-specific class selection configuration can be 
         modelled and integrated with the "ietf-dhcpv6-server" module 
         defined in this document.</t>
 
       <t>The example module defines "client-class-names" with associated
         matching rules. A client can be classified based on "client-id",
         "interface-id" (ingress interface of the client's messages),
-        packets source or destination address, relay link address,
+        packet's source or destination address, relay link address,
         relay link interface-id and more. Actually, there are endless 
         methods for classifying clients. So this standard does not try 
         to provide full specification for class selection, it only shows
-        an example how it can be defined.</t>
+        an example how it could be defined.</t>
 
       <t>At the end of the example augment statements are used to add 
         the defined class selector rules into the overall DHCPv6 
@@ -969,7 +1107,7 @@
         address(es)/prefix(es) from given network-range/pool if the 
         class name matches.
       </t>
-      <xi:include href="ietf-example-dhcpv6-class-select.yang.xml"/>
+      <xi:include href="example-dhcpv6-class-select.yang.xml"/>
     </section>
   </back>
 </rfc>

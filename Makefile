@@ -5,12 +5,12 @@ RFCFOLD?=../venv/bin/rfcfold
 YANGLINT=/usr/local/bin/yanglint
 SED=/bin/sed
 INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
+XMLPATH=./xml
 DATE ?= $(shell date +%F)
 
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-19
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-20
 
 MODELS_DIR:=.
-
 
 all: text #html
 
@@ -61,6 +61,12 @@ INCLUDETREE=
 INCLUDETREE+=ietf-dhcpv6-server.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-relay.yang.tree.clean
 INCLUDETREE+=ietf-dhcpv6-client.yang.tree.clean
+INCLUDETREE+=$(XMLPATH)/server-base-ex
+INCLUDETREE+=$(XMLPATH)/host-res-ex
+INCLUDETREE+=$(XMLPATH)/prefixpool-ex
+INCLUDETREE+=$(XMLPATH)/opt-set-ex
+INCLUDETREE+=$(XMLPATH)/relay-base-ex
+INCLUDETREE+=$(XMLPATH)/client-base-ex
 
 TREEINCLUDES=
 $(foreach inc_file,$(INCLUDETREE),$(eval $(call tree_to_xml,$(MODELS_DIR)/$(inc_file))))
@@ -82,16 +88,34 @@ INCLUDES+=ietf-dhcpv6-client.yang
 INCLUDES+=ietf-dhcpv6-server.yang
 INCLUDES+=ietf-dhcpv6-relay.yang
 INCLUDES+=ietf-dhcpv6-common.yang
-INCLUDES+=ietf-example-dhcpv6-class-select.yang
-INCLUDES+=ietf-example-dhcpv6-server-conf.yang
-INCLUDES+=ietf-example-dhcpv6-opt-sip-serv.yang
 
 YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
 
 
+define ex_yang_to_xml =
+$(1).xml: $(1)
+	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
+	echo '<artwork align="center">' >> $$@
+	echo '<![CDATA[' >> $$@
+	cat $$< |fold -w 69 >> $$@
+	echo ']]>' >> $$@
+	echo '</artwork>' >> $$@
+EXYANGINCLUDES+=$(1).xml
+endef
+
+EXINCLUDES=
+EXINCLUDES+=example-dhcpv6-class-select.yang
+EXINCLUDES+=example-dhcpv6-server-conf.yang
+EXINCLUDES+=example-dhcpv6-opt-sip-serv.yang
+
+EXYANGINCLUDES=
+$(foreach ex_inc_yang_file,$(EXINCLUDES),$(eval $(call ex_yang_to_xml,$(MODELS_DIR)/$(ex_inc_yang_file))))
+
+
+
 text: $(SPEC_NAME).txt
-$(SPEC_NAME).txt: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
+$(SPEC_NAME).txt: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES)
 	$(XML2RFC) -n -N --text --v3 $<
 
 html: $(SPEC_NAME).html
@@ -99,6 +123,6 @@ $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
 
 clean:
-	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
+	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
 
 #xml complete file can be created with 'xml2rfc --exp draft-ietf-dhc-dhcpv6-yang-XX.xml

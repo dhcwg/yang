@@ -1,0 +1,20 @@
+<network-ranges>
+  <network-range>
+    <id>1</id>
+    <description>prefix-pool-example</description>
+    <network-prefix>2001:db8::/32</network-prefix>
+    <prefix-pools>
+      <valid-lifetime>54000</valid-lifetime>
+      <renew-time>7200</renew-time>
+      <rebind-time>32400</rebind-time>
+      <preferred-lifetime>43200</preferred-lifetime>
+      <prefix-pool>
+        <pool-id>0</pool-id>
+        <option-set-id>1</option-set-id>
+        <pool-prefix>2001:db8:1::/48</pool-prefix>
+        <client-prefix-length>56</client-prefix-length>
+        <max-pd-space-utilization>80</max-pd-space-utilization>
+      </prefix-pool>
+    </prefix-pools>
+  </network-range>
+</network-ranges>
