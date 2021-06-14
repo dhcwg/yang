@@ -1,7 +1,7 @@
 module ietf-dhcpv6-client {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client";
-  prefix "dhcpv6-clnt";
+  prefix "dhc6-clnt";
 
   import ietf-inet-types {
     prefix inet;
@@ -64,10 +64,23 @@ module ietf-dhcpv6-client {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2017-11-24 {
+  revision 2021-06-14 {
     description 
-      "First version of the separated client specific YANG model.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+      "Initial Revision.";
+    reference 
+      "XXXX: YANG Data Model for DHCPv6 Configuration";
+  }
+
+  /*
+   * Features
+   */
+
+  feature prefix-delegation {
+    description
+      "Denotes that the client implements DHCPv6 prefix
+      delegation.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.3";
   }
 
   /*
@@ -425,6 +438,7 @@ module ietf-dhcpv6-client {
         }
       }
       list ia-pd {
+        if-feature prefix-delegation;
         key ia-id;
         description 
           "Configuration relevant for an IA_PD (Identity Association
@@ -675,6 +689,7 @@ module ietf-dhcpv6-client {
         "Reference to the IA_TA lease.";
     }
     leaf lease-ia-pd {
+      if-feature prefix-delegation;
       type leafref {
         path "/dhcpv6-client/client-if/ia-pd/ia-id";
       }

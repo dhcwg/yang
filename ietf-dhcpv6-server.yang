@@ -57,10 +57,11 @@ module ietf-dhcpv6-server {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2017-11-24 {
+  revision 2021-06-14 {
     description 
-      "First version of the separated server specific YANG model.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+      "Initial Revision.";
+    reference 
+      "XXXX: YANG Data Model for DHCPv6 Configuration";
   }
 
   /*

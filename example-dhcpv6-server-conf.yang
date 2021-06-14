@@ -49,10 +49,11 @@ module example-dhcpv6-server-conf {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2019-06-04 {
+  revision 2021-06-14 {
     description 
-      "Initial revision.";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+      "Initial Revision.";
+    reference 
+      "XXXX: YANG Data Model for DHCPv6 Configuration";
   }
 
   /*

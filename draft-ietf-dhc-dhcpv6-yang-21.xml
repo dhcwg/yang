@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-20" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-21" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-20"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-21"/>
     <author fullname="Ian Farrer" role="editor" initials="I." 
         surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
@@ -522,7 +522,9 @@
           <li>ia-na, ia-ta, ia-pd: Contains configuration nodes relevant
             for requesting one or more of each of the lease types. 
             Read-only nodes related to the active leases for each 
-            type are also located here.
+            type are also located here. As prefix delegation is not
+            supported by all DHCPv6 client implementations, it is 
+            enabled with a feature statement.
           </li>
         </ul>
         <t>Information about notifications:</t>
@@ -634,11 +636,11 @@
       <ul spacing="normal">
         <li>Information the server holds about clients with active 
           leases: 
-          (dhcpv6-server/network-ranges/network-range/address-pools/
+          (dhc6-srv/network-ranges/network-range/address-pools/
           address-pool/active-leases)
         </li>
         <li>Information the relay holds about clients with active 
-          leases: (dhcpv6-relay/relay-if/prefix-delegation/)
+          leases: (dhc6-rly/relay-if/prefix-delegation/)
         </li>
       </ul>
 
@@ -696,7 +698,7 @@
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6-server</dd>
+        <dd>dhc6-srv</dd>
         <dt>reference:</dt>
         <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
@@ -706,7 +708,7 @@
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6-client</dd>
+        <dd>dhc6-rly</dd>
         <dt>reference:</dt>
         <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
@@ -716,7 +718,7 @@
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6-relay</dd>
+        <dd>dhc6-clnt</dd>
         <dt>reference:</dt>
         <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
@@ -726,7 +728,7 @@
         <dt>namespace:</dt>
         <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
         <dt>prefix:</dt>
-        <dd>dhcpv6-common</dd>
+        <dd>dhc6</dd>
         <dt>reference:</dt>
         <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
       </dl>
@@ -968,10 +970,10 @@
             single sub-option data item.
           </li>
           <li>Requests a non-temporary IPv6 address (IA_NA) with
-            an identity association interface identifier of 00000001.
+            an identity association interface identifier of 1.
           </li>
           <li>Requests an IPv6 delegated prefix address (IA_PD) with
-            an identity association interface identifier of 00000002.
+            an identity association interface identifier of 2.
           </li>
          </ul>
 
@@ -1031,8 +1033,8 @@
         will be augmented into the ietf-dhcpv6-server module, in 
         many cases, these will be augmented to:
      </t>
-     <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/
-       dhcpv6-server:option-set'</t>
+     <t>'/dhc6-srv:dhc6-srv/dhc6-srv:option-sets/dhc6-srv:option-set'
+     </t>
       <t>
         So that they can be defined within option sets. However,
         there are some options which are only applicable for 
@@ -1044,9 +1046,7 @@
         prefix which contains a specific prefix. In this case, the
         following location for the augmentation may be more suitable:
       </t>
-      <t>'/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/
-        dhcpv6-server:network-range/dhcpv6-server:prefix-pools/
-        dhcpv6-server:prefix-pool"
+      <t>'/dhc6-srv:dhc6-srv/dhc6-srv:network-ranges/dhc6-srv:network-range/dhc6-srv:prefix-pools/dhc6-srv:prefix-pool"
       </t>
     </section>
 

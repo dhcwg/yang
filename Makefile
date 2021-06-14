@@ -8,7 +8,7 @@ INCLUDE_PATH:=../ietf/yang/standard/ietf/RFC
 XMLPATH=./xml
 DATE ?= $(shell date +%F)
 
-SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-20
+SPEC_NAME?=draft-ietf-dhc-dhcpv6-yang-21
 
 MODELS_DIR:=.
 
