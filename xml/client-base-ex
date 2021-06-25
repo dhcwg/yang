@@ -24,17 +24,17 @@
         <vendor-specific-information-option>
           <enterprise-number>9</enterprise-number>
           <vendor-option-data>
-            <sub-option-code>01</sub-option-code>
+            <sub-option-code>1</sub-option-code>
             <sub-option-data>abcd1234</sub-option-data>
           </vendor-option-data>
         </vendor-specific-information-option>
       </vendor-specific-information-options>
     </client-configured-options>
     <ia-na>
-      <ia-id>00000001</ia-id>
+      <ia-id>1</ia-id>
     </ia-na>
     <ia-pd>
-      <ia-id>00000002</ia-id>
+      <ia-id>2</ia-id>
     </ia-pd>
   </client-if>
 </dhcpv6-client>

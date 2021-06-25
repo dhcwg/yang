@@ -1,0 +1,7 @@
+
+  revision 2021-06-14 {
+    description 
+      "Initial Revision.";
+    reference 
+      "XXXX: YANG Data Model for DHCPv6 Configuration";
+  }

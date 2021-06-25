@@ -40,10 +40,11 @@ module ietf-dhcpv6-common {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2018-01-30 {
+  revision 2021-06-14 {
     description 
-      "Initial revision";
-    reference "I-D: draft-ietf-dhc-dhcpv6-yang";
+      "Initial Revision.";
+    reference 
+      "XXXX: YANG Data Model for DHCPv6 Configuration";
   }
 
   typedef threshold {
@@ -69,7 +70,9 @@ module ietf-dhcpv6-common {
       "Each DHCP server and client has a DUID (DHCP Unique 
       Identifier). The DUID consists of a two-octet 
       type field and an arbitrary length (1-128 octets) content 
-      field. The duid-base type provides the    
+      field. The duid-base type is used by other duid types with
+      additional pattern constraints.
+
       Currently, there are four defined types of DUIDs
       in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
@@ -87,20 +90,20 @@ module ietf-dhcpv6-common {
     }
     description 
       "DUID type 1, based on Link-Layer Address Plus Time 
-      (DUID-LLT). Constructed with a 2-byte hardware type assigned
-      by IANA,  4-bytes containing the time the DUID is generated
+      (DUID-LLT). Constructed with a 2-octet hardware type assigned
+      by IANA,  4-octet containing the time the DUID is generated
       (represented in seconds since midnight (UTC), January 1, 2000, 
       modulo 2^32), and a link-layer address. The address is encoded 
       without separator characters. For example:
 
-      +------+----+----------+--------------+
-      | 0001 | 06 | 28490058 | 00005E005300 |
-      +------+----+----------+--------------+
+      +------+------+----------+--------------+
+      | 0001 | 0006 | 28490058 | 00005E005300 |
+      +------+------+----------+--------------+
       
-      This example includes the 2-octet DUID type of 1 (0001), the
-      hardware type is 06 (IEEE Hardware Types) the creation
-      time is 0x284900580 (constructed as described above). Finally,
-      the link-layer address is 00005E005300 (EUI-48 address
+      This example includes the 2-octet DUID type of 1 (0x01), the
+      hardware type is 0x06 (IEEE Hardware Types) the creation
+      time is 0x028490058 (constructed as described above). Finally,
+      the link-layer address is 0x5E005300 (EUI-48 address
       00-00-5E-00-53-00)";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.2
@@ -120,13 +123,13 @@ module ietf-dhcpv6-common {
       followed by a unique identifier assigned by the vendor. For
       example:
       
-      +------+------+------------------+
-      | 0002 | 0009 | 0CC084D303000912 |
-      +------+------+------------------+
+      +------+----------+------------------+
+      | 0002 | 00000009 | 0CC084D303000912 |
+      +------+----------+------------------+
  
-      This example includes the 2-octet DUID type of 2 (0002), 
-      4-octets for the Enterprise Number (0009), followed by 8-octets 
-      of identifier data (0x0CC084D303000912).";
+      This example includes the 2-octet DUID type of 2 (0x02), 
+      4-octets for the Enterprise Number (0x09), followed by 
+      8-octets of identifier data (0x0CC084D303000912).";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.3
       IANA 'Private Enterprise Numbers' registry.
@@ -140,17 +143,17 @@ module ietf-dhcpv6-common {
     }
     description 
       "DUID type 3, based on Link-Layer Address (DUID-LL).
-      Constructed with a 2-byte hardware type assigned
+      Constructed with a 2-octet hardware type assigned
       by IANA, and a link-layer address. The address is encoded 
       without separator characters. For example:
 
-      +------+----+--------------+
-      | 0003 | 06 | 00005E005300 |
-      +------+----+--------------+
+      +------+------+--------------+
+      | 0003 | 0006 | 00005E005300 |
+      +------+------+--------------+
 
-      This example includes the 2-octet DUID type of 3 (0003), the
-      hardware type is 06 (IEEE Hardware Types), and the link-layer 
-      address is 00005E005300 (EUI-48 address 00-00-5E-00-53-00)";
+      This example includes the 2-octet DUID type of 3 (0x03), the
+      hardware type is 0x06 (IEEE Hardware Types), and the link-layer 
+      address is 0x5E005300 (EUI-48 address 00-00-5E-00-53-00)";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.4
       IANA 'Hardware Types' registry.
@@ -171,7 +174,7 @@ module ietf-dhcpv6-common {
       | 0004 | 9f03b182705747e38a1e422910078642 |
       +------+----------------------------------+
 
-      This example includes the 2-octet DUID type of 4 (0004), and
+      This example includes the 2-octet DUID type of 4 (0x04), and
       the UUID 9f03b182-7057-47e3-8a1e-422910078642.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.5
@@ -194,7 +197,7 @@ module ietf-dhcpv6-common {
       +----------------------------------+
 
       Here, an arbitrary 16-octet value is used. The only constraint
-      placed on this is that the first 2-octects are not 0001-0004
+      placed on this is that the first 2-octects are not 0x01-0x04
       to avoid collision with the other defined DUID types
       (duid-llt, duid-en, duid-ll, or duid-uuid)."; 
     reference "RFC 8415: Dynamic Host Configuration Protocol for
