@@ -124,11 +124,11 @@ module ietf-dhcpv6-common {
       example:
       
       +------+----------+------------------+
-      | 0002 | 00000009 | 0CC084D303000912 |
+      | 0002 | 00007ED9 | 0CC084D303000912 |
       +------+----------+------------------+
  
       This example includes the 2-octet DUID type of 2 (0x02), 
-      4-octets for the Enterprise Number (0x09), followed by 
+      4-octets for the Enterprise Number (0x7ED9), followed by 
       8-octets of identifier data (0x0CC084D303000912).";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.3

@@ -22,7 +22,7 @@
       </option-request-option>
       <vendor-specific-information-options>
         <vendor-specific-information-option>
-          <enterprise-number>9</enterprise-number>
+          <enterprise-number>32473</enterprise-number>
           <vendor-option-data>
             <sub-option-code>1</sub-option-code>
             <sub-option-data>abcd1234</sub-option-data>
