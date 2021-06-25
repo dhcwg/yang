@@ -74,13 +74,29 @@ module ietf-dhcpv6-client {
   /*
    * Features
    */
-
+  
+  feature non-temporary-address {
+    description
+      "Denotes that the client supports DHCPv6 non-temporary address
+      allocations.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.2";
+  }
+  
   feature prefix-delegation {
     description
       "Denotes that the client implements DHCPv6 prefix
       delegation.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 6.3";
+  }
+
+  feature temporary-address {
+    description
+      "Denotes that the client supports DHCPv6 temporary address
+      allocations.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.5";
   }
 
   /*
@@ -305,6 +321,7 @@ module ietf-dhcpv6-client {
         uses dhc6:reconfigure-accept-option-group;
       }
       list ia-na {
+        if-feature non-temporary-address;
         key ia-id;
         description 
           "Configuration relevant for an IA_NA (Identity Association
@@ -378,7 +395,8 @@ module ietf-dhcpv6-client {
           }
         }
       }
-      list ia-ta {
+      list ia-ta {  
+        if-feature temporary-address;
         key ia-id;
         description 
           "Configuration relevant for an IA_TA (Identity Association
@@ -521,6 +539,7 @@ module ietf-dhcpv6-client {
    */
 
   notification invalid-ia-address-detected {
+    if-feature "non-temporary-address or temporary-address";
     description 
       "Notification sent when an address received 
       in an identity association option is determined invalid. 
@@ -639,7 +658,7 @@ module ietf-dhcpv6-client {
       "Notification sent when the client receives a message that 
       includes an unsuccessful Status Code option.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
-          IPv6 (DHCPv6), Section 21.13";
+        IPv6 (DHCPv6), Section 21.13";
     leaf status-code {
       type uint16;
       mandatory true;
@@ -656,6 +675,8 @@ module ietf-dhcpv6-client {
   }
 
   notification server-duid-changed {
+    if-feature "non-temporary-address or prefix-delegation or " + 
+      "temporary-address";
     description 
       "Notification sent when the client receives a lease
       from a server with different DUID to the one currently stored
@@ -675,6 +696,7 @@ module ietf-dhcpv6-client {
         "DUID of the previous server.";
     }
     leaf lease-ia-na {
+      if-feature non-temporary-address;
       type leafref {
         path "/dhcpv6-client/client-if/ia-na/ia-id";
       }
@@ -682,6 +704,7 @@ module ietf-dhcpv6-client {
         "Reference to the IA_NA lease.";
     }
     leaf lease-ia-ta {
+      if-feature temporary-address;
       type leafref {
         path "/dhcpv6-client/client-if/ia-ta/ia-id";
       }
