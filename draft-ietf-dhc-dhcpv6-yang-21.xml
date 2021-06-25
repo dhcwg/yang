@@ -897,7 +897,8 @@
         </t>
         <t>The 'max-pd-space-utiliation' is set to 80 so that 
           a 'prefix-pool-utilization-threshold-exceeded' notification 
-          will be raised.
+          will be raised if the number of prefix allocations exceeds
+          this.
         </t>
         <figure anchor="pd-example-conf">
           <name>Prefix Delegation Configuration Example XML</name>
