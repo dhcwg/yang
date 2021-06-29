@@ -63,12 +63,9 @@ module ietf-dhcpv6-options-rfc6603 {
       }
     }
   }
-
-
-  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:option-sets/" +
-    "dhcpv6-server:option-set" {
-    description "Augment the option definition groupings to the
-      server module.";
+  
+  augment "/dhcpv6-server:dhcpv6-server/dhcpv6-server:network-ranges/dhcpv6-server:network-range/dhcpv6-server:prefix-pools/dhcpv6-server:prefix-pool" {
+    when "../../../../../dhcpv6-server:dhcpv6-node-type='dhcpv6-server:server'";
     uses pd-exclude-option-group;
   }
 }
