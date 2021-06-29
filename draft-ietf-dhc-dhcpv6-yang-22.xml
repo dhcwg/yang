@@ -195,13 +195,6 @@
                 <td>ietf-dhcpv6-server.yang</td>
               </tr>
               <tr>
-                <td>OPTION_STATUS_CODE (13) Status Code Option</td>
-                <td align="center">X</td>
-                <td align="center">X</td>
-                <td align="center">X</td>
-                <td>ietf-dhcpv6-common.yang</td>
-              </tr>
-              <tr>
                 <td>OPTION_RAPID_COMMIT (14) Rapid Commit Option</td>
                 <td align="center">X</td>
                 <td align="center"></td>
