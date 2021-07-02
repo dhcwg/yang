@@ -884,7 +884,7 @@
           dynamically assigned addresses.</t>
 
         <figure anchor="host-res-example-conf">
-          <name>Host Reservation Configuration Example XML</name>
+          <name>Server Host Reservation Configuration Example XML</name>
           <xi:include href="xml/host-res-ex.xml"/>
         </figure>
 
@@ -899,7 +899,7 @@
           this.
         </t>
         <figure anchor="pd-example-conf">
-          <name>Prefix Delegation Configuration Example XML</name>
+          <name>Server Prefix Delegation Configuration Example XML</name>
           <xi:include href="xml/prefixpool-ex.xml"/>
         </figure>
 
@@ -910,13 +910,13 @@
           configuration (e.g., address pool configuration) as the 
           available options for clients that request them.</t>
         <t>The example shows how the option definitions can be
-          extended via augmention. In this case, "OPTION_SIP_SERVER_D 
+          extended via augmentation. In this case, "OPTION_SIP_SERVER_D 
           (21) SIP Servers Domain-Name List" from the example
           module in <xref target="example-dhcp-options-extension"/>
           has been augmented to the server's option set.</t>
 
         <figure anchor="option-set-example">
-          <name>Option Set Configuration Example XML</name>
+          <name>Server Option Set Configuration Example XML</name>
           <xi:include href="xml/opt-set-ex.xml"/>
         </figure>
       </section>
@@ -978,7 +978,7 @@
          </ul>
 
         <figure anchor="client-base-example-confg">
-          <name>Basic Server Configuration Example XML</name>
+          <name>Basic Client Configuration Example XML</name>
           <xi:include href="xml/client-base-ex.xml"/>
         </figure>
       </section>
@@ -995,7 +995,10 @@
 
       <t>The example defines YANG models for OPTION_SIP_SERVER_D (21) 
         and OPTION_SIP_SERVER_D (22) defined in <xref target="RFC3319"/>. 
-        The module is constructed as follows:</t>
+        Example XML configuration, showing the interworking with
+        other modules is provided in 
+        <xref target="option-set-example"/>.</t>
+      <t>The module is constructed as follows:</t>
       <ul spacing="normal">
         <li>The module is named using a meaningful, shortened version of the 
           document name in which the DHCP option format is specified.

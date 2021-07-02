@@ -7,7 +7,8 @@
     <enabled>true</enabled>
   </interface>
 </interfaces>
-<dhcpv6-client xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client">
+<dhcpv6-client 
+  xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client">
   <enabled>true</enabled>
   <client-if>
     <if-name>eth0</if-name>
