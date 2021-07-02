@@ -63,7 +63,7 @@ module ietf-dhcpv6-relay {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2021-06-14 {
+  revision 2021-07-02 {
     description 
       "Initial Revision.";
     reference 
@@ -332,7 +332,6 @@ module ietf-dhcpv6-relay {
           by the relay are augmented to this location from other 
           YANG modules as required.";
         uses dhc6:auth-option-group;
-        uses dhc6:status-code-option-group;
         uses interface-id-option-group;
       }
       uses message-statistics;
@@ -346,33 +345,6 @@ module ietf-dhcpv6-relay {
       }
     }
     uses global-statistics;
-  }
-
-  /*
-   * Notifications
-   */
-
-  notification relay-event {
-    description 
-      "DHCPv6 relay event notifications.";
-    container topology-change {
-      description 
-        "Raised if the entry for an interface with DHCPv6
-        related configuration or state is removed from 
-        if:interface-refs.";
-      leaf relay-if-name {
-        type leafref {
-          path "/dhcpv6-relay/relay-if/if-name";
-        }
-        description 
-          "Name of the interface that has been removed.";
-      }
-      leaf last-ipv6-addr {
-        type inet:ipv6-address;
-        description 
-          "Last IPv6 address configured on the interface.";
-      }
-    }
   }
 
   /*
@@ -390,7 +362,7 @@ module ietf-dhcpv6-relay {
     input {
       leaf lease-prefix {
         type leafref {
-          path "/dhcpv6-relay/relay-if/prefix-delegation" +
+          path "../../dhcpv6-relay/relay-if/prefix-delegation" +
           "/pd-leases/ia-pd-prefix";
         }
         mandatory true;
@@ -407,6 +379,7 @@ module ietf-dhcpv6-relay {
       }
     }
   }
+
   rpc clear-client-prefixes {
     nacm:default-deny-all;
     if-feature prefix-delegation;
@@ -430,6 +403,7 @@ module ietf-dhcpv6-relay {
       }
     }
   }
+
   rpc clear-interface-prefixes {
     nacm:default-deny-all;
     if-feature prefix-delegation;
@@ -454,6 +428,33 @@ module ietf-dhcpv6-relay {
         type string;
         description 
           "Response message from the relay.";
+      }
+    }
+  }
+
+  /*
+   * Notifications
+   */
+
+  notification relay-event {
+    description 
+      "DHCPv6 relay event notifications.";
+    container topology-change {
+      description 
+        "Raised if the entry for an interface with DHCPv6
+        related configuration or state is removed from 
+        if:interface-refs.";
+      leaf relay-if-name {
+        type leafref {
+          path "../../../dhcpv6-relay/relay-if/if-name";
+        }
+        description 
+          "Name of the interface that has been removed.";
+      }
+      leaf last-ipv6-addr {
+        type inet:ipv6-address;
+        description 
+          "Last IPv6 address configured on the interface.";
       }
     }
   }

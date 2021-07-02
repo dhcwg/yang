@@ -14,20 +14,20 @@
           <sub-option-data>abcd1234</sub-option-data>
         </vendor-option-data>
       </vendor-specific-information-option>
-      <vendor-specific-information-option>
-        <enterprise-number>10</enterprise-number>
-        <vendor-option-data>
-          <sub-option-code>01</sub-option-code>
-          <sub-option-data>4321dcba</sub-option-data>
-        </vendor-option-data>
-        <vendor-option-data>
-          <sub-option-code>02</sub-option-code>
-          <sub-option-data>dcba4321</sub-option-data>
-        </vendor-option-data>
-      </vendor-specific-information-option>
     </vendor-specific-information-options>
     <sol-max-rt-option>
       <sol-max-rt-value>3600</sol-max-rt-value>
     </sol-max-rt-option>
+    <sip-server-domain-name-list-option 
+      xmlns="https://example.com/ns/example-dhcpv6-opt-sip-serv">
+      <sip-server>
+        <sip-serv-id>0</sip-serv-id>
+        <sip-serv-domain-name>sip1.example.org</sip-serv-domain-name>
+      </sip-server>
+      <sip-server>
+        <sip-serv-id>1</sip-serv-id>
+        <sip-serv-domain-name>sip2.example.org</sip-serv-domain-name>
+      </sip-server>
+    </sip-server-domain-name-list-option>
   </option-set>
 </option-sets>

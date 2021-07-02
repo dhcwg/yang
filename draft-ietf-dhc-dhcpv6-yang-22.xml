@@ -356,19 +356,31 @@
           </li>
           <li>network-ranges: A hierarchical model is used
             for the allocation of addresses and prefixes. At the top 
-            level, 'network-ranges' holds global configuration 
-            parameters. Under this, a list of 'network-ranges' can be 
-            defined. Inside 'network-rages', 'address-pools' (for IA_NA 
-            and IA_TA allocations), and 'prefix-pools' (for IA_PD 
-            allocation) are defined. Finally within the pools, specific 
-            host-reservations are held.
+            level 'network-ranges' container holds global configuration 
+            parameters. Under this, the 'network-range' list is used
+            for specifying IPv6 prefixes and additional, prefix
+            specific parameters.
+          </li>
+          <li>address-pools: Used for IA_NA and IA_TA pool allocations 
+            with a container for defining host reservations. State
+            information about active leases from the pool is also 
+            located here.
           </li>
           <li>prefix-pools: Defines pools to be used for prefix
-            delegation to clients. As prefix delegation is not supported 
+            delegation to clients. Static host reservations can also
+            be configured.  As prefix delegation is not supported 
             by all DHCPv6 server implementations, it is enabled by a 
             feature statement.</li>
         </ul>
-        <t>Information about notifications:</t>
+        <t>Information about RPCs</t>
+        <ul spacing="normal">
+          <li>delete-address-lease: Allows the deletion of a lease for
+            an individual IPv6 address from the server's lease database.
+          </li>
+          <li>delete-prefix-lease: Allows the deletion of a lease for
+            an individual IPv6 prefix from the server's lease database.
+          </li>
+        </ul>       <t>Information about notifications:</t>
         <ul spacing="normal">
           <li>address/prefix-pool-utilization-threshold-exceeded: Raised 
             when the number of leased addresses or prefixes exceeds the 
@@ -381,17 +393,8 @@
           <li>decline-received: Raised when a DHCPv6 Decline message is 
             received from a client.
           </li>
-          <li>non-success-code-sent: Raised when a status message is 
-            raised for an error.
-          </li>
-        </ul>
-        <t>Information about RPCs</t>
-        <ul spacing="normal">
-          <li>delete-address-lease: Allows the deletion of a lease for
-            an individual IPv6 address from the server's lease database.
-          </li>
-          <li>delete-prefix-lease: Allows the deletion of a lease for
-            an individual IPv6 prefix from the server's lease database.
+          <li>non-success-code-sent: Raised when there is a status 
+            message for an failure.
           </li>
         </ul>
       </section>
@@ -442,13 +445,6 @@
             augmented as they are defined.
           </li>
         </ul>
-        <t>Information about notifications:</t>
-        <ul spacing="normal">
-          <li>topology-changed: Raised when the topology of the relay 
-            agent is changed, e.g., a client facing interface is 
-            reconfigured.
-          </li>
-        </ul>
         <t>Information about RPCs</t>
         <ul spacing="normal">
           <li>clear-prefix-lease: Allows the removal of a delegated 
@@ -460,6 +456,13 @@
           </li>
           <li>clear-interface-prefixes: Allows the removal of all of
             the delegated lease entries from an interface on the relay.
+          </li>
+        </ul>
+        <t>Information about notifications:</t>
+        <ul spacing="normal">
+          <li>topology-changed: Raised when the topology of the relay 
+            agent is changed, e.g., a client facing interface is 
+            reconfigured.
           </li>
         </ul>
       </section>
@@ -490,7 +493,7 @@
             YANG module.
           </li>
           <li>enabled: Enables/disables all DHCPv6 client 
-             function for the specific interface.</li>          
+            function for the specific interface.</li>          
           <li>client-duid: Each client must have a DUID (DHCP Unique
             Identifier) to identify itself to servers and relays. A 
             DUID consists of a two-octet type field and an arbitrary 
@@ -906,10 +909,11 @@
           ID is '1', which will referenced by other places in the 
           configuration (e.g., address pool configuration) as the 
           available options for clients that request them.</t>
-        <t>The example contains 2 instances of the Vendor
-          Specific Information Option (OPTION_VENDOR_OPTS (17)) to
-          show how options which allow for multiple instances are
-          configured.</t>
+        <t>The example shows how the option definitions can be
+          extended via augmention. In this case, "OPTION_SIP_SERVER_D 
+          (21) SIP Servers Domain-Name List" from the example
+          module in <xref target="example-dhcp-options-extension"/>
+          has been augmented to the server's option set.</t>
 
         <figure anchor="option-set-example">
           <name>Option Set Configuration Example XML</name>
