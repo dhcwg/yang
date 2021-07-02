@@ -7,7 +7,8 @@
     <enabled>true</enabled>
   </interface>
 </interfaces>
-<dhcpv6-client xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client">
+<dhcpv6-client 
+  xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client">
   <enabled>true</enabled>
   <client-if>
     <if-name>eth0</if-name>
@@ -22,7 +23,7 @@
       </option-request-option>
       <vendor-specific-information-options>
         <vendor-specific-information-option>
-          <enterprise-number>9</enterprise-number>
+          <enterprise-number>32473</enterprise-number>
           <vendor-option-data>
             <sub-option-code>1</sub-option-code>
             <sub-option-data>abcd1234</sub-option-data>

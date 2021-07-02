@@ -31,7 +31,7 @@ module ietf-dhcpv6-server {
     "IETF DHC (Dynamic Host Configuration) Working Group";
 
   contact
-    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
+    "WG Web:   <https://datatracker.ietf.org/wg/dhc/>
      WG List:  <mailto:dhcwg@ietf.org>
      Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
      Author:   Linhui Sun <lh.sunlinh@gmail.com>
@@ -52,12 +52,12 @@ module ietf-dhcpv6-server {
     to the license terms contained in, the Simplified BSD License
     set forth in Section 4.c of the IETF Trust's Legal Provisions
     Relating to IETF Documents
-    (http://trustee.ietf.org/license-info).
+    (https://trustee.ietf.org/license-info).
 
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2021-06-14 {
+  revision 2021-07-02 {
     description 
       "Initial Revision.";
     reference 
@@ -196,6 +196,7 @@ module ietf-dhcpv6-server {
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 4.2";
     }
+    uses dhc6:status;
   }
 
   grouping message-stats {
@@ -432,7 +433,6 @@ module ietf-dhcpv6-server {
         uses preference-option-group;
         uses dhc6:auth-option-group;
         uses server-unicast-option-group;
-        uses dhc6:status-code-option-group;
         uses dhc6:rapid-commit-option-group;
         uses dhc6:vendor-specific-information-option-group;
         uses reconfigure-message-option-group;
@@ -684,6 +684,69 @@ module ietf-dhcpv6-server {
   }
 
   /*
+   * RPCs
+   */
+
+  rpc delete-address-lease {
+    nacm:default-deny-all;
+    description 
+      "Deletes a client's active address lease from the 
+      server's lease database. Note this will not cause the address
+      to be revoked from the client, and the lease may be refreshed
+      or renewed by the client.";
+    input {
+      leaf lease-address-to-delete {
+        type leafref {
+          path "../../dhcpv6-server/network-ranges/network-range" +
+            "/address-pools/address-pool/active-leases" +
+            "/active-lease/leased-address";
+        }
+        mandatory true;
+        description 
+          "IPv6 address of an active lease that will be 
+          deleted from the server.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description 
+          "Response message from the server.";
+      }
+    }
+  }
+
+  rpc delete-prefix-lease {
+    nacm:default-deny-all;
+    if-feature prefix-delegation;
+    description 
+      "Deletes a client's active prefix lease from the 
+      server's lease database. Note, this will not cause the prefix
+      to be revoked from the client, and the lease may be refreshed
+      or renewed by the client.";
+    input {
+      leaf lease-prefix-to-delete {
+        type leafref {
+          path "../../dhcpv6-server/network-ranges/network-range" +
+            "/prefix-pools/prefix-pool/active-leases/active-lease" +
+            "/leased-prefix";
+        }
+        mandatory true;
+        description 
+          "IPv6 prefix of an active lease that will be deleted 
+          from the server.";
+      }
+    }
+    output {
+      leaf return-message {
+        type string;
+        description 
+          "Response message from the server.";
+      }
+    }
+  }
+
+  /*
    * Notifications
    */
 
@@ -694,7 +757,7 @@ module ietf-dhcpv6-server {
       max-address-utilization.";
     leaf pool-id {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/" +
+        path "../../dhcpv6-server/network-ranges/network-range/" +
           "address-pools/address-pool/pool-id";
       }
       mandatory true;
@@ -735,7 +798,7 @@ module ietf-dhcpv6-server {
       max-pd-space-utilization.";
     leaf pool-id {
       type leafref {
-        path "/dhcpv6-server/network-ranges/network-range/" + 
+        path "../../dhcpv6-server/network-ranges/network-range/" + 
           "prefix-pools/prefix-pool/pool-id";
       }
       mandatory true;
@@ -859,78 +922,11 @@ module ietf-dhcpv6-server {
     description 
       "Notification sent when the server responded
       to a client with non-success status code.";
-    leaf status-code {
-      type uint16;
-      mandatory true;
-      description 
-        "Status code returned to the client.";
-    }
     leaf duid {
       type dhc6:duid;
       description 
         "Client DUID.";
     }
-  }
-
-  /*
-   * RPCs
-   */
-
-  rpc delete-address-lease {
-    nacm:default-deny-all;
-    description 
-      "Deletes a client's active address lease from the 
-      server's lease database. Note this will not cause the address
-      to be revoked from the client, and the lease may be refreshed
-      or renewed by the client.";
-    input {
-      leaf lease-address-to-delete {
-        type leafref {
-          path "../../dhcpv6-server/network-ranges/network-range" +
-            "/address-pools/address-pool/active-leases" +
-            "/active-lease/leased-address";
-        }
-        mandatory true;
-        description 
-          "IPv6 address of an active lease that will be 
-          deleted from the server.";
-      }
-    }
-    output {
-      leaf return-message {
-        type string;
-        description 
-          "Response message from the server.";
-      }
-    }
-  }
-  rpc delete-prefix-lease {
-    nacm:default-deny-all;
-    if-feature prefix-delegation;
-    description 
-      "Deletes a client's active prefix lease from the 
-      server's lease database. Note, this will not cause the prefix
-      to be revoked from the client, and the lease may be refreshed
-      or renewed by the client.";
-    input {
-      leaf lease-prefix-to-delete {
-        type leafref {
-          path "../../dhcpv6-server/network-ranges/network-range" +
-            "/prefix-pools/prefix-pool/active-leases/active-lease" +
-            "/leased-prefix";
-        }
-        mandatory true;
-        description 
-          "IPv6 prefix of an active lease that will be deleted 
-          from the server.";
-      }
-    }
-    output {
-      leaf return-message {
-        type string;
-        description 
-          "Response message from the server.";
-      }
-    }
+    uses dhc6:status;
   }
 }

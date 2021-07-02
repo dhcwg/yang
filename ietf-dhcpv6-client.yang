@@ -31,14 +31,14 @@ module ietf-dhcpv6-client {
     "IETF DHC (Dynamic Host Configuration) Working Group";
 
   contact
-    "WG Web:   <http://datatracker.ietf.org/wg/dhc/>
-     WG List:  <mailto:dhcwg@ietf.org>
-     Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
-     Author:   Linhui Sun <lh.sunlinh@gmail.com>
-     Editor:   Ian Farrer <ian.farrer@telekom.de>
-     Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
-     Author:   Zihao He <hezihao9512@gmail.com>
-     Author:   Michal Nowikowski <godfryd@isc.org>";
+    "WG Web:   <https://datatracker.ietf.org/wg/dhc/>
+    WG List:  <mailto:dhcwg@ietf.org>
+    Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
+    Author:   Linhui Sun <lh.sunlinh@gmail.com>
+    Editor:   Ian Farrer <ian.farrer@telekom.de>
+    Author:   Sladjana Zeichlin <sladjana.zechlin@telekom.de>
+    Author:   Zihao He <hezihao9512@gmail.com>
+    Author:   Michal Nowikowski <godfryd@isc.org>";
 
   description 
     "This YANG module defines components necessary for the 
@@ -59,12 +59,12 @@ module ietf-dhcpv6-client {
     to the license terms contained in, the Simplified BSD License
     set forth in Section 4.c of the IETF Trust's Legal Provisions
     Relating to IETF Documents
-    (http://trustee.ietf.org/license-info).
+    (https://trustee.ietf.org/license-info).
 
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2021-06-14 {
+  revision 2021-07-02 {
     description 
       "Initial Revision.";
     reference 
@@ -75,6 +75,14 @@ module ietf-dhcpv6-client {
    * Features
    */
 
+  feature non-temporary-address {
+    description
+      "Denotes that the client supports DHCPv6 non-temporary address
+      allocations.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.2";
+  }
+
   feature prefix-delegation {
     description
       "Denotes that the client implements DHCPv6 prefix
@@ -83,10 +91,18 @@ module ietf-dhcpv6-client {
       IPv6 (DHCPv6), Section 6.3";
   }
 
+  feature temporary-address {
+    description
+      "Denotes that the client supports DHCPv6 temporary address
+      allocations.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.5";
+  }
+
   /*
    * Groupings
    */
-  
+
   grouping message-statistics {
     description 
       "Counters for DHCPv6 messages.";
@@ -159,13 +175,47 @@ module ietf-dhcpv6-client {
     }
   }
 
+  grouping lease-state {
+    description 
+      "Information about the active IA_NA lease.";
+    leaf preferred-lifetime {
+      type dhc6:timer-seconds32;
+      description 
+        "The preferred lifetime for the leased address 
+        expressed in seconds.";
+    }
+    leaf valid-lifetime {
+      type dhc6:timer-seconds32;
+      description 
+        "The valid lifetime for the leased address expressed 
+        in seconds.";
+    }
+    leaf allocation-time {
+      type yang:date-and-time;
+      description 
+        "Time and date that the address was first leased.";
+    }
+    leaf last-renew-rebind {
+      type yang:date-and-time;
+      description 
+        "Time of the last successful renew or rebind of the 
+        leased address.";
+    }
+    leaf server-duid {
+      type dhc6:duid;
+      description 
+        "DUID of the leasing server.";
+    }
+    uses dhc6:status;
+  }
+
   grouping option-request-option-group {
     description 
       "OPTION_ORO (6) Option Request Option. A client MUST include 
       an Option Request option in a Solicit, Request, Renew, 
-      Rebind, or Information-request message to inform the server 
-      about options the client wants the server to send to the 
-      client.";
+         Rebind, or Information-request message to inform the server 
+           about options the client wants the server to send to the 
+           client.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.7";
     container option-request-option {
@@ -173,9 +223,9 @@ module ietf-dhcpv6-client {
         "OPTION_ORO (6) Option Request Option container.";
       leaf-list oro-option {
         type uint16;
-       description 
-         "List of options that the client is requesting,
-         identified by option code";
+        description 
+          "List of options that the client is requesting,
+          identified by option code";
       }
     }
   }
@@ -297,7 +347,6 @@ module ietf-dhcpv6-client {
           augmented to this location from other YANG modules as 
           required.";
         uses option-request-option-group;
-        uses dhc6:status-code-option-group;
         uses dhc6:rapid-commit-option-group;
         uses user-class-option-group;
         uses vendor-class-option-group;
@@ -305,10 +354,11 @@ module ietf-dhcpv6-client {
         uses dhc6:reconfigure-accept-option-group;
       }
       list ia-na {
+        if-feature non-temporary-address;
         key ia-id;
         description 
           "Configuration relevant for an IA_NA (Identity Association
-           for Non-temporary Addresses).";
+          for Non-temporary Addresses).";
         reference "RFC 8415: Dynamic Host Configuration Protocol
           for IPv6 (DHCPv6), Section 13.1";
         leaf ia-id {
@@ -325,73 +375,47 @@ module ietf-dhcpv6-client {
             of OPTION_IA_NA.";
         }
         container lease-state {
-          config "false";
-          description 
+          config false;
+          description
             "Information about the active IA_NA lease.";
           leaf ia-na-address {
             type inet:ipv6-address;
-            description 
+            description
               "Address that is currently leased.";
-          }
-          leaf preferred-lifetime {
-            type dhc6:timer-seconds32;
-            description 
-              "The preferred lifetime for the leased address 
-              expressed in seconds.";
-          }
-          leaf valid-lifetime {
-            type dhc6:timer-seconds32;
-            description 
-              "The valid lifetime for the leased address expressed 
-              in seconds.";
           }
           leaf lease-t1 {
             type dhc6:timer-seconds32;
-            description 
-              "The time interval after which the client should 
-              contact the server from which the addresses in the 
-              IA_NA were obtained to extend the lifetimes of the 
+            description
+              "The time interval after which the client should
+              contact the server from which the addresses in the
+              IA_NA were obtained to extend the lifetimes of the
               addresses assigned to the IA_NA.";
           }
           leaf lease-t2 {
             type dhc6:timer-seconds32;
-            description 
-              "The time interval after which the client should 
-              contact any available server to extend the lifetimes 
+            description
+              "The time interval after which the client should
+              contact any available server to extend the lifetimes
               of the addresses assigned to the IA_NA.";
           }
-          leaf allocation-time {
-            type yang:date-and-time;
-            description 
-              "Time and date that the address was first leased.";
-          }
-          leaf last-renew-rebind {
-            type yang:date-and-time;
-            description 
-              "Time of the last successful renew or rebind of the 
-              leased address.";
-          }
-          leaf server-duid {
-            type dhc6:duid;
-            description 
-              "DUID of the leasing server.";
-          }
+          uses lease-state;
         }
       }
-      list ia-ta {
+      list ia-ta {  
+        if-feature temporary-address;
         key ia-id;
         description 
           "Configuration relevant for an IA_TA (Identity Association
           for Temporary Addresses).";
         reference "RFC 8415: Dynamic Host Configuration Protocol for
           IPv6 (DHCPv6), Section 13.2";
-          leaf ia-id {
-            type uint32;
-            description 
-              "The unique identifier for this IA_TA.";
-            reference "RFC 8415: Dynamic Host Configuration Protocol
-              for IPv6 (DHCPv6), Section 12";
-          }
+        leaf ia-id {
+          type uint32;
+          description 
+            "The unique identifier for this IA_TA.";
+          reference "RFC 8415: Dynamic Host Configuration Protocol
+            for IPv6 (DHCPv6), Section 12";
+        }
         container ia-ta-options {
           description 
             "An augmentation point for additional options
@@ -407,34 +431,7 @@ module ietf-dhcpv6-client {
             description 
               "Address that is currently leased.";
           }
-          leaf preferred-lifetime {
-            type dhc6:timer-seconds32;
-            description 
-              "The preferred lifetime for the leased address 
-              expressed in seconds.";
-          }
-          leaf valid-lifetime {
-            type dhc6:timer-seconds32;
-            description 
-              "The valid lifetime for the leased address expressed 
-              in seconds.";
-          }
-          leaf allocation-time {
-            type yang:date-and-time;
-            description 
-              "Time and date that the address was first leased.";
-          }
-          leaf last-renew-rebind {
-            type yang:date-and-time;
-            description 
-              "Time of the last successful renew or rebind of the 
-              address.";
-          }
-          leaf server-duid {
-            type dhc6:duid;
-            description 
-              "DUID of the leasing server.";
-          }
+          uses lease-state;
         }
       }
       list ia-pd {
@@ -467,18 +464,6 @@ module ietf-dhcpv6-client {
             description 
               "Delegated prefix that is currently leased.";
           }
-          leaf preferred-lifetime {
-            type dhc6:timer-seconds32;
-            description 
-              "The preferred lifetime for the leased prefix expressed 
-              in units of seconds.";
-          }
-          leaf valid-lifetime {
-            type dhc6:timer-seconds32;
-            description 
-              "The valid lifetime for the leased prefix expressed 
-              in units of seconds.";
-          }
           leaf lease-t1 {
             type dhc6:timer-seconds32;
             description 
@@ -494,22 +479,7 @@ module ietf-dhcpv6-client {
               contact any available server to extend the lifetimes 
               of the addresses assigned to the IA_PD.";
           }
-          leaf allocation-time {
-            type yang:date-and-time;
-            description 
-              "Time and date that the prefix was first leased.";
-          }
-          leaf last-renew-rebind {
-            type yang:date-and-time;
-            description 
-              "Time of the last successful renew or rebind of the 
-              delegated prefix.";
-          }
-          leaf server-duid {
-            type dhc6:duid;
-            description 
-              "DUID of the delegating server.";
-          }
+          uses lease-state;
         }
       }
       uses message-statistics;
@@ -521,6 +491,7 @@ module ietf-dhcpv6-client {
    */
 
   notification invalid-ia-address-detected {
+    if-feature "non-temporary-address or temporary-address";
     description 
       "Notification sent when an address received 
       in an identity association option is determined invalid. 
@@ -563,9 +534,9 @@ module ietf-dhcpv6-client {
         "The value of the valid-lifetime field in OPTION_IAADDR.";
     }
     leaf ia-options {
-     type binary;
-     description 
-       "A copy of the contents of the IAaddr-options field.";
+      type binary;
+      description 
+        "A copy of the contents of the IAaddr-options field.";
     }
     leaf description {
       type string;
@@ -579,7 +550,7 @@ module ietf-dhcpv6-client {
     description 
       "Notification sent when the transmission or retransmission 
       of a message fails."; 
-    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 7.6";
     leaf failure-type {
       type enumeration {
@@ -638,14 +609,8 @@ module ietf-dhcpv6-client {
     description 
       "Notification sent when the client receives a message that 
       includes an unsuccessful Status Code option.";
-      reference "RFC 8415: Dynamic Host Configuration Protocol for
-          IPv6 (DHCPv6), Section 21.13";
-    leaf status-code {
-      type uint16;
-      mandatory true;
-      description 
-        "Unsuccessful status code received by a client.";
-    }
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 21.13";
     leaf server-duid {
       type dhc6:duid;
       mandatory true;
@@ -653,9 +618,12 @@ module ietf-dhcpv6-client {
         "DUID of the server sending the unsuccessful
         error code.";
     }
+    uses dhc6:status;
   }
 
   notification server-duid-changed {
+    if-feature "non-temporary-address or prefix-delegation or " + 
+      "temporary-address";
     description 
       "Notification sent when the client receives a lease
       from a server with different DUID to the one currently stored
@@ -675,15 +643,17 @@ module ietf-dhcpv6-client {
         "DUID of the previous server.";
     }
     leaf lease-ia-na {
+      if-feature non-temporary-address;
       type leafref {
-        path "/dhcpv6-client/client-if/ia-na/ia-id";
+        path "../../dhcpv6-client/client-if/ia-na/ia-id";
       }
       description 
         "Reference to the IA_NA lease.";
     }
     leaf lease-ia-ta {
+      if-feature temporary-address;
       type leafref {
-        path "/dhcpv6-client/client-if/ia-ta/ia-id";
+        path "../../dhcpv6-client/client-if/ia-ta/ia-id";
       }
       description 
         "Reference to the IA_TA lease.";
@@ -691,7 +661,7 @@ module ietf-dhcpv6-client {
     leaf lease-ia-pd {
       if-feature prefix-delegation;
       type leafref {
-        path "/dhcpv6-client/client-if/ia-pd/ia-id";
+        path "../../dhcpv6-client/client-if/ia-pd/ia-id";
       }
       description 
         "Reference to the IA_PD lease.";
