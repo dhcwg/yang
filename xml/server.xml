@@ -36,12 +36,12 @@
     </option-set>
   </option-sets>
   <class-selector/>
-  <network-ranges>
+  <allocation-ranges>
     <valid-lifetime>54000</valid-lifetime>
     <renew-time>7200</renew-time>
     <rebind-time>32400</rebind-time>
     <preferred-lifetime>43200</preferred-lifetime>
-    <network-range>
+    <allocation-range>
       <id>1</id>
       <description>example-network-range</description>
       <network-prefix>2001:db8::/32</network-prefix>
@@ -75,6 +75,6 @@
           <max-pd-space-utilization>80</max-pd-space-utilization>
         </prefix-pool>
       </prefix-pools>
-    </network-range>
-  </network-ranges>
+    </allocation-range>
+  </allocation-ranges>
 </dhcpv6-server>

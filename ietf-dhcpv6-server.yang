@@ -57,7 +57,7 @@ module ietf-dhcpv6-server {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2021-07-02 {
+  revision 2021-10-25 {
     description 
       "Initial Revision.";
     reference 
@@ -67,6 +67,14 @@ module ietf-dhcpv6-server {
   /*
    * Features
    */
+
+  feature na-assignment {
+    description 
+      "Denotes that the server implements DHCPv6 non-temporary 
+      address assignment.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.2";
+  }
 
   feature prefix-delegation {
     description 
@@ -90,7 +98,7 @@ module ietf-dhcpv6-server {
       }
       description 
         "The ID field of relevant set of DHCPv6 options (option-set) 
-        to be provisioned to clients using the network-range.";
+        to be provisioned to clients using the allocation-range.";
     }
     leaf valid-lifetime {
       type dhc6:timer-seconds32;
@@ -455,14 +463,14 @@ module ietf-dhcpv6-server {
         class-selector YANG.";
     }
 
-    container network-ranges {
+    container allocation-ranges {
       description 
         "This model is based on an address and parameter 
         allocation hierarchy.  The top level is 'global' - which 
-        is defined as the container for all network-ranges. Under 
-        this are the individual network-ranges.";
+        is defined as the container for all allocation-ranges. Under 
+        this are the individual allocation-ranges.";
       uses resource-config;
-      list network-range {
+      list allocation-range {
         key id;
         description 
           "Network-ranges are identified by the 'id' key.";
@@ -470,12 +478,12 @@ module ietf-dhcpv6-server {
           type uint32;
           mandatory true;
           description 
-            "Unique identifier for the network range.";
+            "Unique identifier for the allocation range.";
         }
         leaf description {
           type string;
           description 
-            "Description for the network range.";
+            "Description for the allocation range.";
         }
         leaf network-prefix {
           type inet:ipv6-prefix;
@@ -485,6 +493,7 @@ module ietf-dhcpv6-server {
         }
         uses resource-config;
         container address-pools {
+          if-feature na-assignment;
           description 
             "Configuration for the DHCPv6 server's 
             address pools.";
@@ -494,7 +503,7 @@ module ietf-dhcpv6-server {
               "List of address pools for allocation to clients, 
               distinguished by 'pool-id'.";
             leaf pool-id {
-              type uint32;
+              type string;
               mandatory true;
               description 
                 "Unique identifier for the pool.";
@@ -591,7 +600,7 @@ module ietf-dhcpv6-server {
               "List of prefix pools for allocation to 
               clients, distinguished by 'pool-id'.";
             leaf pool-id {
-              type uint32;
+              type string;
               mandatory true;
               description 
                 "Unique identifier for the pool.";
@@ -689,6 +698,7 @@ module ietf-dhcpv6-server {
 
   rpc delete-address-lease {
     nacm:default-deny-all;
+    if-feature na-assignment;
     description 
       "Deletes a client's active address lease from the 
       server's lease database. Note this will not cause the address
@@ -697,9 +707,9 @@ module ietf-dhcpv6-server {
     input {
       leaf lease-address-to-delete {
         type leafref {
-          path "../../dhcpv6-server/network-ranges/network-range" +
-            "/address-pools/address-pool/active-leases" +
-            "/active-lease/leased-address";
+          path "../../dhcpv6-server/allocation-ranges/" + 
+            "allocation-range/address-pools/address-pool" +
+            "/active-leases/active-lease/leased-address";
         }
         mandatory true;
         description 
@@ -727,9 +737,9 @@ module ietf-dhcpv6-server {
     input {
       leaf lease-prefix-to-delete {
         type leafref {
-          path "../../dhcpv6-server/network-ranges/network-range" +
-            "/prefix-pools/prefix-pool/active-leases/active-lease" +
-            "/leased-prefix";
+          path "../../dhcpv6-server/allocation-ranges/" +
+            "allocation-range/prefix-pools/prefix-pool" +
+            "/active-leases/active-lease/leased-prefix";
         }
         mandatory true;
         description 
@@ -751,14 +761,16 @@ module ietf-dhcpv6-server {
    */
 
   notification address-pool-utilization-threshold-exceeded {
+    if-feature na-assignment;
     description 
       "Notification sent when the address pool 
       utilization exceeds the threshold configured in
       max-address-utilization.";
     leaf pool-id {
       type leafref {
-        path "../../dhcpv6-server/network-ranges/network-range/" +
-          "address-pools/address-pool/pool-id";
+        path "../../dhcpv6-server/allocation-ranges/" +
+          "allocation-range/address-pools/address-pool" +
+          "/pool-id";
       }
       mandatory true;
       description 
@@ -798,8 +810,8 @@ module ietf-dhcpv6-server {
       max-pd-space-utilization.";
     leaf pool-id {
       type leafref {
-        path "../../dhcpv6-server/network-ranges/network-range/" + 
-          "prefix-pools/prefix-pool/pool-id";
+        path "../../dhcpv6-server/allocation-ranges" +
+        "/allocation-range/prefix-pools/prefix-pool/pool-id";
       }
       mandatory true;
       description 
@@ -886,6 +898,7 @@ module ietf-dhcpv6-server {
   }
 
   notification decline-received {
+    if-feature na-assignment;
     description 
       "Notification sent when the server has received a 
       Decline (9) message from a client.";

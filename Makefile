@@ -23,7 +23,7 @@ all: text #html
 
 define file_to_tree =
 $(1).tree: $(1)
-	$(PYANG) --ietf -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$<  > $$@
+	$(PYANG) --ietf --lint -f tree --tree-line-length 65 -p $(INCLUDE_PATH) $$<  > $$@
 endef
 
 MODULES=
@@ -124,5 +124,9 @@ $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 
 clean:
 	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
+
+cleanwithtxt:
+	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
+
 
 #xml complete file can be created with 'xml2rfc --exp draft-ietf-dhc-dhcpv6-yang-XX.xml

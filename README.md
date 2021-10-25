@@ -12,6 +12,8 @@ yanglint --strict --verbose -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-relay.
 yanglint --strict --verbose -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-client.yang client.xml
 
 yanglint --strict --verbose -t config -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-server.yang server-base-ex.xml
+yanglint --strict --verbose -t config -p ../ietf/yang/standard/ietf/RFC ietf-dhcpv6-server.yang ietf-example-server-conf.xml
+
 
 Test modules:
 

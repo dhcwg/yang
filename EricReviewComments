@@ -1,0 +1,96 @@
+
+
+On 4. Oct 2021, at 10:59, Eric Vyncke (evyncke) <evyncke@cisco.com> wrote:
+
+Hello Ian,
+
+First of all, thank you for the work done on this document. I really appreciate the concise explanations given about DHCP as it facilitates the reading. Thank you also for the examples.
+
+Please find below my own AD review. I would appreciate to get a reply to all points below before proceeding further with the publication process (i.e., the IETF Last Call).
+
+Sorry for belated review but I was on vacations ;-)
+
+Regards
+
+-éric
+
+Abstract: suggest to already mention RFC 8415 
+
+[if - Added]
+
+
+The requirement language section is at an unusual location. It is usually a section of its own after the introduction. Cfr RFC 7322.
+
+[if - Moved]
+
+
+Section 1
+“DHCPv6 [RFC8415] is widely used" unsure whether we can really write "widely".... suggest to remove it.
+
+[if - Removed ‘widely’]
+
+
+Section 2.1
+Why is address-pools not also enabled by a feature like for PD ?
+
+[if - Address pool allocation was modelled as a ‘default’ function of a DHCPv6 server, as this was defined in RFC3315 spec. As PD came a bit later, we took the view that this would be best as a feature.
+
+However, if a server was only providing stateless DHCP, then it also wouldn’t need address pools, so I think a feature for address assignment makes
+sense.
+
+I've added a 'na-assignment' feature and added 'if-feature' to the address-pools container, delete-address-lease RPC and address-pool-utilization-exceeded and decline-received notifications.
+]
+
+
+The name "network-range" does not seem to be the best choice as it is a bag for prefixes and addresses... What about "allocation-range" ?
+
+[if - Renamed container to 'allocation-ranges' and the list to 'allocation-range']
+
+No type for class-selector vendor-config
+
+[if - class-selector and vendor-config are empty containers that are intended to be used as points that implementation specific yang can be augmented to. This is described in the description in the YANG module and also in the descriptions of the tree diagrams (e.g. sec 2.1).]
+
+
+Pool-id being only a number ?
+[if - Changed to string.]
+
+
+Section 2.3
+This one really puzzles me... why is DUID optional (with a '?') and in the client-if while DUID is unique per DHCP client (i.e., not linked to a specific interface).
+
+[if - I’m of the understanding that a client with multiple interfaces could have a different DUID for each interface. e.g. RFC7844 Section 3 -
+
+" When using the anonymity profile in conjunction with randomized
+   link-layer addresses, DHCPv6 clients MUST use DUID format number 3 --
+   link-layer address.  The value of the link-layer address should be
+   the value currently assigned to the interface.”
+
+I’d appreciate Bernie/Tim’s view on this.]
+
+
+Most the clients I know of have the option to specify a hint for the requested delegated prefix, I do not see any leaf to specify this 'hint'.
+
+[If - I've added a 'prefix-length-hint' leaf to the client's ia-pd configuration.]
+
+Section 3, 
+Is there any reason why not to start with the "common" YANG module ?
+
+Section 3.1
+I wonder why the module forces the pool-id to be a uint32. This could be anything in my opinion (like a character string).
+[if - Changed to string.]
+
+Section 3.4
+In typedef duid-unstructured, it seems that the pattern is wrong (but I am not familiar with the YANG pattern). Using https://yangvalidator.com/yangre as a test, 1004 was refused while correct. Unsure though how to write a correct YANG pattern __
+
+[if - I've reworked it using the following regex
+'(?!0001|0002|0003|0004).([0-9a-fA-F])*'
+
+This behaves as expected in the YANG validator.]
+
+
+Section A.1
+Typo in "max-pd-space-utiliation"
+
+[if - fixed]
+
+
