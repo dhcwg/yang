@@ -53,7 +53,7 @@ module example-dhcpv6-class-select {
     This version of this YANG module is part of RFC XXXX; see
     the RFC itself for full legal notices.";
 
-  revision 2021-07-02 {
+  revision 2021-10-25 {
     description 
       "Initial Revision.";
     reference 
@@ -270,10 +270,10 @@ module example-dhcpv6-class-select {
   }
 
   augment "/dhc6-srv:dhcpv6-server/" + 
-    "dhc6-srv:network-ranges/dhc6-srv:network-range" {
+    "dhc6-srv:allocation-ranges/dhc6-srv:allocation-range" {
     description 
       "Augment class selector functions to the DHCPv6 server 
-      network-ranges.";
+      allocation-ranges.";
     leaf-list client-class {
       type leafref {
         path "/dhc6-srv:dhcpv6-server/dhc6-srv:" +
@@ -285,7 +285,7 @@ module example-dhcpv6-class-select {
   }
 
   augment "/dhc6-srv:dhcpv6-server/dhc6-srv:" + 
-    "network-ranges/dhc6-srv:network-range/dhc6-srv:" +
+    "allocation-ranges/dhc6-srv:allocation-range/dhc6-srv:" +
     "address-pools/dhc6-srv:address-pool" {
     description 
       "Augment class selector functions to the DHCPv6 server 
@@ -301,7 +301,7 @@ module example-dhcpv6-class-select {
   }
 
   augment "/dhc6-srv:dhcpv6-server/dhc6-srv:" + 
-    "network-ranges/dhc6-srv:network-range/dhc6-srv:" + 
+    "allocation-ranges/dhc6-srv:allocation-range/dhc6-srv:" + 
     "prefix-pools/dhc6-srv:prefix-pool" {
     description 
       "Augment class selector functions to the DHCPv6 

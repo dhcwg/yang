@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-22" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-23" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-22"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-23"/>
     <author fullname="Ian Farrer" role="editor" initials="I." 
         surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
@@ -34,22 +34,14 @@
     <abstract>
       <t>This document describes YANG data modules for the configuration 
         and management of DHCPv6 (Dynamic Host Configuration Protocol 
-        for IPv6) servers, relays, and clients.
+        for IPv6 RFC8415) servers, relays, and clients.
       </t>
     </abstract>
-    <note>
-      <name>Requirements Language</name>
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-        "OPTIONAL" in this document are to be interpreted as described in
-        BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and
-        only when, they appear in all capitals, as shown here.</t>
-    </note>
   </front>
   <middle>
     <section anchor="introduction">
       <name>Introduction</name>
-      <t>DHCPv6 <xref target="RFC8415"/> is widely used for supplying
+      <t>DHCPv6 <xref target="RFC8415"/> is used for supplying
         configuration and other relevant parameters to clients in IPv6 
         networks. This document defines YANG <xref target="RFC7950"/>
         modules for the configuration and management of DHCPv6 
@@ -295,7 +287,15 @@
           relevant documents.</t>
       </section>
     </section>
-    <section anchor="tree-diagrams">
+    <section anchor="req-lang">
+      <name>Requirements Language</name>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+        "OPTIONAL" in this document are to be interpreted as described in
+        BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and
+        only when, they appear in all capitals, as shown here.</t>
+   </section>
+   <section anchor="tree-diagrams">
       <name>DHCPv6 Tree Diagrams</name>
       <section anchor="dhcpv6-server-tree">
         <name>DHCPv6 Server Tree Diagram</name>
@@ -354,12 +354,12 @@
             <xref target="class-selector-example"/> for an example of 
             this.
           </li>
-          <li>network-ranges: A hierarchical model is used
+          <li>allocation-ranges: A hierarchical model is used
             for the allocation of addresses and prefixes. At the top 
-            level 'network-ranges' container holds global configuration 
-            parameters. Under this, the 'network-range' list is used
-            for specifying IPv6 prefixes and additional, prefix
-            specific parameters.
+            level 'allocation-ranges' container holds global 
+            configuration parameters. Under this, the 
+            'allocation-range' list is used for specifying IPv6 
+            prefixes and additional, prefix specific parameters.
           </li>
           <li>address-pools: Used for IA_NA and IA_TA pool allocations 
             with a container for defining host reservations. State
@@ -494,10 +494,22 @@
           </li>
           <li>enabled: Enables/disables all DHCPv6 client 
             function for the specific interface.</li>          
-          <li>client-duid: Each client must have a DUID (DHCP Unique
-            Identifier) to identify itself to servers and relays. A 
-            DUID consists of a two-octet type field and an arbitrary 
-            length (1-128 octets) content field. 
+          <li>client-duid/interface-duid: The DUID (DHCP Unique 
+            Identifier) is used to identify the client to servers 
+            and relays. DUID configuration may conditionally appear 
+            in one of two locations in the client tree, depending on 
+            the features that the client implements. If the client does not 
+            support requesting any address or prefix leasing features,
+            then there is no leaf for a DUID value.  If the client 
+            does not implement the 'anon-profile' feature 
+            <xref target="RFC7844"/>, then there
+            is a single 'client-duid' leaf that holds that DUID value 
+            which will be used for all DHCPv6 enabled interfaces. If the
+            'anon-profile' is enabled, there is an 
+            'interface-duid' leaf for each DHCP enabled interface. 
+            A DUID consists of a 
+            two-octet type field and an arbitrary length (1-128 
+            octets) content field. 
             Currently there are four defined types of DUIDs in 
             <xref target="RFC8415"/> and <xref target="RFC6355"/>. The 
             DUID may be configured using the format for one of these 
@@ -540,7 +552,13 @@
     </section>
     <section anchor="yang-module">
       <name>DHCPv6 YANG Modules</name>
-      <section anchor="server-module">
+      <section anchor="common-module">
+        <name>DHCPv6 Common YANG Module</name>
+        <t>This module imports typedefs from <xref target="RFC6991"/>.
+        </t>
+        <xi:include href="ietf-dhcpv6-common.yang.xml"/>
+      </section>
+     <section anchor="server-module">
         <name>DHCPv6 Server YANG Module</name>
         <t>This module imports typedefs from <xref target="RFC6991"/>,
           <xref target="RFC8343"/>.</t>
@@ -558,12 +576,6 @@
         <t>This module imports typedefs from <xref target="RFC6991"/>,
           <xref target="RFC8343"/>.</t>
         <xi:include href="ietf-dhcpv6-client.yang.xml"/>
-      </section>
-      <section anchor="common-module">
-        <name>DHCPv6 Common YANG Module</name>
-        <t>This module imports typedefs from <xref target="RFC6991"/>.
-        </t>
-        <xi:include href="ietf-dhcpv6-common.yang.xml"/>
       </section>
     </section>
 
@@ -634,7 +646,7 @@
       <ul spacing="normal">
         <li>Information the server holds about clients with active 
           leases: 
-          (dhc6-srv/network-ranges/network-range/address-pools/
+          (dhc6-srv/allocation-ranges/allocation-range/address-pools/
           address-pool/active-leases)
         </li>
         <li>Information the relay holds about clients with active 
@@ -789,6 +801,7 @@
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6242.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6991.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7844.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8040.xml"/>
@@ -858,7 +871,7 @@
         the different DHCPv6 elements.
       </t>
       <section anchor="server-usage-examples">
-        <name>DHCPv6 Server Configuration Example</name>
+        <name>DHCPv6 Server Configuration Examples</name>
         <t>The following example shows a basic configuration for a 
           server. The configuration defines:</t>
         <ul spacing="normal">
@@ -893,7 +906,7 @@
           clients. In this example, each client will receive a /56
           prefix.
         </t>
-        <t>The 'max-pd-space-utiliation' is set to 80 so that 
+        <t>The 'max-pd-space-utilization' is set to 80 so that 
           a 'prefix-pool-utilization-threshold-exceeded' notification 
           will be raised if the number of prefix allocations exceeds
           this.
@@ -950,7 +963,7 @@
       </section>
 
       <section anchor="client-usage-example">
-        <name>DHCPv6 Client Configuration Examples</name>
+        <name>DHCPv6 Client Configuration Example</name>
         <t>The following example shows a basic configuration for a 
           DHCP client and its interaction with the
           ietf-interfaces module. The configuration 
@@ -1049,7 +1062,7 @@
         prefix which contains a specific prefix. In this case, the
         following location for the augmentation may be more suitable:
       </t>
-      <t>'/dhc6-srv:dhc6-srv/dhc6-srv:network-ranges/dhc6-srv:network-range/dhc6-srv:prefix-pools/dhc6-srv:prefix-pool"
+      <t>'/dhc6-srv:dhc6-srv/dhc6-srv:allocation-ranges/dhc6-srv:allocation-range/dhc6-srv:prefix-pools/dhc6-srv:prefix-pool"
       </t>
     </section>
 
@@ -1099,7 +1112,7 @@
         <li>The augmented class-selector configuration in the main
           DHCPv6 Server configuration.
         </li>
-        <li>client-class leafrefs augmented to "network-range", 
+        <li>client-class leafrefs augmented to "allocation-range", 
           "address-pool" and "pd-pool", pointing to the 
           "client-class-name" that is required.
         </li>
@@ -1107,7 +1120,7 @@
 
       <t>The mechanism is as follows: class is associated to client 
         based on rules and then client is allowed to get 
-        address(es)/prefix(es) from given network-range/pool if the 
+        address(es)/prefix(es) from given allocation-range/pool if the 
         class name matches.
       </t>
       <xi:include href="example-dhcpv6-class-select.yang.xml"/>

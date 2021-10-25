@@ -13,14 +13,14 @@
     </option-set>
   </option-sets>
   <class-selector/>
-  <network-ranges>
+  <allocation-ranges>
     <valid-lifetime>54000</valid-lifetime>
     <renew-time>7200</renew-time>
     <rebind-time>32400</rebind-time>
     <preferred-lifetime>43200</preferred-lifetime>
-    <network-range>
+    <allocation-range>
       <id>1</id>
-      <description>example-network-range</description>
+      <description>example-allocation-range</description>
       <network-prefix>2001:db8::/32</network-prefix>
       <option-set-id>1</option-set-id>
       <address-pools>
@@ -33,6 +33,6 @@
           <option-set-id>1</option-set-id>
         </address-pool>
       </address-pools>
-    </network-range>
-  </network-ranges>
+    </allocation-range>
+  </allocation-ranges>
 </dhcpv6-server>
