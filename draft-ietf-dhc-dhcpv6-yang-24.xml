@@ -873,7 +873,8 @@
           dynamically assigned addresses.</t>
 
         <figure anchor="host-res-example-conf">
-          <name>Server Host Reservation Configuration Example XML</name>
+          <name>Server Host Reservation Configuration Example XML 
+            Snippet</name>
           <xi:include href="xml/host-res-ex.xml"/>
         </figure>
 
@@ -888,7 +889,8 @@
           this.
         </t>
         <figure anchor="pd-example-conf">
-          <name>Server Prefix Delegation Configuration Example XML</name>
+          <name>Server Prefix Delegation Configuration Example XML
+            Snippet</name>
           <xi:include href="xml/prefixpool-ex.xml"/>
         </figure>
 
@@ -905,7 +907,8 @@
           has been augmented to the server's option set.</t>
 
         <figure anchor="option-set-example">
-          <name>Server Option Set Configuration Example XML</name>
+          <name>Server Option Set Configuration Example XML
+            Snippet</name>
           <xi:include href="xml/opt-set-ex.xml"/>
         </figure>
       </section>
