@@ -56,7 +56,7 @@
         shows their interaction.
       </t>
       <t>The relay and client modules provide configuration which is
-        applicable device's interfaces. This is done by importing the
+        applicable to devices' interfaces. This is done by importing the
         ietf-interfaces module <xref target="RFC8343"/> and using 
         interface-refs to the relevant interface(s).
       </t>
@@ -608,7 +608,7 @@
         sensitive, these use 'nacm:default-deny-all'.
       </t>
 
-      <t>An attacker who is able to access the DHCPv6 server can 
+      <t>An attacker with read/write access the DHCPv6 server can 
         undertake various attacks, such as:</t>
 
       <ul spacing="normal">
@@ -617,16 +617,16 @@
         </li>
         <li>Various attacks based on re-configuring the contents
           of DHCPv6 options. For example, changing the address of a
-          the DNS server supplied in a DHCP option to point
+          DNS server supplied in a DHCP option to point
           to a rogue server.
         </li>
       </ul>
 
-      <t>An attacker who is able to access the DHCPv6 relay can 
+      <t>An attacker with read/write access the DHCPv6 relay can 
         undertake various attacks, such as:</t>
 
       <ul spacing="normal">
-        <li>Re-configuring the relay's destination address to send
+        <li>Modifying the relay's "destination-address" to send
           messages to a rogue DHCPv6 server.
         </li>
         <li>Deleting information about a client's delegated 
@@ -653,6 +653,9 @@
           leases: (dhc6-rly/relay-if/prefix-delegation/)
         </li>
       </ul>
+
+      <t><xref target="RFC7824"/> covers privacy considerations for 
+        DHCPv6 and is applicable here.</t>
 
       <t>Security considerations related to DHCPv6 are discussed in 
         <xref target="RFC8415"/>.</t>
@@ -801,6 +804,7 @@
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6242.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6991.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7824.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7844.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
