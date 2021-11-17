@@ -616,7 +616,8 @@
           messages to a rogue DHCPv6 server.
         </li>
         <li>Various attacks based on re-configuring the contents
-          of DHCPv6 options. For example, changing the address of a
+          of DHCPv6 options, leading to several types of security or 
+          privacy threats.  For example, changing the address of a
           DNS server supplied in a DHCP option to point
           to a rogue server.
         </li>
