@@ -4,12 +4,12 @@
 
 DHC Working Group                                         I. Farrer, Ed.
 Internet-Draft                                       Deutsche Telekom AG
-Intended status: Standards Track                         25 October 2021
-Expires: 28 April 2022
+Intended status: Standards Track                        18 November 2021
+Expires: 22 May 2022
 
 
                 YANG Data Model for DHCPv6 Configuration
-                     draft-ietf-dhc-dhcpv6-yang-23
+                     draft-ietf-dhc-dhcpv6-yang-24
 
 Abstract
 
@@ -32,7 +32,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 April 2022.
+   This Internet-Draft will expire on 22 May 2022.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 1]
+Farrer                     Expires 22 May 2022                  [Page 1]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
 Table of Contents
@@ -82,7 +82,7 @@ Table of Contents
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  76
      9.1.  Normative References  . . . . . . . . . . . . . . . . . .  76
      9.2.  Informative References  . . . . . . . . . . . . . . . . .  78
-   Appendix A.  Data Tree Examples . . . . . . . . . . . . . . . . .  79
+   Appendix A.  Data Tree Examples . . . . . . . . . . . . . . . . .  78
      A.1.  DHCPv6 Server Configuration Examples  . . . . . . . . . .  79
      A.2.  DHCPv6 Relay Configuration Example  . . . . . . . . . . .  83
      A.3.  DHCPv6 Client Configuration Example . . . . . . . . . . .  84
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 2]
+Farrer                     Expires 22 May 2022                  [Page 2]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    Separate modules are defined for each element.  Additionally, a
@@ -120,9 +120,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
    element modules and shows their interaction.
 
    The relay and client modules provide configuration which is
-   applicable device's interfaces.  This is done by importing the ietf-
-   interfaces module [RFC8343] and using interface-refs to the relevant
-   interface(s).
+   applicable to devices' interfaces.  This is done by importing the
+   ietf-interfaces module [RFC8343] and using interface-refs to the
+   relevant interface(s).
 
    It is worth noting that as DHCPv6 is itself a client configuration
    protocol, it is not the intention of this document to provide a
@@ -165,9 +165,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 3]
+Farrer                     Expires 22 May 2022                  [Page 3]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    In DHCPv6, the concept of 'class selection' for messages received by
@@ -221,9 +221,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 4]
+Farrer                     Expires 22 May 2022                  [Page 4]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    |Server Unicast Option|      |     |      |                         |
@@ -277,9 +277,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 5]
+Farrer                     Expires 22 May 2022                  [Page 5]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    Further options definitions can be added using additional YANG
@@ -333,9 +333,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 6]
+Farrer                     Expires 22 May 2022                  [Page 6]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
           |     |  +--rw algorithm?          uint8
@@ -389,9 +389,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 7]
+Farrer                     Expires 22 May 2022                  [Page 7]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              |  |     +--rw end-address
@@ -445,9 +445,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 8]
+Farrer                     Expires 22 May 2022                  [Page 8]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              |  |           +--ro status
@@ -501,9 +501,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                 [Page 9]
+Farrer                     Expires 22 May 2022                  [Page 9]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              |              +--ro preferred-lifetime?
@@ -557,9 +557,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 10]
+Farrer                     Expires 22 May 2022                 [Page 10]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          +---n invalid-client-detected
@@ -613,9 +613,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 11]
+Farrer                     Expires 22 May 2022                 [Page 11]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    *  option-set: Holds configuration parameters for DHCPv6 options.
@@ -669,9 +669,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 12]
+Farrer                     Expires 22 May 2022                 [Page 12]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    *  non-success-code-sent: Raised when there is a status message for
@@ -725,9 +725,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 13]
+Farrer                     Expires 22 May 2022                 [Page 13]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
             |        +--ro client-duid?           dhc6:duid
@@ -781,9 +781,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 14]
+Farrer                     Expires 22 May 2022                 [Page 14]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    *  enabled: Enables/disables all DHCPv6 relay function for the
@@ -837,23 +837,23 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 15]
+Farrer                     Expires 22 May 2022                 [Page 15]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    module: ietf-dhcpv6-client
      +--rw dhcpv6-client
         +--rw enabled?       boolean
         +--rw client-duid?   dhc6:duid
-        |       {non-temp-addr or prefix-del or temp-addr and not anon-p
-   rofile}?
+        |       {non-temp-addr or prefix-del or temp-addr 
+        |         and not anon-profile}?
         +--rw client-if* [if-name]
            +--rw if-name                      if:interface-ref
            +--rw enabled?                     boolean
            +--rw interface-duid?              dhc6:duid
-           |       {non-temp-addr or prefix-del or temp-addr and anon-pr
-   ofile}?
+           |       {non-temp-addr or prefix-del or temp-addr 
+           |         and anon-profile}?
            +--rw client-configured-options
            |  +--rw option-request-option
            |  |  +--rw oro-option*   uint16
@@ -893,9 +893,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 16]
+Farrer                     Expires 22 May 2022                 [Page 16]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            |     +--ro server-duid?          dhc6:duid
@@ -949,9 +949,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 17]
+Farrer                     Expires 22 May 2022                 [Page 17]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        |  +--ro ia-id                 uint32
@@ -1005,9 +1005,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 18]
+Farrer                     Expires 22 May 2022                 [Page 18]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    *  client-duid/interface-duid: The DUID (DHCP Unique Identifier) is
@@ -1061,9 +1061,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 19]
+Farrer                     Expires 22 May 2022                 [Page 19]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
 4.  DHCPv6 YANG Modules
@@ -1072,7 +1072,7 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
    This module imports typedefs from [RFC6991].
 
-   <CODE BEGINS> file "ietf-dhcpv6-common@2021-10-25.yang"
+   <CODE BEGINS> file "ietf-dhcpv6-common@2021-11-18.yang"
 
    module ietf-dhcpv6-common {
      yang-version 1.1;
@@ -1117,9 +1117,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 20]
+Farrer                     Expires 22 May 2022                 [Page 20]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        the RFC itself for full legal notices.";
@@ -1173,9 +1173,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 21]
+Farrer                     Expires 22 May 2022                 [Page 21]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            + '[0-9a-fA-F]{12,}';
@@ -1229,9 +1229,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 22]
+Farrer                     Expires 22 May 2022                 [Page 22]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      }
@@ -1285,9 +1285,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 23]
+Farrer                     Expires 22 May 2022                 [Page 23]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      }
@@ -1341,9 +1341,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 24]
+Farrer                     Expires 22 May 2022                 [Page 24]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          for IPv6 (DHCPv6), Section 7.5.";
@@ -1397,9 +1397,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 25]
+Farrer                     Expires 22 May 2022                 [Page 25]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              "The Replay Detection Method (RDM) used in this
@@ -1453,9 +1453,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 26]
+Farrer                     Expires 22 May 2022                 [Page 26]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        container rapid-commit-option {
@@ -1509,9 +1509,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 27]
+Farrer                     Expires 22 May 2022                 [Page 27]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            }
@@ -1545,7 +1545,7 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
    This module imports typedefs from [RFC6991], [RFC8343].
 
-   <CODE BEGINS> file "ietf-dhcpv6-server@2021-10-25.yang"
+   <CODE BEGINS> file "ietf-dhcpv6-server@2021-11-18.yang"
 
    module ietf-dhcpv6-server {
      yang-version 1.1;
@@ -1565,9 +1565,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 28]
+Farrer                     Expires 22 May 2022                 [Page 28]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      }
@@ -1621,9 +1621,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 29]
+Farrer                     Expires 22 May 2022                 [Page 29]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          "XXXX: YANG Data Model for DHCPv6 Configuration";
@@ -1677,9 +1677,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 30]
+Farrer                     Expires 22 May 2022                 [Page 30]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          description
@@ -1733,9 +1733,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 31]
+Farrer                     Expires 22 May 2022                 [Page 31]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        leaf allocation-time {
@@ -1789,9 +1789,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 32]
+Farrer                     Expires 22 May 2022                 [Page 32]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      }
@@ -1845,9 +1845,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 33]
+Farrer                     Expires 22 May 2022                 [Page 33]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          type uint32;
@@ -1901,9 +1901,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 34]
+Farrer                     Expires 22 May 2022                 [Page 34]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          IPv6 (DHCPv6), Section 21.12";
@@ -1957,9 +1957,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 35]
+Farrer                     Expires 22 May 2022                 [Page 35]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      grouping sol-max-rt-option-group {
@@ -2013,9 +2013,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 36]
+Farrer                     Expires 22 May 2022                 [Page 36]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        }
@@ -2069,9 +2069,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 37]
+Farrer                     Expires 22 May 2022                 [Page 37]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            uses sol-max-rt-option-group;
@@ -2125,9 +2125,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 38]
+Farrer                     Expires 22 May 2022                 [Page 38]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              description
@@ -2181,9 +2181,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 39]
+Farrer                     Expires 22 May 2022                 [Page 39]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
                    description
@@ -2237,9 +2237,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 40]
+Farrer                     Expires 22 May 2022                 [Page 40]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            container prefix-pools {
@@ -2293,9 +2293,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 41]
+Farrer                     Expires 22 May 2022                 [Page 41]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
                      type dhc6:duid;
@@ -2349,9 +2349,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 42]
+Farrer                     Expires 22 May 2022                 [Page 42]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            }
@@ -2405,9 +2405,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 43]
+Farrer                     Expires 22 May 2022                 [Page 43]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        input {
@@ -2461,9 +2461,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 44]
+Farrer                     Expires 22 May 2022                 [Page 44]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            (end-address minus start-address plus one).";
@@ -2517,9 +2517,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 45]
+Farrer                     Expires 22 May 2022                 [Page 45]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            max-prefix-utilization (percentage) of the
@@ -2573,9 +2573,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 46]
+Farrer                     Expires 22 May 2022                 [Page 46]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            }
@@ -2629,9 +2629,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 47]
+Farrer                     Expires 22 May 2022                 [Page 47]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            }
@@ -2657,7 +2657,7 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
    This module imports typedefs from [RFC6991], [RFC8343].
 
-   <CODE BEGINS> file "ietf-dhcpv6-relay@2021-10-25.yang"
+   <CODE BEGINS> file "ietf-dhcpv6-relay@2021-11-18.yang"
 
    module ietf-dhcpv6-relay {
      yang-version 1.1;
@@ -2685,9 +2685,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 48]
+Farrer                     Expires 22 May 2022                 [Page 48]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      import ietf-interfaces {
@@ -2741,9 +2741,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 49]
+Farrer                     Expires 22 May 2022                 [Page 49]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      /*
@@ -2797,9 +2797,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 50]
+Farrer                     Expires 22 May 2022                 [Page 50]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            description
@@ -2853,9 +2853,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 51]
+Farrer                     Expires 22 May 2022                 [Page 51]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          config "false";
@@ -2909,9 +2909,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 52]
+Farrer                     Expires 22 May 2022                 [Page 52]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            for any reason.";
@@ -2965,9 +2965,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 53]
+Farrer                     Expires 22 May 2022                 [Page 53]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      grouping interface-id-option-group {
@@ -3021,9 +3021,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 54]
+Farrer                     Expires 22 May 2022                 [Page 54]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              interface.";
@@ -3077,9 +3077,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 55]
+Farrer                     Expires 22 May 2022                 [Page 55]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          Section 4.4";
@@ -3133,9 +3133,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 56]
+Farrer                     Expires 22 May 2022                 [Page 56]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        if-feature prefix-delegation;
@@ -3189,9 +3189,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 57]
+Farrer                     Expires 22 May 2022                 [Page 57]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              "Last IPv6 address configured on the interface.";
@@ -3205,7 +3205,7 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
    This module imports typedefs from [RFC6991], [RFC8343].
 
-   <CODE BEGINS> file "ietf-dhcpv6-client@2021-10-25.yang"
+   <CODE BEGINS> file "ietf-dhcpv6-client@2021-11-18.yang"
 
    module ietf-dhcpv6-client {
      yang-version 1.1;
@@ -3245,9 +3245,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 58]
+Farrer                     Expires 22 May 2022                 [Page 58]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        Author:   Yong Cui <yong@csnet1.cs.tsinghua.edu.cn>
@@ -3301,9 +3301,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 59]
+Farrer                     Expires 22 May 2022                 [Page 59]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      }
@@ -3357,9 +3357,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 60]
+Farrer                     Expires 22 May 2022                 [Page 60]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            "Number of Request (3) messages sent.";
@@ -3413,9 +3413,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 61]
+Farrer                     Expires 22 May 2022                 [Page 61]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            "Number of Information-request (11) messages
@@ -3469,9 +3469,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 62]
+Farrer                     Expires 22 May 2022                 [Page 62]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        container option-request-option {
@@ -3525,9 +3525,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 63]
+Farrer                     Expires 22 May 2022                 [Page 63]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        container vendor-class-option {
@@ -3581,9 +3581,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 64]
+Farrer                     Expires 22 May 2022                 [Page 64]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        }
@@ -3637,9 +3637,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 65]
+Farrer                     Expires 22 May 2022                 [Page 65]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            uses vendor-class-option-group;
@@ -3693,9 +3693,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 66]
+Farrer                     Expires 22 May 2022                 [Page 66]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              }
@@ -3749,9 +3749,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 67]
+Farrer                     Expires 22 May 2022                 [Page 67]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
                "The unique identifier for this IA_PD.";
@@ -3805,9 +3805,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 68]
+Farrer                     Expires 22 May 2022                 [Page 68]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          uses message-statistics;
@@ -3861,9 +3861,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 69]
+Farrer                     Expires 22 May 2022                 [Page 69]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          description
@@ -3917,9 +3917,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 70]
+Farrer                     Expires 22 May 2022                 [Page 70]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            }
@@ -3973,9 +3973,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 71]
+Farrer                     Expires 22 May 2022                 [Page 71]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          from a server with different DUID to the one currently stored
@@ -4029,9 +4029,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 72]
+Farrer                     Expires 22 May 2022                 [Page 72]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
 5.  Security Considerations
@@ -4058,21 +4058,22 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
    in the server and relay modules are particularly sensitive, these use
    'nacm:default-deny-all'.
 
-   An attacker who is able to access the DHCPv6 server can undertake
+   An attacker with read/write access the DHCPv6 server can undertake
    various attacks, such as:
 
    *  Denial of service attacks, based on re-configuring messages to a
       rogue DHCPv6 server.
 
    *  Various attacks based on re-configuring the contents of DHCPv6
-      options.  For example, changing the address of a the DNS server
-      supplied in a DHCP option to point to a rogue server.
+      options, leading to several types of security or privacy threats.
+      For example, changing the address of a DNS server supplied in a
+      DHCP option to point to a rogue server.
 
-   An attacker who is able to access the DHCPv6 relay can undertake
+   An attacker with read/write access the DHCPv6 relay can undertake
    various attacks, such as:
 
-   *  Re-configuring the relay's destination address to send messages to
-      a rogue DHCPv6 server.
+   *  Modifying the relay's "destination-address" to send messages to a
+      rogue DHCPv6 server.
 
    *  Deleting information about a client's delegated prefix, causing a
       denial of service attack as traffic will no longer be routed to
@@ -4084,10 +4085,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-
-Farrer                    Expires 28 April 2022                [Page 73]
+Farrer                     Expires 22 May 2022                 [Page 73]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    Some of the readable data nodes in this YANG module may be considered
@@ -4102,6 +4102,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
    *  Information the relay holds about clients with active leases:
       (dhc6-rly/relay-if/prefix-delegation/)
+
+   [RFC7824] covers privacy considerations for DHCPv6 and is applicable
+   here.
 
    Security considerations related to DHCPv6 are discussed in [RFC8415].
 
@@ -4136,16 +4139,15 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
    prefix:         dhc6-srv
    reference:      RFC XXXX YANG Data Model for DHCPv6 Configuration
 
+
+
+Farrer                     Expires 22 May 2022                 [Page 74]
+
+Internet-Draft              DHCPv6 YANG Model              November 2021
+
+
    name:           ietf-dhcpv6-relay
    namespace:      urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay
-
-
-
-Farrer                    Expires 28 April 2022                [Page 74]
-
-Internet-Draft              DHCPv6 YANG Model               October 2021
-
-
    prefix:         dhc6-rly
    reference:      RFC XXXX YANG Data Model for DHCPv6 Configuration
 
@@ -4195,11 +4197,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-
-
-Farrer                    Expires 28 April 2022                [Page 75]
+Farrer                     Expires 22 May 2022                 [Page 75]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            Yong Cui
@@ -4253,9 +4253,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 76]
+Farrer                     Expires 22 May 2022                 [Page 76]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    [RFC6355]  Narten, T. and J. Johnson, "Definition of the UUID-Based
@@ -4309,9 +4309,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 77]
+Farrer                     Expires 22 May 2022                 [Page 77]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
@@ -4333,11 +4333,6 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
               RFC 8415, DOI 10.17487/RFC8415, November 2018,
               <https://www.rfc-editor.org/info/rfc8415>.
 
-   [RFC8987]  Farrer, I., Kottapalli, N., Hunek, M., and R. Patterson,
-              "DHCPv6 Prefix Delegating Relay Requirements", RFC 8987,
-              DOI 10.17487/RFC8987, February 2021,
-              <https://www.rfc-editor.org/info/rfc8987>.
-
    [IANA-HARDWARE-TYPES]
               Internet Assigned Numbers Authority, "Hardware Types",
               <https://www.iana.org/assignments/arp-parameters>.
@@ -4346,39 +4341,34 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
               Numbers",
               <https://www.iana.org/assignments/enterprise-numbers>.
 
-   [IANA-AUTH]
-              Internet Assigned Numbers Authority, "Dynamic Host
-              Configuration Protocol (DHCP) Authentication Option Name
-              Spaces",
-              <https://www.iana.org/assignments/auth-namespaces>.
-
-   [IANA-STATUS]
-              Internet Assigned Numbers Authority, "Dynamic Host
-              Configuration Protocol for IPv6 (DHCPv6) Status Codes",
-              <https://www.iana.org/assignments/dhcpv6-parameters>.
-
 9.2.  Informative References
-
-
-
-
-
-
-
-Farrer                    Expires 28 April 2022                [Page 78]
-
-Internet-Draft              DHCPv6 YANG Model               October 2021
-
 
    [RFC3319]  Schulzrinne, H. and B. Volz, "Dynamic Host Configuration
               Protocol (DHCPv6) Options for Session Initiation Protocol
               (SIP) Servers", RFC 3319, DOI 10.17487/RFC3319, July 2003,
               <https://www.rfc-editor.org/info/rfc3319>.
 
+   [RFC7824]  Krishnan, S., Mrugalski, T., and S. Jiang, "Privacy
+              Considerations for DHCPv6", RFC 7824,
+              DOI 10.17487/RFC7824, May 2016,
+              <https://www.rfc-editor.org/info/rfc7824>.
+
+   [RFC8987]  Farrer, I., Kottapalli, N., Hunek, M., and R. Patterson,
+              "DHCPv6 Prefix Delegating Relay Requirements", RFC 8987,
+              DOI 10.17487/RFC8987, February 2021,
+              <https://www.rfc-editor.org/info/rfc8987>.
+
 Appendix A.  Data Tree Examples
 
    This section contains XML examples of data trees for the different
    DHCPv6 elements.
+
+
+
+Farrer                     Expires 22 May 2022                 [Page 78]
+
+Internet-Draft              DHCPv6 YANG Model              November 2021
+
 
 A.1.  DHCPv6 Server Configuration Examples
 
@@ -4421,9 +4411,19 @@ A.1.  DHCPv6 Server Configuration Examples
 
 
 
-Farrer                    Expires 28 April 2022                [Page 79]
+
+
+
+
+
+
+
+
+
+
+Farrer                     Expires 22 May 2022                 [Page 79]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
       <dhcpv6-server
@@ -4467,19 +4467,19 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
               Figure 4: Basic Server Configuration Example XML
 
-   The following example shows a static host reservation within an
-   address pool.  The host's lease timers are configured to be longer
-   than hosts from the pool with dynamically assigned addresses.
+   The following example configuration snippet shows a static host
+   reservation within an address pool.  The host's lease timers are
+   configured to be longer than hosts from the pool with dynamically
+   assigned addresses.
 
 
 
 
 
 
-
-Farrer                    Expires 28 April 2022                [Page 80]
+Farrer                     Expires 22 May 2022                 [Page 80]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          <address-pools>
@@ -4504,9 +4504,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
            </address-pool>
          </address-pools>
 
-        Figure 5: Server Host Reservation Configuration Example XML
+    Figure 5: Server Host Reservation Configuration Example XML Snippet
 
-   The following example shows configuration for a network range and
+   The following example configuration snippet shows a network range and
    pool to be used for delegating prefixes to clients.  In this example,
    each client will receive a /56 prefix.
 
@@ -4533,9 +4533,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 81]
+Farrer                     Expires 22 May 2022                 [Page 81]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
       <allocation-ranges>
@@ -4559,13 +4559,14 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
         </allocation-range>
       </allocation-ranges>
 
-        Figure 6: Server Prefix Delegation Configuration Example XML
+    Figure 6: Server Prefix Delegation Configuration Example XML Snippet
 
-   The next example shows the configuration of a set of options that may
-   be returned to clients, depending on the contents of a received DHCP
-   request message.  The option set ID is '1', which will referenced by
-   other places in the configuration (e.g., address pool configuration)
-   as the available options for clients that request them.
+   The next example configuration snippet shows a set of options that
+   may be returned to clients, depending on the contents of a received
+   DHCP request message.  The option set ID is '1', which will
+   referenced by other places in the configuration (e.g., address pool
+   configuration) as the available options for clients that request
+   them.
 
    The example shows how the option definitions can be extended via
    augmentation.  In this case, "OPTION_SIP_SERVER_D (21) SIP Servers
@@ -4588,10 +4589,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-
-Farrer                    Expires 28 April 2022                [Page 82]
+Farrer                     Expires 22 May 2022                 [Page 82]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    <option-sets>
@@ -4628,27 +4628,30 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
      </option-set>
    </option-sets>
 
-           Figure 7: Server Option Set Configuration Example XML
+       Figure 7: Server Option Set Configuration Example XML Snippet
 
 A.2.  DHCPv6 Relay Configuration Example
 
    The following example shows a basic configuration for a single DHCP
    relay interface and its interaction with the ietf-interfaces module.
-   The configuration defines:
+   The configuration shows two XML documents, one for ietf-interfaces
+   and a second for ietf-dhcpv6-relay, defining:
+
+   *  Configuring an interface using the ietf-interfaces module that the
+      relay configuration will be applied to.
 
    *  Enabling the DHCP relay function globally and for the relevant
       interface.
 
+
+
+Farrer                     Expires 22 May 2022                 [Page 83]
+
+Internet-Draft              DHCPv6 YANG Model              November 2021
+
+
    *  Referencing the interface that the relay configuration is relevant
       for via an inteface-ref to the ietf-interfaces module.
-
-
-
-
-Farrer                    Expires 28 April 2022                [Page 83]
-
-Internet-Draft              DHCPv6 YANG Model               October 2021
-
 
    *  Defining two destination addresses that incoming DHCP messages
       will be relayed to.
@@ -4669,6 +4672,7 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
        <enabled>true</enabled>
      </interface>
    </interfaces>
+
    <dhcpv6-relay xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay">
      <enabled>true</enabled>
      <relay-if>
@@ -4691,20 +4695,25 @@ A.3.  DHCPv6 Client Configuration Example
 
    The following example shows a basic configuration for a DHCP client
    and its interaction with the ietf-interfaces module.  The
-   configuration defines:
+   configuration shows two XML documents, one for ietf-interfaces and a
+   second for ietf-dhcpv6-client defining:
+
+
+
+
+Farrer                     Expires 22 May 2022                 [Page 84]
+
+Internet-Draft              DHCPv6 YANG Model              November 2021
+
+
+   *  Configuring an interface using the ietf-interfaces module that the
+      client configuration will be applied to.
 
    *  Enabling the DHCP relay function globally and for the relevant
       interface.
 
    *  References the interface that the client configuration is relevant
       for via an inteface-ref to the ietf-interfaces module.
-
-
-
-Farrer                    Expires 28 April 2022                [Page 84]
-
-Internet-Draft              DHCPv6 YANG Model               October 2021
-
 
    *  Sets the client's DUID.
 
@@ -4748,18 +4757,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-
-
-
-
-
-
-
-
-
-Farrer                    Expires 28 April 2022                [Page 85]
+Farrer                     Expires 22 May 2022                 [Page 85]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
       <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
@@ -4771,6 +4771,7 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
           <enabled>true</enabled>
         </interface>
       </interfaces>
+
       <dhcpv6-client
         xmlns="urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client">
         <enabled>true</enabled>
@@ -4812,10 +4813,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-
-Farrer                    Expires 28 April 2022                [Page 86]
+Farrer                     Expires 22 May 2022                 [Page 86]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
 Appendix B.  Example of Augmenting Additional DHCPv6 Option Definitions
@@ -4869,9 +4869,9 @@ Appendix B.  Example of Augmenting Additional DHCPv6 Option Definitions
 
 
 
-Farrer                    Expires 28 April 2022                [Page 87]
+Farrer                     Expires 22 May 2022                 [Page 87]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        }
@@ -4925,9 +4925,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 88]
+Farrer                     Expires 22 May 2022                 [Page 88]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          description
@@ -4981,9 +4981,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 89]
+Farrer                     Expires 22 May 2022                 [Page 89]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
                description
@@ -5037,9 +5037,9 @@ Appendix C.  Example Vendor Specific Server Configuration Module
 
 
 
-Farrer                    Expires 28 April 2022                [Page 90]
+Farrer                     Expires 22 May 2022                 [Page 90]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
    The example module defines additional server attributes such as name
@@ -5093,9 +5093,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 91]
+Farrer                     Expires 22 May 2022                 [Page 91]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        Copyright (c) 2021 IETF Trust and the persons identified as
@@ -5149,9 +5149,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 92]
+Farrer                     Expires 22 May 2022                 [Page 92]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
          choice listening-interfaces {
@@ -5205,9 +5205,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 93]
+Farrer                     Expires 22 May 2022                 [Page 93]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              case memfile {
@@ -5261,9 +5261,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 94]
+Farrer                     Expires 22 May 2022                 [Page 94]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
                  type string;
@@ -5317,9 +5317,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 95]
+Farrer                     Expires 22 May 2022                 [Page 95]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
                    leaf postgresql-address {
@@ -5373,9 +5373,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 96]
+Farrer                     Expires 22 May 2022                 [Page 96]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
       * Augmentations
@@ -5429,9 +5429,9 @@ Appendix D.  Example definition of class-selector configuration
 
 
 
-Farrer                    Expires 28 April 2022                [Page 97]
+Farrer                     Expires 22 May 2022                 [Page 97]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      import ietf-inet-types {
@@ -5485,9 +5485,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 98]
+Farrer                     Expires 22 May 2022                 [Page 98]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
      revision 2021-10-25 {
@@ -5541,9 +5541,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022                [Page 99]
+Farrer                     Expires 22 May 2022                 [Page 99]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
            description
@@ -5597,9 +5597,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022               [Page 100]
+Farrer                     Expires 22 May 2022                [Page 100]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              interface-id option.";
@@ -5653,9 +5653,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022               [Page 101]
+Farrer                     Expires 22 May 2022                [Page 101]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              description
@@ -5709,9 +5709,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022               [Page 102]
+Farrer                     Expires 22 May 2022                [Page 102]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
        }
@@ -5765,9 +5765,9 @@ Internet-Draft              DHCPv6 YANG Model               October 2021
 
 
 
-Farrer                    Expires 28 April 2022               [Page 103]
+Farrer                     Expires 22 May 2022                [Page 103]
 
-Internet-Draft              DHCPv6 YANG Model               October 2021
+Internet-Draft              DHCPv6 YANG Model              November 2021
 
 
              "class-selector/client-classes/class/client-class-name";
@@ -5821,4 +5821,4 @@ Author's Address
 
 
 
-Farrer                    Expires 28 April 2022               [Page 104]
+Farrer                     Expires 22 May 2022                [Page 104]
