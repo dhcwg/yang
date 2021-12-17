@@ -128,89 +128,99 @@ module ietf-dhcpv6-relay {
     description 
       "Contains counters for the different DHCPv6 
       message types.";
+    leaf discontinuity-time {                                           
+      type yang:date-and-time;                                          
+      description                                                       
+        "The time on the most recent occasion at which any one or       
+        more of DHCPv6 relay's counters suffered a discontinuity.         
+        If no such discontinuities have occurred since the last            
+        re-initialization of the local management subsystem, then       
+        this node contains the time the local management subsystem         
+        re-initialized itself.";                                           
+    }  
     leaf solicit-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Solicit (1) messages received.";
     }
     leaf advertise-sent-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Advertise (2) messages sent.";
     }
     leaf request-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Request (3) messages received.";
     }
     leaf confirm-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Confirm (4) messages received.";
     }
     leaf renew-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Renew (5) messages received.";
     }
     leaf rebind-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Rebind (6) messages received.";
     }
     leaf reply-sent-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reply (7) messages received.";
     }
     leaf release-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Release (8) messages sent.";
     }
     leaf decline-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Decline (9) messages sent.";
     }
     leaf reconfigure-sent-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reconfigure (10) messages sent.";
     }
     leaf information-request-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Information-request (11) messages
         received.";
     }
     leaf unknown-message-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of messages of unknown type that have 
         been received.";
     }
     leaf unknown-message-sent-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of messages of unknown type that have 
         been sent.";
     }
     leaf discarded-message-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of messages that have been discarded 

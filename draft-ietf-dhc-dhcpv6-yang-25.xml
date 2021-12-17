@@ -9,13 +9,13 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-23" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-24" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-23"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-24"/>
     <author fullname="Ian Farrer" role="editor" initials="I." 
         surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
@@ -56,7 +56,7 @@
         shows their interaction.
       </t>
       <t>The relay and client modules provide configuration which is
-        applicable device's interfaces. This is done by importing the
+        applicable to devices' interfaces. This is done by importing the
         ietf-interfaces module <xref target="RFC8343"/> and using 
         interface-refs to the relevant interface(s).
       </t>
@@ -383,8 +383,8 @@
         </ul>       <t>Information about notifications:</t>
         <ul spacing="normal">
           <li>address/prefix-pool-utilization-threshold-exceeded: Raised 
-            when the number of leased addresses or prefixes exceeds the 
-            configured usage threshold. 
+            when the number of leased addresses or prefixes in a pool 
+            exceeds the configured usage threshold. 
           </li>
           <li>invalid-client-detected: Raised when the server detects an
             invalid client. A description of the error and message
@@ -608,7 +608,7 @@
         sensitive, these use 'nacm:default-deny-all'.
       </t>
 
-      <t>An attacker who is able to access the DHCPv6 server can 
+      <t>An attacker with read/write access the DHCPv6 server can 
         undertake various attacks, such as:</t>
 
       <ul spacing="normal">
@@ -616,17 +616,18 @@
           messages to a rogue DHCPv6 server.
         </li>
         <li>Various attacks based on re-configuring the contents
-          of DHCPv6 options. For example, changing the address of a
-          the DNS server supplied in a DHCP option to point
+          of DHCPv6 options, leading to several types of security or 
+          privacy threats.  For example, changing the address of a
+          DNS server supplied in a DHCP option to point
           to a rogue server.
         </li>
       </ul>
 
-      <t>An attacker who is able to access the DHCPv6 relay can 
+      <t>An attacker with read/write access the DHCPv6 relay can 
         undertake various attacks, such as:</t>
 
       <ul spacing="normal">
-        <li>Re-configuring the relay's destination address to send
+        <li>Modifying the relay's "destination-address" to send
           messages to a rogue DHCPv6 server.
         </li>
         <li>Deleting information about a client's delegated 
@@ -653,6 +654,9 @@
           leases: (dhc6-rly/relay-if/prefix-delegation/)
         </li>
       </ul>
+
+      <t><xref target="RFC7824"/> covers privacy considerations for 
+        DHCPv6 and is applicable here.</t>
 
       <t>Security considerations related to DHCPv6 are discussed in 
         <xref target="RFC8415"/>.</t>
@@ -811,7 +815,6 @@
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8415.xml"/>
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8987.xml"/>
         <reference anchor="IANA-HARDWARE-TYPES"
           target="https://www.iana.org/assignments/arp-parameters">
           <front>
@@ -834,34 +837,12 @@
             <date />
           </front>
         </reference>
-        <reference anchor="IANA-AUTH"
-          target="https://www.iana.org/assignments/auth-namespaces">
-          <front>
-            <title>Dynamic Host Configuration Protocol (DHCP) 
-              Authentication Option Name Spaces</title>
-            <author>
-            <organization abbrev="IANA">Internet Assigned Numbers
-              Authority</organization>
-            </author>
-            <date />
-          </front>
-        </reference>
-        <reference anchor="IANA-STATUS"
-          target="https://www.iana.org/assignments/dhcpv6-parameters">
-          <front>
-            <title>Dynamic Host Configuration Protocol for IPv6 
-              (DHCPv6) Status Codes</title>
-            <author>
-            <organization abbrev="IANA">Internet Assigned Numbers
-              Authority</organization>
-            </author>
-            <date />
-          </front>
-        </reference>
       </references>
       <references>
         <name>Informative References</name>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3319.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7824.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8987.xml"/>
       </references>
     </references>
 
@@ -891,18 +872,19 @@
           <xi:include href="xml/server-base-ex.xml"/>
         </figure>
 
-        <t>The following example shows a static host reservation
-          within an address pool. The host's lease timers are 
-          configured to be longer than hosts from the pool with
+        <t>The following example configuration snippet shows a static 
+          host reservation within an address pool. The host's lease 
+          timers are configured to be longer than hosts from the pool with
           dynamically assigned addresses.</t>
 
         <figure anchor="host-res-example-conf">
-          <name>Server Host Reservation Configuration Example XML</name>
+          <name>Server Host Reservation Configuration Example XML 
+            Snippet</name>
           <xi:include href="xml/host-res-ex.xml"/>
         </figure>
 
-        <t>The following example shows configuration for a network
-          range and pool to be used for delegating prefixes to 
+        <t>The following example configuration snippet shows a 
+          network range and pool to be used for delegating prefixes to 
           clients. In this example, each client will receive a /56
           prefix.
         </t>
@@ -912,11 +894,12 @@
           this.
         </t>
         <figure anchor="pd-example-conf">
-          <name>Server Prefix Delegation Configuration Example XML</name>
+          <name>Server Prefix Delegation Configuration Example XML
+            Snippet</name>
           <xi:include href="xml/prefixpool-ex.xml"/>
         </figure>
 
-        <t>The next example shows the configuration of a set of 
+        <t>The next example configuration snippet shows a set of 
           options that may be returned to clients, depending on the 
           contents of a received DHCP request message. The option set 
           ID is '1', which will referenced by other places in the 
@@ -929,7 +912,8 @@
           has been augmented to the server's option set.</t>
 
         <figure anchor="option-set-example">
-          <name>Server Option Set Configuration Example XML</name>
+          <name>Server Option Set Configuration Example XML
+            Snippet</name>
           <xi:include href="xml/opt-set-ex.xml"/>
         </figure>
       </section>
@@ -938,9 +922,13 @@
         <name>DHCPv6 Relay Configuration Example</name>
         <t>The following example shows a basic configuration for a 
           single DHCP relay interface and its interaction with the
-          ietf-interfaces module. The configuration 
-          defines:</t>
+          ietf-interfaces module. The configuration shows two XML
+          documents, one for ietf-interfaces and a second for 
+          ietf-dhcpv6-relay, defining:</t>
         <ul spacing="normal">
+          <li>Configuring an interface using the ietf-interfaces
+            module that the relay configuration will be applied to.
+          </li>
           <li>Enabling the DHCP relay function globally and for
             the relevant interface.</li>
           <li>Referencing the interface that the relay configuration
@@ -966,9 +954,13 @@
         <name>DHCPv6 Client Configuration Example</name>
         <t>The following example shows a basic configuration for a 
           DHCP client and its interaction with the
-          ietf-interfaces module. The configuration 
-          defines:</t>
+          ietf-interfaces module. The configuration shows two XML
+          documents, one for ietf-interfaces and a second for 
+          ietf-dhcpv6-client defining:</t>
         <ul spacing="normal">
+          <li>Configuring an interface using the ietf-interfaces
+            module that the client configuration will be applied to.
+          </li>
           <li>Enabling the DHCP relay function globally and for 
             the relevant interface.</li>
           <li>References the interface that the client configuration

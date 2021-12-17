@@ -105,7 +105,7 @@ module ietf-dhcpv6-server {
       description 
         "Valid lifetime for the Identity Association (IA).";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 6";
+        IPv6 (DHCPv6), Section 12.1";
     }
     leaf renew-time {
       type dhc6:timer-seconds32;
@@ -126,7 +126,7 @@ module ietf-dhcpv6-server {
       description 
         "Preferred lifetime for the Identity Association (IA).";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 6";
+        IPv6 (DHCPv6), Section 12.1";
     }
     leaf rapid-commit {
       type boolean;
@@ -207,75 +207,92 @@ module ietf-dhcpv6-server {
     uses dhc6:status;
   }
 
-  grouping message-stats {
+  grouping message-statistics {
     description 
       "Counters for DHCPv6 messages.";
+    leaf discontinuity-time {
+      type yang:date-and-time;
+      description
+        "The time on the most recent occasion at which any one or
+        more of DHCPv6 server's counters suffered a discontinuity.  
+        If no such discontinuities have occurred since the last 
+        re-initialization of the local management subsystem, then 
+        this node contains the time the local management subsystem 
+        re-initialized itself.";
+    }
     leaf solicit-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Solicit (1) messages received.";
     }
     leaf advertise-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Advertise (2) messages sent.";
     }
     leaf request-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Request (3) messages received.";
     }
     leaf confirm-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Confirm (4) messages received.";
     }
     leaf renew-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Renew (5) messages received.";
     }
     leaf rebind-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Rebind (6) messages received.";
     }
     leaf reply-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reply (7) messages sent.";
     }
     leaf release-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Release (8) messages received.";
     }
     leaf decline-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Decline (9) messages received.";
     }
     leaf reconfigure-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reconfigure (10) messages sent.";
     }
     leaf information-request-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Information-request (11) messages
         received.";
+    }
+    leaf discarded-message-count {
+      type yang:counter32;
+      config "false";
+      description
+        "Number of messages that have been discarded
+        for any reason.";
     }
   }
 
@@ -344,8 +361,9 @@ module ietf-dhcpv6-server {
       leaf info-refresh-time {
         type dhc6:timer-seconds32;
         description 
-          "Time duration relative to the current time, expressed 
-          in units of seconds.";
+          "Time duration specifying an upper bound for how long a 
+          client should wait before refreshing information retrieved 
+          from a DHCP server.";
       }
     }
   }
@@ -428,7 +446,7 @@ module ietf-dhcpv6-server {
           contained in separate YANG modules and augmented to this
           container as required.";
         leaf option-set-id {
-          type uint32;
+          type string;
           description 
             "Option set identifier.";
         }
@@ -475,7 +493,7 @@ module ietf-dhcpv6-server {
         description 
           "Network-ranges are identified by the 'id' key.";
         leaf id {
-          type uint32;
+          type string;
           mandatory true;
           description 
             "Unique identifier for the allocation range.";
@@ -512,7 +530,8 @@ module ietf-dhcpv6-server {
               type inet:ipv6-prefix;
               mandatory true;
               description 
-                "IPv6 prefix for the pool.";
+                "IPv6 prefix for the pool. Should be contained within
+                the network-prefix, if configured.";
             }
             leaf start-address {
               type inet:ipv6-address-no-zone;
@@ -533,7 +552,9 @@ module ietf-dhcpv6-server {
                 pool which can be simultaneously allocated, 
                 calculated as a percentage of the available 
                 addresses (end-address minus start-address plus
-                one).";
+                one). Used to set the value for the
+                address-pool-utilization-threshold-exceeded
+                notification";
             }
             uses resource-config;
             container host-reservations {
@@ -626,7 +647,9 @@ module ietf-dhcpv6-server {
                 "Maximum amount of the prefixes in the
                 pool which can be simultaneously allocated,
                 calculated as a percentage of the available
-                prefixes, rounded up.";
+                prefixes, rounded up.  Used to set the value for the                        
+                prefix-pool-utilization-threshold-exceeded             
+                notification"; ";
             }
             uses resource-config;
             container host-reservations {
@@ -688,7 +711,7 @@ module ietf-dhcpv6-server {
           }
         }
       }
-      uses message-stats;
+      uses message-statistics;
     }
   }
 

@@ -102,7 +102,7 @@ module ietf-dhcpv6-common {
       
       This example includes the 2-octet DUID type of 1 (0x01), the
       hardware type is 0x06 (IEEE Hardware Types) the creation
-      time is 0x028490058 (constructed as described above). Finally,
+      time is 0x28490058 (constructed as described above). Finally,
       the link-layer address is 0x5E005300 (EUI-48 address
       00-00-5E-00-53-00)";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
@@ -114,7 +114,7 @@ module ietf-dhcpv6-common {
   typedef duid-en {
     type duid-base {
       pattern '0002'
-        + '[0-9a-fA-F]{4,}';
+        + '[0-9a-fA-F]{8,}';
     }
     description 
       "DUID type 2, assigned by vendor based on Enterprise
@@ -184,7 +184,7 @@ module ietf-dhcpv6-common {
 
   typedef duid-unstructured {
     type duid-base {
-      pattern '(000[1-4].*|.*[^0-9a-fA-F].*)' {
+      pattern '(000[1-4].*)' {
         modifier invert-match;
       }
     }
@@ -252,7 +252,7 @@ module ietf-dhcpv6-common {
 
   grouping auth-option-group {
     description 
-    "OPTION_AUTH (11) Authentication Option.";
+      "OPTION_AUTH (11) Authentication Option.";
     reference "RFC 8415: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6), Section 21.11
       IANA 'Dynamic Host Configuration Protocol (DHCP) Authentication 
@@ -261,11 +261,35 @@ module ietf-dhcpv6-common {
     container auth-option {
       description 
         "OPTION_AUTH (11) Authentication Option container.";
-      leaf protocol {
-        type uint8;
+      choice protocol {
         description 
           "The authentication protocol used by this Authentication 
           option.";
+        case conf-token {
+          leaf auth-information {
+          type string;
+          description 
+            "The authentication information, as specified by the 
+            protocol and algorithm used in this Authentication
+            option.";
+          }
+        }
+        case rkap {
+          description 
+            "RKAP provides protection against 
+            misconfiguration of a client caused by a Reconfigure 
+            message sent by a malicious DHCP server.";
+          choice rkap-auth-inf-type {
+            leaf datatype {
+              type uint8 {
+                range "1 .. 2";
+              }
+              description 
+                "Type of data in the Value field carried in this
+                option.";
+            }
+          }
+        }
       }
       leaf algorithm {
         type uint8;
@@ -289,31 +313,6 @@ module ietf-dhcpv6-common {
           "The authentication information, as specified by the 
           protocol and algorithm used in this Authentication
           option.";
-      }
-    }
-  }
-
-  grouping status-code-option-group {
-    description 
-      "OPTION_STATUS_CODE (13) Status Code Option.";
-    reference "RFC 8415: Dynamic Host Configuration Protocol
-      for IPv6 (DHCPv6), Section 21.13";
-    container status-code-option {
-      description 
-        "OPTION_STATUS_CODE (13) Status Code Option container.";
-      leaf status-code {
-        type uint16;
-        description 
-          "The numeric code for the status encoded in this option. 
-          See the Status Codes registry at
-          <https://www.iana.org/assignments/dhcpv6-parameters>
-          for the current list of status codes.";
-      }
-      leaf status-message {
-        type string;
-        description 
-          "A UTF-8 encoded text string suitable for display to an 
-          end user. It MUST NOT be null-terminated.";
       }
     }
   }
@@ -365,9 +364,7 @@ module ietf-dhcpv6-common {
               "The code for the sub-option.";
           }
           leaf sub-option-data {
-            type string {
-              pattern '([0-9a-fA-F]{2}){0,}';
-            }
+            type binary; 
             description 
               "The data area for the sub-option.";
           }

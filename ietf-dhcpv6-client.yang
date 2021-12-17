@@ -83,7 +83,7 @@ module ietf-dhcpv6-client {
       IPv6 (DHCPv6), Section 6.2";
   }
 
-  feature prefix-del {
+  feature prefix-delegation {
     description
       "Denotes that the client implements DHCPv6 prefix
       delegation.";
@@ -113,72 +113,89 @@ module ietf-dhcpv6-client {
   grouping message-statistics {
     description 
       "Counters for DHCPv6 messages.";
+    leaf discontinuity-time {                                           
+      type yang:date-and-time;                                          
+      description                                                       
+        "The time on the most recent occasion at which any one or       
+        more of DHCPv6 client's counters suffered a discontinuity.         
+        If no such discontinuities have occurred since the last            
+        re-initialization of the local management subsystem, then       
+        this node contains the time the local management subsystem         
+        re-initialized itself.";                                           
+    }     
     leaf solicit-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Solicit (1) messages sent.";
     }
     leaf advertise-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Advertise (2) messages received.";
     }
     leaf request-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Request (3) messages sent.";
     }
     leaf confirm-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Confirm (4) messages sent.";
     }
     leaf renew-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Renew (5) messages sent.";
     }
     leaf rebind-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Rebind (6) messages sent.";
     }
     leaf reply-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reply (7) messages received.";
     }
     leaf release-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Release (8) messages sent.";
     }
     leaf decline-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Decline (9) messages sent.";
     }
     leaf reconfigure-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reconfigure (10) messages received.";
     }
     leaf information-request-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Information-request (11) messages
         sent.";
+    }
+    leaf discarded-message-count {
+      type yang:counter32;
+      config "false";
+      description
+        "Number of messages that have been discarded
+        for any reason.";
     }
   }
 
@@ -323,7 +340,7 @@ module ietf-dhcpv6-client {
         "Globally enables the DHCP client function.";
     }
     leaf client-duid {
-      if-feature "non-temp-addr or prefix-del " +
+      if-feature "non-temp-addr or prefix-delegation " +
         "or temp-addr and not anon-profile";
       type dhc6:duid;
       description 
@@ -351,7 +368,7 @@ module ietf-dhcpv6-client {
           "Enables the DHCP client function for this interface.";
       }
       leaf interface-duid {
-        if-feature "non-temp-addr or prefix-del " +
+        if-feature "non-temp-addr or prefix-delegation " +
           "or temp-addr and anon-profile";
         type dhc6:duid;
         description 
@@ -455,7 +472,7 @@ module ietf-dhcpv6-client {
         }
       }
       list ia-pd {
-        if-feature prefix-del;
+        if-feature prefix-delegation;
         key ia-id;
         description 
           "Configuration relevant for an IA_PD (Identity Association
@@ -652,7 +669,7 @@ module ietf-dhcpv6-client {
   }
 
   notification server-duid-changed {
-    if-feature "non-temp-addr or prefix-del or " + 
+    if-feature "non-temp-addr or prefix-delegation or " + 
       "temp-addr";
     description 
       "Notification sent when the client receives a lease
@@ -689,7 +706,7 @@ module ietf-dhcpv6-client {
         "Reference to the IA_TA lease.";
     }
     leaf lease-ia-pd {
-      if-feature prefix-del;
+      if-feature prefix-delegation;
       type leafref {
         path "../../dhcpv6-client/client-if/ia-pd/ia-id";
       }
