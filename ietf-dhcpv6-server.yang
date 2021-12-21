@@ -649,7 +649,7 @@ module ietf-dhcpv6-server {
                 calculated as a percentage of the available
                 prefixes, rounded up.  Used to set the value for the                        
                 prefix-pool-utilization-threshold-exceeded             
-                notification"; ";
+                notification";
             }
             uses resource-config;
             container host-reservations {

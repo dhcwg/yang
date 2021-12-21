@@ -266,7 +266,7 @@ module ietf-dhcpv6-common {
           "The authentication protocol used by this Authentication 
           option.";
         case conf-token {
-          leaf auth-information {
+          leaf token-auth-information {
           type string;
           description 
             "The authentication information, as specified by the 

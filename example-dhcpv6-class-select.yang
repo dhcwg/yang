@@ -165,7 +165,7 @@ module example-dhcpv6-class-select {
           type string;
           mandatory true;
           description 
-            "Value of the enterprise-number field.";
+          "User Class value to match.";
         }
       }
       case vendor-class-present-id {

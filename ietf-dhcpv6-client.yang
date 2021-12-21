@@ -237,11 +237,11 @@ module ietf-dhcpv6-client {
     description 
       "OPTION_ORO (6) Option Request Option. A client MUST include 
       an Option Request option in a Solicit, Request, Renew, 
-         Rebind, or Information-request message to inform the server 
-           about options the client wants the server to send to the 
-           client.";
+      Rebind, or Information-request message to inform the server 
+      about options the client wants the server to send to the 
+      client.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6), Section 21.7";
+      IPv6 (DHCPv6), Sections 21.23, 21.24, 21.25, & 21.7";
     container option-request-option {
       description 
         "OPTION_ORO (6) Option Request Option container.";
@@ -249,7 +249,12 @@ module ietf-dhcpv6-client {
         type uint16;
         description 
           "List of options that the client is requesting,
-          identified by option code";
+          identified by option code. This list MUST include the
+          code for option SOL_MAX_RT (82) when included in a
+          Solicit-message. If this option is being
+          sent in an Infoformation-request message, then the code
+          for option OPTION_INFORMATION_REFRESH_TIME (32) and
+          INF_MAX_RT (83) MUST be included.";
       }
     }
   }
@@ -340,8 +345,8 @@ module ietf-dhcpv6-client {
         "Globally enables the DHCP client function.";
     }
     leaf client-duid {
-      if-feature "non-temp-addr or prefix-delegation " +
-        "or temp-addr and not anon-profile";
+      if-feature "(non-temp-addr or prefix-delegation " +
+        "or temp-addr) and not anon-profile";
       type dhc6:duid;
       description 
         "A single Client DUID that will be used by all of the
@@ -368,8 +373,8 @@ module ietf-dhcpv6-client {
           "Enables the DHCP client function for this interface.";
       }
       leaf interface-duid {
-        if-feature "non-temp-addr or prefix-delegation " +
-          "or temp-addr and anon-profile";
+        if-feature "(non-temp-addr or prefix-delegation " +
+          "or temp-addr) and anon-profile";
         type dhc6:duid;
         description 
           "Per-interface Client DUIDs for use with DHCP anonymity
