@@ -131,8 +131,8 @@ module ietf-dhcpv6-server {
     leaf rapid-commit {
       type boolean;
       description 
-        "When set to 'true', Specifies that the pool supports 
-        client-server exchanges involving two messages.";
+        "When set to 'true', Specifies that client-server exchanges 
+        involving two messages is supported.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 5.1";
     }
@@ -380,7 +380,7 @@ module ietf-dhcpv6-server {
       leaf sol-max-rt-value {
         type dhc6:timer-seconds32;
         description 
-          "sol max rt value";
+          "Maximum Solicit timeout value.";
       }
     }
   }
@@ -398,7 +398,7 @@ module ietf-dhcpv6-server {
       leaf inf-max-rt-value {
         type dhc6:timer-seconds32;
         description 
-          "inf max rt value";
+          "Maximum Information-request timeout value.";
       }
     }
   }
@@ -552,7 +552,7 @@ module ietf-dhcpv6-server {
                 pool which can be simultaneously allocated, 
                 calculated as a percentage of the available 
                 addresses (end-address minus start-address plus
-                one). Used to set the value for the
+                one), rouded up. Used to set the value for the
                 address-pool-utilization-threshold-exceeded
                 notification";
             }

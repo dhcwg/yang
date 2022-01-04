@@ -178,19 +178,19 @@ module ietf-dhcpv6-relay {
       type yang:counter32;
       config "false";
       description 
-        "Number of Reply (7) messages received.";
+        "Number of Reply (7) messages sent.";
     }
     leaf release-received-count {
       type yang:counter32;
       config "false";
       description 
-        "Number of Release (8) messages sent.";
+        "Number of Release (8) messages received.";
     }
     leaf decline-received-count {
       type yang:counter32;
       config "false";
       description 
-        "Number of Decline (9) messages sent.";
+        "Number of Decline (9) messages received.";
     }
     leaf reconfigure-sent-count {
       type yang:counter32;
