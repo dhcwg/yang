@@ -129,7 +129,7 @@ module example-dhcpv6-server-conf {
           "Configures how the server will stores leases.";
         choice storage-type {
           description 
-            "The type storage that will be used for lease 
+            "The type of storage that will be used for lease 
             information.";
           case memfile {
             description 
@@ -192,7 +192,7 @@ module example-dhcpv6-server-conf {
             }
             leaf mysql-port {
               type inet:port-number;
-              default 5432;
+              default 3306;
               description 
                 "If the database is located on a different system, 
                 the port number may be specified.";

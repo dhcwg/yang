@@ -29,7 +29,7 @@
         <email>ian.farrer@telekom.de</email>
       </address>
     </author>
-    <date year="2021"/>
+    <date year="2022"/>
     <workgroup>DHC Working Group</workgroup>
     <abstract>
       <t>This document describes YANG data modules for the configuration 
@@ -143,8 +143,8 @@
             for the option, so it is not modelled.
           </t>
           <t>The following table shows the DHCPv6 options that are
-            modeled, the element(s) they are sent by, and the relevant
-            YANG module name: 
+            modeled, the element(s) they are modelled for, and the 
+            relevant YANG module name: 
           </t>   
           <table anchor="option-tab">
             <name>Modeled DHCPv6 Options</name>
@@ -380,7 +380,8 @@
           <li>delete-prefix-lease: Allows the deletion of a lease for
             an individual IPv6 prefix from the server's lease database.
           </li>
-        </ul>       <t>Information about notifications:</t>
+        </ul>       
+        <t>Information about notifications:</t>
         <ul spacing="normal">
           <li>address/prefix-pool-utilization-threshold-exceeded: Raised 
             when the number of leased addresses or prefixes in a pool 
@@ -407,7 +408,7 @@
         </t>
         <t>The RPCs in the module are taken from requirements defined
           in <xref target="RFC8987"/>.
-        </ti>
+        </t>
 
         <figure anchor="relay-structure">
           <name>DHCPv6 Relay Data Module Structure</name>
@@ -606,12 +607,12 @@
         protection can have a negative effect on network operations. 
       </t>
 
-      <t>As the RPCs for deleting/clearing active address and prefix
+      <t>The RPCs for deleting/clearing active address and prefix
         entries in the server and relay modules are particularly
-        sensitive, these use 'nacm:default-deny-all'.
+        sensitive. These RPCs use 'nacm:default-deny-all'.
       </t>
 
-      <t>An attacker with read/write access the DHCPv6 server can 
+      <t>An attacker with read/write access to the DHCPv6 server can 
         undertake various attacks, such as:</t>
 
       <ul spacing="normal">
@@ -647,9 +648,9 @@
       <t>Some of the readable data nodes in this YANG module may 
         be considered sensitive or vulnerable in some network 
         environments.  Therefore, it is important to control read 
-        access (e.g., only permitting get, get-config, or 
-        notifications) to these data nodes.  These subtrees and
-        data nodes can be misused to track the activity of a host:
+        access (e.g., via get, get-config, or notification) 
+        to these data nodes.  These subtrees and data nodes can be 
+        misused to track the activity of a host:
       </t>
 
       <ul spacing="normal">
@@ -824,6 +825,7 @@
       <references>
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3118.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6355.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml"/>
@@ -914,7 +916,7 @@
           clients. In this example, each client will receive a /56
           prefix.
         </t>
-        <t>The 'max-pd-space-utilization' is set to 80 so that 
+        <t>The 'max-pd-space-utilization' is set to 80 percent so that 
           a 'prefix-pool-utilization-threshold-exceeded' notification 
           will be raised if the number of prefix allocations exceeds
           this.
@@ -1120,7 +1122,7 @@
         relay link interface-id and more. Actually, there are endless 
         methods for classifying clients. So this standard does not try 
         to provide full specification for class selection, it only shows
-        an example how it could be defined.</t>
+        an example of how it could be defined.</t>
 
       <t>At the end of the example augment statements are used to add 
         the defined class selector rules into the overall DHCPv6 

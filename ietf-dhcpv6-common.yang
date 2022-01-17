@@ -255,42 +255,13 @@ module ietf-dhcpv6-common {
       "OPTION_AUTH (11) Authentication Option.";
     reference "RFC 8415: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6), Section 21.11
+      RFC 3118: Authentication for DHCP Messages
       IANA 'Dynamic Host Configuration Protocol (DHCP) Authentication 
       Option Name Spaces' registry.
       <https://www.iana.org/assignments/auth-namespaces>";
     container auth-option {
       description 
         "OPTION_AUTH (11) Authentication Option container.";
-      choice protocol {
-        description 
-          "The authentication protocol used by this Authentication 
-          option.";
-        case conf-token {
-          leaf token-auth-information {
-          type string;
-          description 
-            "The authentication information, as specified by the 
-            protocol and algorithm used in this Authentication
-            option.";
-          }
-        }
-        case rkap {
-          description 
-            "RKAP provides protection against 
-            misconfiguration of a client caused by a Reconfigure 
-            message sent by a malicious DHCP server.";
-          choice rkap-auth-inf-type {
-            leaf datatype {
-              type uint8 {
-                range "1 .. 2";
-              }
-              description 
-                "Type of data in the Value field carried in this
-                option.";
-            }
-          }
-        }
-      }
       leaf algorithm {
         type uint8;
         description 
@@ -306,13 +277,47 @@ module ietf-dhcpv6-common {
         type uint64;
         description 
           "The replay detection information for the RDM.";
-      }
-      leaf auth-information {
-        type string;
+      }     
+      choice protocol {
         description 
-          "The authentication information, as specified by the 
-          protocol and algorithm used in this Authentication
-          option.";
+          "The authentication protocol used in the option. Namespace
+          values 1 (delayed authentication) and 2 (Delayed 
+          Authentication (Obsolete) are not applicable and so are 
+          not modelled.";
+        case conf-token {
+          leaf token-auth-information {
+          type string;
+          description 
+            "Protocol Namespace Value 0. The authentication
+            information, as specified by the protocol and 
+            algorithm used in this Authentication option.";
+          }
+        }
+      case rkap {
+        description 
+          "Protocol Namespace Value 3. RKAP provides protection 
+          against misconfiguration of a client caused by a Reconfigure
+          message sent by a malicious DHCP server.";
+          leaf datatype {
+            type uint8 {
+              range "1 .. 2";
+            }
+            description 
+              "Type of data in the Value field carried in this
+              option.
+                1  Reconfigure key value (used in the Reply
+                   message).
+                2  HMAC-MD5 digest of the message (used in
+                   the Reconfigure message).";
+          }
+          leaf auth-info-value {
+            type binary {
+              length 16;
+            }
+          description "Data as defined by the Type field.  A 16-octet
+            field.";
+          }
+        }
       }
     }
   }
