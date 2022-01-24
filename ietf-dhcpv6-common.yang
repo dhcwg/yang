@@ -76,7 +76,10 @@ module ietf-dhcpv6-common {
       Currently, there are four defined types of DUIDs
       in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
       and DUID-UUID.  DUID-unstructured represents DUIDs which 
-      do not follow any of the defined formats.";
+      do not follow any of the defined formats.
+      
+      Type 'string' is used to represent the hexadecimal DUID value 
+      so that pattern constraints can be applied.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11
       RFC 6355: Definition of the UUID-Based DHCPv6 Unique 

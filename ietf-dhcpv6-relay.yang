@@ -384,8 +384,11 @@ module ietf-dhcpv6-relay {
     output {
       leaf return-message {
         type string;
-        description 
-          "Response message from the relay.";
+        description
+          "Response message from the server. If available, a language
+          identifier should be included in the message.";
+        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets
+          and Languages, Section 4.2.";
       }
     }
   }
@@ -408,8 +411,11 @@ module ietf-dhcpv6-relay {
     output {
       leaf return-message {
         type string;
-        description 
-          "Response message from the relay.";
+        description
+          "Response message from the server. If available, a language
+          identifier should be included in the message.";
+        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets
+          and Languages, Section 4.2.";
       }
     }
   }
@@ -436,8 +442,11 @@ module ietf-dhcpv6-relay {
     output {
       leaf return-message {
         type string;
-        description 
-          "Response message from the relay.";
+        description                                                     
+          "Response message from the server. If available, a language   
+          identifier should be included in the message.";               
+        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets         
+          and Languages, Section 4.2.";   
       }
     }
   }

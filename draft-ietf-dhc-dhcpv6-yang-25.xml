@@ -620,11 +620,12 @@
           server sevice, or removing address/prefix pool 
           configuration.
         </li>
-        <li>Various attacks based on re-configuring the contents
+        <li>Various attacks based on re-configuring the contents 
           of DHCPv6 options, leading to several types of security or 
-          privacy threats.  For example, changing the address of a
-          DNS server supplied in a DHCP option to point
-          to a rogue server.
+          privacy threats.  These options could redirect clients to 
+          services under an attacker’s control. For example, changing
+          the address of a DNS server supplied in a DHCP option to 
+          point to a rogue server.
         </li>
       </ul>
 
@@ -649,8 +650,9 @@
         be considered sensitive or vulnerable in some network 
         environments.  Therefore, it is important to control read 
         access (e.g., via get, get-config, or notification) 
-        to these data nodes.  These subtrees and data nodes can be 
-        misused to track the activity of a host:
+        to these data nodes. These subtrees and data nodes can be 
+        misused to track the activity or fingerprint the device type 
+        of the host:
       </t>
 
       <ul spacing="normal">
@@ -825,6 +827,7 @@
       <references>
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2277.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3118.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6355.xml"/>
