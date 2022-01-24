@@ -119,7 +119,7 @@
           function has been omitted from the DHCPv6 server module to 
           allow implementors to define their own suitable YANG modules.
           <xref target="class-selector-example"/> provides an
-          example of this, to demonstrate how this is can be 
+          example of this, to demonstrate how this can be 
           integrated with the main 'ietf-dhcpv6-server.yang' module.
         </t>
         <section>
@@ -351,7 +351,7 @@
           <li>class-selector: This is provided as a location for
             additional implementation specific YANG nodes for vendor 
             specific class selector nodes to be augmented. See
-            <xref target="class-selector-example"/> for an example of 
+            <xref target="class-selector-example"/> for a example of 
             this.
           </li>
           <li>allocation-ranges: A hierarchical model is used
@@ -696,84 +696,95 @@
 
     <section anchor="iana">
       <name>IANA Considerations</name>
+
+      <t>This document registers four URIs and four YANG modules.</t>
+
+      <section>
+        <name>URI Registration</name>
   
-      <t>This document requests IANA to register the following URIs in the
-        "IETF XML Registry" <xref target="RFC3688"></xref>:</t>
-      <dl newline="false" spacing="compact">
-        <dt>URI:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
-        <dt>Registrant Contact:</dt>
-        <dd>The IESG.</dd>
-        <dt>XML:</dt>
-        <dd>N/A; the requested URI is an XML namespace.</dd>
-      </dl>
-      <dl newline="false" spacing="compact">
-        <dt>URI:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
-        <dt>Registrant Contact:</dt>
-        <dd>The IESG.</dd>
-        <dt>XML:</dt>
-        <dd>N/A; the requested URI is an XML namespace.</dd>
-      </dl>
-      <dl newline="false" spacing="compact">
-        <dt>URI:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
-        <dt>Registrant Contact:</dt>
-        <dd>The IESG.</dd>
-        <dt>XML:</dt>
-        <dd>N/A; the requested URI is an XML namespace.</dd>
-      </dl>
-      <dl newline="false" spacing="compact">
-        <dt>URI:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
-        <dt>Registrant Contact:</dt>
-        <dd>The IESG.</dd>
-        <dt>XML:</dt>
-        <dd>N/A; the requested URI is an XML namespace.</dd>
-      </dl>
+        <t>This document requests IANA to register the following four 
+          URIs in the "IETF XML Registry" 
+          <xref target="RFC3688"></xref>:</t>
+        <dl newline="false" spacing="compact">
+          <dt>URI:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
+          <dt>Registrant Contact:</dt>
+          <dd>The IESG.</dd>
+          <dt>XML:</dt>
+          <dd>N/A; the requested URI is an XML namespace.</dd>
+        </dl>
+        <dl newline="false" spacing="compact">
+          <dt>URI:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
+          <dt>Registrant Contact:</dt>
+          <dd>The IESG.</dd>
+          <dt>XML:</dt>
+          <dd>N/A; the requested URI is an XML namespace.</dd>
+        </dl>
+        <dl newline="false" spacing="compact">
+          <dt>URI:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
+          <dt>Registrant Contact:</dt>
+          <dd>The IESG.</dd>
+          <dt>XML:</dt>
+          <dd>N/A; the requested URI is an XML namespace.</dd>
+        </dl>
+        <dl newline="false" spacing="compact">
+          <dt>URI:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
+          <dt>Registrant Contact:</dt>
+          <dd>The IESG.</dd>
+          <dt>XML:</dt>
+          <dd>N/A; the requested URI is an XML namespace.</dd>
+        </dl>
+      </section>
+
+      <section>
+        <name>YANG Module Name Registration</name>
  
-      <t>This document registers the following YANG modules in the "YANG
-        Module Names" registry <xref target="RFC6020"/>.</t>
-      <dl newline="false" spacing="compact" indent="16">
-        <dt>name:</dt>
-        <dd>ietf-dhcpv6-server</dd>
-        <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
-        <dt>prefix:</dt>
-        <dd>dhc6-srv</dd>
-        <dt>reference:</dt>
-        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
-      </dl>
-      <dl newline="false" spacing="compact" indent="16">
-        <dt>name:</dt>
-        <dd>ietf-dhcpv6-relay</dd>
-        <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
-        <dt>prefix:</dt>
-        <dd>dhc6-rly</dd>
-        <dt>reference:</dt>
-        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
-      </dl>
-      <dl newline="false" spacing="compact" indent="16">
-        <dt>name:</dt>
-        <dd>ietf-dhcpv6-client</dd>
-        <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
-        <dt>prefix:</dt>
-        <dd>dhc6-clnt</dd>
-        <dt>reference:</dt>
-        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
-      </dl>
-      <dl newline="false" spacing="compact" indent="16">
-        <dt>name:</dt>
-        <dd>ietf-dhcpv6-common</dd>
-        <dt>namespace:</dt>
-        <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
-        <dt>prefix:</dt>
-        <dd>dhc6</dd>
-        <dt>reference:</dt>
-        <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
-      </dl>
+        <t>This document registers the following four YANG modules in 
+          the "YANG Module Names" registry <xref target="RFC6020"/>.</t>
+        <dl newline="false" spacing="compact" indent="16">
+          <dt>name:</dt>
+          <dd>ietf-dhcpv6-server</dd>
+          <dt>namespace:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-server</dd>
+          <dt>prefix:</dt>
+          <dd>dhc6-srv</dd>
+          <dt>reference:</dt>
+          <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
+        </dl>
+        <dl newline="false" spacing="compact" indent="16">
+          <dt>name:</dt>
+          <dd>ietf-dhcpv6-relay</dd>
+          <dt>namespace:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-relay</dd>
+          <dt>prefix:</dt>
+          <dd>dhc6-rly</dd>
+          <dt>reference:</dt>
+          <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
+        </dl>
+        <dl newline="false" spacing="compact" indent="16">
+          <dt>name:</dt>
+          <dd>ietf-dhcpv6-client</dd>
+          <dt>namespace:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-client</dd>
+          <dt>prefix:</dt>
+          <dd>dhc6-clnt</dd>
+          <dt>reference:</dt>
+          <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
+        </dl>
+        <dl newline="false" spacing="compact" indent="16">
+          <dt>name:</dt>
+          <dd>ietf-dhcpv6-common</dd>
+          <dt>namespace:</dt>
+          <dd>urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common</dd>
+          <dt>prefix:</dt>
+          <dd>dhc6</dd>
+          <dt>reference:</dt>
+          <dd>RFC XXXX YANG Data Model for DHCPv6 Configuration</dd>
+        </dl>
+      </section>
     </section>
     <section anchor="acknowledgments">
       <name>Acknowledgments</name>
