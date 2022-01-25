@@ -351,7 +351,7 @@
           <li>class-selector: This is provided as a location for
             additional implementation specific YANG nodes for vendor 
             specific class selector nodes to be augmented. See
-            <xref target="class-selector-example"/> for a example of 
+            <xref target="class-selector-example"/> for an example of 
             this.
           </li>
           <li>allocation-ranges: A hierarchical model is used
