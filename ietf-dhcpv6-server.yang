@@ -303,8 +303,7 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.8";
    container preference-option {
      description 
-       "OPTION_PREFERENCE (7) Preference Option
-       container.";
+       "OPTION_PREFERENCE (7) Preference Option.";
      leaf pref-value {
         type uint8;
         description 
@@ -321,7 +320,7 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.12";
     container server-unicast-option {
       description 
-        "OPTION_UNICAST (12) Server Unicast Option container.";
+        "OPTION_UNICAST (12) Server Unicast Option.";
       leaf server-address {
         type inet:ipv6-address;
         description 
@@ -357,7 +356,7 @@ module ietf-dhcpv6-server {
     container info-refresh-time-option {
       description 
         "OPTION_INFORMATION_REFRESH_TIME (32)
-        Information Refresh Time option container.";
+        Information Refresh Time Option.";
       leaf info-refresh-time {
         type dhc6:timer-seconds32;
         description 
@@ -376,7 +375,7 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.24";
     container sol-max-rt-option {
       description 
-        "OPTION_SOL_MAX_RT (82) SOL_MAX_RT option container.";
+        "OPTION_SOL_MAX_RT (82) SOL_MAX_RT Option.";
       leaf sol-max-rt-value {
         type dhc6:timer-seconds32;
         description 
@@ -393,8 +392,7 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.25";
     container inf-max-rt-option {
       description 
-        "OPTION_INF_MAX_RT (83) inf max rt option
-        container.";
+        "OPTION_INF_MAX_RT (83) inf max rt Option.";
       leaf inf-max-rt-value {
         type dhc6:timer-seconds32;
         description 
@@ -711,7 +709,10 @@ module ietf-dhcpv6-server {
           }
         }
       }
-      uses message-statistics;
+      container statistics {
+        description "DHCPv6 message counters for the server.";
+        uses message-statistics;
+      }
     }
   }
 
@@ -730,7 +731,7 @@ module ietf-dhcpv6-server {
     input {
       leaf lease-address-to-delete {
         type leafref {
-          path "../../dhcpv6-server/allocation-ranges/" + 
+          path "/dhcpv6-server/allocation-ranges/" + 
             "allocation-range/address-pools/address-pool" +
             "/active-leases/active-lease/leased-address";
         }
@@ -763,7 +764,7 @@ module ietf-dhcpv6-server {
     input {
       leaf lease-prefix-to-delete {
         type leafref {
-          path "../../dhcpv6-server/allocation-ranges/" +
+          path "/dhcpv6-server/allocation-ranges/" +
             "allocation-range/prefix-pools/prefix-pool" +
             "/active-leases/active-lease/leased-prefix";
         }
@@ -797,7 +798,7 @@ module ietf-dhcpv6-server {
       max-address-utilization.";
     leaf pool-id {
       type leafref {
-        path "../../dhcpv6-server/allocation-ranges/" +
+        path "/dhcpv6-server/allocation-ranges/" +
           "allocation-range/address-pools/address-pool" +
           "/pool-id";
       }
@@ -839,7 +840,7 @@ module ietf-dhcpv6-server {
       max-pd-space-utilization.";
     leaf pool-id {
       type leafref {
-        path "../../dhcpv6-server/allocation-ranges" +
+        path "/dhcpv6-server/allocation-ranges" +
         "/allocation-range/prefix-pools/prefix-pool/pool-id";
       }
       mandatory true;

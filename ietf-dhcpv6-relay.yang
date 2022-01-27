@@ -232,39 +232,39 @@ module ietf-dhcpv6-relay {
     description 
       "Global statistics for the device.";
     leaf relay-forward-sent-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Relay-forward (12) messages sent.";
     }
     leaf relay-forward-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Relay-forward (12) messages received.";
     }
     leaf relay-reply-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Relay-reply (13) messages received.";
     }
     leaf relay-forward-unknown-sent-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Relay-forward (12) messages containing
         a message of unknown type sent.";
     }
     leaf relay-forward-unknown-received-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Relay-forward (12) messages containing
         a message of unknown type received.";
     }
     leaf discarded-message-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of messages that have been discarded
@@ -279,8 +279,7 @@ module ietf-dhcpv6-relay {
         IPv6 (DHCPv6), Section 21.18";
     container interface-id-option {
      description 
-       "OPTION_INTERFACE_ID (18) Interface-Id Option
-       container.";
+       "OPTION_INTERFACE_ID (18) Interface-Id Option.";
      leaf interface-id {
         type string;
         description 
@@ -344,7 +343,11 @@ module ietf-dhcpv6-relay {
         uses dhc6:auth-option-group;
         uses interface-id-option-group;
       }
-      uses message-statistics;
+      container statistics {
+        description "DHCPv6 message counters for the relay's
+          interface.";
+        uses message-statistics;
+      }
       container prefix-delegation {
         if-feature prefix-delegation;
         presence "Enables prefix delegation for this interface.";
@@ -354,7 +357,10 @@ module ietf-dhcpv6-relay {
         uses pd-lease-state;
       }
     }
-    uses global-statistics;
+    container statistics {
+        description "Global DHCPv6 message counters for the relay.";
+        uses global-statistics;
+    }
   }
 
   /*
@@ -372,7 +378,7 @@ module ietf-dhcpv6-relay {
     input {
       leaf lease-prefix {
         type leafref {
-          path "../../dhcpv6-relay/relay-if/prefix-delegation" +
+          path "/dhcpv6-relay/relay-if/prefix-delegation" +
           "/pd-leases/ia-pd-prefix";
         }
         mandatory true;
@@ -431,7 +437,7 @@ module ietf-dhcpv6-relay {
     input {
       leaf interface {
         type leafref {
-          path "../../dhcpv6-relay/relay-if/if-name";
+          path "/dhcpv6-relay/relay-if/if-name";
         }
         mandatory true;
         description 
@@ -465,7 +471,7 @@ module ietf-dhcpv6-relay {
         if:interface-refs.";
       leaf relay-if-name {
         type leafref {
-          path "../../../dhcpv6-relay/relay-if/if-name";
+          path "/dhcpv6-relay/relay-if/if-name";
         }
         description 
           "Name of the interface that has been removed.";

@@ -62,7 +62,7 @@ module example-dhcpv6-opt-sip-serv {
     container sip-server-domain-name-list-option {
      description 
        "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List 
-       container.";
+       Option.";
      list sip-server {
         key sip-serv-id;
         description 
@@ -90,7 +90,7 @@ module example-dhcpv6-opt-sip-serv {
     container sip-server-address-list-option {
       description 
         "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List 
-        container.";
+        Option.";
      list sip-server {
         key sip-serv-id;
         description 

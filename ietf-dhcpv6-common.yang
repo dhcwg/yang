@@ -264,7 +264,7 @@ module ietf-dhcpv6-common {
       <https://www.iana.org/assignments/auth-namespaces>";
     container auth-option {
       description 
-        "OPTION_AUTH (11) Authentication Option container.";
+        "OPTION_AUTH (11) Authentication Option.";
       leaf algorithm {
         type uint8;
         description 
@@ -333,7 +333,7 @@ module ietf-dhcpv6-common {
     container rapid-commit-option {
       presence "Enable sending of this option";
       description 
-        "OPTION_RAPID_COMMIT (14) Rapid Commit Option container.";
+        "OPTION_RAPID_COMMIT (14) Rapid Commit Option.";
     }
   }
 
@@ -346,7 +346,7 @@ module ietf-dhcpv6-common {
     container vendor-specific-information-options {
       description 
         "OPTION_VENDOR_OPTS (17) Vendor-specific Information 
-        Option container.";
+        Option.";
       list vendor-specific-information-option {
         key enterprise-number;
         description 
@@ -396,8 +396,7 @@ module ietf-dhcpv6-common {
     container reconfigure-accept-option {
       presence "Enable sending of this option";
       description 
-        "OPTION_RECONF_ACCEPT (20)  Reconfigure Accept Option 
-        container.";
+        "OPTION_RECONF_ACCEPT (20)  Reconfigure Accept Option.";
     }
   }
 }

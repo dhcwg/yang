@@ -98,6 +98,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
+	sed -i 's/YYYY-MM-DD/working/' $$<
 	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
