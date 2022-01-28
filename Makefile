@@ -51,7 +51,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
-	cat $$< |fold -w 69 >> $$@
+	sed -E "s/revision [0-9]{4}-[0-9]{2}-[0-9]{2} /revision $(DATE) /" $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
 TREEINCLUDES+=$(1).xml
@@ -93,13 +93,13 @@ YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
 
 
+
 define ex_yang_to_xml =
 $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
-	sed -i 's/YYYY-MM-DD/working/' $$<
-	cat $$< |fold -w 69 >> $$@
+	sed -E "s/revision [0-9]{4}-[0-9]{2}-[0-9]{2} /revision $(DATE) /" $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
 EXYANGINCLUDES+=$(1).xml
