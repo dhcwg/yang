@@ -51,7 +51,6 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
-	sed -E "s/revision [0-9]{4}-[0-9]{2}-[0-9]{2} /revision $(DATE) /" $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
 TREEINCLUDES+=$(1).xml
@@ -77,7 +76,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[<CODE BEGINS> file "$(inc_yang_file:.yang=@$(DATE).yang)" \n' >> $$@
-	cat $$< |fold -w 69 >> $$@
+	sed -E "s/revision [0-9]{4}-[0-9]{2}-[0-9]{2} /revision $(DATE) /" $$< |fold -w 69 >> $$@
 	echo '<CODE ENDS>]]>' >> $$@
 	echo '</artwork>' >> $$@
 YANGINCLUDES+=$(1).xml
