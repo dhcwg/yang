@@ -319,7 +319,7 @@ module ietf-dhcpv6-client {
               "Vendor class data ID";
           }
           leaf vendor-class-data {
-            type string;
+            type binary;
             description 
               "Opaque field representing a vendor class of which 
               the client is a member.";

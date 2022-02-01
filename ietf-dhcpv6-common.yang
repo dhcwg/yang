@@ -289,7 +289,7 @@ module ietf-dhcpv6-common {
           not modelled.";
         case conf-token {
           leaf token-auth-information {
-          type string;
+          type binary;
           description 
             "Protocol Namespace Value 0. The authentication
             information, as specified by the protocol and 
