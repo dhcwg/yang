@@ -498,30 +498,28 @@
           </li>
           <li>enabled: Enables/disables all DHCPv6 client 
             function for the specific interface.</li>          
-          <li>client-duid/interface-duid: The DUID (DHCP Unique 
-            Identifier) is used to identify the client to servers 
-            and relays. DUID configuration may conditionally appear 
-            in one of two locations in the client tree, depending on 
-            the features that the client implements. If the client does not 
-            support requesting any address or prefix leasing features,
-            then there is no leaf for a DUID value.  If the client 
-            does not implement the 'anon-profile' feature 
-            <xref target="RFC7844"/>, then there
-            is a single 'client-duid' leaf that holds that DUID value 
-            which will be used for all DHCPv6 enabled interfaces. If the
-            'anon-profile' is enabled, there is an 
-            'interface-duid' leaf for each DHCP enabled interface. 
-            A DUID consists of a 
-            two-octet type field and an arbitrary length (1-128 
-            octets) content field. 
-            Currently there are four defined types of DUIDs in 
-            <xref target="RFC8415"/> and <xref target="RFC6355"/>. The 
-            DUID may be configured using the format for one of these 
-            types, or using the 'unstructured' format.  The DUID type 
+          <li>client-duid/interface-duid: The DUID (DHCP Unique         
+            Identifier) is used to identify the client to servers           
+            and relays. A DUID consists of a two-octet type field
+            and an arbitrary length (1-128 octets) content field.
+            Currently there are four defined types of DUIDs in          
+            <xref target="RFC8415"/> and <xref target="RFC6355"/>. The  
+            DUID may be configured using the format for one of these    
+            types, or using the 'unstructured' format.  The DUID type   
             definitions are imported from the 'ietf-dhcpv6-common.yang' 
-            module. <xref target="IANA-HARDWARE-TYPES"/> and 
-            <xref target="IANA-PEN"/> are referenced for the relevant
-            DUID types.
+            module. <xref target="IANA-HARDWARE-TYPES"/> and                
+            <xref target="IANA-PEN"/> are referenced for the relevant   
+            DUID types. A DUID only needs to be configured
+            if the client is requesting addresses and/or
+            prefixes from the server. Presence of the 'client-duid' or
+            'interface-duid' leaves is conditional on at least
+            one of the 'non-temp-addr', 'temp-addr', or 
+            'prefix-delegation' features being enabled.
+            Additionally, if the 'anon-profile'
+            <xref target="RFC7844"/> feature is enabled, a unique
+            DUID can be configured per DHCP enabled interface
+            using the 'interface-duid' leaf, otherwise there is
+            a global 'client-duid' leaf.
           </li> 
           <li>client-configured-options: Holds configuration parameters 
             for DHCPv6 options which can be sent by the client.  The 
@@ -878,7 +876,31 @@
             </author>
             <date />
           </front>
+          </reference>
+        <reference anchor="IANA-DHCPV6-OPTION-CODES"
+            target="https://www.iana.org/assignments/dhcpv6-parameters">
+          <front>
+            <title>DHCPv6 Option Codes</title>
+            <author>
+            <organization abbrev="IANA">Internet Assigned Numbers
+              Authority</organization>
+            </author>
+            <date />
+          </front>
         </reference>
+        <reference anchor="IANA-DHCP-AUTH-NAMESPACES"
+          target="https://www.iana.org/assignments/auth-namespaces>">
+          <front>
+            <title>Dynamic Host Configuration Protocol (DHCP) 
+              Authentication Option Name Spaces</title>
+            <author>
+            <organization abbrev="IANA">Internet Assigned Numbers
+              Authority</organization>
+            </author>
+            <date />
+          </front>
+        </reference>
+
       </references>
       <references>
         <name>Informative References</name>

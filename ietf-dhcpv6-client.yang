@@ -83,20 +83,20 @@ module ietf-dhcpv6-client {
       IPv6 (DHCPv6), Section 6.2";
   }
 
-  feature prefix-delegation {
-    description
-      "Denotes that the client implements DHCPv6 prefix
-      delegation.";
-    reference "RFC 8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6), Section 6.3";
-  }
-
   feature temp-addr {
     description
       "Denotes that the client supports DHCPv6 temporary address
       allocations.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 6.5";
+  }
+
+  feature prefix-delegation {
+    description
+      "Denotes that the client implements DHCPv6 prefix
+      delegation.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.3";
   }
 
   feature anon-profile {
@@ -280,7 +280,7 @@ module ietf-dhcpv6-client {
             "User class data ID";
         }
         leaf user-class-data {
-          type string;
+          type binary;
           description 
             "Opaque field representing a User Class
             of which the client is a member.";
