@@ -628,7 +628,8 @@ module ietf-dhcpv6-server {
               type inet:ipv6-prefix;
               mandatory true;
               description 
-                "IPv6 prefix for the pool.";
+                "IPv6 prefix for the pool. Should be contained within
+                the network-prefix, if configured.";
             }
             leaf client-prefix-length {
               type uint8 {

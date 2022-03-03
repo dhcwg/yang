@@ -153,30 +153,8 @@ module example-dhcpv6-server-conf {
             leaf mysql-name {
               type string;
               description 
-                "Name of the database.";
-            }
-            choice mysql-host {
-              description 
-                "Define host or address for MySQL server.";
-              case mysql-server-hostname { 
-                leaf mysql-hostname {
-                  type inet:domain-name;
-                  default "localhost";
-                  description 
-                    "If the database is located on a different 
-                    system to the DHCPv6 server, the domain name can 
-                    be specified.";
-                }
-              }
-              case mysql-server-address {
-                leaf mysql-address {
-                  type inet:ip-address;
-                  default "::";
-                  description 
-                    "Configure the location of the database using 
-                    an IP (v6 or v6) literal address";
-                }
-              }
+                "Name of the MySQL database, running on the 
+                localhost.";
             }
             leaf mysql-username {
               type string;
@@ -212,28 +190,11 @@ module example-dhcpv6-server-conf {
             }
           }
           case postgresql {
-            choice postgresql-host {
-              description 
-                "Define host or address for postgresql server.";
-              case postgresql-server-hostname {
-                leaf postgresql-hostname {
-                  type inet:domain-name;
-                  default "localhost";
-                  description 
-                    "If the database is located on a different system 
-                    to the DHCPv6 server, the domain name can be 
-                    specified.";
-                }
-              }
-              case postgresql-server-address {
-                leaf postgresql-address {
-                  type inet:ip-address;
-                  default "::";
-                  description 
-                    "Configure the location of the database using 
-                    an IP (v6 or v6) literal address";
-                }
-              }
+            leaf postgresql-name {
+              type string;
+              description
+                "Name of the PostgreSQL database, running on the 
+                localhost.";
             }
             leaf postgresql-username {
               type string;

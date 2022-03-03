@@ -9,7 +9,7 @@
 <?rfc subcompact="no" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" 
-  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-24" 
+  submissionType="IETF" docName="draft-ietf-dhc-dhcpv6-yang-25" 
   ipr="trust200902" version="3">
   <!-- xml2rfc v2v3 conversion 2.30.0 -->
   <front>
@@ -627,6 +627,12 @@
         </li>
       </ul>
 
+      <t>An attacker sending DHCPv6 messages which cause the server to
+        generate 'invalid-client-detected' and 'decline-received' 
+        notifications could be used as a DoS attack. Such an attack
+        could be mitigated by the NETCONF client unsubscribing
+        from the affected notifications.</t>
+
       <t>An attacker with read/write access the DHCPv6 relay can 
         undertake various attacks, such as:</t>
 
@@ -680,6 +686,12 @@
           prefix-pool/pool-prefix)
         </li>
       </ul>
+
+      <t><xref target="RFC7844"/> describes anonyimty profiles for
+        DHCP clients. These can be used to prevent client tracking
+        on a visited network. Support for this can be enabled by
+        implementing the 'anon-profile' feature in the client
+        module.</t>
 
       <t><xref target="RFC7824"/> covers privacy considerations for 
         DHCPv6 and is applicable here.</t>
@@ -907,6 +919,7 @@
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3319.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7707.xml"/>
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7824.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-tls-client-server.xml"/>
       </references>
     </references>
 
@@ -1132,8 +1145,18 @@
       <t>The example module defines additional server attributes such 
         as name and description. Storage for leases is configured using 
         a lease-storage container. It allows storing leases in one of
-        three options: memory (memfile), MySQL and PosgreSQL. For each 
+        three options: memory (memfile), MySQL and PostgreSQL. For each 
         case, the necessary configuration parameters are provided.</t>
+
+      <t>For simplicity, this example module assumes that the DHCPv6 
+        server is colocated with the MySQL or PostgreSQL database 
+        server and can serve traffic securely on the localhost without 
+        additional cryptographic protection.  In a production 
+        deployment, these functions would likely not be colocated 
+        and thus use TLS to secure the database connection between 
+        the DHCPv6 server and database server. A YANG module for 
+        configuring TLS is defined in 
+        <xref target="I-D.ietf-netconf-tls-client-server"/>.</t>
 
       <t>At the end there is an augment statement which adds the vendor 
         specific configuration defined in "dhcpv6-server-config:config" 

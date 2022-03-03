@@ -118,6 +118,10 @@ text: $(SPEC_NAME).txt
 $(SPEC_NAME).txt: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES)
 	$(XML2RFC) -n -N --text --v3 $<
 
+xml: $(SPEC_NAME).xml2
+$(SPEC_NAME).xml2: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES)
+	$(XML2RFC) -n -N --expand --v3 $<
+
 html: $(SPEC_NAME).html
 $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
