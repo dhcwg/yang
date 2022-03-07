@@ -44,20 +44,21 @@ module ietf-dhcpv6-server {
     "This YANG module defines components for the configuration 
     and management of DHCPv6 servers.
 
-    Copyright (c) 2021 IETF Trust and the persons identified as
+    Copyright (c) 2022 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
-    without modification, is permitted pursuant to, and subject
-    to the license terms contained in, the Simplified BSD License
-    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    without modification, is permitted pursuant to, and subject to 
+    the license terms contained in, the Revised BSD License set 
+    forth in Section 4.c of the IETF Trust's Legal Provisions
     Relating to IETF Documents
     (https://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC XXXX; see
-    the RFC itself for full legal notices.";
+    This version of this YANG module is part of RFC XXXX
+    (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+    for full legal notices.";
 
-  revision 2021-10-25 {
+  revision 2022-03-07 {
     description 
       "Initial Revision.";
     reference 
@@ -90,14 +91,14 @@ module ietf-dhcpv6-server {
 
   grouping resource-config {
     description 
-    "Nodes that are reused at multiple levels in the DHCPv6 
-    server's addressing hierarchy.";
+      "Nodes that are reused at multiple levels in the DHCPv6 
+      server's addressing hierarchy.";
     leaf-list option-set-id {
       type leafref {
         path "/dhcpv6-server/option-sets/option-set/option-set-id";
       }
       description 
-        "The ID field of relevant set of DHCPv6 options (option-set) 
+        "The ID field of relevant set of DHCPv6 options (option-set)
         to be provisioned to clients using the allocation-range.";
     }
     leaf valid-lifetime {
@@ -105,20 +106,20 @@ module ietf-dhcpv6-server {
       description 
         "Valid lifetime for the Identity Association (IA).";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 6";
+        IPv6 (DHCPv6), Section 12.1";
     }
     leaf renew-time {
       type dhc6:timer-seconds32;
       description 
         "Renew (T1) time.";
-      reference "RFC 8415: Dynamic Host Configuration Protocol for 
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 4.2";
     }
     leaf rebind-time {
       type dhc6:timer-seconds32;
       description 
         "Rebind (T2) time.";
-      reference "RFC 8415: Dynamic Host Configuration Protocol for 
+      reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 4.2";
     }
     leaf preferred-lifetime {
@@ -126,13 +127,13 @@ module ietf-dhcpv6-server {
       description 
         "Preferred lifetime for the Identity Association (IA).";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 6";
+        IPv6 (DHCPv6), Section 12.1";
     }
     leaf rapid-commit {
       type boolean;
       description 
-        "When set to 'true', Specifies that the pool supports 
-        client-server exchanges involving two messages.";
+        "When set to 'true', Specifies that client-server exchanges 
+        involving two messages is supported.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 5.1";
     }
@@ -207,75 +208,92 @@ module ietf-dhcpv6-server {
     uses dhc6:status;
   }
 
-  grouping message-stats {
+  grouping message-statistics {
     description 
       "Counters for DHCPv6 messages.";
+    leaf discontinuity-time {
+      type yang:date-and-time;
+      description
+        "The time on the most recent occasion at which any one or
+        more of DHCPv6 server's counters suffered a discontinuity.
+        If no such discontinuities have occurred since the last 
+        re-initialization of the local management subsystem, then 
+        this node contains the time the local management subsystem 
+        re-initialized itself.";
+    }
     leaf solicit-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Solicit (1) messages received.";
     }
     leaf advertise-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Advertise (2) messages sent.";
     }
     leaf request-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Request (3) messages received.";
     }
     leaf confirm-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Confirm (4) messages received.";
     }
     leaf renew-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Renew (5) messages received.";
     }
     leaf rebind-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Rebind (6) messages received.";
     }
     leaf reply-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reply (7) messages sent.";
     }
     leaf release-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Release (8) messages received.";
     }
     leaf decline-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Decline (9) messages received.";
     }
     leaf reconfigure-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Reconfigure (10) messages sent.";
     }
     leaf information-request-count {
-      type uint32;
+      type yang:counter32;
       config "false";
       description 
         "Number of Information-request (11) messages
         received.";
+    }
+    leaf discarded-message-count {
+      type yang:counter32;
+      config "false";
+      description
+        "Number of messages that have been discarded for any 
+        reason.";
     }
   }
 
@@ -286,13 +304,12 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.8";
    container preference-option {
      description 
-       "OPTION_PREFERENCE (7) Preference Option
-       container.";
+       "OPTION_PREFERENCE (7) Preference Option.";
      leaf pref-value {
         type uint8;
         description 
-          "The preference value for the server in this
-          message. A 1-octet unsigned integer.";
+          "The preference value for the server in this message. A 
+          1-octet unsigned integer.";
       }
     }
   }
@@ -304,7 +321,7 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.12";
     container server-unicast-option {
       description 
-        "OPTION_UNICAST (12) Server Unicast Option container.";
+        "OPTION_UNICAST (12) Server Unicast Option.";
       leaf server-address {
         type inet:ipv6-address;
         description 
@@ -339,30 +356,31 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.23";
     container info-refresh-time-option {
       description 
-        "OPTION_INFORMATION_REFRESH_TIME (32)
-        Information Refresh Time option container.";
+        "OPTION_INFORMATION_REFRESH_TIME (32) Information Refresh 
+        Time Option.";
       leaf info-refresh-time {
         type dhc6:timer-seconds32;
         description 
-          "Time duration relative to the current time, expressed 
-          in units of seconds.";
+          "Time duration specifying an upper bound for how long a 
+          client should wait before refreshing information retrieved
+          from a DHCP server.";
       }
     }
   }
 
   grouping sol-max-rt-option-group {
     description 
-      "OPTION_SOL_MAX_RT (82) SOL_MAX_RT Option (Max Solicit timeout 
+      "OPTION_SOL_MAX_RT (82) SOL_MAX_RT Option (Max Solicit timeout
         value).";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 21.24";
     container sol-max-rt-option {
       description 
-        "OPTION_SOL_MAX_RT (82) SOL_MAX_RT option container.";
+        "OPTION_SOL_MAX_RT (82) SOL_MAX_RT Option.";
       leaf sol-max-rt-value {
         type dhc6:timer-seconds32;
         description 
-          "sol max rt value";
+          "Maximum Solicit timeout value.";
       }
     }
   }
@@ -375,12 +393,11 @@ module ietf-dhcpv6-server {
       IPv6 (DHCPv6), Section 21.25";
     container inf-max-rt-option {
       description 
-        "OPTION_INF_MAX_RT (83) inf max rt option
-        container.";
+        "OPTION_INF_MAX_RT (83) inf max rt Option.";
       leaf inf-max-rt-value {
         type dhc6:timer-seconds32;
         description 
-          "inf max rt value";
+          "Maximum Information-request timeout value.";
       }
     }
   }
@@ -392,7 +409,7 @@ module ietf-dhcpv6-server {
   container dhcpv6-server {
     description 
       "Configuration nodes for the DHCPv6 server.";
-    reference "RFC 8415: Dynamic Host Configuration Protocol for 
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.3";
     leaf enabled {
       type boolean;
@@ -408,27 +425,26 @@ module ietf-dhcpv6-server {
     }
     container vendor-config {
       description 
-        "This container provides a location for 
-        augmenting vendor or implementation specific 
-        configuration nodes.";
+        "This container provides a location for augmenting vendor 
+        or implementation specific configuration nodes.";
     }
     container option-sets {
       description 
-        "A server may allow different option sets
-        to be configured for clients matching specific parameters
-        such as topological location or client type. The 
-        'option-set' list is a set of options and their 
-        contents that will be returned to clients.";
+        "A server may allow different option sets to be configured
+        for clients matching specific parameters such as topological
+        location or client type. The 'option-set' list is a set of
+        options and their contents that will be returned to
+        clients.";
       reference "RFC 8415: Dynamic Host Configuration Protocol for
         IPv6 (DHCPv6), Section 21";
       list option-set {
         key option-set-id;
         description 
-          "YANG definitions for DHCPv6 options are
-          contained in separate YANG modules and augmented to this
-          container as required.";
+          "YANG definitions for DHCPv6 options are contained in 
+          separate YANG modules and augmented to this container as
+          required.";
         leaf option-set-id {
-          type uint32;
+          type string;
           description 
             "Option set identifier.";
         }
@@ -458,7 +474,7 @@ module ietf-dhcpv6-server {
         so that they can be given the correct configuration.
         The mechanisms used for implementing this function vary
         greatly between different implementations such it is not 
-        possible to include in this module. This container provides 
+        possible to include in this module. This container provides
         a location for server implementors to augment their own 
         class-selector YANG.";
     }
@@ -467,7 +483,7 @@ module ietf-dhcpv6-server {
       description 
         "This model is based on an address and parameter 
         allocation hierarchy.  The top level is 'global' - which 
-        is defined as the container for all allocation-ranges. Under 
+        is defined as the container for all allocation-ranges. Under
         this are the individual allocation-ranges.";
       uses resource-config;
       list allocation-range {
@@ -475,7 +491,7 @@ module ietf-dhcpv6-server {
         description 
           "Network-ranges are identified by the 'id' key.";
         leaf id {
-          type uint32;
+          type string;
           mandatory true;
           description 
             "Unique identifier for the allocation range.";
@@ -495,7 +511,7 @@ module ietf-dhcpv6-server {
         container address-pools {
           if-feature na-assignment;
           description 
-            "Configuration for the DHCPv6 server's 
+            "Configuration for the DHCPv6 server's
             address pools.";
           list address-pool {
             key pool-id;
@@ -512,7 +528,8 @@ module ietf-dhcpv6-server {
               type inet:ipv6-prefix;
               mandatory true;
               description 
-                "IPv6 prefix for the pool.";
+                "IPv6 prefix for the pool. Should be contained 
+                within the network-prefix, if configured.";
             }
             leaf start-address {
               type inet:ipv6-address-no-zone;
@@ -533,7 +550,9 @@ module ietf-dhcpv6-server {
                 pool which can be simultaneously allocated, 
                 calculated as a percentage of the available 
                 addresses (end-address minus start-address plus
-                one).";
+                one), rouded up. Used to set the value for the
+                address-pool-utilization-threshold-exceeded
+                notification";
             }
             uses resource-config;
             container host-reservations {
@@ -566,15 +585,14 @@ module ietf-dhcpv6-server {
                 type uint64;
                 mandatory true;
                 description 
-                  "The total number of addresses in the
-                  pool.";
+                  "The total number of addresses in the pool.";
               }
               leaf allocated-count {
                 type uint64;
                 mandatory true;
                 description 
-                  "The number of addresses or prefixes 
-                  in the pool that are currently allocated.";
+                  "The number of addresses or prefixes in the pool
+                  that are currently allocated.";
               }
               list active-lease {
                 key leased-address;
@@ -597,8 +615,8 @@ module ietf-dhcpv6-server {
           list prefix-pool {
             key pool-id;
             description 
-              "List of prefix pools for allocation to 
-              clients, distinguished by 'pool-id'.";
+              "List of prefix pools for allocation to clients, 
+              distinguished by 'pool-id'.";
             leaf pool-id {
               type string;
               mandatory true;
@@ -609,7 +627,8 @@ module ietf-dhcpv6-server {
               type inet:ipv6-prefix;
               mandatory true;
               description 
-                "IPv6 prefix for the pool.";
+                "IPv6 prefix for the pool. Should be contained 
+                within the network-prefix, if configured.";
             }
             leaf client-prefix-length {
               type uint8 {
@@ -623,10 +642,12 @@ module ietf-dhcpv6-server {
             leaf max-pd-space-utilization {
               type dhc6:threshold;
               description 
-                "Maximum amount of the prefixes in the
-                pool which can be simultaneously allocated,
-                calculated as a percentage of the available
-                prefixes, rounded up.";
+                "Maximum amount of the prefixes in the pool which 
+                can be simultaneously allocated, calculated as a 
+                percentage of the available prefixes, rounded up.
+                Used to set the value for the
+                prefix-pool-utilization-threshold-exceeded
+                notification";
             }
             uses resource-config;
             container host-reservations {
@@ -688,7 +709,11 @@ module ietf-dhcpv6-server {
           }
         }
       }
-      uses message-stats;
+      container statistics {
+        description 
+          "DHCPv6 message counters for the server.";
+        uses message-statistics;
+      }
     }
   }
 
@@ -700,14 +725,14 @@ module ietf-dhcpv6-server {
     nacm:default-deny-all;
     if-feature na-assignment;
     description 
-      "Deletes a client's active address lease from the 
-      server's lease database. Note this will not cause the address
-      to be revoked from the client, and the lease may be refreshed
-      or renewed by the client.";
+      "Deletes a client's active address lease from the server's 
+      lease database. Note this will not cause the address to be 
+      revoked from the client, and the lease may be refreshed or 
+      renewed by the client.";
     input {
       leaf lease-address-to-delete {
         type leafref {
-          path "../../dhcpv6-server/allocation-ranges/" + 
+          path "/dhcpv6-server/allocation-ranges/" + 
             "allocation-range/address-pools/address-pool" +
             "/active-leases/active-lease/leased-address";
         }
@@ -720,8 +745,11 @@ module ietf-dhcpv6-server {
     output {
       leaf return-message {
         type string;
-        description 
-          "Response message from the server.";
+        description
+          "Response message from the server. If available, a 
+          language identifier should be included in the message.";
+        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets
+          and Languages, Section 4.2.";
       }
     }
   }
@@ -730,14 +758,14 @@ module ietf-dhcpv6-server {
     nacm:default-deny-all;
     if-feature prefix-delegation;
     description 
-      "Deletes a client's active prefix lease from the 
-      server's lease database. Note, this will not cause the prefix
-      to be revoked from the client, and the lease may be refreshed
-      or renewed by the client.";
+      "Deletes a client's active prefix lease from the server's 
+      lease database. Note, this will not cause the prefix to be 
+      revoked from the client, and the lease may be refreshed or 
+      renewed by the client.";
     input {
       leaf lease-prefix-to-delete {
         type leafref {
-          path "../../dhcpv6-server/allocation-ranges/" +
+          path "/dhcpv6-server/allocation-ranges/" +
             "allocation-range/prefix-pools/prefix-pool" +
             "/active-leases/active-lease/leased-prefix";
         }
@@ -750,8 +778,11 @@ module ietf-dhcpv6-server {
     output {
       leaf return-message {
         type string;
-        description 
-          "Response message from the server.";
+        description
+          "Response message from the server. If available, a 
+          language identifier should be included in the message.";
+        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets 
+          and Languages, Section 4.2.";
       }
     }
   }
@@ -768,29 +799,29 @@ module ietf-dhcpv6-server {
       max-address-utilization.";
     leaf pool-id {
       type leafref {
-        path "../../dhcpv6-server/allocation-ranges/" +
+        path "/dhcpv6-server/allocation-ranges/" +
           "allocation-range/address-pools/address-pool" +
           "/pool-id";
       }
       mandatory true;
       description 
-        "Leafref to the address pool that the notification
-        is being generated for.";
+        "Leafref to the address pool that the notification is being
+        generated for.";
     }
     leaf total-pool-addresses {
       type uint64;
       mandatory true;
       description 
-        "Total number of addresses in the pool 
-        (end-address minus start-address plus one).";
+        "Total number of addresses in the pool (end-address minus 
+        start-address plus one).";
     }
     leaf max-allocated-addresses {
       type uint64;
       mandatory true;
       description 
         "Maximum number of addresses that can be simultaneously 
-        allocated from the pool. This value may be less than 
-        count of total addresses. Calculated as the 
+        allocated from the pool. This value may be less than count
+        of total addresses. Calculated as the 
         max-address-utilization (percentage) of the 
         total-pool-addresses, rounded up.";
     }
@@ -810,7 +841,7 @@ module ietf-dhcpv6-server {
       max-pd-space-utilization.";
     leaf pool-id {
       type leafref {
-        path "../../dhcpv6-server/allocation-ranges" +
+        path "/dhcpv6-server/allocation-ranges" +
         "/allocation-range/prefix-pools/prefix-pool/pool-id";
       }
       mandatory true;
@@ -843,8 +874,8 @@ module ietf-dhcpv6-server {
 
   notification invalid-client-detected {
     description 
-      "Notification sent when the server detects an 
-      invalid client.";
+      "Notification sent when the server detects an invalid 
+      client.";
     leaf message-type {
       type enumeration {
         enum solicit {
@@ -881,7 +912,7 @@ module ietf-dhcpv6-server {
         }
       }
       description 
-        "The message type received by the server that has caused 
+        "The message type received by the server that has caused
         the error.";
     }
     leaf duid {
@@ -892,7 +923,7 @@ module ietf-dhcpv6-server {
     leaf description {
       type string;
       description 
-        "Description of the event (e.g., and error code or log 
+        "Description of the event (e.g., an error code or log 
         message).";
     }
   }
@@ -900,8 +931,8 @@ module ietf-dhcpv6-server {
   notification decline-received {
     if-feature na-assignment;
     description 
-      "Notification sent when the server has received a 
-      Decline (9) message from a client.";
+      "Notification sent when the server has received a Decline (9)
+      message from a client.";
     leaf duid {
       type dhc6:duid;
       description 
@@ -933,8 +964,8 @@ module ietf-dhcpv6-server {
 
   notification non-success-code-sent {
     description 
-      "Notification sent when the server responded
-      to a client with non-success status code.";
+      "Notification sent when the server responded to a client with
+      a non-success status code.";
     leaf duid {
       type dhc6:duid;
       description 

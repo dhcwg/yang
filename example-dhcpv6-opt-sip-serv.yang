@@ -29,20 +29,21 @@ module example-dhcpv6-opt-sip-serv {
     "This YANG module contains DHCPv6 options defined in RFC 8415 
     that can be used by DHCPv6 servers.
 
-    Copyright (c) 2021 IETF Trust and the persons identified as
+    Copyright (c) 2022 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
-    without modification, is permitted pursuant to, and subject
-    to the license terms contained in, the Simplified BSD License
-    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    without modification, is permitted pursuant to, and subject to
+    the license terms contained in, the Revised BSD License set
+    forth in Section 4.c of the IETF Trust's Legal Provisions
     Relating to IETF Documents
     (https://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC XXXX; see
-    the RFC itself for full legal notices.";
+    This version of this YANG module is part of RFC XXXX
+    (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+    for full legal notices.";
 
-  revision 2021-10-25 {
+  revision 2022-03-07 {
     description 
       "Initial Revision.";
     reference 
@@ -62,7 +63,7 @@ module example-dhcpv6-opt-sip-serv {
     container sip-server-domain-name-list-option {
      description 
        "OPTION_SIP_SERVER_D (21) SIP Servers Domain Name List 
-       container.";
+       Option.";
      list sip-server {
         key sip-serv-id;
         description 
@@ -70,7 +71,7 @@ module example-dhcpv6-opt-sip-serv {
         leaf sip-serv-id {
           type uint8;
           description 
-            "SIP server list identifier identifier.";
+            "SIP server list identifier.";
         }
         leaf sip-serv-domain-name {
           type inet:domain-name;
@@ -90,7 +91,7 @@ module example-dhcpv6-opt-sip-serv {
     container sip-server-address-list-option {
       description 
         "OPTION_SIP_SERVER_A (22) SIP Servers IPv6 Address List 
-        container.";
+        Option.";
      list sip-server {
         key sip-serv-id;
         description 
