@@ -18,7 +18,7 @@
     <link-address>2001:db8:3::1</link-address>
     <relay-options>
       <interface-id-option>
-        <interface-id>EXAMPLE-INTERFACE-ID</interface-id>
+        <interface-id>EXAMPLEINTERFACEID01</interface-id>
       </interface-id-option>
     </relay-options>
   </relay-if>

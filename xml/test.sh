@@ -26,5 +26,8 @@ yanglint --strict --verbose -t config -p $IETFYANG ../ietf-dhcpv6-server.yang ..
 yanglint --strict --verbose -t config -p $IETFYANG $IETFYANG/iana-if-type.yang $IETFYANG/ietf-interfaces.yang ../ietf-dhcpv6-relay.yang relay-base-ex.xml
 yanglint --strict --verbose -t config -p $IETFYANG $IETFYANG/iana-if-type.yang $IETFYANG/ietf-interfaces.yang ../ietf-dhcpv6-client.yang client-base-ex.xml
 
-
+#Don't work - they are snippets
+yanglint --strict --verbose -t config -p $IETFYANG ../ietf-dhcpv6-server.yang host-res-ex.xml
+yanglint --strict --verbose -t config -p $IETFYANG ../ietf-dhcpv6-server.yang prefixpool-ex.xml
+yanglint --strict --verbose -t config -p $IETFYANG ../ietf-dhcpv6-server.yang opt-set-ex.xml
 

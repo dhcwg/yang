@@ -1039,12 +1039,12 @@
           <li>Configuring an interface using the ietf-interfaces
             module that the client configuration will be applied to.
           </li>
-          <li>Enabling the DHCP relay function globally and for 
+          <li>Enabling the DHCP client function globally and for 
             the relevant interface.</li>
           <li>References the interface that the client configuration
             is relevant for via an inteface-ref to the 
             ietf-interfaces module.</li>
-          <li>Sets the client's DUID.</li>
+          <li>Sets the DUID for the DHCPv6 enabled interface.</li>
           <li>Configures a list of option codes that will be 
             requested by the client in its Option Request Option
             (OPTION_ORO (5)).</li>
