@@ -27,20 +27,21 @@ module ietf-dhcpv6-common {
     (RFC 8174) when, and only when, they appear in all
     capitals, as shown here.
 
-    Copyright (c) 2021 IETF Trust and the persons identified as
+    Copyright (c) 2022 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
-    without modification, is permitted pursuant to, and subject
-    to the license terms contained in, the Revised BSD License
-    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    without modification, is permitted pursuant to, and subject to
+    the license terms contained in, the Revised BSD License set
+    forth in Section 4.c of the IETF Trust's Legal Provisions
     Relating to IETF Documents
     (https://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC XXXX; see
-    the RFC itself for full legal notices.";
+    This version of this YANG module is part of RFC XXXX
+    (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+    for full legal notices.";
 
-  revision 2021-10-25 {
+  revision 2022-03-07 {
     description 
       "Initial Revision.";
     reference 
@@ -287,7 +288,7 @@ module ietf-dhcpv6-common {
           "The authentication protocol used in the option. Namespace
           values 1 (delayed authentication) and 2 (Delayed 
           Authentication (Obsolete) are not applicable and so are 
-          not modelled.";
+          not modeled.";
         case conf-token {
           leaf token-auth-information {
           type binary;

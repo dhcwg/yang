@@ -51,6 +51,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
+	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
 TREEINCLUDES+=$(1).xml
@@ -76,7 +77,7 @@ $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[<CODE BEGINS> file "$(inc_yang_file:.yang=@$(DATE).yang)" \n' >> $$@
-	sed -E "s/revision [0-9]{4}-[0-9]{2}-[0-9]{2} /revision $(DATE) /" $$< |fold -w 69 >> $$@
+	cat $$< |fold -w 69 >> $$@
 	echo '<CODE ENDS>]]>' >> $$@
 	echo '</artwork>' >> $$@
 YANGINCLUDES+=$(1).xml
@@ -92,13 +93,12 @@ YANGINCLUDES=
 $(foreach inc_yang_file,$(INCLUDES),$(eval $(call yang_to_xml,$(MODELS_DIR)/$(inc_yang_file))))
 
 
-
 define ex_yang_to_xml =
 $(1).xml: $(1)
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $$@
 	echo '<artwork align="center">' >> $$@
 	echo '<![CDATA[' >> $$@
-	sed -E "s/revision [0-9]{4}-[0-9]{2}-[0-9]{2} /revision $(DATE) /" $$< |fold -w 69 >> $$@
+	cat $$< |fold -w 69 >> $$@
 	echo ']]>' >> $$@
 	echo '</artwork>' >> $$@
 EXYANGINCLUDES+=$(1).xml
@@ -117,10 +117,6 @@ $(foreach ex_inc_yang_file,$(EXINCLUDES),$(eval $(call ex_yang_to_xml,$(MODELS_D
 text: $(SPEC_NAME).txt
 $(SPEC_NAME).txt: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES)
 	$(XML2RFC) -n -N --text --v3 $<
-
-xml: $(SPEC_NAME).xml2
-$(SPEC_NAME).xml2: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES)
-	$(XML2RFC) -n -N --expand --v3 $<
 
 html: $(SPEC_NAME).html
 $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)

@@ -133,17 +133,17 @@
             <xref target="RFC8415"/> are included in this document. 
           </t>
           <t>Of these, only the options that require operator 
-            configuration are modelled. For example, OPTION_IA_NA (3) 
+            configuration are modeled. For example, OPTION_IA_NA (3) 
             is created by the DHCP server when requested by the client. 
             The contents of the fields in the option are based on a 
             number of input configuration parameters which the server 
             will apply when it receives the request (e.g., the T1/T2 
             timers that are relevant for the pool of addresses). As a 
             result, there are no fields that are directly configurable 
-            for the option, so it is not modelled.
+            for the option, so it is not modeled.
           </t>
           <t>The following table shows the DHCPv6 options that are
-            modeled, the element(s) they are modelled for, and the 
+            modeled, the element(s) they are modeled for, and the 
             relevant YANG module name: 
           </t>   
           <table anchor="option-tab">
@@ -688,7 +688,7 @@
         </li>
       </ul>
 
-      <t><xref target="RFC7844"/> describes anonyimty profiles for
+      <t><xref target="RFC7844"/> describes anonymity profiles for
         DHCP clients. These can be used to prevent client tracking
         on a visited network. Support for this can be enabled by
         implementing the 'anon-profile' feature in the client
@@ -934,12 +934,12 @@
         <t>The following example shows a basic configuration for a 
           server. The configuration defines:</t>
         <ul spacing="normal">
-          <li>Enabling the DHCP server function</li>
-          <li>The server's DUID</li>
+          <li>Enabling the DHCP server function.</li>
+          <li>The server's DUID.</li>
           <li>An option set (id=1) with configuration for the 
             Solicit Max Retry Timeout (SOL_MAX_RT (82)) option.
           </li>
-          <li>A single network range (2001:db8::/32)</li>
+          <li>A single network range (2001:db8::/32).</li>
           <li>A single address pool, with start and end addresses,
             relevant lease timers and an option-set-id of "1"
             referencing the option set configured above.</li>
@@ -1172,7 +1172,7 @@
       <t>
         The module "ietf-example-dhcpv6-class-selector" provides an example 
         of how vendor-specific class selection configuration can be 
-        modelled and integrated with the "ietf-dhcpv6-server" module 
+        modeled and integrated with the "ietf-dhcpv6-server" module 
         defined in this document.</t>
 
       <t>The example module defines "client-class-names" with associated
