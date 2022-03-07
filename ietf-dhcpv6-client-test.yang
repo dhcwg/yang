@@ -83,14 +83,6 @@ module ietf-dhcpv6-client {
       IPv6 (DHCPv6), Section 6.2";
   }
 
-  feature temp-addr {
-    description
-      "Denotes that the client supports DHCPv6 temporary address
-      allocations.";
-    reference "RFC 8415: Dynamic Host Configuration Protocol for
-      IPv6 (DHCPv6), Section 6.5";
-  }
-
   feature prefix-delegation {
     description
       "Denotes that the client implements DHCPv6 prefix
@@ -99,9 +91,18 @@ module ietf-dhcpv6-client {
       IPv6 (DHCPv6), Section 6.3";
   }
 
+  feature temp-addr {
+    description
+      "Denotes that the client supports DHCPv6 temporary address
+      allocations.";
+    reference "RFC 8415: Dynamic Host Configuration Protocol for
+      IPv6 (DHCPv6), Section 6.5";
+  }
+
   feature anon-profile {
     description
-      "Denotes that the client supports DHCP anonymity profiles.";
+      "Denotes that the client supports DHCP anonymity
+      profiles.";
     reference "RFC 7844: Anonymity Profiles for DHCP Clients";
   }
 
@@ -112,16 +113,16 @@ module ietf-dhcpv6-client {
   grouping message-statistics {
     description 
       "Counters for DHCPv6 messages.";
-    leaf discontinuity-time {
-      type yang:date-and-time;
-      description
-        "The time on the most recent occasion at which any one or
-        more of DHCPv6 client's counters suffered a discontinuity.
-        If no such discontinuities have occurred since the last
-        re-initialization of the local management subsystem, then
-        this node contains the time the local management subsystem
-        re-initialized itself.";
-    }
+    leaf discontinuity-time {                                           
+      type yang:date-and-time;                                          
+      description                                                       
+        "The time on the most recent occasion at which any one or       
+        more of DHCPv6 client's counters suffered a discontinuity.         
+        If no such discontinuities have occurred since the last            
+        re-initialization of the local management subsystem, then       
+        this node contains the time the local management subsystem         
+        re-initialized itself.";                                           
+    }     
     leaf solicit-count {
       type yang:counter32;
       config "false";
@@ -186,14 +187,15 @@ module ietf-dhcpv6-client {
       type yang:counter32;
       config "false";
       description 
-        "Number of Information-request (11) messages sent.";
+        "Number of Information-request (11) messages
+        sent.";
     }
     leaf discarded-message-count {
       type yang:counter32;
       config "false";
       description
-        "Number of messages that have been discarded for any 
-        reason.";
+        "Number of messages that have been discarded
+        for any reason.";
     }
   }
 
@@ -249,10 +251,10 @@ module ietf-dhcpv6-client {
           "List of options that the client is requesting,
           identified by option code. This list MUST include the
           code for option SOL_MAX_RT (82) when included in a
-          Solicit-message. If this option is being sent in an 
-          Information-request message, then the code for option 
-          OPTION_INFORMATION_REFRESH_TIME (32) and INF_MAX_RT (83)
-          MUST be included.";
+          Solicit-message. If this option is being
+          sent in an Infoformation-request message, then the code
+          for option OPTION_INFORMATION_REFRESH_TIME (32) and
+          INF_MAX_RT (83) MUST be included.";
       }
     }
   }
@@ -260,8 +262,8 @@ module ietf-dhcpv6-client {
   grouping user-class-option-group {
     description 
       "OPTION_USER_CLASS (15) User Class Option";
-    reference "RFC 8415: Dynamic Host Configuration Protocol for 
-      IPv6 (DHCPv6), Section 21.15";
+    reference "RFC 8415: Dynamic Host Configuration Protocol
+      for IPv6 (DHCPv6), Section 21.15";
     container user-class-option {
       presence "Configures the option";
       description 
@@ -270,17 +272,18 @@ module ietf-dhcpv6-client {
         key user-class-data-id;
         min-elements 1;
         description 
-          "The user classes of which the client is a member.";
+          "The user classes of which the client
+          is a member.";
         leaf user-class-data-id {
           type uint8;
           description 
             "User class data ID";
         }
         leaf user-class-data {
-          type binary;
+          type string;
           description 
-            "Opaque field representing a User Class of which the 
-            client is a member.";
+            "Opaque field representing a User Class
+            of which the client is a member.";
         }
       }
     }
@@ -297,9 +300,9 @@ module ietf-dhcpv6-client {
       list vendor-class-option-instances {
         key enterprise-number;
         description 
-          "The vendor class option allows for multiple instances 
-          in a single message. Each list entry defines the contents
-          of an instance of the option.";
+          "The vendor class option allows for multiple
+          instances in a single message. Each list entry defines
+          the contents of an instance of the option.";
         leaf enterprise-number {
           type uint32;
           description 
@@ -316,7 +319,7 @@ module ietf-dhcpv6-client {
               "Vendor class data ID";
           }
           leaf vendor-class-data {
-            type binary;
+            type string;
             description 
               "Opaque field representing a vendor class of which 
               the client is a member.";
@@ -490,12 +493,11 @@ module ietf-dhcpv6-client {
           type uint8 {
             range "1..128";
             }
-          description 
-            "Prefix-length hint value included in the messages sent 
-            to the server to indicate a preference for the size of
-            the prefix to be delegated.";
-          reference "RFC 8415: Dynamic Host Configuration Protocol
-            for IPv6 (DHCPv6), Section 18.2.1";
+          description "Prefix-length hint value included 
+            in the messages sent to the server to indicate a 
+            preference for the size of the prefix to be delegated.";
+          reference "RFC 8415: Dynamic Host Configuration Protocol      
+            for IPv6 (DHCPv6), Section 18.2.1";  
         }
         container ia-pd-options {
           description 
@@ -531,8 +533,7 @@ module ietf-dhcpv6-client {
         }
       }
       container statistics {
-        description 
-          "DHCPv6 message counters for the client.";
+        description "DHCPv6 message counters for the client.";
         uses message-statistics;
       }
     }
@@ -545,9 +546,10 @@ module ietf-dhcpv6-client {
   notification invalid-ia-address-detected {
     if-feature "non-temp-addr or temp-addr";
     description 
-      "Notification sent when an address received in an identity 
-      association option is determined invalid.  Possible conditions
-      include a duplicate or otherwise illegal address.";
+      "Notification sent when an address received 
+      in an identity association option is determined invalid. 
+      Possible conditions include a duplicate or otherwise illegal 
+      address.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.2.10.1";
     leaf ia-id {
@@ -565,7 +567,7 @@ module ietf-dhcpv6-client {
     leaf ia-na-t2-timer {
       type uint32;
       description 
-        "The value of the preferred-lifetime field for non-temporary
+        "The value of the preferred-lifetime field for non-temporary 
         address allocations (OPTION_IA_NA).";
     }
     leaf invalid-address {
@@ -599,7 +601,7 @@ module ietf-dhcpv6-client {
 
   notification transmission-failed {
     description 
-      "Notification sent when the transmission or retransmission
+      "Notification sent when the transmission or retransmission 
       of a message fails."; 
       reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 7.6";
@@ -651,7 +653,7 @@ module ietf-dhcpv6-client {
     leaf description {
       type string;
       description 
-        "Information related to the failure, such as number of
+        "Information related to the failure, such as number of 
         retries and timer values.";
     }
   }
@@ -666,7 +668,8 @@ module ietf-dhcpv6-client {
       type dhc6:duid;
       mandatory true;
       description 
-        "DUID of the server sending the unsuccessful error code.";
+        "DUID of the server sending the unsuccessful
+        error code.";
     }
     uses dhc6:status;
   }
@@ -675,9 +678,9 @@ module ietf-dhcpv6-client {
     if-feature "non-temp-addr or prefix-delegation or " + 
       "temp-addr";
     description 
-      "Notification sent when the client receives a lease from a 
-      server with different DUID to the one currently stored by the
-      client, e.g., in response to a Rebind message.";
+      "Notification sent when the client receives a lease
+      from a server with different DUID to the one currently stored
+      by the client, e.g., in response to a Rebind message.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 18.2.5";
     leaf new-server-duid {

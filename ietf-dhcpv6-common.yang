@@ -68,17 +68,17 @@ module ietf-dhcpv6-common {
     }
     description 
       "Each DHCP server and client has a DUID (DHCP Unique 
-      Identifier). The DUID consists of a two-octet 
-      type field and an arbitrary length (1-128 octets) content 
-      field. The duid-base type is used by other duid types with
+      Identifier). The DUID consists of a two-octet type field 
+      and an arbitrary length (1-128 octets) content field. 
+      The duid-base type is used by other duid types with
       additional pattern constraints.
 
       Currently, there are four defined types of DUIDs
-      in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL 
-      and DUID-UUID.  DUID-unstructured represents DUIDs which 
-      do not follow any of the defined formats.
+      in RFC 8415 and RFC 6355 - DUID-LLT, DUID-EN, DUID-LL and
+      DUID-UUID.  DUID-unstructured represents DUIDs which do not
+      follow any of the defined formats.
       
-      Type 'string' is used to represent the hexadecimal DUID value 
+      Type 'string' is used to represent the hexadecimal DUID value
       so that pattern constraints can be applied.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11
@@ -94,9 +94,9 @@ module ietf-dhcpv6-common {
     description 
       "DUID type 1, based on Link-Layer Address Plus Time 
       (DUID-LLT). Constructed with a 2-octet hardware type assigned
-      by IANA,  4-octet containing the time the DUID is generated
-      (represented in seconds since midnight (UTC), January 1, 2000, 
-      modulo 2^32), and a link-layer address. The address is encoded 
+      by IANA,  4-octets containing the time the DUID is generated
+      (represented in seconds since midnight (UTC), January 1, 2000,
+      modulo 2^32), and a link-layer address. The address is encoded
       without separator characters. For example:
 
       +------+------+----------+--------------+
@@ -121,7 +121,7 @@ module ietf-dhcpv6-common {
     }
     description 
       "DUID type 2, assigned by vendor based on Enterprise
-      Number (DUID-EN). This DUID consists of the 4-octet vendor's 
+      Number (DUID-EN). This DUID consists of the 4-octet vendor's
       registered Private Enterprise Number as maintained by IANA 
       followed by a unique identifier assigned by the vendor. For
       example:
@@ -155,8 +155,9 @@ module ietf-dhcpv6-common {
       +------+------+--------------+
 
       This example includes the 2-octet DUID type of 3 (0x03), the
-      hardware type is 0x06 (IEEE Hardware Types), and the link-layer 
-      address is 0x5E005300 (EUI-48 address 00-00-5E-00-53-00)";
+      hardware type is 0x06 (IEEE Hardware Types), and the 
+      link-layer address is 0x5E005300 (EUI-48 address 
+      00-00-5E-00-53-00)";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.4
       IANA 'Hardware Types' registry.
@@ -181,8 +182,8 @@ module ietf-dhcpv6-common {
       the UUID 9f03b182-7057-47e3-8a1e-422910078642.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11.5
-      RFC 6355: Definition of the UUID-Based DHCPv6 Unique Identifier 
-      (DUID-UUID)";
+      RFC 6355: Definition of the UUID-Based DHCPv6 Unique 
+      Identifier (DUID-UUID)";
   }
 
   typedef duid-unstructured {
@@ -216,7 +217,7 @@ module ietf-dhcpv6-common {
       type duid-unstructured;
     }
     description 
-      "Represents the DUID and is neutral to the DUID's construction 
+      "Represents the DUID and is neutral to the DUID's construction
       format.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
       IPv6 (DHCPv6), Section 11";
@@ -259,8 +260,8 @@ module ietf-dhcpv6-common {
     reference "RFC 8415: Dynamic Host Configuration Protocol
       for IPv6 (DHCPv6), Section 21.11
       RFC 3118: Authentication for DHCP Messages
-      IANA 'Dynamic Host Configuration Protocol (DHCP) Authentication 
-      Option Name Spaces' registry.
+      IANA 'Dynamic Host Configuration Protocol (DHCP) 
+      Authentication Option Name Spaces' registry.
       <https://www.iana.org/assignments/auth-namespaces>";
     container auth-option {
       description 
@@ -299,8 +300,8 @@ module ietf-dhcpv6-common {
       case rkap {
         description 
           "Protocol Namespace Value 3. RKAP provides protection 
-          against misconfiguration of a client caused by a Reconfigure
-          message sent by a malicious DHCP server.";
+          against misconfiguration of a client caused by a 
+          Reconfigure message sent by a malicious DHCP server.";
           leaf datatype {
             type uint8 {
               range "1 .. 2";
@@ -317,8 +318,8 @@ module ietf-dhcpv6-common {
             type binary {
               length 16;
             }
-          description "Data as defined by the Type field.  A 16-octet
-            field.";
+          description 
+            "Data as defined by the Type field.  A 16-octet field.";
           }
         }
       }
@@ -350,7 +351,7 @@ module ietf-dhcpv6-common {
       list vendor-specific-information-option {
         key enterprise-number;
         description 
-          "The vendor-specific information option allows for 
+          "The Vendor-specific Information option allows for 
           multiple instances in a single message. Each list entry
           defines the contents of an instance of the option.";
         leaf enterprise-number {

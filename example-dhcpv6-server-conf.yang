@@ -102,8 +102,8 @@ module example-dhcpv6-server-conf {
           leaf-list interfaces {
             type if:interface-ref;
             description 
-              "List of interfaces on which the server will listen for 
-              incoming messages. Messages addressed to any 
+              "List of interfaces on which the server will listen 
+              for incoming messages. Messages addressed to any 
               valid IPv6 address (unicast and multicast) will be 
               received.";
           }

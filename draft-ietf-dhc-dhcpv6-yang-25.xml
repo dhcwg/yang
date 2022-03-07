@@ -15,7 +15,7 @@
   <front>
     <title abbrev="DHCPv6 YANG Model">YANG Data Model for DHCPv6 
       Configuration</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-24"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dhc-dhcpv6-yang-25"/>
     <author fullname="Ian Farrer" role="editor" initials="I." 
         surname="Farrer">
       <organization>Deutsche Telekom AG</organization>
@@ -301,7 +301,7 @@
         <name>DHCPv6 Server Tree Diagram</name>
         <t>The tree diagram in <xref target="server-structure"/> 
           provides an overview of the DHCPv6 server module. The tree 
-          also includes the common functions module 
+          also includes the common functions module defined in 
           <xref target="common-module"/>.
         </t>
 
@@ -320,7 +320,7 @@
             Identifier) to identify itself to clients. A DUID consists 
             of a two-octet type field and an arbitrary length (of no 
             more than 128-octets) content field. Currently there are
-            four defined types of DUIDs in <xref target="RFC8415"/> and
+            four DUID types defined in <xref target="RFC8415"/> and
             <xref target="RFC6355"/>. The DUID may be configured using
             the format for one of these types, or using the 
             'unstructured' format.  The DUID type definitions are 
@@ -355,7 +355,7 @@
             this.
           </li>
           <li>allocation-ranges: A hierarchical model is used
-            for the allocation of addresses and prefixes. At the top 
+            for the allocation of addresses and prefixes. The top 
             level 'allocation-ranges' container holds global 
             configuration parameters. Under this, the 
             'allocation-range' list is used for specifying IPv6 
@@ -363,7 +363,7 @@
           </li>
           <li>address-pools: Used for IA_NA and IA_TA pool allocations 
             with a container for defining host reservations. State
-            information about active leases from the pool is also 
+            information about active leases from each pool is also 
             located here.
           </li>
           <li>prefix-pools: Defines pools to be used for prefix
@@ -395,7 +395,7 @@
             received from a client.
           </li>
           <li>non-success-code-sent: Raised when there is a status 
-            message for an failure.
+            message for a failure.
           </li>
         </ul>
       </section>
@@ -404,7 +404,8 @@
         <name>DHCPv6 Relay Tree Diagram</name>
         <t>The tree diagram in <xref target="relay-structure"/> provides 
           an overview of the DHCPv6 relay module. The tree also includes
-          the common functions module <xref target="common-module"/>.
+          the common functions module defined in
+          <xref target="common-module"/>.
         </t>
         <t>The RPCs in the module are taken from requirements defined
           in <xref target="RFC8987"/>.
@@ -427,7 +428,7 @@
             interface defined by the 'ietf-interfaces' YANG module.
           </li>
            <li>enabled: Enables/disables all DHCPv6 relay 
-             function for the specific interface.</li>          
+             functions for the specific interface.</li>          
            <li>destination-addresses: Defines a list of IPv6 addresses 
             that client messages will be relayed to. May include unicast 
             or multicast addresses.</li>
@@ -464,7 +465,7 @@
         </ul>
         <t>Information about notifications:</t>
         <ul spacing="normal">
-          <li>topology-changed: Raised when the topology of the relay 
+          <li>topology-change: Raised when the topology of the relay 
             agent is changed, e.g., a client facing interface is 
             reconfigured.
           </li>
@@ -502,7 +503,7 @@
             Identifier) is used to identify the client to servers           
             and relays. A DUID consists of a two-octet type field
             and an arbitrary length (1-128 octets) content field.
-            Currently there are four defined types of DUIDs in          
+            Currently there are four DUID types defined in          
             <xref target="RFC8415"/> and <xref target="RFC6355"/>. The  
             DUID may be configured using the format for one of these    
             types, or using the 'unstructured' format.  The DUID type   
@@ -800,8 +801,8 @@
       <name>Acknowledgments</name>
       <t>The authors would like to thank Qi Sun, Lishan Li, Hao Wang,
         Tomek Mrugalski, Marcin Siodelski, Bernie Volz, Ted Lemon, 
-        Bing Liu, Tom Petch, and Acee Lindem for their valuable 
-        comments and contributions to this work.</t>
+        Bing Liu, Tom Petch, Acee Lindem, and Benjamin Kaduk for their 
+        valuable comments and contributions to this work.</t>
     </section>
     <section anchor="contributors">
       <name>Contributors</name>
@@ -1199,8 +1200,8 @@
 
       <t>The mechanism is as follows: class is associated to client 
         based on rules and then client is allowed to get 
-        address(es)/prefix(es) from given allocation-range/pool if the 
-        class name matches.
+        address(es)/prefix(es) from a given allocation-range/pool if 
+        the class name matches.
       </t>
       <xi:include href="example-dhcpv6-class-select.yang.xml"/>
     </section>

@@ -201,23 +201,23 @@ module example-dhcpv6-class-select {
         container vendor-class-option-data {
           description 
             "Vendor class option data container.";
-          leaf enterprise-number {                                        
-            type uint32;                                                  
-            description                                                   
-              "The vendor's registered Enterprise Number as               
-              maintained by IANA.";                                       
-          }                                                               
-          leaf vendor-class-data-id {                                   
-            type uint8;                                                 
-            description                                                 
-              "Vendor class data ID";                                   
-          }                                                             
-          leaf vendor-class-data {                                      
-            type string;                                                
-            description                                                 
-              "Opaque field for matching the client's vendor class 
-              data.";       
-          }                                                             
+          leaf enterprise-number {
+            type uint32;
+            description
+              "The vendor's registered Enterprise Number as
+              maintained by IANA.";
+          }
+          leaf vendor-class-data-id {
+            type uint8;
+            description
+              "Vendor class data ID";
+          }
+          leaf vendor-class-data {
+            type string;
+            description
+              "Opaque field for matching the client's vendor class
+              data.";
+          }
         }
       }
       case client-duid-id {

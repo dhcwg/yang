@@ -79,7 +79,7 @@ module ietf-dhcpv6-relay {
       "Enable if the relay functions as a delegating router for 
       DHCPv6 prefix delegation.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 6.3";
+      IPv6 (DHCPv6), Section 6.3";
   }
 
   /*
@@ -93,8 +93,7 @@ module ietf-dhcpv6-relay {
       key ia-pd-prefix;
       config false;
       description 
-        "Information about an active IA_PD prefix
-        delegation.";
+        "Information about an active IA_PD prefix delegation.";
      leaf ia-pd-prefix {
         type inet:ipv6-prefix;
         description 
@@ -126,17 +125,16 @@ module ietf-dhcpv6-relay {
 
   grouping message-statistics {
     description 
-      "Contains counters for the different DHCPv6 
-      message types.";
-    leaf discontinuity-time {                                           
-      type yang:date-and-time;                                          
-      description                                                       
-        "The time on the most recent occasion at which any one or       
-        more of DHCPv6 relay's counters suffered a discontinuity.         
-        If no such discontinuities have occurred since the last            
-        re-initialization of the local management subsystem, then       
-        this node contains the time the local management subsystem         
-        re-initialized itself.";                                           
+      "Contains counters for the different DHCPv6 message types.";
+    leaf discontinuity-time {
+      type yang:date-and-time;
+      description
+        "The time on the most recent occasion at which any one or
+        more of DHCPv6 relay's counters suffered a discontinuity.
+        If no such discontinuities have occurred since the last
+        re-initialization of the local management subsystem, then
+        this node contains the time the local management subsystem
+        re-initialized itself.";
     }  
     leaf solicit-received-count {
       type yang:counter32;
@@ -276,7 +274,7 @@ module ietf-dhcpv6-relay {
     description 
       "OPTION_INTERFACE_ID (18) Interface-Id Option.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 21.18";
+      IPv6 (DHCPv6), Section 21.18";
     container interface-id-option {
      description 
        "OPTION_INTERFACE_ID (18) Interface-Id Option.";
@@ -299,8 +297,8 @@ module ietf-dhcpv6-relay {
       "This container contains the configuration data nodes 
       for the relay.";
     reference "RFC 8415: Dynamic Host Configuration Protocol for
-        IPv6 (DHCPv6), Section 19";
-   leaf enabled {
+      IPv6 (DHCPv6), Section 19";
+    leaf enabled {
       type boolean;
       description 
         "Globally enables the DHCP relay function.";
@@ -308,8 +306,7 @@ module ietf-dhcpv6-relay {
     list relay-if {
       key if-name;
       description 
-        "List of interfaces configured for DHCPv6 
-        relaying.";
+        "List of interfaces configured for DHCPv6 relaying.";
       leaf if-name {
         type if:interface-ref;
         description 
@@ -318,8 +315,7 @@ module ietf-dhcpv6-relay {
       leaf enabled {
         type boolean;
         description 
-          "Enables the DHCP relay function for this
-          interface.";
+          "Enables the DHCP relay function for this interface.";
       }
       leaf-list destination-address {
         type inet:ipv6-address;
@@ -344,8 +340,8 @@ module ietf-dhcpv6-relay {
         uses interface-id-option-group;
       }
       container statistics {
-        description "DHCPv6 message counters for the relay's
-          interface.";
+        description
+          "DHCPv6 message counters for the relay's interface.";
         uses message-statistics;
       }
       container prefix-delegation {
@@ -358,8 +354,9 @@ module ietf-dhcpv6-relay {
       }
     }
     container statistics {
-        description "Global DHCPv6 message counters for the relay.";
-        uses global-statistics;
+      description 
+        "Global DHCPv6 message counters for the relay.";
+      uses global-statistics;
     }
   }
 
@@ -373,7 +370,7 @@ module ietf-dhcpv6-relay {
     description 
       "Clears an entry for an active delegated prefix
       from the relay.";
-    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
+    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements,
       Section 4.4";
     input {
       leaf lease-prefix {
@@ -404,7 +401,7 @@ module ietf-dhcpv6-relay {
     if-feature prefix-delegation;
     description 
       "Clears all active prefix entries for a single client.";
-    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements, 
+    reference "RFC8987: DHCPv6 Prefix Delegating Relay Requirements,
       Section 4.4";
    input {
       leaf client-duid {
@@ -418,8 +415,8 @@ module ietf-dhcpv6-relay {
       leaf return-message {
         type string;
         description
-          "Response message from the server. If available, a language
-          identifier should be included in the message.";
+          "Response message from the server. If available, a 
+          language identifier should be included in the message.";
         reference "BCP 14 (RFC 2277) IETF Policy on Character Sets
           and Languages, Section 4.2.";
       }
@@ -448,11 +445,11 @@ module ietf-dhcpv6-relay {
     output {
       leaf return-message {
         type string;
-        description                                                     
-          "Response message from the server. If available, a language   
-          identifier should be included in the message.";               
-        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets         
-          and Languages, Section 4.2.";   
+        description
+          "Response message from the server. If available, a 
+          language identifier should be included in the message.";
+        reference "BCP 14 (RFC 2277) IETF Policy on Character Sets
+          and Languages, Section 4.2.";
       }
     }
   }
@@ -466,9 +463,8 @@ module ietf-dhcpv6-relay {
       "DHCPv6 relay event notifications.";
     container topology-change {
       description 
-        "Raised if the entry for an interface with DHCPv6
-        related configuration or state is removed from 
-        if:interface-refs.";
+        "Raised if the entry for an interface with DHCPv6 related 
+        configuration or state is removed from if:interface-refs.";
       leaf relay-if-name {
         type leafref {
           path "/dhcpv6-relay/relay-if/if-name";
