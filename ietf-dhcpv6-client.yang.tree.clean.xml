@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artwork align="center">
+<![CDATA[
+module: ietf-dhcpv6-client
+  +--rw dhcpv6-client
+     +--rw enabled?     boolean
+     +--rw client-if* [if-name]
+        +--rw if-name                      if:interface-ref
+        +--rw enabled?                     boolean
+        +--rw interface-duid?              dhc6:duid
+        |       {(non-temp-addr or prefix-delegation or temp-addr) an
+d anon-profile}?
+        +--rw client-configured-options
+        |  +--rw option-request-option
+        |  |  +--rw oro-option*   uint16
+        |  +--rw rapid-commit-option!
+        |  +--rw user-class-option!
+        |  |  +--rw user-class-data-instance*
+        |  |          [user-class-data-id]
+        |  |     +--rw user-class-data-id    uint8
+        |  |     +--rw user-class-data?      binary
+        |  +--rw vendor-class-option
+        |  |  +--rw vendor-class-option-instances*
+        |  |          [enterprise-number]
+        |  |     +--rw enterprise-number            uint32
+        |  |     +--rw vendor-class-data-element*
+        |  |             [vendor-class-data-id]
+        |  |        +--rw vendor-class-data-id    uint8
+        |  |        +--rw vendor-class-data?      binary
+        |  +--rw vendor-specific-information-options
+        |  |  +--rw vendor-specific-information-option*
+        |  |          [enterprise-number]
+        |  |     +--rw enterprise-number     uint32
+        |  |     +--rw vendor-option-data* [sub-option-code]
+        |  |        +--rw sub-option-code    uint16
+        |  |        +--rw sub-option-data?   binary
+        |  +--rw reconfigure-accept-option!
+        +--rw ia-na* [ia-id] {non-temp-addr}?
+        |  +--rw ia-id            uint32
+        |  +--rw ia-na-options
+        |  +--ro lease-state
+        |     +--ro ia-na-address?        inet:ipv6-address
+        |     +--ro lease-t1?             dhc6:timer-seconds32
+        |     +--ro lease-t2?             dhc6:timer-seconds32
+        |     +--ro preferred-lifetime?   dhc6:timer-seconds32
+        |     +--ro valid-lifetime?       dhc6:timer-seconds32
+        |     +--ro allocation-time?      yang:date-and-time
+        |     +--ro last-renew-rebind?    yang:date-and-time
+        |     +--ro server-duid?          dhc6:duid
+        |     +--ro status
+        |        +--ro code?      uint16
+        |        +--ro message?   string
+        +--rw ia-ta* [ia-id] {temp-addr}?
+        |  +--rw ia-id            uint32
+        |  +--rw ia-ta-options
+        |  +--ro lease-state
+        |     +--ro ia-ta-address?        inet:ipv6-address
+        |     +--ro preferred-lifetime?   dhc6:timer-seconds32
+        |     +--ro valid-lifetime?       dhc6:timer-seconds32
+        |     +--ro allocation-time?      yang:date-and-time
+        |     +--ro last-renew-rebind?    yang:date-and-time
+        |     +--ro server-duid?          dhc6:duid
+        |     +--ro status
+        |        +--ro code?      uint16
+        |        +--ro message?   string
+        +--rw ia-pd* [ia-id] {prefix-delegation}?
+        |  +--rw ia-id                 uint32
+        |  +--rw prefix-length-hint?   uint8
+        |  +--rw ia-pd-options
+        |  +--ro lease-state
+        |     +--ro ia-pd-prefix?         inet:ipv6-prefix
+        |     +--ro lease-t1?             dhc6:timer-seconds32
+        |     +--ro lease-t2?             dhc6:timer-seconds32
+        |     +--ro preferred-lifetime?   dhc6:timer-seconds32
+        |     +--ro valid-lifetime?       dhc6:timer-seconds32
+        |     +--ro allocation-time?      yang:date-and-time
+        |     +--ro last-renew-rebind?    yang:date-and-time
+        |     +--ro server-duid?          dhc6:duid
+        |     +--ro status
+        |        +--ro code?      uint16
+        |        +--ro message?   string
+        +--rw statistics
+           +--rw discontinuity-time?          yang:date-and-time
+           +--ro solicit-count?               yang:counter32
+           +--ro advertise-count?             yang:counter32
+           +--ro request-count?               yang:counter32
+           +--ro confirm-count?               yang:counter32
+           +--ro renew-count?                 yang:counter32
+           +--ro rebind-count?                yang:counter32
+           +--ro reply-count?                 yang:counter32
+           +--ro release-count?               yang:counter32
+           +--ro decline-count?               yang:counter32
+           +--ro reconfigure-count?           yang:counter32
+           +--ro information-request-count?   yang:counter32
+           +--ro discarded-message-count?     yang:counter32
+
+  notifications:
+    +---n invalid-ia-address-detected
+    |       {non-temp-addr or temp-addr}?
+    |  +--ro ia-id                 uint32
+    |  +--ro ia-na-t1-timer?       uint32
+    |  +--ro ia-na-t2-timer?       uint32
+    |  +--ro invalid-address?      inet:ipv6-address
+    |  +--ro preferred-lifetime?   uint32
+    |  +--ro valid-lifetime?       uint32
+    |  +--ro ia-options?           binary
+    |  +--ro description?          string
+    +---n transmission-failed
+    |  +--ro failure-type    enumeration
+    |  +--ro description?    string
+    +---n unsuccessful-status-code
+    |  +--ro server-duid    dhc6:duid
+    |  +--ro status
+    |     +--ro code?      uint16
+    |     +--ro message?   string
+    +---n server-duid-changed
+            {non-temp-addr or prefix-delegation or temp-addr}?
+       +--ro new-server-duid         dhc6:duid
+       +--ro previous-server-duid    dhc6:duid
+       +--ro lease-ia-na?
+       |       -> /dhcpv6-client/client-if/ia-na/ia-id
+       |       {non-temp-addr}?
+       +--ro lease-ia-ta?
+       |       -> /dhcpv6-client/client-if/ia-ta/ia-id
+       |       {temp-addr}?
+       +--ro lease-ia-pd?
+               -> /dhcpv6-client/client-if/ia-pd/ia-id
+               {prefix-delegation}?
+]]>
+</artwork>

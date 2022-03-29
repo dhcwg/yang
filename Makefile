@@ -122,6 +122,10 @@ html: $(SPEC_NAME).html
 $(SPEC_NAME).html: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES)
 	$(XML2RFC) -n -N --html --v3 $<
 
+xml: $(SPEC_NAME).xml2
+$(SPEC_NAME).xml2: $(SPEC_NAME).xml $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES) 
+	$(XML2RFC) -n -N --expand --v3 $<
+
 clean:
 	rm -f $(TREEINCLUDES) $(YANGINCLUDES) $(EXYANGINCLUDES) $(MODELS_DIR)/*html $(MODELS_DIR)/*txt $(MODELS_DIR)/*tree $(MODELS_DIR)/*tree.xml $(MODELS_DIR)/*.tree.clean
 

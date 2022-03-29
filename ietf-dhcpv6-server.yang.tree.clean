@@ -1,0 +1,229 @@
+module: ietf-dhcpv6-server
+  +--rw dhcpv6-server
+     +--rw enabled?             boolean
+     +--rw server-duid?         dhc6:duid
+     +--rw vendor-config
+     +--rw option-sets
+     |  +--rw option-set* [option-set-id]
+     |     +--rw option-set-id                          string
+     |     +--rw description?                           string
+     |     +--rw preference-option
+     |     |  +--rw pref-value?   uint8
+     |     +--rw auth-option
+     |     |  +--rw algorithm?                      uint8
+     |     |  +--rw rdm?                            uint8
+     |     |  +--rw replay-detection?               uint64
+     |     |  +--rw (protocol)?
+     |     |     +--:(conf-token)
+     |     |     |  +--rw token-auth-information?   binary
+     |     |     +--:(rkap)
+     |     |        +--rw datatype?                 uint8
+     |     |        +--rw auth-info-value?          binary
+     |     +--rw server-unicast-option
+     |     |  +--rw server-address?   inet:ipv6-address
+     |     +--rw rapid-commit-option!
+     |     +--rw vendor-specific-information-options
+     |     |  +--rw vendor-specific-information-option*
+     |     |          [enterprise-number]
+     |     |     +--rw enterprise-number     uint32
+     |     |     +--rw vendor-option-data* [sub-option-code]
+     |     |        +--rw sub-option-code    uint16
+     |     |        +--rw sub-option-data?   binary
+     |     +--rw reconfigure-message-option
+     |     |  +--rw msg-type?   uint8
+     |     +--rw reconfigure-accept-option!
+     |     +--rw info-refresh-time-option
+     |     |  +--rw info-refresh-time?   dhc6:timer-seconds32
+     |     +--rw sol-max-rt-option
+     |     |  +--rw sol-max-rt-value?   dhc6:timer-seconds32
+     |     +--rw inf-max-rt-option
+     |        +--rw inf-max-rt-value?   dhc6:timer-seconds32
+     +--rw class-selector
+     +--rw allocation-ranges
+        +--rw option-set-id*        leafref
+        +--rw valid-lifetime?       dhc6:timer-seconds32
+        +--rw renew-time?           dhc6:timer-seconds32
+        +--rw rebind-time?          dhc6:timer-seconds32
+        +--rw preferred-lifetime?   dhc6:timer-seconds32
+        +--rw rapid-commit?         boolean
+        +--rw allocation-range* [id]
+        |  +--rw id                    string
+        |  +--rw description?          string
+        |  +--rw network-prefix        inet:ipv6-prefix
+        |  +--rw option-set-id*        leafref
+        |  +--rw valid-lifetime?       dhc6:timer-seconds32
+        |  +--rw renew-time?           dhc6:timer-seconds32
+        |  +--rw rebind-time?          dhc6:timer-seconds32
+        |  +--rw preferred-lifetime?   dhc6:timer-seconds32
+        |  +--rw rapid-commit?         boolean
+        |  +--rw address-pools {na-assignment}?
+        |  |  +--rw address-pool* [pool-id]
+        |  |     +--rw pool-id                    string
+        |  |     +--rw pool-prefix
+        |  |     |       inet:ipv6-prefix
+        |  |     +--rw start-address
+        |  |     |       inet:ipv6-address-no-zone
+        |  |     +--rw end-address
+        |  |     |       inet:ipv6-address-no-zone
+        |  |     +--rw max-address-utilization?   dhc6:threshold
+        |  |     +--rw option-set-id*             leafref
+        |  |     +--rw valid-lifetime?
+        |  |     |       dhc6:timer-seconds32
+        |  |     +--rw renew-time?
+        |  |     |       dhc6:timer-seconds32
+        |  |     +--rw rebind-time?
+        |  |     |       dhc6:timer-seconds32
+        |  |     +--rw preferred-lifetime?
+        |  |     |       dhc6:timer-seconds32
+        |  |     +--rw rapid-commit?              boolean
+        |  |     +--rw host-reservations
+        |  |     |  +--rw host-reservation* [reserved-addr]
+        |  |     |     +--rw client-duid?          dhc6:duid
+        |  |     |     +--rw reserved-addr
+        |  |     |     |       inet:ipv6-address
+        |  |     |     +--rw option-set-id*        leafref
+        |  |     |     +--rw valid-lifetime?
+        |  |     |     |       dhc6:timer-seconds32
+        |  |     |     +--rw renew-time?
+        |  |     |     |       dhc6:timer-seconds32
+        |  |     |     +--rw rebind-time?
+        |  |     |     |       dhc6:timer-seconds32
+        |  |     |     +--rw preferred-lifetime?
+        |  |     |     |       dhc6:timer-seconds32
+        |  |     |     +--rw rapid-commit?         boolean
+        |  |     +--ro active-leases
+        |  |        +--ro total-count        uint64
+        |  |        +--ro allocated-count    uint64
+        |  |        +--ro active-lease* [leased-address]
+        |  |           +--ro leased-address
+        |  |           |       inet:ipv6-address
+        |  |           +--ro client-duid?          dhc6:duid
+        |  |           +--ro ia-id                 uint32
+        |  |           +--ro allocation-time?
+        |  |           |       yang:date-and-time
+        |  |           +--ro last-renew-rebind?
+        |  |           |       yang:date-and-time
+        |  |           +--ro preferred-lifetime?
+        |  |           |       dhc6:timer-seconds32
+        |  |           +--ro valid-lifetime?
+        |  |           |       dhc6:timer-seconds32
+        |  |           +--ro lease-t1?
+        |  |           |       dhc6:timer-seconds32
+        |  |           +--ro lease-t2?
+        |  |           |       dhc6:timer-seconds32
+        |  |           +--ro status
+        |  |              +--ro code?      uint16
+        |  |              +--ro message?   string
+        |  +--rw prefix-pools {prefix-delegation}?
+        |     +--rw prefix-pool* [pool-id]
+        |        +--rw pool-id                     string
+        |        +--rw pool-prefix
+        |        |       inet:ipv6-prefix
+        |        +--rw client-prefix-length        uint8
+        |        +--rw max-pd-space-utilization?   dhc6:threshold
+        |        +--rw option-set-id*              leafref
+        |        +--rw valid-lifetime?
+        |        |       dhc6:timer-seconds32
+        |        +--rw renew-time?
+        |        |       dhc6:timer-seconds32
+        |        +--rw rebind-time?
+        |        |       dhc6:timer-seconds32
+        |        +--rw preferred-lifetime?
+        |        |       dhc6:timer-seconds32
+        |        +--rw rapid-commit?               boolean
+        |        +--rw host-reservations
+        |        |  +--rw prefix-reservation* [reserved-prefix]
+        |        |  |  +--rw client-duid?           dhc6:duid
+        |        |  |  +--rw reserved-prefix
+        |        |  |  |       inet:ipv6-prefix
+        |        |  |  +--rw reserved-prefix-len?   uint8
+        |        |  +--rw option-set-id*        leafref
+        |        |  +--rw valid-lifetime?
+        |        |  |       dhc6:timer-seconds32
+        |        |  +--rw renew-time?
+        |        |  |       dhc6:timer-seconds32
+        |        |  +--rw rebind-time?
+        |        |  |       dhc6:timer-seconds32
+        |        |  +--rw preferred-lifetime?
+        |        |  |       dhc6:timer-seconds32
+        |        |  +--rw rapid-commit?         boolean
+        |        +--ro active-leases
+        |           +--ro total-count        uint64
+        |           +--ro allocated-count    uint64
+        |           +--ro active-lease* [leased-prefix]
+        |              +--ro leased-prefix
+        |              |       inet:ipv6-prefix
+        |              +--ro client-duid?          dhc6:duid
+        |              +--ro ia-id                 uint32
+        |              +--ro allocation-time?
+        |              |       yang:date-and-time
+        |              +--ro last-renew-rebind?
+        |              |       yang:date-and-time
+        |              +--ro preferred-lifetime?
+        |              |       dhc6:timer-seconds32
+        |              +--ro valid-lifetime?
+        |              |       dhc6:timer-seconds32
+        |              +--ro lease-t1?
+        |              |       dhc6:timer-seconds32
+        |              +--ro lease-t2?
+        |              |       dhc6:timer-seconds32
+        |              +--ro status
+        |                 +--ro code?      uint16
+        |                 +--ro message?   string
+        +--rw statistics
+           +--rw discontinuity-time?          yang:date-and-time
+           +--ro solicit-count?               yang:counter32
+           +--ro advertise-count?             yang:counter32
+           +--ro request-count?               yang:counter32
+           +--ro confirm-count?               yang:counter32
+           +--ro renew-count?                 yang:counter32
+           +--ro rebind-count?                yang:counter32
+           +--ro reply-count?                 yang:counter32
+           +--ro release-count?               yang:counter32
+           +--ro decline-count?               yang:counter32
+           +--ro reconfigure-count?           yang:counter32
+           +--ro information-request-count?   yang:counter32
+           +--ro discarded-message-count?     yang:counter32
+
+  rpcs:
+    +---x delete-address-lease {na-assignment}?
+    |  +---w input
+    |  |  +---w lease-address-to-delete    leafref
+    |  +--ro output
+    |     +--ro return-message?   string
+    +---x delete-prefix-lease {prefix-delegation}?
+       +---w input
+       |  +---w lease-prefix-to-delete    leafref
+       +--ro output
+          +--ro return-message?   string
+
+  notifications:
+    +---n address-pool-utilization-threshold-exceeded
+    |       {na-assignment}?
+    |  +--ro pool-id                    leafref
+    |  +--ro total-pool-addresses       uint64
+    |  +--ro max-allocated-addresses    uint64
+    |  +--ro allocated-address-count    uint64
+    +---n prefix-pool-utilization-threshold-exceeded
+    |       {prefix-delegation}?
+    |  +--ro pool-id                     leafref
+    |  +--ro total-pool-prefixes         uint64
+    |  +--ro max-allocated-prefixes      uint64
+    |  +--ro allocated-prefixes-count    uint64
+    +---n invalid-client-detected
+    |  +--ro message-type?   enumeration
+    |  +--ro duid?           dhc6:duid
+    |  +--ro description?    string
+    +---n decline-received {na-assignment}?
+    |  +--ro duid?                 dhc6:duid
+    |  +--ro declined-resources* []
+    |     +--ro (resource-type)?
+    |        +--:(declined-address)
+    |        |  +--ro address?   inet:ipv6-address
+    |        +--:(declined-prefix)
+    |           +--ro prefix?    inet:ipv6-prefix
+    +---n non-success-code-sent
+       +--ro duid?     dhc6:duid
+       +--ro status
+          +--ro code?      uint16
+          +--ro message?   string

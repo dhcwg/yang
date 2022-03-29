@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artwork align="center">
+<![CDATA[
+module: ietf-dhcpv6-relay
+  +--rw dhcpv6-relay
+     +--rw enabled?      boolean
+     +--rw relay-if* [if-name]
+     |  +--rw if-name                if:interface-ref
+     |  +--rw enabled?               boolean
+     |  +--rw destination-address*   inet:ipv6-address
+     |  +--rw link-address?          inet:ipv6-address
+     |  +--rw relay-options
+     |  |  +--rw auth-option
+     |  |  |  +--rw algorithm?                      uint8
+     |  |  |  +--rw rdm?                            uint8
+     |  |  |  +--rw replay-detection?               uint64
+     |  |  |  +--rw (protocol)?
+     |  |  |     +--:(conf-token)
+     |  |  |     |  +--rw token-auth-information?   binary
+     |  |  |     +--:(rkap)
+     |  |  |        +--rw datatype?                 uint8
+     |  |  |        +--rw auth-info-value?          binary
+     |  |  +--rw interface-id-option
+     |  |     +--rw interface-id?   binary
+     |  +--rw statistics
+     |  |  +--rw discontinuity-time?
+     |  |  |       yang:date-and-time
+     |  |  +--ro solicit-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro advertise-sent-count?
+     |  |  |       yang:counter32
+     |  |  +--ro request-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro confirm-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro renew-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro rebind-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro reply-sent-count?
+     |  |  |       yang:counter32
+     |  |  +--ro release-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro decline-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro reconfigure-sent-count?
+     |  |  |       yang:counter32
+     |  |  +--ro information-request-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro unknown-message-received-count?
+     |  |  |       yang:counter32
+     |  |  +--ro unknown-message-sent-count?
+     |  |  |       yang:counter32
+     |  |  +--ro discarded-message-count?
+     |  |          yang:counter32
+     |  +--rw prefix-delegation! {prefix-delegation}?
+     |     +--ro pd-leases* [ia-pd-prefix]
+     |        +--ro ia-pd-prefix           inet:ipv6-prefix
+     |        +--ro last-renew?            yang:date-and-time
+     |        +--ro client-peer-address?   inet:ipv6-address
+     |        +--ro client-duid?           dhc6:duid
+     |        +--ro server-duid?           dhc6:duid
+     +--rw statistics
+        +--ro relay-forward-sent-count?
+        |       yang:counter32
+        +--ro relay-forward-received-count?
+        |       yang:counter32
+        +--ro relay-reply-received-count?
+        |       yang:counter32
+        +--ro relay-forward-unknown-sent-count?
+        |       yang:counter32
+        +--ro relay-forward-unknown-received-count?
+        |       yang:counter32
+        +--ro discarded-message-count?
+                yang:counter32
+
+  rpcs:
+    +---x clear-prefix-entry {prefix-delegation}?
+    |  +---w input
+    |  |  +---w lease-prefix    leafref
+    |  +--ro output
+    |     +--ro return-message?   string
+    +---x clear-client-prefixes {prefix-delegation}?
+    |  +---w input
+    |  |  +---w client-duid    dhc6:duid
+    |  +--ro output
+    |     +--ro return-message?   string
+    +---x clear-interface-prefixes {prefix-delegation}?
+       +---w input
+       |  +---w interface    -> /dhcpv6-relay/relay-if/if-name
+       +--ro output
+          +--ro return-message?   string
+
+  notifications:
+    +---n relay-event
+       +--ro topology-change
+          +--ro relay-if-name?
+          |       -> /dhcpv6-relay/relay-if/if-name
+          +--ro last-ipv6-addr?   inet:ipv6-address
+]]>
+</artwork>
